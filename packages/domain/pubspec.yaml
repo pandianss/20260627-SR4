@@ -1,0 +1,13 @@
+name: domain
+description: >-
+  Shared domain model for the IIBF micro-learning platform: content schema
+  (Exam -> Paper -> Module -> Lesson -> Card), the polymorphic question-type
+  union, localized strings, and the publish-gate validator (P0 / epic E1).
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dev_dependencies:
+  test: ^1.25.0

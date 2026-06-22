@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iibf-microlearning/schemas/question.schema.json",
+  "title": "Question",
+  "description": "Cross-language contract for a question (epic E1). The Dart ContentValidator is the enforced runtime publish gate; this schema is the shared structural contract for non-Dart services (e.g. the backend).",
+  "type": "object",
+  "required": ["id", "gradingMode", "explanation", "payload"],
+  "properties": {
+    "id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1, "default": 1 },
+    "topicTags": { "type": "array", "items": { "type": "string" } },
+    "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "gradingMode": {
+      "enum": ["auto_exact", "auto_numeric", "auto_text", "assisted_rubric", "manual"]
+    },
+    "defaultMarks": { "type": "number", "exclusiveMinimum": 0, "default": 1 },
+    "defaultNegativeMarks": { "type": "number", "minimum": 0, "default": 0 },
+    "explanation": { "$ref": "#/$defs/localized" },
+    "sourceRef": { "type": "string" },
+    "stimulusId": { "type": "string" },
+    "authoring": {
+      "type": "object",
+      "properties": {
+        "status": { "enum": ["draft", "in_review", "published"] },
+        "authorId": { "type": "string" },
+        "reviewerId": { "type": "string" }
+      },
+      "required": ["status", "authorId"]
+    },
+    "payload": { "$ref": "#/$defs/payload" }
+  },
+  "$defs": {
+    "localized": {
+      "description": "Map of language code -> string. Validator requires all declared exam languages.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string" }
+    },
+    "option": {
+      "type": "object",
+      "required": ["id", "content"],
+      "properties": {
+        "id": { "type": "string" },
+        "content": { "$ref": "#/$defs/localized" }
+      }
+    },
+    "tolerance": {
+      "type": "object",
+      "required": ["kind", "amount"],
+      "properties": {
+        "kind": { "enum": ["absolute", "relative", "decimals"] },
+        "amount": { "type": "number", "minimum": 0 }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["type"],
+      "oneOf": [
+        {
+          "properties": {
+            "type": { "const": "mcq_single" },
+            "stem": { "$ref": "#/$defs/localized" },
+            "options": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/option" } },
+            "correctOptionId": { "type": "string" }
+          },
+          "required": ["type", "stem", "options", "correctOptionId"]
+        },
+        {
+          "properties": {
+            "type": { "const": "true_false" },
+            "stem": { "$ref": "#/$defs/localized" },
+            "answer": { "type": "boolean" }
+          },
+          "required": ["type", "stem", "answer"]
+        },
+        {
+          "properties": {
+            "type": { "const": "match_pairs" },
+            "stem": { "$ref": "#/$defs/localized" },
+            "left": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/option" } },
+            "right": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/option" } },
+            "correct": { "type": "object", "additionalProperties": { "type": "string" } },
+            "partialCredit": { "enum": ["none", "per_pair", "per_correct", "jaccard", "kendall_tau"] }
+          },
+          "required": ["type", "stem", "left", "right", "correct"]
+        },
+        {
+          "properties": {
+            "type": { "const": "numeric" },
+            "stem": { "$ref": "#/$defs/localized" },
+            "answer": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": { "type": "number" },
+                "unit": { "type": "string" }
+              }
+            },
+            "tolerance": { "$ref": "#/$defs/tolerance" }
+          },
+          "required": ["type", "stem", "answer", "tolerance"]
+        },
+        {
+          "properties": {
+            "type": { "const": "numeric_multistep" },
+            "stem": { "$ref": "#/$defs/localized" },
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["id", "prompt", "answer", "tolerance"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "prompt": { "$ref": "#/$defs/localized" },
+                  "answer": { "type": "number" },
+                  "tolerance": { "type": "number", "minimum": 0 },
+                  "hint": { "$ref": "#/$defs/localized" }
+                }
+              }
+            }
+          },
+          "required": ["type", "stem", "steps"]
+        },
+        {
+          "properties": {
+            "type": { "const": "passage_ref" },
+            "innerType": { "type": "string" },
+            "inner": { "$ref": "#/$defs/payload" }
+          },
+          "required": ["type", "inner"]
+        }
+      ]
+    }
+  }
+}
