@@ -1,0 +1,18 @@
+name: grading
+description: >-
+  Deterministic grading & scoring engine for the IIBF micro-learning platform
+  (epic E2): auto-graders per question type, numeric tolerance, multi-step
+  grading, config-driven marking, and pass-rule evaluation. Pure Dart, shared
+  by the on-device grader and the authoritative server grader.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  domain:
+    path: ../domain
+
+dev_dependencies:
+  test: ^1.25.0

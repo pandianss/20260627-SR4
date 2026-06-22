@@ -18,8 +18,15 @@ packages/domain/      Pure-Dart shared model — the engine's foundation (epic E
     localized.dart       Multilingual strings (E1.4)
     content.dart         Exam -> Paper -> Module -> Lesson -> Card, Stimulus, Asset (E1.1)
     question.dart        Polymorphic question-type union (E1.2)
+    exam_config.dart     Declarative per-exam config (papers, marking, pass rule)
     validation.dart      Publish-gate validator (E1.3)
-  test/                  Unit tests (serialization round-trips + validation)
+packages/grading/     Deterministic grading & scoring engine (epic E2)
+  lib/src/
+    response.dart        Learner answer model (per question type)
+    grader.dart          Auto-graders + numeric tolerance (E2.1/E2.2)
+    marking.dart         Config-driven marking application (E2.3)
+    scoring.dart         Pass-rule evaluation (e.g. JAIIB two-path)
+content/exams/        Exam-config documents (e.g. jaiib.config.json — E2.4)
 schemas/              Language-neutral JSON Schema contracts (for the backend)
 docs (root *.md):
   banking-microlearning-study.md   Sourced strategy study
@@ -50,7 +57,9 @@ dart test          # 16 tests, all green
 | Epic | Scope | Status |
 |------|-------|--------|
 | **E1** | Content schema + question-type system + validation | ✅ implemented + tested |
-| E2 | Grading & scoring engine | next |
-| E3 | FSRS spaced-repetition engine | planned |
+| **E2** | Grading & scoring engine (graders, marking, pass rule) | ✅ implemented + tested |
+| E3 | FSRS spaced-repetition engine | next |
 | E4 | Offline store & sync | planned |
 | E5–E10 | App shell, renderers, mocks, content, release | planned (see `p0-build-backlog.md`) |
+
+33 tests passing (`dart test` in `packages/domain` and `packages/grading`).

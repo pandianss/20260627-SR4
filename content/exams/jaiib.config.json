@@ -1,0 +1,84 @@
+{
+  "examCode": "JAIIB",
+  "version": 1,
+  "languages": ["en", "hi"],
+  "papers": [
+    {
+      "paperCode": "IEIFS",
+      "name": "Indian Economy & Indian Financial System",
+      "kind": "compulsory",
+      "durationMin": 120,
+      "sectionalTiming": false,
+      "sections": [
+        {
+          "code": "ALL",
+          "name": "MCQ + caselets",
+          "allowedTypes": ["mcq_single", "true_false", "match_pairs", "numeric", "passage_ref"],
+          "count": 100,
+          "marksPerQuestion": 1,
+          "negativeMarks": 0
+        }
+      ]
+    },
+    {
+      "paperCode": "PPB",
+      "name": "Principles & Practices of Banking",
+      "kind": "compulsory",
+      "durationMin": 120,
+      "sectionalTiming": false,
+      "sections": [
+        {
+          "code": "ALL",
+          "name": "MCQ + caselets",
+          "allowedTypes": ["mcq_single", "true_false", "match_pairs", "numeric", "passage_ref"],
+          "count": 100,
+          "marksPerQuestion": 1,
+          "negativeMarks": 0
+        }
+      ]
+    },
+    {
+      "paperCode": "AFM",
+      "name": "Accounting & Financial Management for Bankers",
+      "kind": "compulsory",
+      "durationMin": 120,
+      "sectionalTiming": false,
+      "sections": [
+        {
+          "code": "ALL",
+          "name": "MCQ + caselets",
+          "allowedTypes": ["mcq_single", "true_false", "numeric", "numeric_multistep", "passage_ref"],
+          "count": 100,
+          "marksPerQuestion": 1,
+          "negativeMarks": 0
+        }
+      ]
+    },
+    {
+      "paperCode": "RBWM",
+      "name": "Retail Banking & Wealth Management",
+      "kind": "compulsory",
+      "durationMin": 120,
+      "sectionalTiming": false,
+      "sections": [
+        {
+          "code": "ALL",
+          "name": "MCQ + caselets",
+          "allowedTypes": ["mcq_single", "true_false", "match_pairs", "numeric", "passage_ref"],
+          "count": 100,
+          "marksPerQuestion": 1,
+          "negativeMarks": 0
+        }
+      ]
+    }
+  ],
+  "passRule": {
+    "perComponentMin": 50,
+    "alternativeAggregate": { "perComponentMin": 45, "aggregateMin": 50 },
+    "carryForward": true
+  },
+  "gradingProfile": {
+    "allowPartialDefault": false,
+    "descriptiveGrading": "off"
+  }
+}
