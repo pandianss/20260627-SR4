@@ -1,35 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:store/store.dart';
-import 'package:srs/srs.dart';
-import 'package:domain/domain.dart';
 import '../components/card.dart';
 import '../components/button.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
+import '../app_scope.dart';
 import 'mock_player_screen.dart';
 
 /// The Mocks tab: a single calm action to start a practice mock assembled from
 /// the question bank. Assembly logic is intentionally thin here — it will move
 /// behind a controller in a later cleanup.
 class MocksScreen extends StatefulWidget {
-  final ContentStore contentStore;
-  final EventLogStore eventStore;
-  final SrsStateStore stateStore;
-  final Scheduler scheduler;
-  final String userId;
-  final String examName;
-  final ExamConfig examConfig;
-
-  const MocksScreen({
-    super.key,
-    required this.contentStore,
-    required this.eventStore,
-    required this.stateStore,
-    required this.scheduler,
-    required this.userId,
-    required this.examName,
-    required this.examConfig,
-  });
+  const MocksScreen({super.key});
 
   @override
   State<MocksScreen> createState() => _MocksScreenState();
@@ -38,17 +19,13 @@ class MocksScreen extends StatefulWidget {
 class _MocksScreenState extends State<MocksScreen> {
   bool _isLoading = false;
 
-  late final LearningRepository _repo = LearningRepository(
-    content: widget.contentStore,
-    events: widget.eventStore,
-    states: widget.stateStore,
-    scheduler: widget.scheduler,
-  );
+  AppScope get _scope => AppScope.of(context);
+  LearningRepository get _repo => _scope.repository;
 
   Future<void> _startMock() async {
     setState(() => _isLoading = true);
     try {
-      final mock = await _repo.assembleMockForPaper(widget.examConfig,
+      final mock = await _repo.assembleMockForPaper(_scope.examConfig,
           paperContentId: 'p_ppb');
 
       if (mock.isEmpty) {
@@ -67,13 +44,13 @@ class _MocksScreenState extends State<MocksScreen> {
             blueprint: mock.blueprint,
             questions: mock.questions,
             stimuli: const [],
-            userId: widget.userId,
-            contentStore: widget.contentStore,
-            eventStore: widget.eventStore,
-            stateStore: widget.stateStore,
-            scheduler: widget.scheduler,
-            examName: widget.examName,
-            examConfig: widget.examConfig,
+            userId: _scope.userId,
+            contentStore: _repo.content,
+            eventStore: _repo.events,
+            stateStore: _repo.states,
+            scheduler: _repo.scheduler,
+            examName: _scope.examName,
+            examConfig: _scope.examConfig,
           ),
         ),
       );

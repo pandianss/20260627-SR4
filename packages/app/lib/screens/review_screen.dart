@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart' hide Card;
 import 'package:domain/domain.dart';
 import 'package:srs/srs.dart';
-import 'package:store/store.dart';
 import '../components/card.dart';
 import '../components/button.dart';
 import '../components/rating_buttons.dart';
 import '../components/block_renderer.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
+import '../app_scope.dart';
 
 class ReviewScreen extends StatefulWidget {
-  final String userId;
-  final String examContext;
-  final ContentStore contentStore;
-  final EventLogStore eventStore;
-  final SrsStateStore stateStore;
-  final Scheduler scheduler;
-
-  const ReviewScreen({
-    super.key,
-    required this.userId,
-    required this.examContext,
-    required this.contentStore,
-    required this.eventStore,
-    required this.stateStore,
-    required this.scheduler,
-  });
+  const ReviewScreen({super.key});
 
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
@@ -39,22 +24,20 @@ class _ReviewScreenState extends State<ReviewScreen> {
   int _currentIndex = 0;
   bool _isFlipped = false;
 
-  late final LearningRepository _repo = LearningRepository(
-    content: widget.contentStore,
-    events: widget.eventStore,
-    states: widget.stateStore,
-    scheduler: widget.scheduler,
-  );
+  AppScope get _scope => AppScope.of(context);
+  LearningRepository get _repo => _scope.repository;
 
   @override
   void initState() {
     super.initState();
-    _loadDueQueue();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _loadDueQueue();
+    });
   }
 
   Future<void> _loadDueQueue() async {
     setState(() => _isLoading = true);
-    final result = await _repo.loadDueReviews(widget.userId, widget.examContext,
+    final result = await _repo.loadDueReviews(_scope.userId, _scope.examName,
         budget: 15);
     if (!mounted) return;
     setState(() {
@@ -71,7 +54,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   Future<void> _handleRating(Rating rating) async {
     final currentState = _dueStates[_currentIndex];
     await _repo.applyReview(
-        widget.userId, widget.examContext, currentState, rating);
+        _scope.userId, _scope.examName, currentState, rating);
 
     // Advance to next card
     if (_currentIndex + 1 < _dueStates.length) {

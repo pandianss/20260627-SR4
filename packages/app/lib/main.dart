@@ -9,6 +9,8 @@ import 'theme/tokens.dart';
 import 'services/notification_service.dart';
 import 'services/telemetry_service.dart';
 import 'dev/dev_seed.dart';
+import 'app_scope.dart';
+import 'data/learning_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -146,6 +148,13 @@ class _MyAppState extends State<MyApp> {
       ],
     );
 
+    final repository = LearningRepository(
+      content: _contentStore,
+      events: _eventStore,
+      states: _stateStore,
+      scheduler: scheduler,
+    );
+
     return MaterialApp(
       title: 'Calm Prep',
       debugShowCheckedModeBanner: false,
@@ -162,16 +171,14 @@ class _MyAppState extends State<MyApp> {
                 });
               },
             )
-          : MainLayout(
-              examDate: _examDate!,
-              examName: _examName,
-              contentStore: _contentStore,
-              eventStore: _eventStore,
-              stateStore: _stateStore,
-              scheduler: scheduler,
+          : AppScope(
+              repository: repository,
               userId: _userId,
+              examName: _examName,
+              examDate: _examDate!,
               examConfig: examConfig,
               notificationService: _notificationService,
+              child: const MainLayout(),
             ),
     );
   }

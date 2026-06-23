@@ -9,8 +9,10 @@ import 'package:app/components/question_renderer.dart';
 import 'package:app/components/caselet_renderer.dart';
 import 'package:app/screens/lesson_player_screen.dart';
 import 'package:app/screens/review_screen.dart';
+import 'package:app/app_scope.dart';
+import 'package:app/data/learning_repository.dart';
+import 'package:app/services/notification_service.dart';
 import 'package:app/theme/tokens.dart';
-import 'package:app/components/option_chip.dart';
 import 'package:app/components/rating_buttons.dart';
 
 void main() {
@@ -436,13 +438,19 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: buildTheme(AppTokens.dark),
-          home: ReviewScreen(
+          home: AppScope(
+            repository: LearningRepository(
+              content: contentStore,
+              events: eventStore,
+              states: stateStore,
+              scheduler: scheduler,
+            ),
             userId: 'test_user',
-            examContext: 'ex_rev',
-            contentStore: contentStore,
-            eventStore: eventStore,
-            stateStore: stateStore,
-            scheduler: scheduler,
+            examName: 'ex_rev',
+            examDate: DateTime.now().add(const Duration(days: 90)),
+            examConfig: const ExamConfig(examCode: 'ex_rev'),
+            notificationService: NotificationService(),
+            child: const ReviewScreen(),
           ),
         ),
       );

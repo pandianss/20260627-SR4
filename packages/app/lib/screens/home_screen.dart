@@ -1,38 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:store/store.dart';
-import 'package:srs/srs.dart';
 import '../components/card.dart';
 import '../components/progress_ring.dart';
 import '../components/button.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
+import '../app_scope.dart';
 import 'lesson_player_screen.dart';
-import '../services/notification_service.dart';
 
 /// The calm home: one clear action ("Today's 5 minutes"), a gentle progress
 /// ring, and a non-stressful weekly streak. Mocks live on their own tab;
 /// developer/diagnostics tooling is not part of the shipping UI.
 class HomeScreen extends StatefulWidget {
-  final DateTime examDate;
-  final String examName;
-  final ContentStore contentStore;
-  final EventLogStore eventStore;
-  final SrsStateStore stateStore;
-  final Scheduler scheduler;
-  final String userId;
-  final NotificationService notificationService;
-
-  const HomeScreen({
-    super.key,
-    required this.examDate,
-    required this.examName,
-    required this.contentStore,
-    required this.eventStore,
-    required this.stateStore,
-    required this.scheduler,
-    required this.userId,
-    required this.notificationService,
-  });
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -43,22 +23,20 @@ class _HomeScreenState extends State<HomeScreen> {
   int _completedCount = 0;
   bool _studiedToday = false;
 
-  late final LearningRepository _repo = LearningRepository(
-    content: widget.contentStore,
-    events: widget.eventStore,
-    states: widget.stateStore,
-    scheduler: widget.scheduler,
-  );
+  AppScope get _scope => AppScope.of(context);
+  LearningRepository get _repo => _scope.repository;
 
   @override
   void initState() {
     super.initState();
-    _loadStats();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _loadStats();
+    });
   }
 
   Future<void> _loadStats() async {
     final stats =
-        await _repo.homeStats(widget.userId, trackLessonId: 'les_ppb_crr');
+        await _repo.homeStats(_scope.userId, trackLessonId: 'les_ppb_crr');
     if (mounted) {
       setState(() {
         _completedCount = stats.completedCount;
@@ -88,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             lesson: lesson,
             questions: questions,
             stimuli: const [],
-            userId: widget.userId,
+            userId: _scope.userId,
             onComplete: (events) async {
               Navigator.of(context).pop();
               await _handleLessonComplete(events);
@@ -102,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _handleLessonComplete(List<SrsEvent> events) async {
-    await _repo.applyLessonCompletion(widget.userId, widget.examName, events);
+    await _repo.applyLessonCompletion(_scope.userId, _scope.examName, events);
     await _loadStats();
   }
 
@@ -114,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final t = context.tokens;
         return StatefulBuilder(
           builder: (context, setSheetState) {
-            final settings = widget.notificationService.settings;
+            final settings = _scope.notificationService.settings;
             return Container(
               decoration: BoxDecoration(
                 color: t.bgSurface,
@@ -147,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     value: settings.enabled,
                     activeColor: t.accent,
                     onChanged: (val) {
-                      widget.notificationService.updateSettings(
+                      _scope.notificationService.updateSettings(
                         enabled: val,
                         hour: settings.hour,
                         minute: settings.minute,
@@ -178,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               hour: settings.hour, minute: settings.minute),
                         );
                         if (picked != null) {
-                          widget.notificationService.updateSettings(
+                          _scope.notificationService.updateSettings(
                             enabled: settings.enabled,
                             hour: picked.hour,
                             minute: picked.minute,
@@ -200,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final remainingDays = widget.examDate.difference(DateTime.now()).inDays;
+    final remainingDays = _scope.examDate.difference(DateTime.now()).inDays;
     final progress = _completedCount / 20.0;
 
     return Scaffold(
@@ -217,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.examName, style: AppTypography.heading(t)),
+                      Text(_scope.examName, style: AppTypography.heading(t)),
                       const SizedBox(height: 4),
                       Text(
                         remainingDays > 0
