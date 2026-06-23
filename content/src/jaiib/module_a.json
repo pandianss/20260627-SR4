@@ -1,0 +1,8 @@
+{
+  "contentType": "module",
+  "id": "m_ppb_a",
+  "paperId": "p_ppb",
+  "name": { "en": "Module A: Indian Financial System" },
+  "topicTags": ["crr", "slr", "kyc", "aml"],
+  "lessonIds": ["les_ppb_crr", "les_ppb_kyc_aml"]
+}

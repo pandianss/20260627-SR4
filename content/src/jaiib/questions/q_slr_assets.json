@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "q_slr_assets",
+  "version": 1,
+  "topicTags": ["slr"],
+  "difficulty": 2,
+  "gradingMode": "auto_exact",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "payload": {
+    "type": "mcq_single",
+    "stem": { "en": "Which of the following assets can count towards a bank's SLR requirement?" },
+    "options": [
+      { "id": "a", "content": { "en": "Unencumbered government approved securities" } },
+      { "id": "b", "content": { "en": "Personal loans extended to retail borrowers" } },
+      { "id": "c", "content": { "en": "Real estate investments owned by the bank" } },
+      { "id": "d", "content": { "en": "Fixed deposits placed with foreign banks" } }
+    ],
+    "correctOptionId": "a"
+  },
+  "explanation": { "en": "Under Section 24 of the Banking Regulation Act, 1949, SLR can be held in gold, cash, or unencumbered approved securities (e.g. government bonds)." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

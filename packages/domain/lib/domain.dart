@@ -11,3 +11,4 @@ export 'src/content.dart';
 export 'src/question.dart';
 export 'src/exam_config.dart';
 export 'src/validation.dart';
+export 'src/assembly.dart';

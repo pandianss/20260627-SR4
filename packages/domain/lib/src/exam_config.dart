@@ -183,6 +183,7 @@ class ExamConfig {
   final List<PaperConfig> papers;
   final PassRule passRule;
   final GradingProfile gradingProfile;
+  final List<MockBlueprint> mockBlueprints;
 
   const ExamConfig({
     required this.examCode,
@@ -191,6 +192,7 @@ class ExamConfig {
     this.papers = const [],
     this.passRule = const PassRule(),
     this.gradingProfile = const GradingProfile(),
+    this.mockBlueprints = const [],
   });
 
   factory ExamConfig.fromJson(Map<String, dynamic> j) => ExamConfig(
@@ -211,6 +213,11 @@ class ExamConfig {
             ? const GradingProfile()
             : GradingProfile.fromJson(
                 (j['gradingProfile'] as Map).cast<String, dynamic>()),
+        mockBlueprints: (j['mockBlueprints'] as List?)
+                ?.map((e) =>
+                    MockBlueprint.fromJson((e as Map).cast<String, dynamic>()))
+                .toList() ??
+            const [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -220,6 +227,7 @@ class ExamConfig {
         'papers': papers.map((p) => p.toJson()).toList(),
         'passRule': passRule.toJson(),
         'gradingProfile': gradingProfile.toJson(),
+        'mockBlueprints': mockBlueprints.map((m) => m.toJson()).toList(),
       };
 
   PaperConfig? paper(String code) {
@@ -228,4 +236,67 @@ class ExamConfig {
     }
     return null;
   }
+}
+
+class MockPick {
+  final List<String> topicTags;
+  final int count;
+  final Map<int, double> difficultyMix;
+
+  const MockPick({
+    required this.topicTags,
+    required this.count,
+    required this.difficultyMix,
+  });
+
+  factory MockPick.fromJson(Map<String, dynamic> j) {
+    final rawMix = j['difficultyMix'] as Map? ?? const {};
+    final mix = rawMix.map((k, v) => MapEntry(int.parse(k.toString()), (v as num).toDouble()));
+    return MockPick(
+      topicTags: (j['topicTags'] as List?)?.map((e) => e.toString()).toList() ?? const [],
+      count: (j['count'] as num).toInt(),
+      difficultyMix: mix,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'topicTags': topicTags,
+        'count': count,
+        'difficultyMix': difficultyMix.map((k, v) => MapEntry(k.toString(), v)),
+      };
+}
+
+class MockBlueprint {
+  final String id;
+  final String name;
+  final List<MockPick> picks;
+  final bool shuffle;
+  final String? timingFromPaper;
+
+  const MockBlueprint({
+    required this.id,
+    required this.name,
+    required this.picks,
+    this.shuffle = true,
+    this.timingFromPaper,
+  });
+
+  factory MockBlueprint.fromJson(Map<String, dynamic> j) => MockBlueprint(
+        id: j['id'] as String,
+        name: j['name'] as String,
+        picks: (j['picks'] as List?)
+                ?.map((e) => MockPick.fromJson((e as Map).cast<String, dynamic>()))
+                .toList() ??
+            const [],
+        shuffle: j['shuffle'] as bool? ?? true,
+        timingFromPaper: j['timingFromPaper'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'picks': picks.map((p) => p.toJson()).toList(),
+        'shuffle': shuffle,
+        if (timingFromPaper != null) 'timingFromPaper': timingFromPaper,
+      };
 }

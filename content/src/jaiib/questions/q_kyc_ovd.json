@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "q_kyc_ovd",
+  "version": 1,
+  "topicTags": ["kyc"],
+  "difficulty": 1,
+  "gradingMode": "auto_exact",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "payload": {
+    "type": "mcq_single",
+    "stem": { "en": "Which of the following is NOT an Officially Valid Document (OVD) for KYC verification?" },
+    "options": [
+      { "id": "a", "content": { "en": "Driving License" } },
+      { "id": "b", "content": { "en": "Aadhaar Card" } },
+      { "id": "c", "content": { "en": "Club Membership Card" } },
+      { "id": "d", "content": { "en": "Voter Identity Card" } }
+    ],
+    "correctOptionId": "c"
+  },
+  "explanation": { "en": "OVDs are government-issued identity documents. A club membership card is a private document and does not qualify as an OVD." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

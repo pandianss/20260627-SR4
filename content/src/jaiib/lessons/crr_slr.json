@@ -1,0 +1,56 @@
+{
+  "contentType": "lesson",
+  "status": "published",
+  "author": "sme_author_1",
+  "reviewedBy": "sme_reviewer_2",
+  "id": "les_ppb_crr",
+  "moduleId": "m_ppb_a",
+  "title": { "en": "Cash Reserve Ratio & SLR" },
+  "estMinutes": 5,
+  "version": 1,
+  "cards": [
+    {
+      "id": "card_crr_intro",
+      "kind": "intro",
+      "srsEligible": false,
+      "blocks": [
+        { "kind": "text", "md": { "en": "Banks cannot lend out all their deposited funds. By law, they must hold a portion back for security. Two ratios dictate these requirements." } }
+      ]
+    },
+    {
+      "id": "card_crr_concept",
+      "kind": "concept",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "**Cash Reserve Ratio (CRR)**: The percentage of demand and time deposits that banks must keep as cash reserves **with the RBI**. No interest is paid on these funds." } },
+        { "kind": "chart", "spec": { "type": "bar_segment", "total": "Total deposits", "segment": { "label": "CRR 4.5%", "value": 4.5 } } }
+      ]
+    },
+    {
+      "id": "card_slr_concept",
+      "kind": "concept",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "**Statutory Liquidity Ratio (SLR)**: The mandatory proportion of deposits a bank must store in safe, liquid assets (gold, cash, approved bonds) **within the bank itself**." } },
+        { "kind": "chart", "spec": { "type": "bar_segment", "total": "Total deposits", "segment": { "label": "SLR 18%", "value": 18 } } }
+      ]
+    },
+    {
+      "id": "card_crr_slr_diff",
+      "kind": "example",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "CRR vs SLR contrast:\n- **CRR**: Kept as cash **with the RBI** (earns no interest).\n- **SLR**: Kept as liquid assets **by the bank** (can earn interest via government bonds)." } }
+      ]
+    },
+    {
+      "id": "card_crr_slr_recap",
+      "kind": "recap",
+      "srsEligible": false,
+      "blocks": [
+        { "kind": "text", "md": { "en": "CRR reserves cash at the RBI. SLR keeps liquid assets at the bank. The RBI sets both to regulate banking liquidity and system stability." } }
+      ]
+    }
+  ],
+  "probeQuestionIds": ["q_crr_holder", "cs_crr_q1", "cs_crr_q2", "q_slr_assets"]
+}

@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "cs_crr_q2",
+  "version": 1,
+  "topicTags": ["slr"],
+  "difficulty": 2,
+  "gradingMode": "auto_numeric",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "stimulusId": "cs_crr_caselet",
+  "payload": {
+    "type": "passage_ref",
+    "innerType": "numeric",
+    "inner": {
+      "type": "numeric",
+      "stem": { "en": "Based on the caselet, how much must the bank hold as SLR liquid assets (in ₹ crore)?" },
+      "answer": { "value": 18, "unit": "₹ cr" },
+      "tolerance": { "kind": "absolute", "amount": 0.01 }
+    }
+  },
+  "explanation": { "en": "The SLR requirement is 18% of ₹100 crore, which equals ₹18 crore." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

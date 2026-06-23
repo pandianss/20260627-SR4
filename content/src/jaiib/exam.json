@@ -1,0 +1,11 @@
+{
+  "contentType": "exam",
+  "id": "ex_jaiib",
+  "code": "JAIIB",
+  "name": "JAIIB Certification",
+  "body": "Indian Institute of Banking and Finance",
+  "languages": ["en"],
+  "paperIds": ["p_ppb"],
+  "status": "published",
+  "version": 1
+}

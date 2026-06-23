@@ -6,6 +6,9 @@ pubspec.lock
 .flutter-plugins
 .flutter-plugins-dependencies
 
+# Scratch
+temp/
+
 # IDE / editor
 .idea/
 .vscode/

@@ -1,0 +1,10 @@
+{
+  "contentType": "stimulus",
+  "status": "published",
+  "author": "sme_author_1",
+  "reviewedBy": "sme_reviewer_2",
+  "id": "cs_crr_caselet",
+  "kind": "caselet",
+  "content": { "en": "A commercial bank has Net Demand and Time Liabilities (NDTL) of ₹100 crore. The current Cash Reserve Ratio (CRR) is 4.5% and the Statutory Liquidity Ratio (SLR) is 18%." },
+  "childQuestionIds": ["cs_crr_q1", "cs_crr_q2"]
+}

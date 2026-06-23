@@ -1,0 +1,8 @@
+{
+  "contentType": "paper",
+  "id": "p_ppb",
+  "examCode": "JAIIB",
+  "name": { "en": "Principles & Practices of Banking" },
+  "kind": "compulsory",
+  "moduleIds": ["m_ppb_a"]
+}

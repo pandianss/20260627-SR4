@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "q_crr_holder",
+  "version": 1,
+  "topicTags": ["crr"],
+  "difficulty": 1,
+  "gradingMode": "auto_exact",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "payload": {
+    "type": "mcq_single",
+    "stem": { "en": "Where does a commercial bank keep its Cash Reserve Ratio (CRR) balance?" },
+    "options": [
+      { "id": "a", "content": { "en": "As cash in its own vault" } },
+      { "id": "b", "content": { "en": "With the Reserve Bank of India" } },
+      { "id": "c", "content": { "en": "Invested in gold bullion" } },
+      { "id": "d", "content": { "en": "Invested in corporate bonds" } }
+    ],
+    "correctOptionId": "b"
+  },
+  "explanation": { "en": "Under the RBI Act, 1934, banks are required to maintain a cash balance equivalent to the CRR percentage directly with the RBI." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

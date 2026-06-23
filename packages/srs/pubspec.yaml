@@ -1,0 +1,17 @@
+name: srs
+description: >-
+  Spaced-repetition scheduling engine for the IIBF micro-learning platform (epic E3).
+  Implements FSRS-4.5 with exam-deadline-aware clamping, topic-interleaved due queues,
+  and weak-topic weighting.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  domain:
+    path: ../domain
+
+dev_dependencies:
+  test: ^1.25.0

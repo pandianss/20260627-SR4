@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "q_aml_stages",
+  "version": 1,
+  "topicTags": ["aml"],
+  "difficulty": 2,
+  "gradingMode": "auto_exact",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "payload": {
+    "type": "mcq_single",
+    "stem": { "en": "What are the three stages of money laundering in correct chronological order?" },
+    "options": [
+      { "id": "a", "content": { "en": "Placement, Layering, Integration" } },
+      { "id": "b", "content": { "en": "Layering, Placement, Integration" } },
+      { "id": "c", "content": { "en": "Placement, Integration, Layering" } },
+      { "id": "d", "content": { "en": "Integration, Layering, Placement" } }
+    ],
+    "correctOptionId": "a"
+  },
+  "explanation": { "en": "Money laundering begins with Placement (entering the system), followed by Layering (hiding trace), and ends with Integration (incorporating into the economy)." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

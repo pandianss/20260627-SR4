@@ -1,0 +1,27 @@
+{
+  "contentType": "question",
+  "id": "cs_crr_q1",
+  "version": 1,
+  "topicTags": ["crr"],
+  "difficulty": 2,
+  "gradingMode": "auto_numeric",
+  "defaultMarks": 1,
+  "defaultNegativeMarks": 0,
+  "stimulusId": "cs_crr_caselet",
+  "payload": {
+    "type": "passage_ref",
+    "innerType": "numeric",
+    "inner": {
+      "type": "numeric",
+      "stem": { "en": "Based on the caselet, how much must the bank keep with the RBI as CRR (in ₹ crore)?" },
+      "answer": { "value": 4.5, "unit": "₹ cr" },
+      "tolerance": { "kind": "absolute", "amount": 0.01 }
+    }
+  },
+  "explanation": { "en": "The CRR requirement is 4.5% of ₹100 crore, which equals ₹4.5 crore." },
+  "authoring": {
+    "status": "published",
+    "authorId": "sme_author_1",
+    "reviewerId": "sme_reviewer_2"
+  }
+}

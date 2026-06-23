@@ -1,0 +1,54 @@
+{
+  "contentType": "lesson",
+  "status": "published",
+  "author": "sme_author_1",
+  "reviewedBy": "sme_reviewer_2",
+  "id": "les_ppb_kyc_aml",
+  "moduleId": "m_ppb_a",
+  "title": { "en": "KYC Guidelines & Anti-Money Laundering" },
+  "estMinutes": 5,
+  "version": 1,
+  "cards": [
+    {
+      "id": "card_kyc_intro",
+      "kind": "intro",
+      "srsEligible": false,
+      "blocks": [
+        { "kind": "text", "md": { "en": "Banks must verify customer identities before opening accounts to prevent financial crimes. This is done through Know Your Customer (KYC) and Anti-Money Laundering (AML) rules." } }
+      ]
+    },
+    {
+      "id": "card_kyc_ovd",
+      "kind": "concept",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "**Officially Valid Documents (OVDs)**: To open accounts, customers must provide OVDs. These are: Passport, Aadhaar, Driving License, Voter ID, NREGA job card, and Letter from National Population Register." } }
+      ]
+    },
+    {
+      "id": "card_aml_stages",
+      "kind": "concept",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "**AML Stages**: Money laundering flows through three key steps:\n1. **Placement**: Injecting illegal cash into the formal financial system.\n2. **Layering**: Spreading money across multiple accounts/transactions to hide its origin.\n3. **Integration**: Merging clean funds back into the economy (e.g., real estate)." } }
+      ]
+    },
+    {
+      "id": "card_aml_example",
+      "kind": "example",
+      "srsEligible": true,
+      "blocks": [
+        { "kind": "text", "md": { "en": "Example flow:\n- **Placement**: Depositing cash bags in small amounts in a bank.\n- **Layering**: Wire-transferring funds to shell firms overseas.\n- **Integration**: Purchasing luxury apartments using the clean bank wire." } }
+      ]
+    },
+    {
+      "id": "card_kyc_aml_recap",
+      "kind": "recap",
+      "srsEligible": false,
+      "blocks": [
+        { "kind": "text", "md": { "en": "KYC verifies identity using 6 OVDs. AML stops dirty money through Placement, Layering, and Integration controls." } }
+      ]
+    }
+  ],
+  "probeQuestionIds": ["q_kyc_ovd", "q_aml_stages"]
+}

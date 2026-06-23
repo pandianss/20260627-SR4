@@ -1,0 +1,21 @@
+name: store
+description: >-
+  Offline store and sync engine for the IIBF micro-learning platform (epic E4).
+  Provides event-sourced logs, state projections, abstract database storage interfaces,
+  and client-server sync protocol synchronization.
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  domain:
+    path: ../domain
+  srs:
+    path: ../srs
+  grading:
+    path: ../grading
+
+dev_dependencies:
+  test: ^1.25.0
