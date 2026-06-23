@@ -8,6 +8,7 @@ import 'screens/main_layout.dart';
 import 'theme/tokens.dart';
 import 'services/notification_service.dart';
 import 'services/telemetry_service.dart';
+import 'dev/dev_seed.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,11 +69,10 @@ class _MyAppState extends State<MyApp> {
         await _contentStore.saveStimulus(stimulus);
       }
 
-      await _seedSrsStates(_stateStore);
     } catch (e, stack) {
       _telemetryService.logError(e, stack);
-      debugPrint('Failed to load content pack: $e. Falling back to default mock seed.');
-      await _seedMockData(_contentStore, _stateStore);
+      debugPrint('Failed to load content pack: $e. Falling back to seeded content.');
+      await DevSeed.seedFallbackContent(_contentStore);
     } finally {
       final latency = DateTime.now().difference(startTime);
       _telemetryService.setBootLatency(latency);
@@ -82,37 +82,6 @@ class _MyAppState extends State<MyApp> {
         });
       }
     }
-  }
-
-  Future<void> _seedSrsStates(SrsStateStore stateStore) async {
-    final now = DateTime.now();
-    final state1 = SrsState(
-      stability: 1.0,
-      difficulty: 3.0,
-      due: now.subtract(const Duration(minutes: 5)),
-      lastReview: now.subtract(const Duration(days: 1)),
-      reps: 1,
-      lapses: 0,
-      phase: SrsPhase.review,
-      userId: 'dummy_user',
-      itemId: 'card_crr_concept',
-      examContext: 'JAIIB',
-    );
-    await stateStore.saveState(state1);
-
-    final state2 = SrsState(
-      stability: 2.0,
-      difficulty: 4.0,
-      due: now.subtract(const Duration(minutes: 1)),
-      lastReview: now.subtract(const Duration(days: 2)),
-      reps: 1,
-      lapses: 0,
-      phase: SrsPhase.review,
-      userId: 'dummy_user',
-      itemId: 'card_slr_concept',
-      examContext: 'JAIIB',
-    );
-    await stateStore.saveState(state2);
   }
 
   @override
@@ -183,7 +152,9 @@ class _MyAppState extends State<MyApp> {
       theme: buildTheme(themeTokens),
       home: _examDate == null
           ? OnboardingScreen(
-              onComplete: (date, email, token) {
+              onComplete: (date, email, token) async {
+                await DevSeed.seedDueReviews(_stateStore, email);
+                if (!mounted) return;
                 setState(() {
                   _examDate = date;
                   _userId = email;
@@ -204,124 +175,4 @@ class _MyAppState extends State<MyApp> {
             ),
     );
   }
-}
-
-Future<void> _seedMockData(ContentStore contentStore, SrsStateStore stateStore) async {
-  // 1. Seed Exam
-  final exam = const Exam(
-    id: 'ex_ppb',
-    code: 'JAIIB',
-    name: 'JAIIB Exam',
-    body: 'Indian Institute of Banking and Finance',
-    paperIds: ['p_ppb'],
-  );
-  await contentStore.saveExam(exam);
-
-  // 2. Seed Paper
-  final paper = const Paper(
-    id: 'p_ppb',
-    examCode: 'JAIIB',
-    name: LocalizedString({'en': 'Principles & Practices of Banking'}),
-    moduleIds: ['m_ppb_a'],
-  );
-  await contentStore.savePaper(paper);
-
-  // 3. Seed Module
-  final module = const Module(
-    id: 'm_ppb_a',
-    paperId: 'p_ppb',
-    name: LocalizedString({'en': 'Module A: Indian Financial System'}),
-    topicTags: ['crr', 'slr', 'banking'],
-    lessonIds: ['les_ppb_crr'],
-  );
-  await contentStore.saveModule(module);
-
-  // 4. Seed Lesson
-  final lesson = const Lesson(
-    id: 'les_ppb_crr',
-    moduleId: 'm_ppb_a',
-    title: LocalizedString({'en': 'Cash Reserve Ratio & Statutory Liquidity Ratio'}),
-    cards: [
-      Card(
-        id: 'card_crr',
-        kind: CardKind.concept,
-        blocks: [
-          TextBlock(LocalizedString({'en': 'The **Cash Reserve Ratio (CRR)** is the share of Net Demand and Time Liabilities (NDTL) that a bank must maintain as cash balance with the Reserve Bank of India (RBI). No interest is paid by the RBI on CRR balances.'})),
-          FormulaBlock('CRR = \\frac{\\text{Cash with RBI}}{\\text{NDTL}} \\times 100\\%'),
-        ],
-        srsEligible: true,
-      ),
-      Card(
-        id: 'card_slr',
-        kind: CardKind.concept,
-        blocks: [
-          TextBlock(LocalizedString({'en': 'The **Statutory Liquidity Ratio (SLR)** is the minimum percentage of deposits that a commercial bank has to maintain in the form of liquid cash, gold, or other securities approved by the RBI.'})),
-        ],
-        srsEligible: true,
-      ),
-    ],
-    probeQuestionIds: ['q_crr_1', 'q_crr_2'],
-  );
-  await contentStore.saveLesson(lesson);
-
-  // 5. Seed Questions
-  final q1 = const QuestionBase(
-    id: 'q_crr_1',
-    topicTags: ['crr'],
-    difficulty: 1,
-    gradingMode: GradingMode.autoExact,
-    explanation: LocalizedString({'en': 'Under Section 42(1) of the RBI Act, 1934, banks are required to keep a certain percentage of NDTL as cash reserves with the RBI.'}),
-    payload: McqSingle(
-      stem: LocalizedString({'en': 'Which of the following describes the Cash Reserve Ratio (CRR)?'}),
-      options: [
-        QuestionOption(id: 'opt_1_a', content: LocalizedString({'en': 'Percentage of NDTL kept as cash with the RBI'})),
-        QuestionOption(id: 'opt_1_b', content: LocalizedString({'en': 'Percentage of deposits kept as liquid assets with themselves'})),
-      ],
-      correctOptionId: 'opt_1_a',
-    ),
-  );
-  await contentStore.saveQuestion(q1);
-
-  final q2 = const QuestionBase(
-    id: 'q_crr_2',
-    topicTags: ['slr'],
-    difficulty: 2,
-    gradingMode: GradingMode.autoExact,
-    explanation: LocalizedString({'en': 'Under Section 24 of the Banking Regulation Act, 1949, SLR can be maintained in gold, cash, or unencumbered approved securities.'}),
-    payload: TrueFalse(
-      stem: LocalizedString({'en': 'Statutory Liquidity Ratio (SLR) must only be maintained in cash reserves with the RBI.'}),
-      answer: false,
-    ),
-  );
-  await contentStore.saveQuestion(q2);
-
-  // 6. Seed SRS states due today
-  final now = DateTime.now();
-  final state1 = SrsState(
-    stability: 1.0,
-    difficulty: 3.0,
-    due: now.subtract(const Duration(minutes: 5)),
-    lastReview: now.subtract(const Duration(days: 1)),
-    reps: 1,
-    lapses: 0,
-    phase: SrsPhase.review,
-    userId: 'dummy_user',
-    itemId: 'card_crr',
-    examContext: 'JAIIB',
-  );
-  await stateStore.saveState(state1);
-
-  final state2 = SrsState(
-    stability: 2.0,
-    difficulty: 4.0,
-    due: now.subtract(const Duration(minutes: 1)),
-    lastReview: now.subtract(const Duration(days: 2)),
-    reps: 1,
-    lapses: 0,
-    phase: SrsPhase.review,
-    userId: 'dummy_user',
-    itemId: 'card_slr',
-    examContext: 'JAIIB',
-  );
-  await stateStore.saveState(state2);
 }
