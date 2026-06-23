@@ -20,8 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = false;
-  int _completedCount = 0;
-  bool _studiedToday = false;
+  HomeData? _data;
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
@@ -30,34 +29,26 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _loadStats();
+      if (mounted) _load();
     });
   }
 
-  Future<void> _loadStats() async {
-    final stats =
-        await _repo.homeStats(_scope.userId, trackLessonId: 'les_ppb_crr');
-    if (mounted) {
-      setState(() {
-        _completedCount = stats.completedCount;
-        _studiedToday = stats.studiedToday;
-      });
-    }
+  Future<void> _load() async {
+    final data = await _repo.homeData(_scope.examName, _scope.userId);
+    if (mounted) setState(() => _data = data);
   }
 
   Future<void> _startDailyLesson() async {
+    final lesson = _data?.nextLesson;
+    if (lesson == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lessons are still loading. Please try again.')),
+      );
+      return;
+    }
     setState(() => _isLoading = true);
     try {
-      final lesson = await _repo.getLesson('les_ppb_crr');
-      if (lesson == null) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Lesson not ready yet. Please try again.')),
-          );
-        }
-        return;
-      }
-      final questions = await _repo.getLessonQuestions('les_ppb_crr');
+      final questions = await _repo.getLessonQuestions(lesson.id);
 
       if (!mounted) return;
       Navigator.of(context).push(
@@ -81,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _handleLessonComplete(List<SrsEvent> events) async {
     await _repo.applyLessonCompletion(_scope.userId, _scope.examName, events);
-    await _loadStats();
+    await _load();
   }
 
   void _showSettingsSheet() {
@@ -178,8 +169,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    final data = _data;
     final remainingDays = _scope.examDate.difference(DateTime.now()).inDays;
-    final progress = _completedCount / 20.0;
+    final total = data?.totalLessons ?? 0;
+    final completed = data?.completedCount ?? 0;
+    final progress = total > 0 ? completed / total : 0.0;
+    final studiedToday = data?.studiedToday ?? false;
 
     return Scaffold(
       backgroundColor: t.bgBase,
@@ -257,13 +252,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Principles & practices of banking',
+                          Text(
+                              (data?.paperName.isNotEmpty ?? false)
+                                  ? data!.paperName
+                                  : _scope.examName,
                               style: AppTypography.heading(t)),
                           const SizedBox(height: 4),
-                          Text('Module A · Indian financial system',
+                          Text(
+                              (data?.moduleName.isNotEmpty ?? false)
+                                  ? data!.moduleName
+                                  : 'Loading…',
                               style: AppTypography.bodySm(t)),
                           const SizedBox(height: 6),
-                          Text('$_completedCount of 20 lessons',
+                          Text('$completed of $total lessons',
                               style: AppTypography.caption(t)),
                         ],
                       ),
@@ -285,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         _streakDay(t, 'M', true),
                         _streakDay(t, 'T', true),
-                        _streakDay(t, 'W', _studiedToday),
+                        _streakDay(t, 'W', studiedToday),
                         _streakDay(t, 'T', false),
                         _streakDay(t, 'F', false),
                         _streakDay(t, 'S', false),
@@ -294,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      _studiedToday
+                      studiedToday
                           ? 'You studied today. Nicely done.'
                           : 'Learn when you are ready — no pressure.',
                       style: AppTypography.bodySm(t).copyWith(color: t.textSecondary),

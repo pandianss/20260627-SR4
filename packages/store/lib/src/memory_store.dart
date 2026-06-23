@@ -75,6 +75,10 @@ class MemoryContentStore implements ContentStore {
   }
 
   @override
+  Future<List<QuestionBase>> getAllQuestions() async =>
+      _questions.values.toList();
+
+  @override
   Future<void> saveAsset(Asset asset) async => _assets[asset.id] = asset;
 
   @override

@@ -23,6 +23,7 @@ abstract interface class ContentStore {
   Future<void> saveQuestion(QuestionBase question);
   Future<QuestionBase?> getQuestion(String id);
   Future<List<QuestionBase>> getQuestionsByLesson(String lessonId);
+  Future<List<QuestionBase>> getAllQuestions();
 
   Future<void> saveAsset(Asset asset);
   Future<Asset?> getAsset(String id);

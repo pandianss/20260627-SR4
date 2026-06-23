@@ -20,8 +20,9 @@ class LearningRepository {
 
   // --- Home ---
 
-  Future<HomeStats> homeStats(String userId,
-      {required String trackLessonId}) async {
+  /// Home dashboard data for [examCode]: the next un-completed lesson (with its
+  /// paper/module names), overall progress, and today's study state.
+  Future<HomeData> homeData(String examCode, String userId) async {
     final all = await events.getAllEvents(userId);
     final completed =
         all.whereType<LessonViewedEvent>().map((e) => e.lessonId).toSet();
@@ -30,8 +31,42 @@ class LearningRepository {
         e.timestamp.year == now.year &&
         e.timestamp.month == now.month &&
         e.timestamp.day == now.day);
-    return HomeStats(
-      completedCount: completed.contains(trackLessonId) ? 1 : 0,
+
+    Lesson? first;
+    Lesson? next;
+    String firstPaper = '', firstModule = '', nextPaper = '', nextModule = '';
+    var total = 0;
+
+    final exam = await content.getExamByCode(examCode);
+    if (exam != null) {
+      final papers = await content.getPapersByExam(exam.code);
+      for (final paper in papers) {
+        final modules = await content.getModulesByPaper(paper.id);
+        for (final mod in modules) {
+          final lessons = await content.getLessonsByModule(mod.id);
+          for (final l in lessons) {
+            total++;
+            if (first == null) {
+              first = l;
+              firstPaper = paper.name.resolve('en');
+              firstModule = mod.name.resolve('en');
+            }
+            if (next == null && !completed.contains(l.id)) {
+              next = l;
+              nextPaper = paper.name.resolve('en');
+              nextModule = mod.name.resolve('en');
+            }
+          }
+        }
+      }
+    }
+
+    return HomeData(
+      nextLesson: next ?? first,
+      paperName: next != null ? nextPaper : firstPaper,
+      moduleName: next != null ? nextModule : firstModule,
+      completedCount: completed.length,
+      totalLessons: total,
       studiedToday: studiedToday,
     );
   }
@@ -79,20 +114,10 @@ class LearningRepository {
     timingFromPaper: 'PPB',
   );
 
-  /// Build a practice mock from the question bank of [paperContentId].
-  Future<MockAssembly> assembleMockForPaper(
-    ExamConfig config, {
-    required String paperContentId,
-  }) async {
+  /// Build a practice mock from the full question bank of the loaded exam.
+  Future<MockAssembly> assembleMockForExam(ExamConfig config) async {
     final blueprint = config.mockBlueprints.firstOrNull ?? _fallbackBlueprint;
-    final pool = <QuestionBase>[];
-    final modules = await content.getModulesByPaper(paperContentId);
-    for (final mod in modules) {
-      final lessons = await content.getLessonsByModule(mod.id);
-      for (final les in lessons) {
-        pool.addAll(await content.getQuestionsByLesson(les.id));
-      }
-    }
+    final pool = await content.getAllQuestions();
     if (pool.isEmpty) {
       return MockAssembly(blueprint: blueprint, questions: const []);
     }
@@ -165,10 +190,21 @@ class LearningRepository {
   }
 }
 
-class HomeStats {
+class HomeData {
+  final Lesson? nextLesson;
+  final String paperName;
+  final String moduleName;
   final int completedCount;
+  final int totalLessons;
   final bool studiedToday;
-  const HomeStats({required this.completedCount, required this.studiedToday});
+  const HomeData({
+    required this.nextLesson,
+    required this.paperName,
+    required this.moduleName,
+    required this.completedCount,
+    required this.totalLessons,
+    required this.studiedToday,
+  });
 }
 
 class MockAssembly {

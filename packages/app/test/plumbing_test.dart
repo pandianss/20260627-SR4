@@ -15,7 +15,7 @@ void main() {
         MaterialApp(
           theme: buildTheme(AppTokens.dark),
           home: OnboardingScreen(
-            onComplete: (date, email, token) {
+            onComplete: (date, email, token, examCode) {
               onCompleteCalled = true;
             },
           ),
@@ -70,7 +70,7 @@ void main() {
         MaterialApp(
           theme: buildTheme(AppTokens.dark),
           home: OnboardingScreen(
-            onComplete: (date, email, token) {
+            onComplete: (date, email, token, examCode) {
               completedDate = date;
               completedEmail = email;
               completedToken = token;

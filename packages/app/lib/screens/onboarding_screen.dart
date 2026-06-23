@@ -4,7 +4,8 @@ import '../components/card.dart';
 import '../theme/tokens.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  final void Function(DateTime date, String email, String token) onComplete;
+  final void Function(DateTime date, String email, String token, String examCode)
+      onComplete;
 
   const OnboardingScreen({
     super.key,
@@ -190,33 +191,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            GestureDetector(
-              onTap: () => setState(() => _selectedExam = 'JAIIB'),
-              child: CalmCard(
-                child: Row(
-                  children: [
-                    Icon(
-                      _selectedExam == 'JAIIB' ? Icons.radio_button_checked : Icons.radio_button_off,
-                      color: _selectedExam == 'JAIIB' ? t.accent : t.textTertiary,
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('JAIIB', style: AppTypography.heading(t)),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Junior Associate of Indian Institute of Bankers',
-                            style: AppTypography.caption(t),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _examCard(t, 'JAIIB',
+                'Junior Associate of the Indian Institute of Bankers'),
+            const SizedBox(height: 12),
+            _examCard(t, 'CAIIB',
+                'Certified Associate of the Indian Institute of Bankers'),
           ],
         );
       case 3:
@@ -314,6 +293,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _selectedDate,
                   _emailController.text.trim(),
                   'JWT_dummy_token_${_emailController.text.trim().hashCode}',
+                  _selectedExam,
                 );
               } else {
                 setState(() {
@@ -324,6 +304,34 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _examCard(AppTokens t, String code, String subtitle) {
+    final selected = _selectedExam == code;
+    return GestureDetector(
+      onTap: () => setState(() => _selectedExam = code),
+      child: CalmCard(
+        child: Row(
+          children: [
+            Icon(
+              selected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: selected ? t.accent : t.textTertiary,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(code, style: AppTypography.heading(t)),
+                  const SizedBox(height: 4),
+                  Text(subtitle, style: AppTypography.caption(t)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

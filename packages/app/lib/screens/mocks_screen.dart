@@ -25,8 +25,7 @@ class _MocksScreenState extends State<MocksScreen> {
   Future<void> _startMock() async {
     setState(() => _isLoading = true);
     try {
-      final mock = await _repo.assembleMockForPaper(_scope.examConfig,
-          paperContentId: 'p_ppb');
+      final mock = await _repo.assembleMockForExam(_scope.examConfig);
 
       if (mock.isEmpty) {
         if (mounted) {
