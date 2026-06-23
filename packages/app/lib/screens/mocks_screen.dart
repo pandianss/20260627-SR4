@@ -5,6 +5,7 @@ import 'package:domain/domain.dart';
 import '../components/card.dart';
 import '../components/button.dart';
 import '../theme/tokens.dart';
+import '../data/learning_repository.dart';
 import 'mock_player_screen.dart';
 
 /// The Mocks tab: a single calm action to start a practice mock assembled from
@@ -37,30 +38,20 @@ class MocksScreen extends StatefulWidget {
 class _MocksScreenState extends State<MocksScreen> {
   bool _isLoading = false;
 
+  late final LearningRepository _repo = LearningRepository(
+    content: widget.contentStore,
+    events: widget.eventStore,
+    states: widget.stateStore,
+    scheduler: widget.scheduler,
+  );
+
   Future<void> _startMock() async {
     setState(() => _isLoading = true);
     try {
-      final blueprint = widget.examConfig.mockBlueprints.firstOrNull ??
-          const MockBlueprint(
-            id: 'bp_ppb_full',
-            name: 'Principles & practices of banking — full mock',
-            picks: [
-              MockPick(topicTags: [], count: 2, difficultyMix: {1: 0.5, 2: 0.5}),
-            ],
-            shuffle: true,
-            timingFromPaper: 'PPB',
-          );
+      final mock = await _repo.assembleMockForPaper(widget.examConfig,
+          paperContentId: 'p_ppb');
 
-      final questions = <QuestionBase>[];
-      final modules = await widget.contentStore.getModulesByPaper('p_ppb');
-      for (final mod in modules) {
-        final lessons = await widget.contentStore.getLessonsByModule(mod.id);
-        for (final les in lessons) {
-          questions.addAll(await widget.contentStore.getQuestionsByLesson(les.id));
-        }
-      }
-
-      if (questions.isEmpty) {
+      if (mock.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('No questions available yet.')),
@@ -69,14 +60,12 @@ class _MocksScreenState extends State<MocksScreen> {
         return;
       }
 
-      final assembled = assembleMock(blueprint, questions);
-
       if (!mounted) return;
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => MockPlayerScreen(
-            blueprint: blueprint,
-            questions: assembled,
+            blueprint: mock.blueprint,
+            questions: mock.questions,
             stimuli: const [],
             userId: widget.userId,
             contentStore: widget.contentStore,

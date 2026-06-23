@@ -5,6 +5,7 @@ import '../components/card.dart';
 import '../components/progress_ring.dart';
 import '../components/button.dart';
 import '../theme/tokens.dart';
+import '../data/learning_repository.dart';
 import 'lesson_player_screen.dart';
 import '../services/notification_service.dart';
 
@@ -42,6 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
   int _completedCount = 0;
   bool _studiedToday = false;
 
+  late final LearningRepository _repo = LearningRepository(
+    content: widget.contentStore,
+    events: widget.eventStore,
+    states: widget.stateStore,
+    scheduler: widget.scheduler,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -49,22 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadStats() async {
-    final events = await widget.eventStore.getAllEvents(widget.userId);
-    final completed = events
-        .whereType<LessonViewedEvent>()
-        .map((e) => e.lessonId)
-        .toSet();
-
-    final now = DateTime.now();
-    final studiedToday = events.any((e) =>
-        e.timestamp.year == now.year &&
-        e.timestamp.month == now.month &&
-        e.timestamp.day == now.day);
-
+    final stats =
+        await _repo.homeStats(widget.userId, trackLessonId: 'les_ppb_crr');
     if (mounted) {
       setState(() {
-        _completedCount = completed.contains('les_ppb_crr') ? 1 : 0;
-        _studiedToday = studiedToday;
+        _completedCount = stats.completedCount;
+        _studiedToday = stats.studiedToday;
       });
     }
   }
@@ -72,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _startDailyLesson() async {
     setState(() => _isLoading = true);
     try {
-      final lesson = await widget.contentStore.getLesson('les_ppb_crr');
+      final lesson = await _repo.getLesson('les_ppb_crr');
       if (lesson == null) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -81,8 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return;
       }
-      final questions =
-          await widget.contentStore.getQuestionsByLesson('les_ppb_crr');
+      final questions = await _repo.getLessonQuestions('les_ppb_crr');
 
       if (!mounted) return;
       Navigator.of(context).push(
@@ -105,34 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _handleLessonComplete(List<SrsEvent> events) async {
-    for (final event in events) {
-      await widget.eventStore.appendEvent(event);
-    }
-
-    final itemIds = <String>{};
-    for (final event in events) {
-      if (event is CardReviewedEvent) {
-        itemIds.add(event.itemId);
-      } else if (event is QuestionAnsweredEvent) {
-        itemIds.add(event.questionId);
-      }
-    }
-
-    for (final itemId in itemIds) {
-      final itemEvents =
-          await widget.eventStore.getEventsForItem(widget.userId, itemId);
-      final nextState = projectSrsState(
-        userId: widget.userId,
-        itemId: itemId,
-        events: itemEvents,
-        scheduler: widget.scheduler,
-        examContext: widget.examName,
-      );
-      if (nextState != null) {
-        await widget.stateStore.saveState(nextState);
-      }
-    }
-
+    await _repo.applyLessonCompletion(widget.userId, widget.examName, events);
     await _loadStats();
   }
 

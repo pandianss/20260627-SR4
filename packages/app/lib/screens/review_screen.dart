@@ -7,6 +7,7 @@ import '../components/button.dart';
 import '../components/rating_buttons.dart';
 import '../components/block_renderer.dart';
 import '../theme/tokens.dart';
+import '../data/learning_repository.dart';
 
 class ReviewScreen extends StatefulWidget {
   final String userId;
@@ -33,11 +34,17 @@ class ReviewScreen extends StatefulWidget {
 class _ReviewScreenState extends State<ReviewScreen> {
   bool _isLoading = true;
   List<SrsState> _dueStates = [];
-  final Map<String, LearnableItem> _learnableItems = {};
   final Map<String, Card> _cards = {};
 
   int _currentIndex = 0;
   bool _isFlipped = false;
+
+  late final LearningRepository _repo = LearningRepository(
+    content: widget.contentStore,
+    events: widget.eventStore,
+    states: widget.stateStore,
+    scheduler: widget.scheduler,
+  );
 
   @override
   void initState() {
@@ -47,50 +54,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   Future<void> _loadDueQueue() async {
     setState(() => _isLoading = true);
-
-    // 1. Fetch all states and create a mock map of learnable items for lookup
-    final allStates = await widget.stateStore.getStatesForExam(widget.userId, widget.examContext);
-
-    // Mock query learnable items from content base
-    // In our mock, let's load all cards that are srsEligible and register them
-    final exam = await widget.contentStore.getExamByCode(widget.examContext) ?? 
-                 await widget.contentStore.getExam('ex_ppb');
-
-    if (exam != null) {
-      final papers = await widget.contentStore.getPapersByExam(exam.code);
-      for (final paper in papers) {
-        final modules = await widget.contentStore.getModulesByPaper(paper.id);
-        for (final mod in modules) {
-          final lessons = await widget.contentStore.getLessonsByModule(mod.id);
-          for (final lesson in lessons) {
-            // Register card items
-            for (final card in lesson.cards) {
-              if (card.srsEligible) {
-                _cards[card.id] = card;
-                _learnableItems[card.id] = LearnableItem(
-                  id: card.id,
-                  kind: LearnableItemKind.card,
-                  refId: card.id,
-                  topicTags: mod.topicTags,
-                  examContexts: [exam.code],
-                );
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // 2. Build FSRS due queue
-    final dueQueue = buildDueQueue(
-      states: allStates,
-      items: _learnableItems,
-      now: DateTime.now(),
-      budget: 15,
-    );
-
+    final result = await _repo.loadDueReviews(widget.userId, widget.examContext,
+        budget: 15);
+    if (!mounted) return;
     setState(() {
-      _dueStates = dueQueue;
+      _dueStates = result.states;
+      _cards
+        ..clear()
+        ..addAll(result.cards);
       _currentIndex = 0;
       _isFlipped = false;
       _isLoading = false;
@@ -99,26 +70,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   Future<void> _handleRating(Rating rating) async {
     final currentState = _dueStates[_currentIndex];
-    final now = DateTime.now();
+    await _repo.applyReview(
+        widget.userId, widget.examContext, currentState, rating);
 
-    // 1. Update state through scheduler
-    final nextState = widget.scheduler.review(currentState, rating, now);
-
-    // 2. Save state to store
-    await widget.stateStore.saveState(nextState);
-
-    // 3. Append CardReviewedEvent to event log
-    final clientUlid = 'ulid_rev_${currentState.itemId}_${now.millisecondsSinceEpoch}';
-    await widget.eventStore.appendEvent(CardReviewedEvent(
-      clientUlid: clientUlid,
-      userId: widget.userId,
-      timestamp: now,
-      examContext: widget.examContext,
-      itemId: currentState.itemId,
-      rating: rating,
-    ));
-
-    // 4. Advance to next card
+    // Advance to next card
     if (_currentIndex + 1 < _dueStates.length) {
       setState(() {
         _currentIndex += 1;
