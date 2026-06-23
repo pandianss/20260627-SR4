@@ -1,0 +1,537 @@
+{
+  "exams": [
+    {
+      "id": "ex_jaiib",
+      "code": "JAIIB",
+      "name": "JAIIB Certification",
+      "body": "Indian Institute of Banking and Finance",
+      "languages": [
+        "en"
+      ],
+      "configId": "",
+      "paperIds": [
+        "p_ppb"
+      ],
+      "status": "published",
+      "version": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": "p_ppb",
+      "examCode": "JAIIB",
+      "name": {
+        "en": "Principles & Practices of Banking"
+      },
+      "kind": "compulsory",
+      "moduleIds": [
+        "m_ppb_a"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "m_ppb_a",
+      "paperId": "p_ppb",
+      "name": {
+        "en": "Module A: Indian Financial System"
+      },
+      "topicTags": [
+        "crr",
+        "slr",
+        "kyc",
+        "aml"
+      ],
+      "lessonIds": [
+        "les_ppb_crr",
+        "les_ppb_kyc_aml"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "les_ppb_crr",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Cash Reserve Ratio & SLR"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "card_crr_intro",
+          "kind": "intro",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "Banks cannot lend out all their deposited funds. By law, they must hold a portion back for security. Two ratios dictate these requirements."
+              }
+            }
+          ],
+          "srsEligible": false
+        },
+        {
+          "id": "card_crr_concept",
+          "kind": "concept",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Cash Reserve Ratio (CRR)**: The percentage of demand and time deposits that banks must keep as cash reserves **with the RBI**. No interest is paid on these funds."
+              }
+            },
+            {
+              "kind": "chart",
+              "spec": {
+                "type": "bar_segment",
+                "total": "Total deposits",
+                "segment": {
+                  "label": "CRR 4.5%",
+                  "value": 4.5
+                }
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_slr_concept",
+          "kind": "concept",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Statutory Liquidity Ratio (SLR)**: The mandatory proportion of deposits a bank must store in safe, liquid assets (gold, cash, approved bonds) **within the bank itself**."
+              }
+            },
+            {
+              "kind": "chart",
+              "spec": {
+                "type": "bar_segment",
+                "total": "Total deposits",
+                "segment": {
+                  "label": "SLR 18%",
+                  "value": 18
+                }
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_crr_slr_diff",
+          "kind": "example",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "CRR vs SLR contrast:\n- **CRR**: Kept as cash **with the RBI** (earns no interest).\n- **SLR**: Kept as liquid assets **by the bank** (can earn interest via government bonds)."
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_crr_slr_recap",
+          "kind": "recap",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "CRR reserves cash at the RBI. SLR keeps liquid assets at the bank. The RBI sets both to regulate banking liquidity and system stability."
+              }
+            }
+          ],
+          "srsEligible": false
+        }
+      ],
+      "probeQuestionIds": [
+        "q_crr_holder",
+        "cs_crr_q1",
+        "cs_crr_q2",
+        "q_slr_assets"
+      ]
+    },
+    {
+      "id": "les_ppb_kyc_aml",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "KYC Guidelines & Anti-Money Laundering"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "card_kyc_intro",
+          "kind": "intro",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "Banks must verify customer identities before opening accounts to prevent financial crimes. This is done through Know Your Customer (KYC) and Anti-Money Laundering (AML) rules."
+              }
+            }
+          ],
+          "srsEligible": false
+        },
+        {
+          "id": "card_kyc_ovd",
+          "kind": "concept",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Officially Valid Documents (OVDs)**: To open accounts, customers must provide OVDs. These are: Passport, Aadhaar, Driving License, Voter ID, NREGA job card, and Letter from National Population Register."
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_aml_stages",
+          "kind": "concept",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**AML Stages**: Money laundering flows through three key steps:\n1. **Placement**: Injecting illegal cash into the formal financial system.\n2. **Layering**: Spreading money across multiple accounts/transactions to hide its origin.\n3. **Integration**: Merging clean funds back into the economy (e.g., real estate)."
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_aml_example",
+          "kind": "example",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "Example flow:\n- **Placement**: Depositing cash bags in small amounts in a bank.\n- **Layering**: Wire-transferring funds to shell firms overseas.\n- **Integration**: Purchasing luxury apartments using the clean bank wire."
+              }
+            }
+          ],
+          "srsEligible": true
+        },
+        {
+          "id": "card_kyc_aml_recap",
+          "kind": "recap",
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "KYC verifies identity using 6 OVDs. AML stops dirty money through Placement, Layering, and Integration controls."
+              }
+            }
+          ],
+          "srsEligible": false
+        }
+      ],
+      "probeQuestionIds": [
+        "q_kyc_ovd",
+        "q_aml_stages"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "cs_crr_q1",
+      "version": 1,
+      "topicTags": [
+        "crr"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_numeric",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "The CRR requirement is 4.5% of ₹100 crore, which equals ₹4.5 crore."
+      },
+      "stimulusId": "cs_crr_caselet",
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "passage_ref",
+        "innerType": "numeric",
+        "inner": {
+          "type": "numeric",
+          "stem": {
+            "en": "Based on the caselet, how much must the bank keep with the RBI as CRR (in ₹ crore)?"
+          },
+          "answer": {
+            "value": 4.5,
+            "unit": "₹ cr"
+          },
+          "tolerance": {
+            "kind": "absolute",
+            "amount": 0.01
+          }
+        }
+      }
+    },
+    {
+      "id": "cs_crr_q2",
+      "version": 1,
+      "topicTags": [
+        "slr"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_numeric",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "The SLR requirement is 18% of ₹100 crore, which equals ₹18 crore."
+      },
+      "stimulusId": "cs_crr_caselet",
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "passage_ref",
+        "innerType": "numeric",
+        "inner": {
+          "type": "numeric",
+          "stem": {
+            "en": "Based on the caselet, how much must the bank hold as SLR liquid assets (in ₹ crore)?"
+          },
+          "answer": {
+            "value": 18.0,
+            "unit": "₹ cr"
+          },
+          "tolerance": {
+            "kind": "absolute",
+            "amount": 0.01
+          }
+        }
+      }
+    },
+    {
+      "id": "q_aml_stages",
+      "version": 1,
+      "topicTags": [
+        "aml"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "Money laundering begins with Placement (entering the system), followed by Layering (hiding trace), and ends with Integration (incorporating into the economy)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What are the three stages of money laundering in correct chronological order?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Placement, Layering, Integration"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Layering, Placement, Integration"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Placement, Integration, Layering"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Integration, Layering, Placement"
+            }
+          }
+        ],
+        "correctOptionId": "a"
+      }
+    },
+    {
+      "id": "q_crr_holder",
+      "version": 1,
+      "topicTags": [
+        "crr"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "Under the RBI Act, 1934, banks are required to maintain a cash balance equivalent to the CRR percentage directly with the RBI."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Where does a commercial bank keep its Cash Reserve Ratio (CRR) balance?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "As cash in its own vault"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "With the Reserve Bank of India"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Invested in gold bullion"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Invested in corporate bonds"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_kyc_ovd",
+      "version": 1,
+      "topicTags": [
+        "kyc"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "OVDs are government-issued identity documents. A club membership card is a private document and does not qualify as an OVD."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following is NOT an Officially Valid Document (OVD) for KYC verification?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Driving License"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Aadhaar Card"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Club Membership Card"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Voter Identity Card"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_slr_assets",
+      "version": 1,
+      "topicTags": [
+        "slr"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1.0,
+      "defaultNegativeMarks": 0.0,
+      "explanation": {
+        "en": "Under Section 24 of the Banking Regulation Act, 1949, SLR can be held in gold, cash, or unencumbered approved securities (e.g. government bonds)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "sme_author_1",
+        "reviewerId": "sme_reviewer_2"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following assets can count towards a bank's SLR requirement?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Unencumbered government approved securities"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Personal loans extended to retail borrowers"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Real estate investments owned by the bank"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Fixed deposits placed with foreign banks"
+            }
+          }
+        ],
+        "correctOptionId": "a"
+      }
+    }
+  ],
+  "assets": [],
+  "stimuli": [
+    {
+      "id": "cs_crr_caselet",
+      "kind": "caselet",
+      "content": {
+        "en": "A commercial bank has Net Demand and Time Liabilities (NDTL) of ₹100 crore. The current Cash Reserve Ratio (CRR) is 4.5% and the Statutory Liquidity Ratio (SLR) is 18%."
+      },
+      "childQuestionIds": [
+        "cs_crr_q1",
+        "cs_crr_q2"
+      ]
+    }
+  ]
+}
