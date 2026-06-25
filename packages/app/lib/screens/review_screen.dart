@@ -8,6 +8,7 @@ import '../components/block_renderer.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
 import '../app_scope.dart';
+import 'paywall_screen.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
@@ -23,6 +24,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   int _currentIndex = 0;
   bool _isFlipped = false;
+  int _reviewsCompletedThisSession = 0;
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
@@ -56,6 +58,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
     await _repo.applyReview(
         _scope.userId, _scope.examName, currentState, rating);
 
+    setState(() {
+      _reviewsCompletedThisSession += 1;
+    });
+
     // Advance to next card
     if (_currentIndex + 1 < _dueStates.length) {
       setState(() {
@@ -71,6 +77,46 @@ class _ReviewScreenState extends State<ReviewScreen> {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+
+    if (!_scope.isPremium && _reviewsCompletedThisSession >= 10) {
+      return Scaffold(
+        backgroundColor: t.bgBase,
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.stars,
+                    color: Colors.amber,
+                    size: 72,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Daily Review Limit Reached',
+                    style: AppTypography.heading(t).copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Free tier is limited to 10 card reviews per day. Upgrade to Premium to study all remaining due cards.',
+                    style: AppTypography.body(t).copyWith(color: t.textSecondary),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
+                  CalmButton.primary(
+                    text: 'Unlock Premium',
+                    onPressed: () => PaywallScreen.show(context),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     if (_isLoading) {
       return Scaffold(

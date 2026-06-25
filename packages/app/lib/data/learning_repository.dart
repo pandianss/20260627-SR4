@@ -76,6 +76,38 @@ class LearningRepository {
   Future<List<QuestionBase>> getLessonQuestions(String lessonId) =>
       content.getQuestionsByLesson(lessonId);
 
+  /// Full catalog tree for the content browser: papers → modules → lessons,
+  /// plus the set of completed lesson IDs for the given user.
+  Future<CatalogData> browseCatalog(String examCode, String userId) async {
+    final all = await events.getAllEvents(userId);
+    final completed =
+        all.whereType<LessonViewedEvent>().map((e) => e.lessonId).toSet();
+
+    final exam = await content.getExamByCode(examCode);
+    final papers = <Paper>[];
+    final modulesByPaper = <String, List<Module>>{};
+    final lessonsByModule = <String, List<Lesson>>{};
+
+    if (exam != null) {
+      final ps = await content.getPapersByExam(exam.code);
+      for (final paper in ps) {
+        papers.add(paper);
+        final mods = await content.getModulesByPaper(paper.id);
+        modulesByPaper[paper.id] = mods;
+        for (final mod in mods) {
+          lessonsByModule[mod.id] = await content.getLessonsByModule(mod.id);
+        }
+      }
+    }
+
+    return CatalogData(
+      papers: papers,
+      modulesByPaper: modulesByPaper,
+      lessonsByModule: lessonsByModule,
+      completed: completed,
+    );
+  }
+
   /// Persist a completed lesson's events, then re-project the SRS state of each
   /// touched item from its full event history.
   Future<void> applyLessonCompletion(
@@ -218,4 +250,17 @@ class DueReviews {
   final List<SrsState> states;
   final Map<String, Card> cards;
   const DueReviews({required this.states, required this.cards});
+}
+
+class CatalogData {
+  final List<Paper> papers;
+  final Map<String, List<Module>> modulesByPaper;
+  final Map<String, List<Lesson>> lessonsByModule;
+  final Set<String> completed;
+  const CatalogData({
+    required this.papers,
+    required this.modulesByPaper,
+    required this.lessonsByModule,
+    required this.completed,
+  });
 }

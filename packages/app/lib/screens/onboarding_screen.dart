@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../components/button.dart';
 import '../components/card.dart';
 import '../theme/tokens.dart';
@@ -18,17 +19,23 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentStep = 0;
-  String _selectedExam = 'JAIIB';
+  String _selectedExam = 'CAIIB';
   DateTime _selectedDate = DateTime.now().add(const Duration(days: 90)); // default to 90 days out
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _otpController = TextEditingController();
+  String _loginMethod = 'email'; // 'email', 'google', 'phone'
+  bool _otpSent = false;
   String? _authError;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _phoneController.dispose();
+    _otpController.dispose();
     super.dispose();
   }
 
@@ -89,10 +96,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         return Column(
           key: const ValueKey(0),
           children: [
-            Icon(Icons.spa_outlined, size: 64, color: t.accent),
+            SvgPicture.asset(
+              'assets/logo.svg',
+              width: 80,
+              height: 80,
+              colorFilter: ColorFilter.mode(t.accent, BlendMode.srcIn),
+            ),
             const SizedBox(height: 24),
             Text(
-              'Calm Prep',
+              'SuperRecall Banker',
               style: AppTypography.display(t).copyWith(fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
@@ -109,6 +121,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           key: const ValueKey(1),
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Center(
+              child: SvgPicture.asset(
+                'assets/logo.svg',
+                width: 48,
+                height: 48,
+                colorFilter: ColorFilter.mode(t.accent, BlendMode.srcIn),
+              ),
+            ),
+            const SizedBox(height: 16),
             Text(
               'Create your account',
               style: AppTypography.title(t),
@@ -120,50 +141,161 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               style: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24),
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              style: AppTypography.body(t),
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
-                hintText: 'name@bank.com',
-                hintStyle: AppTypography.bodySm(t).copyWith(color: t.textTertiary),
-                prefixIcon: Icon(Icons.email_outlined, color: t.textSecondary),
-                filled: true,
-                fillColor: t.bgSurface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: t.border),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: t.accent, width: 2),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _loginMethodTab(t, 'email', Icons.email_outlined, 'Email'),
+                const SizedBox(width: 8),
+                _loginMethodTab(t, 'google', Icons.g_mobiledata, 'Google'),
+                const SizedBox(width: 8),
+                _loginMethodTab(t, 'phone', Icons.phone_android_outlined, 'Phone'),
+              ],
+            ),
+            const SizedBox(height: 20),
+            if (_loginMethod == 'email') ...[
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                style: AppTypography.body(t),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
+                  hintText: 'name@bank.com',
+                  hintStyle: AppTypography.bodySm(t).copyWith(color: t.textTertiary),
+                  prefixIcon: Icon(Icons.email_outlined, color: t.textSecondary),
+                  filled: true,
+                  fillColor: t.bgSurface,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: t.border),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: t.accent, width: 2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              style: AppTypography.body(t),
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
-                prefixIcon: Icon(Icons.lock_outline, color: t.textSecondary),
-                filled: true,
-                fillColor: t.bgSurface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: t.border),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: t.accent, width: 2),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _passwordController,
+                obscureText: true,
+                style: AppTypography.body(t),
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
+                  prefixIcon: Icon(Icons.lock_outline, color: t.textSecondary),
+                  filled: true,
+                  fillColor: t.bgSurface,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: t.border),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: t.accent, width: 2),
+                  ),
                 ),
               ),
-            ),
+            ] else if (_loginMethod == 'google') ...[
+              CalmCard(
+                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                child: Column(
+                  children: [
+                    const Icon(Icons.account_circle_outlined, size: 48, color: Colors.blueAccent),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Use your Google Account to log in quickly.',
+                      style: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          _emailController.text = 'google_user@gmail.com';
+                          _passwordController.text = 'google_bypass_pwd';
+                          _currentStep = 2;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black87,
+                        side: const BorderSide(color: Colors.black12),
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                      ),
+                      icon: const Icon(Icons.g_mobiledata, size: 28, color: Colors.redAccent),
+                      label: Text('Continue with Google', style: AppTypography.body(t).copyWith(fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              )
+            ] else ...[
+              if (!_otpSent) ...[
+                TextField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  style: AppTypography.body(t),
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
+                    hintText: '98765 43210',
+                    hintStyle: AppTypography.bodySm(t).copyWith(color: t.textTertiary),
+                    prefixIcon: Icon(Icons.phone, color: t.textSecondary),
+                    filled: true,
+                    fillColor: t.bgSurface,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: t.border),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: t.accent, width: 2),
+                    ),
+                  ),
+                ),
+              ] else ...[
+                Text(
+                  'OTP sent to +91 ${_phoneController.text.trim()}',
+                  style: AppTypography.bodySm(t).copyWith(color: t.accent, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _otpController,
+                  keyboardType: TextInputType.number,
+                  style: AppTypography.body(t),
+                  decoration: InputDecoration(
+                    labelText: 'Enter 6-Digit OTP',
+                    labelStyle: AppTypography.bodySm(t).copyWith(color: t.textSecondary),
+                    hintText: '123456',
+                    hintStyle: AppTypography.bodySm(t).copyWith(color: t.textTertiary),
+                    prefixIcon: Icon(Icons.security, color: t.textSecondary),
+                    filled: true,
+                    fillColor: t.bgSurface,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: t.border),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(color: t.accent, width: 2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _otpSent = false;
+                      _otpController.clear();
+                    });
+                  },
+                  child: Text('Resend OTP / Change Number', style: AppTypography.caption(t).copyWith(color: t.accent)),
+                ),
+              ],
+            ],
             if (_authError != null) ...[
               const SizedBox(height: 12),
               Text(
@@ -191,9 +323,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-            _examCard(t, 'JAIIB',
-                'Junior Associate of the Indian Institute of Bankers'),
-            const SizedBox(height: 12),
             _examCard(t, 'CAIIB',
                 'Certified Associate of the Indian Institute of Bankers'),
           ],
@@ -271,17 +400,36 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             text: _currentStep == 3 ? 'Begin Studying' : 'Next',
             onPressed: () {
               if (_currentStep == 1) {
-                // Validate credentials
-                final email = _emailController.text.trim();
-                final password = _passwordController.text;
+                if (_loginMethod == 'email') {
+                  final email = _emailController.text.trim();
+                  final password = _passwordController.text;
 
-                if (email.isEmpty || !email.contains('@')) {
-                  setState(() => _authError = 'Please enter a valid email address.');
-                  return;
-                }
-                if (password.length < 6) {
-                  setState(() => _authError = 'Password must be at least 6 characters.');
-                  return;
+                  if (email.isEmpty || !email.contains('@')) {
+                    setState(() => _authError = 'Please enter a valid email address.');
+                    return;
+                  }
+                  if (password.length < 6) {
+                    setState(() => _authError = 'Password must be at least 6 characters.');
+                    return;
+                  }
+                } else if (_loginMethod == 'phone') {
+                  final phone = _phoneController.text.trim();
+                  if (phone.isEmpty || phone.length < 10) {
+                    setState(() => _authError = 'Please enter a valid 10-digit phone number.');
+                    return;
+                  }
+                  if (!_otpSent) {
+                    setState(() {
+                      _otpSent = true;
+                      _authError = null;
+                    });
+                    return;
+                  }
+                  final otp = _otpController.text.trim();
+                  if (otp.length != 6) {
+                    setState(() => _authError = 'Please enter a valid 6-digit OTP code.');
+                    return;
+                  }
                 }
 
                 setState(() {
@@ -289,10 +437,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _currentStep = 2;
                 });
               } else if (_currentStep == 3) {
+                final email = _loginMethod == 'email'
+                    ? _emailController.text.trim()
+                    : (_loginMethod == 'phone' ? '${_phoneController.text.trim()}@phone.com' : 'google_user@gmail.com');
                 widget.onComplete(
                   _selectedDate,
-                  _emailController.text.trim(),
-                  'JWT_dummy_token_${_emailController.text.trim().hashCode}',
+                  email,
+                  'JWT_dummy_token_${email.hashCode}',
                   _selectedExam,
                 );
               } else {
@@ -361,6 +512,42 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         _selectedDate = picked;
       });
     }
+  }
+
+  Widget _loginMethodTab(AppTokens t, String method, IconData icon, String label) {
+    final selected = _loginMethod == method;
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _loginMethod = method;
+          _authError = null;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: selected ? t.accent.withOpacity(0.15) : Colors.transparent,
+          border: Border.all(
+            color: selected ? t.accent : t.border,
+            width: selected ? 1.5 : 1,
+          ),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 16, color: selected ? t.accent : t.textSecondary),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: AppTypography.caption(t).copyWith(
+                color: selected ? t.accent : t.textSecondary,
+                fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   String _getMonthName(int month) {

@@ -5,6 +5,7 @@ import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
 import '../app_scope.dart';
 import 'mock_player_screen.dart';
+import 'paywall_screen.dart';
 
 /// The Mocks tab: a single calm action to start a practice mock assembled from
 /// the question bank. Assembly logic is intentionally thin here — it will move
@@ -18,11 +19,16 @@ class MocksScreen extends StatefulWidget {
 
 class _MocksScreenState extends State<MocksScreen> {
   bool _isLoading = false;
+  int _mocksTakenThisSession = 0;
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
 
   Future<void> _startMock() async {
+    if (!_scope.isPremium && _mocksTakenThisSession >= 1) {
+      PaywallScreen.show(context);
+      return;
+    }
     setState(() => _isLoading = true);
     try {
       final mock = await _repo.assembleMockForExam(_scope.examConfig);
@@ -35,6 +41,10 @@ class _MocksScreenState extends State<MocksScreen> {
         }
         return;
       }
+
+      setState(() {
+        _mocksTakenThisSession += 1;
+      });
 
       if (!mounted) return;
       Navigator.of(context).push(
@@ -90,6 +100,19 @@ class _MocksScreenState extends State<MocksScreen> {
                         text: 'Start mock',
                         onPressed: _startMock,
                       ),
+                    if (!_scope.isPremium) ...[
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Icon(Icons.info_outline, size: 14, color: t.textSecondary),
+                          const SizedBox(width: 6),
+                          Text(
+                            'Free tier: 1 mock exam limit. ($_mocksTakenThisSession/1 taken)',
+                            style: AppTypography.caption(t),
+                          ),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
               ),

@@ -13,6 +13,9 @@ class AppScope extends InheritedWidget {
   final DateTime examDate;
   final ExamConfig examConfig;
   final NotificationService notificationService;
+  final VoidCallback? onLogout;
+  final bool isPremium;
+  final VoidCallback? onBuyPremium;
 
   const AppScope({
     super.key,
@@ -22,6 +25,9 @@ class AppScope extends InheritedWidget {
     required this.examDate,
     required this.examConfig,
     required this.notificationService,
+    this.onLogout,
+    required this.isPremium,
+    this.onBuyPremium,
     required super.child,
   });
 
@@ -32,5 +38,8 @@ class AppScope extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(AppScope oldWidget) => false;
+  bool updateShouldNotify(AppScope oldWidget) =>
+      oldWidget.isPremium != isPremium ||
+      oldWidget.userId != userId ||
+      oldWidget.examName != examName;
 }

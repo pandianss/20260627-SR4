@@ -12,6 +12,7 @@ import 'services/telemetry_service.dart';
 import 'dev/dev_seed.dart';
 import 'app_scope.dart';
 import 'data/learning_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   DateTime? _examDate;
-  String _examName = 'JAIIB';
+  String _examName = 'CAIIB';
   String _userId = 'dummy_user';
   bool _contentLoaded = false;
 
@@ -35,6 +36,86 @@ class _MyAppState extends State<MyApp> {
   final SrsStateStore _stateStore = MemorySrsStateStore();
   final NotificationService _notificationService = NotificationService();
   final TelemetryService _telemetryService = TelemetryService();
+
+  bool _isPremium = false;
+  bool _loadingSession = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkPersistedSession();
+  }
+
+  Future<void> _checkPersistedSession() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final email = prefs.getString('userId');
+      final examName = prefs.getString('examName');
+      final examDateStr = prefs.getString('examDate');
+      final isPremium = prefs.getBool('isPremium') ?? false;
+
+      if (email != null && examName != null && examDateStr != null) {
+        final examDate = DateTime.parse(examDateStr);
+        setState(() {
+          _userId = email;
+          _examName = examName;
+          _examDate = examDate;
+          _isPremium = isPremium;
+          _contentLoaded = false;
+        });
+        await _loadExam(examName);
+        if (mounted) {
+          setState(() {
+            _contentLoaded = true;
+            _loadingSession = false;
+          });
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _loadingSession = false;
+          });
+        }
+      }
+    } catch (e) {
+      debugPrint('Error checking persisted session: $e');
+      if (mounted) {
+        setState(() {
+          _loadingSession = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _logout() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('userId');
+      await prefs.remove('examName');
+      await prefs.remove('examDate');
+      await prefs.remove('isPremium');
+    } catch (e) {
+      debugPrint('Error clearing preferences: $e');
+    }
+    setState(() {
+      _examDate = null;
+      _userId = 'dummy_user';
+      _isPremium = false;
+      _contentLoaded = false;
+    });
+  }
+
+  Future<void> _purchasePremium() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isPremium', true);
+    } catch (e) {
+      debugPrint('Error saving premium state: $e');
+    }
+    setState(() {
+      _isPremium = true;
+    });
+  }
 
   /// Load the content pack for the chosen exam into the stores.
   Future<void> _loadExam(String examCode) async {
@@ -71,38 +152,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  ExamConfig get _examConfig =>
-      _examName == 'CAIIB' ? _caiibConfig : _jaiibConfig;
-
-  static const _jaiibConfig = ExamConfig(
-    examCode: 'JAIIB',
-    papers: [
-      PaperConfig(
-        paperCode: 'PPB',
-        name: LocalizedString({'en': 'Principles & Practices of Banking'}),
-        durationMin: 120,
-        sections: [
-          SectionConfig(
-              code: 'ALL', count: 10, marksPerQuestion: 1, negativeMarks: 0),
-        ],
-      ),
-    ],
-    passRule: PassRule(
-      perComponentMin: 50,
-      alternativeAggregate:
-          AlternativeAggregate(perComponentMin: 45, aggregateMin: 50),
-    ),
-    gradingProfile: GradingProfile(allowPartialDefault: false),
-    mockBlueprints: [
-      MockBlueprint(
-        id: 'bp_jaiib_full',
-        name: 'JAIIB practice mock',
-        picks: [MockPick(topicTags: [], count: 10, difficultyMix: {1: 0.5, 2: 0.5})],
-        shuffle: true,
-        timingFromPaper: 'PPB',
-      ),
-    ],
-  );
+  ExamConfig get _examConfig => _caiibConfig;
 
   static const _caiibConfig = ExamConfig(
     examCode: 'CAIIB',
@@ -110,10 +160,10 @@ class _MyAppState extends State<MyApp> {
       PaperConfig(
         paperCode: 'CAIIB',
         name: LocalizedString({'en': 'CAIIB'}),
-        durationMin: 120,
+        durationMin: 15,
         sections: [
           SectionConfig(
-              code: 'ALL', count: 30, marksPerQuestion: 1, negativeMarks: 0),
+              code: 'ALL', count: 15, marksPerQuestion: 1, negativeMarks: 0),
         ],
       ),
     ],
@@ -130,7 +180,7 @@ class _MyAppState extends State<MyApp> {
         picks: [
           MockPick(
               topicTags: [],
-              count: 30,
+              count: 15,
               difficultyMix: {1: 0.3, 2: 0.4, 3: 0.2, 4: 0.1}),
         ],
         shuffle: true,
@@ -141,11 +191,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final themeTokens = AppTokens.dark;
+    final themeTokens = AppTokens.light;
     final theme = buildTheme(themeTokens);
 
     final Widget home;
-    if (_examDate == null) {
+    if (_loadingSession) {
+      home = Scaffold(
+        backgroundColor: themeTokens.bgBase,
+        body: Center(child: CircularProgressIndicator(color: themeTokens.accent)),
+      );
+    } else if (_examDate == null) {
       home = OnboardingScreen(
         onComplete: (date, email, token, examCode) async {
           setState(() {
@@ -154,6 +209,14 @@ class _MyAppState extends State<MyApp> {
             _userId = email;
             _contentLoaded = false;
           });
+          try {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('userId', email);
+            await prefs.setString('examName', examCode);
+            await prefs.setString('examDate', date.toIso8601String());
+          } catch (e) {
+            debugPrint('Failed to save session: $e');
+          }
           await _loadExam(examCode);
           if (!mounted) return;
           setState(() => _contentLoaded = true);
@@ -182,12 +245,15 @@ class _MyAppState extends State<MyApp> {
         examDate: _examDate!,
         examConfig: _examConfig,
         notificationService: _notificationService,
+        onLogout: _logout,
+        isPremium: _isPremium,
+        onBuyPremium: _purchasePremium,
         child: const MainLayout(),
       );
     }
 
     return MaterialApp(
-      title: 'Calm Prep',
+      title: 'SuperRecall Banker',
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: home,

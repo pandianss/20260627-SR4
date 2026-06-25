@@ -282,26 +282,37 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen> {
       onPageChanged: (idx) {
         setState(() => _currentCardIndex = idx);
         if (_narrationService.isPlaying && _narrationService.currentIndex != idx) {
-          // If user swipes manually, sync narration target
           _narrationService.stop();
         }
       },
       itemCount: widget.lesson.cards.length,
       itemBuilder: (context, index) {
         final card = widget.lesson.cards[index];
-        return SingleChildScrollView(
-          child: Semantics(
-            container: true,
-            label: 'Concept card ${index + 1} of ${widget.lesson.cards.length}',
-            child: CalmCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: card.blocks
-                    .map((b) => ContentBlockRenderer(block: b))
-                    .toList(),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Semantics(
+                      container: true,
+                      label: 'Concept card ${index + 1} of ${widget.lesson.cards.length}',
+                      child: LessonCardLayout(
+                        card: card,
+                        cardIndex: index,
+                        totalCards: widget.lesson.cards.length,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

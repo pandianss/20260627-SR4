@@ -41,6 +41,8 @@ dependencies:
     path: ../srs
   store:
     path: ../store
+  flutter_svg: ^2.3.0
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,7 @@ flutter:
   assets:
     - assets/content_pack_jaiib.json
     - assets/content_pack_caiib.json
+    - assets/logo.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

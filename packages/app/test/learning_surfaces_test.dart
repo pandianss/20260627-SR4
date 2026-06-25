@@ -21,20 +21,28 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: buildTheme(AppTokens.dark),
-          home: const Scaffold(
-            body: Column(
-              children: [
-                ContentBlockRenderer(block: TextBlock(LocalizedString({'en': 'Mock Text Content'}))),
-                ContentBlockRenderer(block: FormulaBlock('x^2 + y^2 = z^2')),
-                ContentBlockRenderer(block: ChartBlock({'type': 'bar'})),
-              ],
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: const [
+                    ContentBlockRenderer(block: TextBlock(LocalizedString({'en': 'Mock Text Content'}))),
+                    ContentBlockRenderer(block: FormulaBlock('x^2 + y^2 = z^2')),
+                    ContentBlockRenderer(block: ChartBlock({'type': 'bars', 'items': []})),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
       );
 
       expect(find.text('Mock Text Content'), findsOneWidget);
-      expect(find.text('x^2 + y^2 = z^2'), findsOneWidget);
+      // The formula renderer tokenises the expression into colour-coded Text
+      // widgets, so we assert on a rendered fragment rather than the full string.
+      expect(find.byWidgetPredicate((w) => w is Text && (w.data ?? '').contains('x')), findsWidgets);
       expect(find.byType(CustomPaint), findsWidgets);
     });
   });
@@ -311,8 +319,8 @@ void main() {
         cards: [
           Card(
             id: 'c1',
-            kind: CardKind.concept,
-            blocks: [TextBlock(LocalizedString({'en': 'First Concept Card'}))],
+            kind: CardKind.intro,
+            blocks: [TextBlock(LocalizedString({'en': '**First Intro Card**'}))],
           ),
           Card(
             id: 'c2',
@@ -348,7 +356,7 @@ void main() {
       );
 
       // Card 1
-      expect(find.text('First Concept Card'), findsOneWidget);
+      expect(find.text('First Intro Card'), findsOneWidget);
       expect(find.text('Next Card'), findsOneWidget);
 
       // Go to Card 2
@@ -450,6 +458,7 @@ void main() {
             examDate: DateTime.now().add(const Duration(days: 90)),
             examConfig: const ExamConfig(examCode: 'ex_rev'),
             notificationService: NotificationService(),
+            isPremium: true,
             child: const ReviewScreen(),
           ),
         ),

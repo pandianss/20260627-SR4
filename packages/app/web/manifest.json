@@ -1,11 +1,11 @@
 {
-    "name": "app",
-    "short_name": "app",
+    "name": "SuperRecall Banker",
+    "short_name": "SuperRecall",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Micro-learning exam prep for bankers — JAIIB, CAIIB and other IIBF certifications.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
