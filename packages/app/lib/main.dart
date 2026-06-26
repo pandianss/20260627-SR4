@@ -259,6 +259,8 @@ class _MyAppState extends State<MyApp> {
           setState(() {
             _examName = examCode;
             _examDate = date;
+            // Onboarding may have signed in / linked a real account.
+            _userId = widget.authService?.currentUid ?? _userId;
             _contentLoaded = false;
           });
           try {
@@ -272,7 +274,9 @@ class _MyAppState extends State<MyApp> {
           await _loadExam(examCode);
           if (!mounted) return;
           setState(() => _contentLoaded = true);
+          _syncCloud();
         },
+        authService: widget.authService,
       );
     } else if (!_contentLoaded) {
       home = Scaffold(

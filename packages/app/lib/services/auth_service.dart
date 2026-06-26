@@ -13,6 +13,7 @@ class AuthService {
   final FirebaseAuth _auth;
 
   User? get currentUser => _auth.currentUser;
+  String? get currentUid => _auth.currentUser?.uid;
   Stream<User?> get authStateChanges => _auth.authStateChanges();
   bool get isSignedInWithAccount =>
       _auth.currentUser != null && !_auth.currentUser!.isAnonymous;

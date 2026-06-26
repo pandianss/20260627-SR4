@@ -61,7 +61,7 @@ void main() {
       expect(onCompleteCalled, isFalse);
     });
 
-    testWidgets('Successful onboarding emits correct user data and mock token', (tester) async {
+    testWidgets('Successful onboarding emits the entered email on completion', (tester) async {
       DateTime? completedDate;
       String? completedEmail;
       String? completedToken;
@@ -100,7 +100,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(completedEmail, equals('developer@sbi.co.in'));
-      expect(completedToken, startsWith('JWT_dummy_token_'));
+      // Auth is now handled by AuthService (no mock token); the token arg is unused.
+      expect(completedToken, isEmpty);
       expect(completedDate, isNotNull);
     });
   });

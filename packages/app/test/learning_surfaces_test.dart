@@ -476,7 +476,8 @@ void main() {
       await tester.tap(find.text('Reveal Answer'));
       await tester.pumpAndSettle();
 
-      expect(find.text('FSRS Spaced Review Detail'), findsOneWidget);
+      // Appears as both the front recall cue and the revealed back content.
+      expect(find.text('FSRS Spaced Review Detail'), findsWidgets);
       expect(find.byType(CalmRatingButtons), findsOneWidget);
 
       // Grade as Good

@@ -149,7 +149,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'No spaced reviews are due today. Come back tomorrow!',
+                    'No cards are due right now. Finish a lesson to add new cards — they return here for spaced recall as they fall due.',
                     style: AppTypography.bodySm(t),
                     textAlign: TextAlign.center,
                   ),
@@ -202,7 +202,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 child: SingleChildScrollView(
                   child: CalmCard(
                     child: AnimatedCrossFade(
-                      firstChild: _buildFrontCard(t, cardId),
+                      firstChild: _buildFrontCard(t, card),
                       secondChild: _buildBackCard(t, card),
                       crossFadeState: _isFlipped
                           ? CrossFadeState.showSecond
@@ -235,7 +235,25 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _buildFrontCard(AppTokens t, String cardId) {
+  /// A short recall cue — the concept card's bold title (or its first line).
+  String _cardCue(Card? card) {
+    if (card == null) return '';
+    for (final b in card.blocks) {
+      if (b is TextBlock) {
+        final md = b.md.resolve('en').trim();
+        final bold = RegExp(r'^\s*\*\*(.+?)\*\*').firstMatch(md);
+        if (bold != null) return bold.group(1)!.trim();
+        final firstLine = md.split('\n').first.trim();
+        return firstLine.length > 70
+            ? '${firstLine.substring(0, 70)}…'
+            : firstLine;
+      }
+    }
+    return '';
+  }
+
+  Widget _buildFrontCard(AppTokens t, Card? card) {
+    final cue = _cardCue(card);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -254,14 +272,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
         ),
         const SizedBox(height: 32),
         Text(
-          'Can you recall the key details regarding this concept?',
-          style: AppTypography.body(t).copyWith(height: 1.6),
+          'Recall everything you can about:',
+          style: AppTypography.body(t).copyWith(height: 1.6, color: t.textSecondary),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
         Text(
-          'Item ID: $cardId',
-          style: AppTypography.caption(t),
+          cue.isEmpty ? 'this concept' : cue,
+          style: AppTypography.title(t).copyWith(color: t.textPrimary),
           textAlign: TextAlign.center,
         ),
       ],

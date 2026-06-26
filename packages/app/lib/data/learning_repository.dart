@@ -160,14 +160,29 @@ class LearningRepository {
   // --- Reviews ---
 
   /// Load the due spaced-repetition queue plus the cards needed to render it.
+  ///
+  /// A card enters review once its lesson has been studied (a [LessonViewedEvent]
+  /// exists): cards already in the SRS contribute their scheduled state, and
+  /// studied-but-not-yet-reviewed cards are enrolled as new items due now — so
+  /// finishing a lesson populates the review deck. Probe-question states are
+  /// intentionally excluded (they aren't card-flip reviewable).
   Future<DueReviews> loadDueReviews(
     String userId,
     String examContext, {
     int budget = 15,
   }) async {
     final allStates = await states.getStatesForExam(userId, examContext);
+    final stateByItem = {for (final s in allStates) s.itemId: s};
+    final allEvents = await events.getAllEvents(userId);
+    final studiedLessons = allEvents
+        .whereType<LessonViewedEvent>()
+        .map((e) => e.lessonId)
+        .toSet();
+    final now = DateTime.now();
+
     final items = <String, LearnableItem>{};
     final cards = <String, Card>{};
+    final reviewStates = <SrsState>[];
 
     final exam = await content.getExamByCode(examContext) ??
         await content.getExam('ex_ppb');
@@ -179,15 +194,31 @@ class LearningRepository {
           final lessons = await content.getLessonsByModule(mod.id);
           for (final lesson in lessons) {
             for (final card in lesson.cards) {
-              if (card.srsEligible) {
-                cards[card.id] = card;
-                items[card.id] = LearnableItem(
-                  id: card.id,
-                  kind: LearnableItemKind.card,
-                  refId: card.id,
-                  topicTags: mod.topicTags,
-                  examContexts: [exam.code],
-                );
+              if (!card.srsEligible) continue;
+              cards[card.id] = card;
+              items[card.id] = LearnableItem(
+                id: card.id,
+                kind: LearnableItemKind.card,
+                refId: card.id,
+                topicTags: mod.topicTags,
+                examContexts: [exam.code],
+              );
+              final existing = stateByItem[card.id];
+              if (existing != null) {
+                reviewStates.add(existing);
+              } else if (studiedLessons.contains(lesson.id)) {
+                // Studied but never reviewed → enroll as a new item, due now.
+                reviewStates.add(SrsState(
+                  stability: 0,
+                  difficulty: 5,
+                  due: now,
+                  lastReview: now,
+                  reps: 0,
+                  phase: SrsPhase.newItem,
+                  userId: userId,
+                  itemId: card.id,
+                  examContext: examContext,
+                ));
               }
             }
           }
@@ -196,20 +227,19 @@ class LearningRepository {
     }
 
     final due = buildDueQueue(
-      states: allStates,
+      states: reviewStates,
       items: items,
-      now: DateTime.now(),
+      now: now,
       budget: budget,
     );
     return DueReviews(states: due, cards: cards);
   }
 
-  /// Apply a recall rating: advance the scheduler, persist state, log the event.
+  /// Apply a recall rating: log the event and re-project the item's SRS state
+  /// from its full history (so a card's first review is initialised correctly).
   Future<SrsState> applyReview(
       String userId, String examContext, SrsState state, Rating rating) async {
     final now = DateTime.now();
-    final next = scheduler.review(state, rating, now);
-    await states.saveState(next);
     await events.appendEvent(CardReviewedEvent(
       clientUlid: 'ulid_rev_${state.itemId}_${now.millisecondsSinceEpoch}',
       userId: userId,
@@ -218,7 +248,16 @@ class LearningRepository {
       itemId: state.itemId,
       rating: rating,
     ));
-    return next;
+    final itemEvents = await events.getEventsForItem(userId, state.itemId);
+    final next = projectSrsState(
+      userId: userId,
+      itemId: state.itemId,
+      events: itemEvents,
+      scheduler: scheduler,
+      examContext: examContext,
+    );
+    if (next != null) await states.saveState(next);
+    return next ?? state;
   }
 }
 

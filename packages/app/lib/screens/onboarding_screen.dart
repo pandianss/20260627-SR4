@@ -1,16 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../components/button.dart';
 import '../components/card.dart';
+import '../services/auth_service.dart';
 import '../theme/tokens.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final void Function(DateTime date, String email, String token, String examCode)
       onComplete;
 
+  /// Real auth backend. When null (e.g. in tests), the account step validates
+  /// input but skips the Firebase call and proceeds as a guest.
+  final AuthService? authService;
+
   const OnboardingScreen({
     super.key,
     required this.onComplete,
+    this.authService,
   });
 
   @override
@@ -28,6 +35,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final _otpController = TextEditingController();
   String _loginMethod = 'email'; // 'email', 'google', 'phone'
   bool _otpSent = false;
+  bool _authBusy = false;
+  String? _verificationId;
   String? _authError;
 
   @override
@@ -211,13 +220,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          _emailController.text = 'google_user@gmail.com';
-                          _passwordController.text = 'google_bypass_pwd';
-                          _currentStep = 2;
-                        });
-                      },
+                      onPressed: _authBusy ? null : _handleStep1Auth,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black87,
@@ -381,81 +384,214 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     }
 
-    return Row(
+    final row = Row(
       children: [
         Expanded(
           child: CalmButton.secondary(
             text: 'Back',
-            onPressed: () {
-              setState(() {
-                _currentStep -= 1;
-                _authError = null;
-              });
-            },
+            onPressed: _authBusy
+                ? null
+                : () => setState(() {
+                      _currentStep -= 1;
+                      _authError = null;
+                    }),
           ),
         ),
         const SizedBox(width: 16),
         Expanded(
           child: CalmButton.primary(
-            text: _currentStep == 3 ? 'Begin Studying' : 'Next',
-            onPressed: () {
-              if (_currentStep == 1) {
-                if (_loginMethod == 'email') {
-                  final email = _emailController.text.trim();
-                  final password = _passwordController.text;
-
-                  if (email.isEmpty || !email.contains('@')) {
-                    setState(() => _authError = 'Please enter a valid email address.');
-                    return;
-                  }
-                  if (password.length < 6) {
-                    setState(() => _authError = 'Password must be at least 6 characters.');
-                    return;
-                  }
-                } else if (_loginMethod == 'phone') {
-                  final phone = _phoneController.text.trim();
-                  if (phone.isEmpty || phone.length < 10) {
-                    setState(() => _authError = 'Please enter a valid 10-digit phone number.');
-                    return;
-                  }
-                  if (!_otpSent) {
-                    setState(() {
-                      _otpSent = true;
-                      _authError = null;
-                    });
-                    return;
-                  }
-                  final otp = _otpController.text.trim();
-                  if (otp.length != 6) {
-                    setState(() => _authError = 'Please enter a valid 6-digit OTP code.');
-                    return;
-                  }
-                }
-
-                setState(() {
-                  _authError = null;
-                  _currentStep = 2;
-                });
-              } else if (_currentStep == 3) {
-                final email = _loginMethod == 'email'
-                    ? _emailController.text.trim()
-                    : (_loginMethod == 'phone' ? '${_phoneController.text.trim()}@phone.com' : 'google_user@gmail.com');
-                widget.onComplete(
-                  _selectedDate,
-                  email,
-                  'JWT_dummy_token_${email.hashCode}',
-                  _selectedExam,
-                );
-              } else {
-                setState(() {
-                  _currentStep += 1;
-                });
-              }
-            },
+            text: _nextLabel(),
+            onPressed: _authBusy ? null : _onPrimaryAction,
           ),
         ),
       ],
     );
+
+    if (_currentStep != 1) return row;
+
+    // Account step also offers a guest (anonymous) path.
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        row,
+        const SizedBox(height: 4),
+        if (_authBusy)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: SizedBox(
+              height: 18,
+              width: 18,
+              child: CircularProgressIndicator(strokeWidth: 2, color: t.accent),
+            ),
+          )
+        else
+          TextButton(
+            onPressed: _continueAsGuest,
+            child: Text(
+              'Continue as guest',
+              style: AppTypography.caption(t).copyWith(color: t.textSecondary),
+            ),
+          ),
+      ],
+    );
+  }
+
+  String _nextLabel() {
+    if (_currentStep == 3) return 'Begin Studying';
+    if (_currentStep == 1 && _loginMethod == 'phone') {
+      return _otpSent ? 'Verify' : 'Send OTP';
+    }
+    return 'Next';
+  }
+
+  void _onPrimaryAction() {
+    if (_currentStep == 1) {
+      _handleStep1Auth();
+    } else if (_currentStep == 3) {
+      _finish();
+    } else {
+      setState(() => _currentStep += 1);
+    }
+  }
+
+  void _continueAsGuest() => setState(() {
+        _authError = null;
+        _currentStep = 2;
+      });
+
+  void _finish() {
+    final email = widget.authService?.currentUser?.email ??
+        (_loginMethod == 'email' ? _emailController.text.trim() : '');
+    widget.onComplete(_selectedDate, email, '', _selectedExam);
+  }
+
+  void _advanceToExam() {
+    if (!mounted) return;
+    setState(() {
+      _authError = null;
+      _authBusy = false;
+      _currentStep = 2;
+    });
+  }
+
+  void _setError(String msg) {
+    if (!mounted) return;
+    setState(() {
+      _authError = msg;
+      _authBusy = false;
+    });
+  }
+
+  String _friendlyAuth(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'invalid-email':
+        return 'That email address looks invalid.';
+      case 'wrong-password':
+      case 'invalid-credential':
+        return 'Email or password is incorrect.';
+      case 'weak-password':
+        return 'Pick a stronger password (at least 6 characters).';
+      case 'invalid-verification-code':
+        return 'That code is incorrect.';
+      case 'too-many-requests':
+        return 'Too many attempts. Please try again later.';
+      default:
+        return e.message ?? 'Authentication failed.';
+    }
+  }
+
+  Future<void> _handleStep1Auth() async {
+    // Validate inputs first (runs even without an auth backend, e.g. in tests).
+    if (_loginMethod == 'email') {
+      final email = _emailController.text.trim();
+      if (email.isEmpty || !email.contains('@')) {
+        setState(() => _authError = 'Please enter a valid email address.');
+        return;
+      }
+      if (_passwordController.text.length < 6) {
+        setState(() => _authError = 'Password must be at least 6 characters.');
+        return;
+      }
+    } else if (_loginMethod == 'phone') {
+      final phone = _phoneController.text.trim();
+      if (phone.length < 10) {
+        setState(() => _authError = 'Please enter a valid 10-digit phone number.');
+        return;
+      }
+      if (_otpSent && _otpController.text.trim().length != 6) {
+        setState(() => _authError = 'Please enter a valid 6-digit OTP code.');
+        return;
+      }
+    }
+
+    final auth = widget.authService;
+    // No auth backend (tests / no Firebase) — preserve the original step flow.
+    if (auth == null) {
+      if (_loginMethod == 'phone' && !_otpSent) {
+        setState(() {
+          _otpSent = true;
+          _authError = null;
+        });
+      } else {
+        _advanceToExam();
+      }
+      return;
+    }
+
+    setState(() {
+      _authError = null;
+      _authBusy = true;
+    });
+    try {
+      if (_loginMethod == 'email') {
+        final email = _emailController.text.trim();
+        final password = _passwordController.text;
+        try {
+          await auth.signUpWithEmail(email, password);
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'email-already-in-use' ||
+              e.code == 'credential-already-in-use') {
+            await auth.signInWithEmail(email, password);
+          } else {
+            rethrow;
+          }
+        }
+        _advanceToExam();
+      } else if (_loginMethod == 'google') {
+        await auth.signInWithGoogle();
+        _advanceToExam();
+      } else {
+        final phone = _phoneController.text.trim();
+        final e164 = phone.startsWith('+') ? phone : '+91$phone';
+        if (!_otpSent) {
+          await auth.startPhoneSignIn(
+            phoneNumber: e164,
+            onCodeSent: (id) {
+              if (!mounted) return;
+              setState(() {
+                _verificationId = id;
+                _otpSent = true;
+                _authBusy = false;
+              });
+            },
+            onError: (e) => _setError(_friendlyAuth(e)),
+            onAutoVerified: (_) => _advanceToExam(),
+          );
+          return; // wait for the codeSent / autoVerified callback
+        }
+        final id = _verificationId;
+        if (id == null) {
+          _setError('Please request a new code.');
+          return;
+        }
+        await auth.confirmPhoneCode(id, _otpController.text.trim());
+        _advanceToExam();
+      }
+    } on FirebaseAuthException catch (e) {
+      _setError(_friendlyAuth(e));
+    } catch (_) {
+      _setError('Something went wrong. Please try again.');
+    }
   }
 
   Widget _examCard(AppTokens t, String code, String subtitle) {
