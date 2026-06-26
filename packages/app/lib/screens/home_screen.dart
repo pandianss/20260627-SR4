@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/store.dart';
 import '../components/card.dart';
 import '../components/progress_ring.dart';
-import '../components/button.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
 import '../app_scope.dart';
 import 'lesson_player_screen.dart';
 import 'paywall_screen.dart';
+import 'sign_in_screen.dart';
 
 /// Editorial home screen — dark hero header, bento stat tiles, calm weekly habit strip.
 class HomeScreen extends StatefulWidget {
@@ -190,6 +190,33 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                   ),
                   const SizedBox(height: 8),
+                  if (_scope.authService != null &&
+                      !_scope.authService!.isSignedInWithAccount) ...[
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(Icons.cloud_sync_outlined, color: t.accent),
+                      title:
+                          Text('Sign in to sync', style: AppTypography.body(t)),
+                      subtitle: Text('Back up & sync across your devices',
+                          style: AppTypography.caption(t)),
+                      trailing: Icon(Icons.chevron_right, color: t.textTertiary),
+                      onTap: () async {
+                        Navigator.pop(context);
+                        final ok = await SignInScreen.show(
+                            this.context, _scope.authService!);
+                        if (!mounted) return;
+                        if (ok == true) {
+                          setState(() {});
+                          ScaffoldMessenger.of(this.context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    'Signed in — your progress will sync.')),
+                          );
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: const Icon(Icons.logout, color: Colors.redAccent),

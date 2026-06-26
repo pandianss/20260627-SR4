@@ -28,6 +28,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
   final Color borderStrong;
   final Color accent;
   final Color accentSoft;
+  final Color accentText; // AA-contrast accent for text/links on bgBase/bgSurface
   final Color onAccent;
   final Color danger;
   final Color warning;
@@ -51,6 +52,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     required this.borderStrong,
     required this.accent,
     required this.accentSoft,
+    required this.accentText,
     required this.onAccent,
     required this.danger,
     required this.warning,
@@ -74,6 +76,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     borderStrong:  Color(0xFF3A404B),
     accent:        Color(0xFF62C6A8),
     accentSoft:    Color(0x1F62C6A8),
+    accentText:    Color(0xFF62C6A8),
     onAccent:      Color(0xFF0E1714),
     danger:        Color(0xFFC97A6D),
     warning:       Color(0xFFD8A24A),
@@ -92,11 +95,12 @@ class AppTokens extends ThemeExtension<AppTokens> {
     bgRaised:      Color(0xFFFFFFFF),
     textPrimary:   Color(0xFF1A1A1A),
     textSecondary: Color(0xFF5C5C5C),
-    textTertiary:  Color(0xFF9A9A9A),
+    textTertiary:  Color(0xFF707070),
     border:        Color(0xFFE8E6E1),
     borderStrong:  Color(0xFFD0CEC8),
     accent:        _sageAccent,
     accentSoft:    Color(0x286BA87A),
+    accentText:    Color(0xFF2E7D5B),
     onAccent:      Color(0xFFFFFFFF),
     danger:        Color(0xFFB94040),
     warning:       Color(0xFFB88A10),
@@ -113,7 +117,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     Color? bgBase, Color? bgSurface, Color? bgRaised,
     Color? textPrimary, Color? textSecondary, Color? textTertiary,
     Color? border, Color? borderStrong,
-    Color? accent, Color? accentSoft, Color? onAccent,
+    Color? accent, Color? accentSoft, Color? accentText, Color? onAccent,
     Color? danger, Color? warning,
     Color? ink, Color? onInk,
     Color? sage, Color? amber, Color? sky, Color? lavender,
@@ -128,6 +132,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     borderStrong:  borderStrong  ?? this.borderStrong,
     accent:        accent        ?? this.accent,
     accentSoft:    accentSoft    ?? this.accentSoft,
+    accentText:    accentText    ?? this.accentText,
     onAccent:      onAccent      ?? this.onAccent,
     danger:        danger        ?? this.danger,
     warning:       warning       ?? this.warning,
@@ -153,6 +158,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
       borderStrong:  Color.lerp(borderStrong, other.borderStrong, t)!,
       accent:        Color.lerp(accent, other.accent, t)!,
       accentSoft:    Color.lerp(accentSoft, other.accentSoft, t)!,
+      accentText:    Color.lerp(accentText, other.accentText, t)!,
       onAccent:      Color.lerp(onAccent, other.onAccent, t)!,
       danger:        Color.lerp(danger, other.danger, t)!,
       warning:       Color.lerp(warning, other.warning, t)!,

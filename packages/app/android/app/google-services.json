@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524369176132",
+    "project_id": "superrecall-3afe5",
+    "storage_bucket": "superrecall-3afe5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524369176132:android:40e609a8cb0ee9a8ad3e11",
+        "android_client_info": {
+          "package_name": "com.superrecall.banker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8wQ1Q21gtVCXLuDYiIIbjqHoEW6Hh7lE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

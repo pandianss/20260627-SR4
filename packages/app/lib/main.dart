@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:store/store.dart';
 import 'package:srs/srs.dart';
 import 'package:domain/domain.dart';
@@ -9,17 +11,51 @@ import 'screens/main_layout.dart';
 import 'theme/tokens.dart';
 import 'services/notification_service.dart';
 import 'services/telemetry_service.dart';
+import 'services/updates_service.dart';
+import 'services/auth_service.dart';
+import 'services/firestore_sync_service.dart';
 import 'dev/dev_seed.dart';
 import 'app_scope.dart';
 import 'data/learning_repository.dart';
+import 'data/prefs_stores.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Anonymous-first auth: every user gets a stable uid immediately. Falls back
+  // to a local id only if the very first launch is offline.
+  final authService = AuthService();
+  String userId;
+  try {
+    userId = await authService.ensureSignedIn();
+  } catch (e) {
+    debugPrint('Anonymous sign-in failed (offline?): $e');
+    userId = authService.currentUser?.uid ?? 'local';
+  }
+
+  runApp(MyApp(
+    userId: userId,
+    authService: authService,
+    firestoreSync: FirestoreSyncService(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.userId,
+    this.authService,
+    this.firestoreSync,
+  });
+
+  /// The signed-in user's uid (anonymous or account), used to key all data.
+  final String userId;
+  final AuthService? authService;
+  final FirestoreSyncService? firestoreSync;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -28,14 +64,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   DateTime? _examDate;
   String _examName = 'CAIIB';
-  String _userId = 'dummy_user';
+  late String _userId;
   bool _contentLoaded = false;
 
   final ContentStore _contentStore = MemoryContentStore();
-  final EventLogStore _eventStore = MemoryEventLogStore();
-  final SrsStateStore _stateStore = MemorySrsStateStore();
+  // Persistent (prefs-backed) so progress + SRS schedule survive restarts;
+  // initialized from SharedPreferences in _checkPersistedSession.
+  late final EventLogStore _eventStore;
+  late final SrsStateStore _stateStore;
   final NotificationService _notificationService = NotificationService();
   final TelemetryService _telemetryService = TelemetryService();
+  final UpdatesService _updatesService = UpdatesService();
 
   bool _isPremium = false;
   bool _loadingSession = true;
@@ -43,21 +82,35 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _userId = widget.userId;
     _checkPersistedSession();
   }
 
-  Future<void> _checkPersistedSession() async {
+  /// Back up local progress and restore any cloud data for this uid.
+  /// Fire-and-forget so startup never blocks on the network.
+  Future<void> _syncCloud() async {
+    final sync = widget.firestoreSync;
+    if (sync == null) return;
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final email = prefs.getString('userId');
+      await sync.sync(_userId, _eventStore, _stateStore);
+    } catch (e) {
+      debugPrint('Cloud sync failed: $e');
+    }
+  }
+
+  Future<void> _checkPersistedSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    _eventStore = await PrefsEventLogStore.create(prefs);
+    _stateStore = await PrefsSrsStateStore.create(prefs);
+    _syncCloud(); // fire-and-forget cloud backup + restore for this uid
+    try {
       final examName = prefs.getString('examName');
       final examDateStr = prefs.getString('examDate');
       final isPremium = prefs.getBool('isPremium') ?? false;
 
-      if (email != null && examName != null && examDateStr != null) {
+      if (examName != null && examDateStr != null) {
         final examDate = DateTime.parse(examDateStr);
         setState(() {
-          _userId = email;
           _examName = examName;
           _examDate = examDate;
           _isPremium = isPremium;
@@ -99,7 +152,7 @@ class _MyAppState extends State<MyApp> {
     }
     setState(() {
       _examDate = null;
-      _userId = 'dummy_user';
+      _userId = widget.userId;
       _isPremium = false;
       _contentLoaded = false;
     });
@@ -206,12 +259,11 @@ class _MyAppState extends State<MyApp> {
           setState(() {
             _examName = examCode;
             _examDate = date;
-            _userId = email;
             _contentLoaded = false;
           });
           try {
             final prefs = await SharedPreferences.getInstance();
-            await prefs.setString('userId', email);
+            await prefs.setString('email', email);
             await prefs.setString('examName', examCode);
             await prefs.setString('examDate', date.toIso8601String());
           } catch (e) {
@@ -245,6 +297,8 @@ class _MyAppState extends State<MyApp> {
         examDate: _examDate!,
         examConfig: _examConfig,
         notificationService: _notificationService,
+        updatesService: _updatesService,
+        authService: widget.authService,
         onLogout: _logout,
         isPremium: _isPremium,
         onBuyPremium: _purchasePremium,

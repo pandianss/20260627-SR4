@@ -3,6 +3,7 @@ import 'home_screen.dart';
 import 'review_screen.dart';
 import 'mocks_screen.dart';
 import 'content_browser_screen.dart';
+import 'updates_screen.dart';
 import '../theme/tokens.dart';
 
 /// Bottom-nav shell — ink (#1A1A1A) bar with white icons and a sage active dot.
@@ -18,6 +19,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   static const _screens = [
     HomeScreen(),
+    UpdatesScreen(),
     ContentBrowserScreen(),
     ReviewScreen(),
     MocksScreen(),
@@ -25,6 +27,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   static const _items = [
     _NavItem(icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: 'Home'),
+    _NavItem(icon: Icons.campaign_outlined, activeIcon: Icons.campaign_rounded, label: 'Updates'),
     _NavItem(icon: Icons.menu_book_outlined, activeIcon: Icons.menu_book_rounded, label: 'Browse'),
     _NavItem(icon: Icons.psychology_outlined, activeIcon: Icons.psychology_rounded, label: 'Review'),
     _NavItem(icon: Icons.assignment_outlined, activeIcon: Icons.assignment_rounded, label: 'Mocks'),
@@ -83,14 +86,15 @@ class _InkNavBar extends StatelessWidget {
           children: List.generate(items.length, (i) {
             final active = i == selectedIndex;
             final item = items[i];
-            return GestureDetector(
-              onTap: () => onTap(i),
-              behavior: HitTestBehavior.opaque,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+            return Expanded(
+              child: GestureDetector(
+                onTap: () => onTap(i),
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                     Icon(
                       active ? item.activeIcon : item.icon,
                       color: active ? Colors.white : Colors.white54,
@@ -117,7 +121,8 @@ class _InkNavBar extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-24T18:30:00Z",
+  "note": "Sample seed data for development only. In production this file is replaced by the curated feed published by the ingestion pipeline. Items below are illustrative, not authoritative.",
+  "updates": [
+    {
+      "id": "iibf-2026-06-22-caiib-window",
+      "regulator": "IIBF",
+      "title": "CAIIB November 2026 registration window opens",
+      "summary": "Online registration for the CAIIB November 2026 attempt is now open. Check eligibility and exam-centre options before the last date.",
+      "category": "Exam notice",
+      "priority": "critical",
+      "publishedAt": "2026-06-22",
+      "sourceUrl": "https://www.iibf.org.in/",
+      "affectsTopics": ["exam-schedule"]
+    },
+    {
+      "id": "rbi-2026-06-20-mpc-repo",
+      "regulator": "RBI",
+      "title": "MPC keeps the policy repo rate unchanged at 6.50%",
+      "summary": "The Monetary Policy Committee retained the repo rate at 6.50% and continued its stance on withdrawal of accommodation. Relevant to monetary-policy and interest-rate questions.",
+      "category": "Monetary Policy",
+      "priority": "important",
+      "publishedAt": "2026-06-20",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+      "affectsTopics": ["monetary-policy", "interest-rates"]
+    },
+    {
+      "id": "rbi-2026-06-12-kyc-md",
+      "regulator": "RBI",
+      "title": "Amendment to the Master Direction on KYC",
+      "summary": "Updated periodic-KYC and customer due-diligence timelines. Affects KYC/AML topics in JAIIB Principles & Practices of Banking.",
+      "category": "KYC / AML",
+      "priority": "important",
+      "publishedAt": "2026-06-12",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx",
+      "affectsTopics": ["kyc", "aml"]
+    },
+    {
+      "id": "sebi-2026-06-08-investor-charter",
+      "regulator": "SEBI",
+      "title": "Updated investor charter for stock brokers",
+      "summary": "Revised disclosure and grievance-redressal expectations for brokers. Useful background for retail investor-protection topics.",
+      "category": "Investor Protection",
+      "priority": "normal",
+      "publishedAt": "2026-06-08",
+      "sourceUrl": "https://www.sebi.gov.in/",
+      "affectsTopics": ["investor-protection"]
+    },
+    {
+      "id": "rbi-2026-06-03-upi-limits",
+      "regulator": "RBI",
+      "title": "Revised transaction limits for certain UPI payments",
+      "summary": "Higher per-transaction limits announced for specified UPI use-cases. Relevant to payment-systems and digital-banking topics.",
+      "category": "Payment Systems",
+      "priority": "normal",
+      "publishedAt": "2026-06-03",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["payment-systems", "digital-banking"]
+    },
+    {
+      "id": "irdai-2026-05-28-bancassurance",
+      "regulator": "IRDAI",
+      "title": "Guidance on bancassurance distribution practices",
+      "summary": "Guidance on conduct and disclosures for banks distributing insurance. Relevant to the bancassurance section in CAIIB electives.",
+      "category": "Insurance",
+      "priority": "normal",
+      "publishedAt": "2026-05-28",
+      "sourceUrl": "https://irdai.gov.in/",
+      "affectsTopics": ["bancassurance", "insurance"]
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import 'package:app/screens/review_screen.dart';
 import 'package:app/app_scope.dart';
 import 'package:app/data/learning_repository.dart';
 import 'package:app/services/notification_service.dart';
+import 'package:app/services/updates_service.dart';
 import 'package:app/theme/tokens.dart';
 import 'package:app/components/rating_buttons.dart';
 
@@ -458,6 +459,7 @@ void main() {
             examDate: DateTime.now().add(const Duration(days: 90)),
             examConfig: const ExamConfig(examCode: 'ex_rev'),
             notificationService: NotificationService(),
+            updatesService: UpdatesService(),
             isPremium: true,
             child: const ReviewScreen(),
           ),

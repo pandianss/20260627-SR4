@@ -251,7 +251,9 @@ void main() {
       SharedPreferences.setMockInitialValues({});
 
       // Build our app and trigger a frame.
-      await tester.pumpWidget(const MyApp());
+      // No authService/firestoreSync injected → no Firebase calls in the test;
+      // the uid is supplied directly.
+      await tester.pumpWidget(const MyApp(userId: 'test-user'));
       await tester.pumpAndSettle();
 
       // Step 0: Welcome Screen
