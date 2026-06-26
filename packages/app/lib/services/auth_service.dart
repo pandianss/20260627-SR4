@@ -56,14 +56,20 @@ class AuthService {
 
   bool _googleReady = false;
 
-  /// Interactive Google sign-in (mobile). Requires your SHA-1/SHA-256
-  /// fingerprints registered on the Android app in the Firebase console.
-  /// If Google sign-in fails to authenticate with Firebase, pass your Firebase
-  /// Web client ID as [serverClientId].
+  /// Firebase Web OAuth client ID for project superrecall-3afe5 — the audience
+  /// the Google idToken must be issued for so Firebase accepts it. This value is
+  /// public (it also ships in google-services.json), so embedding it is fine.
+  static const _googleWebClientId =
+      '524369176132-ktm8db0gnavlfbs1c5ougjneu9ntlm1g.apps.googleusercontent.com';
+
+  /// Interactive Google sign-in (mobile). Requires the app's SHA-1/SHA-256
+  /// fingerprints registered in the Firebase console (they are) and the Google
+  /// provider enabled. [serverClientId] overrides the default Web client ID.
   Future<UserCredential> signInWithGoogle({String? serverClientId}) async {
     final google = GoogleSignIn.instance;
     if (!_googleReady) {
-      await google.initialize(serverClientId: serverClientId);
+      await google.initialize(
+          serverClientId: serverClientId ?? _googleWebClientId);
       _googleReady = true;
     }
     if (!google.supportsAuthenticate()) {

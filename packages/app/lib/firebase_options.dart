@@ -57,22 +57,24 @@ class DefaultFirebaseOptions {
     projectId: 'superrecall-3afe5',
     storageBucket: 'superrecall-3afe5.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCnmXofjeaQxtM88rxb4jkR8-ofuZnodNU',
     appId: '1:524369176132:ios:fbc472a79b9b5b88ad3e11',
     messagingSenderId: '524369176132',
     projectId: 'superrecall-3afe5',
     storageBucket: 'superrecall-3afe5.firebasestorage.app',
+    androidClientId: '524369176132-3tlalt1snavr4dj30go4tamhoft9eup1.apps.googleusercontent.com',
+    iosClientId: '524369176132-j4bb09jkrc5egfs2h9kkbalt2ftb23fp.apps.googleusercontent.com',
     iosBundleId: 'com.superrecall.banker',
   );
-
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCnmXofjeaQxtM88rxb4jkR8-ofuZnodNU',
     appId: '1:524369176132:ios:fbc472a79b9b5b88ad3e11',
     messagingSenderId: '524369176132',
     projectId: 'superrecall-3afe5',
     storageBucket: 'superrecall-3afe5.firebasestorage.app',
+    androidClientId: '524369176132-3tlalt1snavr4dj30go4tamhoft9eup1.apps.googleusercontent.com',
+    iosClientId: '524369176132-j4bb09jkrc5egfs2h9kkbalt2ftb23fp.apps.googleusercontent.com',
     iosBundleId: 'com.superrecall.banker',
   );
 

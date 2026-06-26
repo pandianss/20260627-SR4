@@ -12,7 +12,20 @@
           "package_name": "com.superrecall.banker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "524369176132-3tlalt1snavr4dj30go4tamhoft9eup1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superrecall.banker",
+            "certificate_hash": "aeaa61c49382a9000d377f89a35b333658c999dd"
+          }
+        },
+        {
+          "client_id": "524369176132-ktm8db0gnavlfbs1c5ougjneu9ntlm1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC8wQ1Q21gtVCXLuDYiIIbjqHoEW6Hh7lE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524369176132-ktm8db0gnavlfbs1c5ougjneu9ntlm1g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "524369176132-j4bb09jkrc5egfs2h9kkbalt2ftb23fp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.superrecall.banker"
+              }
+            }
+          ]
         }
       }
     }
