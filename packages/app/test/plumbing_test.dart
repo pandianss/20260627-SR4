@@ -303,11 +303,13 @@ void main() {
       expect(settings.hour, 19);
       expect(settings.minute, 45);
     });
-
     test('Simulate notification triggers appropriately', () {
       // Enabled, reviews due > 0 -> should trigger
       final msg = notificationService.simulateNotificationTrigger(5);
       expect(msg, equals('5 reviews due — 3 min'));
+
+      final singularMsg = notificationService.simulateNotificationTrigger(1);
+      expect(singularMsg, equals('1 review due — 3 min'));
 
       // Enabled, reviews due <= 0 -> should not trigger
       final noReviewsMsg = notificationService.simulateNotificationTrigger(0);

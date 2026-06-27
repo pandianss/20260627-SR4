@@ -4,6 +4,7 @@ import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'package:store/store.dart';
@@ -86,7 +87,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final TelemetryService _telemetryService = TelemetryService();
   final UpdatesService _updatesService = UpdatesService();
   final ValueNotifier<int> _syncRevision = ValueNotifier<int>(0);
-  StreamSubscription? _remoteSub;
+  StreamSubscription<void>? _remoteSub;
+  StreamSubscription<User?>? _authSub;
   Timer? _syncDebounce;
 
   bool _isPremium = false;
@@ -100,12 +102,23 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     _userId = widget.userId;
     _checkPersistedSession();
     _notificationService.init();
+
+    _authSub = widget.authService?.authStateChanges.listen((user) {
+      if (user != null && user.uid != _userId) {
+        setState(() {
+          _userId = user.uid;
+        });
+        _startRemoteListener();
+        _syncCloud();
+      }
+    });
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _remoteSub?.cancel();
+    _authSub?.cancel();
     _syncDebounce?.cancel();
     _syncRevision.dispose();
     super.dispose();
@@ -118,6 +131,26 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.detached) {
       _pushCloud();
+      _rescheduleNotification();
+    }
+  }
+
+  Future<void> _rescheduleNotification() async {
+    final date = _examDate;
+    if (date == null) return;
+    try {
+      final scheduler = _buildScheduler();
+      if (scheduler == null) return;
+      final repository = LearningRepository(
+        content: _contentStore,
+        events: _eventStore,
+        states: _stateStore,
+        scheduler: scheduler,
+      );
+      final due = await repository.loadDueReviews(_userId, _examName);
+      await _notificationService.rescheduleWithDueCount(due.states.length);
+    } catch (e) {
+      debugPrint('Failed to reschedule notifications on background: $e');
     }
   }
 

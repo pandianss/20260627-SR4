@@ -243,8 +243,8 @@ class _MockResultScreenState extends State<MockResultScreen> {
                     softColor = t.danger.withOpacity(0.12);
                     label = 'Critical Weakness';
                   } else if (accuracy < 0.7) {
-                    barColor = const Color(0xFFF57C00); // Amber
-                    softColor = const Color(0xFFFFF3E0);
+                    barColor = t.warning;
+                    softColor = t.warning.withOpacity(0.12);
                     label = 'Warning';
                   }
 

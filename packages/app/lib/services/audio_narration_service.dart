@@ -56,8 +56,38 @@ class AudioNarrationService extends ChangeNotifier {
         await _tts.setEngine('com.google.android.tts');
       }
     } catch (_) {}
-    await _tts.setLanguage(await _pickLanguage());
-    await _tts.setSpeechRate(0.5); // natural pace
+
+    final targetLang = await _pickLanguage();
+    await _tts.setLanguage(targetLang);
+
+    try {
+      final dynamic voices = await _tts.getVoices;
+      if (voices is List) {
+        dynamic bestVoice;
+        for (final v in voices) {
+          if (v is Map) {
+            final String locale = v['locale']?.toString().toLowerCase() ?? '';
+            final String name = v['name']?.toString().toLowerCase() ?? '';
+            final targetLangPrefix = targetLang.split('-').first.toLowerCase();
+            if (locale.startsWith(targetLangPrefix)) {
+              if (name.contains('neural') || name.contains('wavenet') || name.contains('premium') || name.contains('natural')) {
+                bestVoice = v;
+                break;
+              }
+              bestVoice ??= v;
+            }
+          }
+        }
+        if (bestVoice != null && bestVoice is Map) {
+          await _tts.setVoice({
+            'name': bestVoice['name'],
+            'locale': bestVoice['locale'],
+          });
+        }
+      }
+    } catch (_) {}
+
+    await _tts.setSpeechRate(0.45); // slightly calmer and more natural pace
     await _tts.setPitch(1.0);
     await _tts.setVolume(1.0);
     _tts.setCompletionHandler(() {

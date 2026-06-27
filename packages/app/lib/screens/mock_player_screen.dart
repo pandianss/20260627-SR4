@@ -279,9 +279,9 @@ class _MockPlayerScreenState extends State<MockPlayerScreen> {
                     borderColor = t.accent;
                     textColor = t.accent;
                   } else if (flagged) {
-                    borderColor = const Color(0xFFF57C00); // Amber
-                    bgColor = const Color(0xFFFFF3E0);
-                    textColor = const Color(0xFFE65100);
+                    borderColor = t.warning;
+                    bgColor = t.warning.withOpacity(0.08);
+                    textColor = t.warning;
                   } else if (answered) {
                     bgColor = t.accentSoft;
                     borderColor = t.accent;
@@ -311,10 +311,10 @@ class _MockPlayerScreenState extends State<MockPlayerScreen> {
                             ),
                           ),
                           if (flagged)
-                            const Positioned(
+                            Positioned(
                               top: 0,
                               right: 0,
-                              child: Icon(Icons.flag, size: 8, color: Color(0xFFE65100)),
+                              child: Icon(Icons.flag, size: 8, color: t.warning),
                             ),
                         ],
                       ),

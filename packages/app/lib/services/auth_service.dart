@@ -74,7 +74,7 @@ class AuthService {
   /// Interactive Google sign-in (mobile). Requires the app's SHA-1/SHA-256
   /// fingerprints registered in the Firebase console (they are) and the Google
   /// provider enabled. [serverClientId] overrides the default Web client ID.
-  Future<UserCredential> signInWithGoogle({String? serverClientId}) async {
+  Future<UserCredential?> signInWithGoogle({String? serverClientId}) async {
     final google = GoogleSignIn.instance;
     if (!_googleReady) {
       await google.initialize(
@@ -86,8 +86,18 @@ class AuthService {
           'Google sign-in is not available on this platform.');
     }
     final account = await google.authenticate();
-    final credential =
-        GoogleAuthProvider.credential(idToken: account.authentication.idToken);
+    if (account == null) {
+      return null;
+    }
+    final auth = await account.authentication;
+    final idToken = auth.idToken;
+    if (idToken == null) {
+      throw FirebaseAuthException(
+        code: 'missing-id-token',
+        message: 'Could not retrieve ID token from Google.',
+      );
+    }
+    final credential = GoogleAuthProvider.credential(idToken: idToken);
     return _linkOrSignIn(credential);
   }
 

@@ -45,6 +45,7 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
   bool _ready = false;
   NotificationSettings _settings = const NotificationSettings();
+  int? _lastDueCount;
 
   NotificationSettings get settings => _settings;
 
@@ -126,6 +127,18 @@ class NotificationService {
     }
   }
 
+  /// Reschedule the study reminder with a dynamic due count.
+  Future<void> rescheduleWithDueCount(int dueCount) async {
+    _lastDueCount = dueCount;
+    if (_ready) {
+      try {
+        await _reschedule();
+      } catch (e) {
+        debugPrint('rescheduleWithDueCount failed: $e');
+      }
+    }
+  }
+
   Future<void> _reschedule() async {
     await _plugin.cancel(id: _reminderId);
     if (!_settings.enabled) return;
@@ -150,10 +163,22 @@ class NotificationService {
       iOS: const DarwinNotificationDetails(),
     );
 
+    final due = _lastDueCount ?? 0;
+    final String title;
+    final String body;
+
+    if (due > 0) {
+      title = 'Time for your 5 minutes 📚';
+      body = '$due review${due == 1 ? '' : 's'} due — 3 min';
+    } else {
+      title = 'Ready to study? 📚';
+      body = 'Your spaced reviews are waiting — keep your streak alive.';
+    }
+
     await _plugin.zonedSchedule(
       id: _reminderId,
-      title: 'Time for your 5 minutes 📚',
-      body: 'Your spaced reviews are waiting — keep your streak alive.',
+      title: title,
+      body: body,
       scheduledDate: when,
       notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
@@ -173,7 +198,7 @@ class NotificationService {
     }
     final timeStr =
         '${_settings.hour.toString().padLeft(2, '0')}:${_settings.minute.toString().padLeft(2, '0')}';
-    final msg = '$dueCount reviews due — 3 min';
+    final msg = '$dueCount review${dueCount == 1 ? '' : 's'} due — 3 min';
     debugPrint('Notification scheduled for $timeStr: "$msg"');
     return msg;
   }

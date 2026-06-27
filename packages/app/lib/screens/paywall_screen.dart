@@ -34,7 +34,7 @@ class PaywallScreen extends StatefulWidget {
 }
 
 class _PaywallScreenState extends State<PaywallScreen> {
-  String _selectedOption = 'bundle'; // 'bundle', 'monthly', 'modular'
+  String _selectedOption = 'monthly'; // default to monthly
 
   @override
   Widget build(BuildContext context) {
@@ -93,27 +93,27 @@ class _PaywallScreenState extends State<PaywallScreen> {
               const SizedBox(height: 12),
               _buildPricingCard(
                 t: t,
-                id: 'bundle',
-                title: 'Full Study Bundle',
-                price: '₹699',
-                subtitle: 'One-time payment for this exam cycle',
-                tag: 'BEST VALUE',
+                id: 'monthly',
+                title: 'Monthly Subscription',
+                price: '₹99/mo',
+                subtitle: 'Cancel anytime, study at your own pace',
+                tag: 'POPULAR',
                 tagColor: t.accent,
               ),
               const SizedBox(height: 10),
               _buildPricingCard(
                 t: t,
-                id: 'monthly',
-                title: 'Monthly Subscription',
-                price: '₹199/mo',
-                subtitle: 'Cancel anytime, study at your own pace',
+                id: 'bundle',
+                title: 'Full Study Bundle',
+                price: '₹499',
+                subtitle: 'One-time payment for this exam cycle',
               ),
               const SizedBox(height: 10),
               _buildPricingCard(
                 t: t,
                 id: 'modular',
                 title: 'Modular Subject Package',
-                price: '₹399',
+                price: '₹199',
                 subtitle: 'Unlock a single compulsory or elective paper',
               ),
               const SizedBox(height: 28),
@@ -140,12 +140,13 @@ class _PaywallScreenState extends State<PaywallScreen> {
               CalmButton.primary(
                 text: 'Unlock Premium Now',
                 onPressed: () {
+                  final messenger = ScaffoldMessenger.of(context);
                   final scope = AppScope.of(context);
                   if (scope.onBuyPremium != null) {
                     scope.onBuyPremium!();
                   }
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  messenger.showSnackBar(
                     SnackBar(
                       backgroundColor: t.accent,
                       content: Text(

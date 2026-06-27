@@ -102,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (context) {
         final t = context.tokens;
         return StatefulBuilder(
@@ -115,214 +116,219 @@ class _HomeScreenState extends State<HomeScreen> {
                   topRight: Radius.circular(24),
                 ),
               ),
-              padding: const EdgeInsets.fromLTRB(24, 12, 24, 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Drag handle
-                  Center(
-                    child: Container(
-                      width: 36, height: 4,
-                      margin: const EdgeInsets.only(bottom: 20),
-                      decoration: BoxDecoration(
-                        color: t.border,
-                        borderRadius: BorderRadius.circular(4),
+              padding: EdgeInsets.fromLTRB(24, 12, 24, MediaQuery.of(context).viewInsets.bottom + 32),
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.85,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Drag handle
+                    Center(
+                      child: Container(
+                        width: 36, height: 4,
+                        margin: const EdgeInsets.only(bottom: 20),
+                        decoration: BoxDecoration(
+                          color: t.border,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Settings', style: AppTypography.title(t)),
-                      IconButton(
-                        icon: Icon(Icons.close, color: t.textSecondary),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  SwitchListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text('Daily reminder', style: AppTypography.body(t)),
-                    subtitle: Text('A gentle nudge when reviews are due',
-                        style: AppTypography.caption(t)),
-                    value: settings.enabled,
-                    activeColor: t.accent,
-                    onChanged: (val) {
-                      _scope.notificationService.updateSettings(
-                        enabled: val, hour: settings.hour, minute: settings.minute,
-                      );
-                      setSheetState(() {});
-                    },
-                  ),
-                  if (settings.enabled)
-                    ListTile(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Settings', style: AppTypography.title(t)),
+                        IconButton(
+                          icon: Icon(Icons.close, color: t.textSecondary),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    SwitchListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Reminder time', style: AppTypography.body(t)),
-                      trailing: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: t.sage,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Text(
-                          '${settings.hour.toString().padLeft(2, '0')}:${settings.minute.toString().padLeft(2, '0')}',
-                          style: AppTypography.heading(t).copyWith(color: t.ink),
-                        ),
-                      ),
-                      onTap: () async {
-                        final picked = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay(hour: settings.hour, minute: settings.minute),
+                      title: Text('Daily reminder', style: AppTypography.body(t)),
+                      subtitle: Text('A gentle nudge when reviews are due',
+                          style: AppTypography.caption(t)),
+                      value: settings.enabled,
+                      activeColor: t.accent,
+                      onChanged: (val) {
+                        _scope.notificationService.updateSettings(
+                          enabled: val, hour: settings.hour, minute: settings.minute,
                         );
-                        if (picked != null) {
-                          _scope.notificationService.updateSettings(
-                            enabled: settings.enabled, hour: picked.hour, minute: picked.minute,
-                          );
-                          setSheetState(() {});
-                        }
+                        setSheetState(() {});
                       },
                     ),
-                  const Divider(),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.brightness_6_outlined,
-                          color: t.textSecondary, size: 20),
-                      const SizedBox(width: 12),
-                      Text('Appearance', style: AppTypography.body(t)),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  SegmentedButton<ThemeMode>(
-                    showSelectedIcon: false,
-                    segments: const [
-                      ButtonSegment(
-                          value: ThemeMode.system, label: Text('System')),
-                      ButtonSegment(
-                          value: ThemeMode.light, label: Text('Light')),
-                      ButtonSegment(
-                          value: ThemeMode.dark, label: Text('Dark')),
-                    ],
-                    selected: {_scope.themeMode},
-                    onSelectionChanged: (sel) {
-                      _scope.onSetThemeMode?.call(sel.first);
-                      setSheetState(() {});
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  const Divider(),
-                  const SizedBox(height: 8),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(
-                      _scope.isPremium ? Icons.verified_user : Icons.stars,
-                      color: _scope.isPremium ? t.accent : Colors.amber,
-                    ),
-                    title: Text(
-                      _scope.isPremium ? 'Premium Plan Active' : 'Upgrade to Premium',
-                      style: AppTypography.body(t).copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: _scope.isPremium ? t.accent : Colors.amber[800],
-                      ),
-                    ),
-                    subtitle: Text(
-                      _scope.isPremium ? 'Thank you for supporting SuperRecall Banker!' : 'Unlock unlimited card reviews and all mock exams',
-                      style: AppTypography.caption(t),
-                    ),
-                    trailing: _scope.isPremium
-                        ? null
-                        : Icon(Icons.chevron_right, color: Colors.amber[800]),
-                    onTap: _scope.isPremium
-                        ? null
-                        : () {
-                            Navigator.pop(context);
-                            PaywallScreen.show(context);
-                          },
-                  ),
-                  const SizedBox(height: 8),
-                  if (_scope.authService != null &&
-                      !_scope.authService!.isSignedInWithAccount) ...[
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.cloud_sync_outlined, color: t.accent),
-                      title:
-                          Text('Sign in to sync', style: AppTypography.body(t)),
-                      subtitle: Text('Back up & sync across your devices',
-                          style: AppTypography.caption(t)),
-                      trailing: Icon(Icons.chevron_right, color: t.textTertiary),
-                      onTap: () async {
-                        Navigator.pop(context);
-                        final ok = await SignInScreen.show(
-                            this.context, _scope.authService!);
-                        if (!mounted) return;
-                        if (ok == true) {
-                          setState(() {});
-                          ScaffoldMessenger.of(this.context).showSnackBar(
-                            const SnackBar(
-                                content: Text(
-                                    'Signed in — your progress will sync.')),
+                    if (settings.enabled)
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text('Reminder time', style: AppTypography.body(t)),
+                        trailing: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: t.sage,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            '${settings.hour.toString().padLeft(2, '0')}:${settings.minute.toString().padLeft(2, '0')}',
+                            style: AppTypography.heading(t).copyWith(color: t.ink),
+                          ),
+                        ),
+                        onTap: () async {
+                          final picked = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay(hour: settings.hour, minute: settings.minute),
                           );
-                        }
+                          if (picked != null) {
+                            _scope.notificationService.updateSettings(
+                              enabled: settings.enabled, hour: picked.hour, minute: picked.minute,
+                            );
+                            setSheetState(() {});
+                          }
+                        },
+                      ),
+                    const Divider(),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.brightness_6_outlined,
+                            color: t.textSecondary, size: 20),
+                        const SizedBox(width: 12),
+                        Text('Appearance', style: AppTypography.body(t)),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    SegmentedButton<ThemeMode>(
+                      showSelectedIcon: false,
+                      segments: const [
+                        ButtonSegment(
+                            value: ThemeMode.system, label: Text('System')),
+                        ButtonSegment(
+                            value: ThemeMode.light, label: Text('Light')),
+                        ButtonSegment(
+                            value: ThemeMode.dark, label: Text('Dark')),
+                      ],
+                      selected: {_scope.themeMode},
+                      onSelectionChanged: (sel) {
+                        _scope.onSetThemeMode?.call(sel.first);
+                        setSheetState(() {});
                       },
                     ),
                     const SizedBox(height: 8),
-                  ],
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: const Icon(Icons.logout, color: Colors.redAccent),
-                    title: Text('Sign Out', style: AppTypography.body(t).copyWith(color: Colors.redAccent)),
-                    onTap: () {
-                      Navigator.pop(context);
-                      if (_scope.onLogout != null) {
-                        _scope.onLogout!();
-                      }
-                    },
-                  ),
-                  if (_scope.onDeleteAccount != null)
+                    const Divider(),
+                    const SizedBox(height: 8),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.delete_forever_outlined,
-                          color: t.textTertiary),
-                      title: Text('Delete account',
-                          style: AppTypography.body(t)
-                              .copyWith(color: t.textSecondary)),
+                      leading: Icon(
+                        _scope.isPremium ? Icons.verified_user : Icons.stars,
+                        color: _scope.isPremium ? t.accent : Colors.amber,
+                      ),
+                      title: Text(
+                        _scope.isPremium ? 'Premium Plan Active' : 'Upgrade to Premium',
+                        style: AppTypography.body(t).copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: _scope.isPremium ? t.accent : Colors.amber[800],
+                        ),
+                      ),
                       subtitle: Text(
-                          'Permanently remove your account and all progress',
-                          style: AppTypography.caption(t)),
-                      onTap: () async {
-                        final messenger = ScaffoldMessenger.of(context);
-                        final confirmed = await showDialog<bool>(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                            title: const Text('Delete account?'),
-                            content: const Text(
-                                'This permanently deletes your account and all your progress. This cannot be undone.'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.pop(ctx, false),
-                                  child: const Text('Cancel')),
-                              TextButton(
-                                  onPressed: () => Navigator.pop(ctx, true),
-                                  child: const Text('Delete',
-                                      style:
-                                          TextStyle(color: Colors.redAccent))),
-                            ],
-                          ),
-                        );
-                        if (confirmed != true) return;
-                        if (context.mounted) Navigator.pop(context);
-                        try {
-                          await _scope.onDeleteAccount!.call();
-                        } catch (_) {
-                          messenger.showSnackBar(const SnackBar(
-                              content: Text(
-                                  'Couldn\'t delete the account. Please sign in again and retry.')));
+                        _scope.isPremium ? 'Thank you for supporting SuperRecall Banker!' : 'Unlock unlimited card reviews and all mock exams',
+                        style: AppTypography.caption(t),
+                      ),
+                      trailing: _scope.isPremium
+                          ? null
+                          : Icon(Icons.chevron_right, color: Colors.amber[800]),
+                      onTap: _scope.isPremium
+                          ? null
+                          : () {
+                              Navigator.pop(context);
+                              PaywallScreen.show(context);
+                            },
+                    ),
+                    const SizedBox(height: 8),
+                    if (_scope.authService != null &&
+                        !_scope.authService!.isSignedInWithAccount) ...[
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(Icons.cloud_sync_outlined, color: t.accent),
+                        title:
+                            Text('Sign in to sync', style: AppTypography.body(t)),
+                        subtitle: Text('Back up & sync across your devices',
+                            style: AppTypography.caption(t)),
+                        trailing: Icon(Icons.chevron_right, color: t.textTertiary),
+                        onTap: () async {
+                          Navigator.pop(context);
+                          final ok = await SignInScreen.show(
+                              this.context, _scope.authService!);
+                          if (!mounted) return;
+                          if (ok == true) {
+                            setState(() {});
+                            ScaffoldMessenger.of(this.context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Signed in — your progress will sync.')),
+                            );
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                    ],
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.logout, color: Colors.redAccent),
+                      title: Text('Sign Out', style: AppTypography.body(t).copyWith(color: Colors.redAccent)),
+                      onTap: () {
+                        Navigator.pop(context);
+                        if (_scope.onLogout != null) {
+                          _scope.onLogout!();
                         }
                       },
                     ),
-                ],
+                    if (_scope.onDeleteAccount != null)
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Icon(Icons.delete_forever_outlined,
+                            color: t.textTertiary),
+                        title: Text('Delete account',
+                            style: AppTypography.body(t)
+                                .copyWith(color: t.textSecondary)),
+                        subtitle: Text(
+                            'Permanently remove your account and all progress',
+                            style: AppTypography.caption(t)),
+                        onTap: () async {
+                          final messenger = ScaffoldMessenger.of(context);
+                          final confirmed = await showDialog<bool>(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: const Text('Delete account?'),
+                              content: const Text(
+                                  'This permanently deletes your account and all your progress. This cannot be undone.'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () => Navigator.pop(ctx, false),
+                                    child: const Text('Cancel')),
+                                TextButton(
+                                    onPressed: () => Navigator.pop(ctx, true),
+                                    child: const Text('Delete',
+                                        style:
+                                            TextStyle(color: Colors.redAccent))),
+                              ],
+                            ),
+                          );
+                          if (confirmed != true) return;
+                          if (context.mounted) Navigator.pop(context);
+                          if (_scope.onDeleteAccount != null) {
+                            await _scope.onDeleteAccount!();
+                            messenger.showSnackBar(
+                              const SnackBar(
+                                  content: Text('Account permanently deleted.')),
+                            );
+                          }
+                        },
+                      ),
+                  ],
+                ),
               ),
             );
           },
@@ -360,48 +366,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 onBegin: _startDailyLesson,
                 onSettings: _showSettingsSheet,
                 t: t,
+                isPremium: _scope.isPremium,
               ),
 
-              if (!_scope.isPremium)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFFBEB),
-                      border: Border.all(color: const Color(0xFFFDE68A)),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.stars, color: Colors.amber),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Free Tier Active',
-                                style: AppTypography.body(t).copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'Upgrade to unlock all mock tests and unlimited reviews.',
-                                style: AppTypography.caption(t),
-                              ),
-                            ],
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => PaywallScreen.show(context),
-                          child: Text(
-                            'UPGRADE',
-                            style: AppTypography.caption(t).copyWith(color: Colors.amber[800], fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+
 
               // ── Bento stat tiles ────────────────────────────────────────
               Padding(
@@ -417,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               '$completed',
-                              style: AppTypography.hero(t).copyWith(fontSize: 36),
+                              style: AppTypography.hero(t).copyWith(fontSize: 36, color: t.ink),
                             ),
                             const SizedBox(height: 4),
                             Text('lessons done', style: AppTypography.bodySm(t).copyWith(
@@ -439,7 +407,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               total > 0
                                   ? '${(progress * 100).round()}%'
                                   : '—',
-                              style: AppTypography.hero(t).copyWith(fontSize: 36),
+                              style: AppTypography.hero(t).copyWith(fontSize: 36, color: t.ink),
                             ),
                             const SizedBox(height: 4),
                             Text('overall progress', style: AppTypography.bodySm(t).copyWith(
@@ -456,36 +424,39 @@ class _HomeScreenState extends State<HomeScreen> {
               // ── Progress context ─────────────────────────────────────────
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                child: CalmCard(
-                  padding: const EdgeInsets.all(18),
-                  child: Row(
-                    children: [
-                      CalmProgressRing(progress: progress, size: 52),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              (data?.paperName.isNotEmpty ?? false)
-                                  ? data!.paperName
-                                  : _scope.examName,
-                              style: AppTypography.heading(t),
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              (data?.moduleName.isNotEmpty ?? false)
-                                  ? data!.moduleName
-                                  : 'Loading…',
-                              style: AppTypography.bodySm(t),
-                            ),
-                            const SizedBox(height: 3),
-                            Text('$completed of $total lessons',
-                                style: AppTypography.caption(t)),
-                          ],
+                child: GestureDetector(
+                  onTap: _isLoading ? null : _startDailyLesson,
+                  child: CalmCard(
+                    padding: const EdgeInsets.all(18),
+                    child: Row(
+                      children: [
+                        CalmProgressRing(progress: progress, size: 52),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                (data?.paperName.isNotEmpty ?? false)
+                                    ? data!.paperName
+                                    : _scope.examName,
+                                style: AppTypography.heading(t),
+                              ),
+                              const SizedBox(height: 3),
+                              Text(
+                                (data?.moduleName.isNotEmpty ?? false)
+                                    ? data!.moduleName
+                                    : 'Loading…',
+                                style: AppTypography.bodySm(t),
+                              ),
+                              const SizedBox(height: 3),
+                              Text('$completed of $total lessons',
+                                  style: AppTypography.caption(t)),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -561,6 +532,7 @@ class _HeroHeader extends StatelessWidget {
   final int remainingDays;
   final String lessonTitle;
   final String moduleName;
+  final bool isPremium;
   final bool isLoading;
   final VoidCallback onBegin;
   final VoidCallback onSettings;
@@ -571,6 +543,7 @@ class _HeroHeader extends StatelessWidget {
     required this.remainingDays,
     required this.lessonTitle,
     required this.moduleName,
+    required this.isPremium,
     required this.isLoading,
     required this.onBegin,
     required this.onSettings,
@@ -611,8 +584,10 @@ class _HeroHeader extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Text(
-                      '$examName · $remainingDays days left',
-                      style: AppTypography.micro(t).copyWith(color: Colors.white70),
+                      isPremium 
+                          ? '$examName · $remainingDays days left · ★ Premium'
+                          : '$examName · $remainingDays days left',
+                      style: AppTypography.micro(t).copyWith(color: isPremium ? Colors.amber[300] : Colors.white70),
                     ),
                   ),
                 ],
