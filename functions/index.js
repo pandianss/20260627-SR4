@@ -160,7 +160,10 @@ exports.updatesFeed = onRequest({ cors: true }, async (req, res) => {
 
 // ── Live ingestion (Claude curation) ────────────────────────────────────────
 
-const MODEL = "claude-opus-4-8";
+// Cost-optimised model split: Sonnet for the search/research pass, Haiku for
+// the cheap JSON-structuring pass. Both handle this task with no quality loss.
+const RESEARCH_MODEL = "claude-sonnet-4-6";
+const STRUCTURE_MODEL = "claude-haiku-4-5";
 
 // JSON-schema the curated output must conform to — mirrors RegulatoryUpdate in
 // packages/app/lib/models/regulatory_update.dart.
@@ -225,14 +228,17 @@ RESEARCH NOTES:
 async function researchUpdates(client) {
   const messages = [{ role: "user", content: RESEARCH_PROMPT }];
   let response;
+  const usage = { input: 0, output: 0 };
   for (let i = 0; i < 6; i++) {
     response = await client.messages.create({
-      model: MODEL,
+      model: RESEARCH_MODEL,
       max_tokens: 16000,
       // Basic variant: no under-the-hood code execution / dynamic filtering.
-      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 12 }],
+      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 6 }],
       messages,
     });
+    usage.input += response.usage?.input_tokens || 0;
+    usage.output += response.usage?.output_tokens || 0;
     if (response.stop_reason !== "pause_turn") break;
     messages.push({ role: "assistant", content: response.content });
   }
@@ -240,31 +246,58 @@ async function researchUpdates(client) {
   const searchHits = blocks
     .filter((b) => b.type === "web_search_tool_result")
     .reduce((n, b) => n + (Array.isArray(b.content) ? b.content.length : 0), 0);
+  const searches = blocks.filter(
+    (b) => b.type === "server_tool_use" && b.name === "web_search"
+  ).length;
   const notes = blocks
     .filter((b) => b.type === "text")
     .map((b) => b.text)
     .join("\n");
   logger.info("researchUpdates", {
+    model: RESEARCH_MODEL,
     stopReason: response.stop_reason,
+    searches,
     searchHits,
+    usage,
     notesPreview: notes.slice(0, 400),
   });
-  return notes;
+  return { notes, usage, searches };
 }
 
 // Two-phase curation: research with web search, then structure into the schema.
 async function curateUpdates() {
   const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
 
-  const notes = await researchUpdates(client);
+  const { notes, usage: researchUsage, searches } = await researchUpdates(client);
   if (!notes.trim()) return [];
 
   const structured = await client.messages.create({
-    model: MODEL,
+    model: STRUCTURE_MODEL,
     max_tokens: 8000,
     output_config: { format: { type: "json_schema", schema: UPDATE_SCHEMA } },
     messages: [{ role: "user", content: STRUCTURE_PROMPT + notes }],
   });
+
+  // Approximate $ cost so spend is visible per run (rates per 1M tokens).
+  const RATES = {
+    [RESEARCH_MODEL]: { in: 3, out: 15 },
+    [STRUCTURE_MODEL]: { in: 1, out: 5 },
+  };
+  const structIn = structured.usage?.input_tokens || 0;
+  const structOut = structured.usage?.output_tokens || 0;
+  const cost =
+    (researchUsage.input / 1e6) * RATES[RESEARCH_MODEL].in +
+    (researchUsage.output / 1e6) * RATES[RESEARCH_MODEL].out +
+    (structIn / 1e6) * RATES[STRUCTURE_MODEL].in +
+    (structOut / 1e6) * RATES[STRUCTURE_MODEL].out +
+    searches * 0.01; // ~$10 per 1k web searches
+  logger.info("curateUpdates: usage", {
+    research: researchUsage,
+    structure: { input: structIn, output: structOut },
+    searches,
+    estTokenCostUsd: Number(cost.toFixed(4)),
+  });
+
   const textBlock = (structured.content || []).find((b) => b.type === "text");
   if (!textBlock) {
     throw new Error(`No structured output (stop_reason=${structured.stop_reason})`);
