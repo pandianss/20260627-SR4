@@ -10,7 +10,10 @@
       ],
       "configId": "",
       "paperIds": [
-        "p_ppb"
+        "p_ppb",
+        "p_ieifs",
+        "p_rbwm",
+        "p_afm"
       ],
       "status": "published",
       "version": 1
@@ -25,7 +28,52 @@
       },
       "kind": "compulsory",
       "moduleIds": [
-        "m_ppb_a"
+        "m_ppb_a",
+        "m_ppb_b",
+        "m_ppb_c",
+        "m_ppb_d"
+      ]
+    },
+    {
+      "id": "p_ieifs",
+      "examCode": "JAIIB",
+      "name": {
+        "en": "Indian Economy & Indian Financial System"
+      },
+      "kind": "compulsory",
+      "moduleIds": [
+        "m_ieifs_a",
+        "m_ieifs_b",
+        "m_ieifs_c",
+        "m_ieifs_d"
+      ]
+    },
+    {
+      "id": "p_rbwm",
+      "examCode": "JAIIB",
+      "name": {
+        "en": "Retail Banking & Wealth Management"
+      },
+      "kind": "compulsory",
+      "moduleIds": [
+        "m_rbwm_a",
+        "m_rbwm_b",
+        "m_rbwm_c",
+        "m_rbwm_d"
+      ]
+    },
+    {
+      "id": "p_afm",
+      "examCode": "JAIIB",
+      "name": {
+        "en": "Accounting & Financial Management for Bankers"
+      },
+      "kind": "compulsory",
+      "moduleIds": [
+        "m_afm_a",
+        "m_afm_b",
+        "m_afm_c",
+        "m_afm_d"
       ]
     }
   ],
@@ -34,24 +82,230 @@
       "id": "m_ppb_a",
       "paperId": "p_ppb",
       "name": {
-        "en": "Module A: Indian Financial System"
+        "en": "Module A: General Banking Operations"
+      },
+      "topicTags": [
+        "kyc",
+        "aml",
+        "banker_customer_rights",
+        "collateral_types",
+        "banker_customer_relationship",
+        "types_of_accounts",
+        "negotiable_instruments"
+      ],
+      "lessonIds": [
+        "les_ppb_kyc_aml",
+        "les_ppb_banker_rights",
+        "les_ppb_collaterals",
+        "les_ppb_banker_customer",
+        "les_ppb_customer_accounts",
+        "les_ppb_negotiable_instruments"
+      ]
+    },
+    {
+      "id": "m_ppb_b",
+      "paperId": "p_ppb",
+      "name": {
+        "en": "Module B: Functions of Banks"
       },
       "topicTags": [
         "crr",
         "slr",
-        "kyc",
-        "aml"
+        "priority_sector_lending"
       ],
       "lessonIds": [
         "les_ppb_crr",
-        "les_ppb_kyc_aml"
+        "les_ppb_psl"
       ]
+    },
+    {
+      "id": "m_ppb_c",
+      "paperId": "p_ppb",
+      "name": {
+        "en": "Module C: Banking Technology"
+      },
+      "topicTags": [
+        "core_banking",
+        "payment_systems"
+      ],
+      "lessonIds": [
+        "les_ppb_payment_systems"
+      ]
+    },
+    {
+      "id": "m_ppb_d",
+      "paperId": "p_ppb",
+      "name": {
+        "en": "Module D: Ethics in Banks and Financial Institutions"
+      },
+      "topicTags": [
+        "ethics"
+      ],
+      "lessonIds": [
+        "les_ppb_ethics"
+      ]
+    },
+    {
+      "id": "m_ieifs_a",
+      "paperId": "p_ieifs",
+      "name": {
+        "en": "Module A: Indian Economic Architecture"
+      },
+      "topicTags": [
+        "monetary_policy",
+        "inflation"
+      ],
+      "lessonIds": [
+        "les_ieifs_monetary_policy"
+      ]
+    },
+    {
+      "id": "m_ieifs_b",
+      "paperId": "p_ieifs",
+      "name": {
+        "en": "Module B: Economic Concepts Related to Banking"
+      },
+      "topicTags": [
+        "gdp"
+      ],
+      "lessonIds": [
+        "les_ieifs_gdp"
+      ]
+    },
+    {
+      "id": "m_ieifs_c",
+      "paperId": "p_ieifs",
+      "name": {
+        "en": "Module C: Indian Financial System"
+      },
+      "topicTags": [
+        "financial_regulators",
+        "money_market"
+      ],
+      "lessonIds": [
+        "les_ieifs_regulators",
+        "les_ieifs_money_market"
+      ]
+    },
+    {
+      "id": "m_ieifs_d",
+      "paperId": "p_ieifs",
+      "name": {
+        "en": "Module D: Financial Products and Services"
+      },
+      "topicTags": [
+        "banking_products"
+      ],
+      "lessonIds": [
+        "les_rbwm_products"
+      ]
+    },
+    {
+      "id": "m_rbwm_a",
+      "paperId": "p_rbwm",
+      "name": {
+        "en": "Module A: Introduction to Retail Banking"
+      },
+      "topicTags": [
+        "retail_banking_intro"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "m_rbwm_b",
+      "paperId": "p_rbwm",
+      "name": {
+        "en": "Module B: Retail Products and Recovery"
+      },
+      "topicTags": [
+        "credit_scoring",
+        "npa_classification"
+      ],
+      "lessonIds": [
+        "les_rbwm_recovery",
+        "les_rbwm_npa"
+      ]
+    },
+    {
+      "id": "m_rbwm_c",
+      "paperId": "p_rbwm",
+      "name": {
+        "en": "Module C: Support Services - Marketing of Banking Services/Products"
+      },
+      "topicTags": [
+        "marketing"
+      ],
+      "lessonIds": [
+        "les_rbwm_marketing"
+      ]
+    },
+    {
+      "id": "m_rbwm_d",
+      "paperId": "p_rbwm",
+      "name": {
+        "en": "Module D: Wealth Management"
+      },
+      "topicTags": [
+        "wealth_management"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "m_afm_a",
+      "paperId": "p_afm",
+      "name": {
+        "en": "Module A: Accounting Principles and Processes"
+      },
+      "topicTags": [
+        "depreciation"
+      ],
+      "lessonIds": []
+    },
+    {
+      "id": "m_afm_b",
+      "paperId": "p_afm",
+      "name": {
+        "en": "Module B: Financial Statements and Core Banking Systems"
+      },
+      "topicTags": [
+        "balance_sheet",
+        "ratio_analysis"
+      ],
+      "lessonIds": [
+        "les_afm_accounting_cycle",
+        "les_afm_ratio_analysis"
+      ]
+    },
+    {
+      "id": "m_afm_c",
+      "paperId": "p_afm",
+      "name": {
+        "en": "Module C: Financial Management"
+      },
+      "topicTags": [
+        "time_value_of_money"
+      ],
+      "lessonIds": [
+        "les_afm_time_value",
+        "les_afm_capital_budgeting"
+      ]
+    },
+    {
+      "id": "m_afm_d",
+      "paperId": "p_afm",
+      "name": {
+        "en": "Module D: Taxation and Fundamentals of Costing"
+      },
+      "topicTags": [
+        "costing_basics"
+      ],
+      "lessonIds": []
     }
   ],
   "lessons": [
     {
       "id": "les_ppb_crr",
-      "moduleId": "m_ppb_a",
+      "moduleId": "m_ppb_b",
       "title": {
         "en": "Cash Reserve Ratio & SLR"
       },
@@ -59,98 +313,105 @@
       "version": 1,
       "cards": [
         {
-          "id": "card_crr_intro",
+          "id": "les_ppb_crr-c0",
           "kind": "intro",
+          "srsEligible": false,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "Banks cannot lend out all their deposited funds. By law, they must hold a portion back for security. Two ratios dictate these requirements."
+                "en": "**Cash Reserve Ratio & SLR**\n\nOperations"
               }
             }
-          ],
-          "srsEligible": false
+          ]
         },
         {
-          "id": "card_crr_concept",
+          "id": "les_ppb_crr-c1",
           "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "**Cash Reserve Ratio (CRR)**: The percentage of demand and time deposits that banks must keep as cash reserves **with the RBI**. No interest is paid on these funds."
+                "en": "**Cash Reserve Ratio (CRR)**\n\nThe percentage of demand and time deposits that banks must keep as cash reserves with the RBI. No interest is paid on these funds."
               }
             },
             {
-              "kind": "chart",
-              "spec": {
-                "type": "bar_segment",
-                "total": "Total deposits",
-                "segment": {
-                  "label": "CRR 4.5%",
-                  "value": 4.5
-                }
+              "kind": "text",
+              "md": {
+                "en": "**Key:** CRR: 4.5% of NDTL"
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_slr_concept",
+          "id": "les_ppb_crr-c2",
           "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "**Statutory Liquidity Ratio (SLR)**: The mandatory proportion of deposits a bank must store in safe, liquid assets (gold, cash, approved bonds) **within the bank itself**."
+                "en": "**Statutory Liquidity Ratio (SLR)**\n\nThe mandatory proportion of deposits a bank must store in safe, liquid assets (gold, cash, approved bonds) within the bank itself."
               }
             },
             {
-              "kind": "chart",
-              "spec": {
-                "type": "bar_segment",
-                "total": "Total deposits",
-                "segment": {
-                  "label": "SLR 18%",
-                  "value": 18
-                }
+              "kind": "text",
+              "md": {
+                "en": "**Key:** SLR: 18.0% of NDTL"
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_crr_slr_diff",
+          "id": "les_ppb_crr-c3",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**CRR vs SLR at a glance**\n\n- **CRR** — Held in cash with the RBI · earns no interest · governed by the RBI Act, 1934\n- **SLR** — Held by the bank itself in cash, gold or approved securities · earns a return · governed by the Banking Regulation Act, 1949\n- **Purpose** — CRR is a liquidity & monetary-policy tool; SLR ensures solvency and channels funds to government securities"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_crr-c4",
           "kind": "example",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "CRR vs SLR contrast:\n- **CRR**: Kept as cash **with the RBI** (earns no interest).\n- **SLR**: Kept as liquid assets **by the bank** (can earn interest via government bonds)."
+                "en": "**CRR & SLR Requirements**\n\nA commercial bank has Net Demand and Time Liabilities (NDTL) of ₹100 crore. The current Cash Reserve Ratio (CRR) is 4.5% and the Statutory Liquidity Ratio (SLR) is 18%.\n\n- CRR = 4.5% of ₹100 Crore = ₹4.5 Crore\n- SLR = 18.0% of ₹100 Crore = ₹18.0 Crore\n\nThe bank must deposit ₹4.5 Crore with the RBI and maintain ₹18.0 Crore in liquid assets internally."
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_crr_slr_recap",
-          "kind": "recap",
+          "id": "les_ppb_crr-c5",
+          "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "CRR reserves cash at the RBI. SLR keeps liquid assets at the bank. The RBI sets both to regulate banking liquidity and system stability."
+                "en": "**Shortfall Penalty**\n\nIf a bank fails to maintain the required CRR, the RBI charges penal interest at the Bank Rate plus 3% per annum on the shortfall, rising to Bank Rate plus 5% if the shortfall continues the next day. This makes CRR compliance non-negotiable."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** CRR shortfall penalty: Bank Rate + 3% (then +5%)"
               }
             }
-          ],
-          "srsEligible": false
+          ]
         }
       ],
       "probeQuestionIds": [
-        "q_crr_holder",
-        "cs_crr_q1",
-        "cs_crr_q2",
-        "q_slr_assets"
+        "les_ppb_crr-quiz",
+        "les_ppb_crr-quiz2"
       ]
     },
     {
@@ -163,223 +424,1417 @@
       "version": 1,
       "cards": [
         {
-          "id": "card_kyc_intro",
+          "id": "les_ppb_kyc_aml-c0",
           "kind": "intro",
+          "srsEligible": false,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "Banks must verify customer identities before opening accounts to prevent financial crimes. This is done through Know Your Customer (KYC) and Anti-Money Laundering (AML) rules."
+                "en": "**KYC Guidelines & Anti-Money Laundering**\n\nCompliance"
               }
             }
-          ],
-          "srsEligible": false
+          ]
         },
         {
-          "id": "card_kyc_ovd",
+          "id": "les_ppb_kyc_aml-c1",
           "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "**Officially Valid Documents (OVDs)**: To open accounts, customers must provide OVDs. These are: Passport, Aadhaar, Driving License, Voter ID, NREGA job card, and Letter from National Population Register."
+                "en": "**Officially Valid Documents (OVDs)**\n\nTo open accounts, customers must provide OVDs. These are: Passport, Aadhaar, Driving License, Voter ID, NREGA job card, and Letter from National Population Register."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** 6 Officially Valid Documents"
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_aml_stages",
+          "id": "les_ppb_kyc_aml-c2",
           "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "**AML Stages**: Money laundering flows through three key steps:\n1. **Placement**: Injecting illegal cash into the formal financial system.\n2. **Layering**: Spreading money across multiple accounts/transactions to hide its origin.\n3. **Integration**: Merging clean funds back into the economy (e.g., real estate)."
+                "en": "**AML Stages**\n\nMoney laundering flows through three key steps: Placement (injecting cash), Layering (hiding origin), and Integration (clean funds return)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Placement -> Layering -> Integration"
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_aml_example",
-          "kind": "example",
+          "id": "les_ppb_kyc_aml-c3",
+          "kind": "concept",
+          "srsEligible": true,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "Example flow:\n- **Placement**: Depositing cash bags in small amounts in a bank.\n- **Layering**: Wire-transferring funds to shell firms overseas.\n- **Integration**: Purchasing luxury apartments using the clean bank wire."
+                "en": "**Risk Categorisation & Periodic KYC**\n\nUnder the RBI Master Direction on KYC, banks classify customers as Low, Medium or High risk and re-verify (periodic updation) accordingly — High risk every 2 years, Medium every 8 years, and Low every 10 years."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Periodic KYC: High 2y · Medium 8y · Low 10y"
               }
             }
-          ],
-          "srsEligible": true
+          ]
         },
         {
-          "id": "card_kyc_aml_recap",
-          "kind": "recap",
+          "id": "les_ppb_kyc_aml-c4",
+          "kind": "concept",
+          "srsEligible": false,
           "blocks": [
             {
               "kind": "text",
               "md": {
-                "en": "KYC verifies identity using 6 OVDs. AML stops dirty money through Placement, Layering, and Integration controls."
+                "en": "**Reporting to FIU-IND (under PMLA)**\n\n- **CTR** — Cash Transaction Report — all cash transactions above ₹10 lakh in a month\n- **STR** — Suspicious Transaction Report — any transaction that raises a reasonable suspicion, regardless of amount\n- **CCR** — Counterfeit Currency Report — for forged or counterfeit notes detected"
               }
             }
-          ],
-          "srsEligible": false
+          ]
         }
       ],
       "probeQuestionIds": [
-        "q_kyc_ovd",
-        "q_aml_stages"
+        "les_ppb_kyc_aml-quiz",
+        "les_ppb_kyc_aml-quiz2"
+      ]
+    },
+    {
+      "id": "les_ieifs_monetary_policy",
+      "moduleId": "m_ieifs_a",
+      "title": {
+        "en": "Monetary Policy & Inflation"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_monetary_policy-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Monetary Policy & Inflation**\n\nEconomy"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_monetary_policy-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Policy Repo Rate**\n\nThe interest rate at which the RBI lends money to commercial banks. Raising Repo Rate helps control inflation by making borrowing costlier."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Repo Rate: Primary lending rate of RBI"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_monetary_policy-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Consumer Price Index (CPI)**\n\nTracks retail inflation by measuring price changes of a basket of goods and services consumed by retail buyers. CPI is the RBI's primary anchor."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** CPI Combined: Retail Inflation Anchor"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_monetary_policy-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_products",
+      "moduleId": "m_ieifs_d",
+      "title": {
+        "en": "Retail Banking Products & Credit"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_products-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Retail Banking Products & Credit**\n\nRetail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_products-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Asset vs Liability Products**\n\nAsset products are loans provided to customers (Home, Auto). Liability products are deposit accounts (Savings, Fixed)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Assets = Loans | Liabilities = Deposits"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_products-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Credit Score (CIBIL)**\n\nA 3-digit numeric summary of a consumer's credit history, ranging from 300 to 900."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Score range: 300 to 900"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_products-quiz"
+      ]
+    },
+    {
+      "id": "les_afm_time_value",
+      "moduleId": "m_afm_c",
+      "title": {
+        "en": "Time Value of Money & Depreciation"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_time_value-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Time Value of Money & Depreciation**\n\nAccounting"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_time_value-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Compounding and Discounting**\n\nFuture Value (FV) compound a present sum. Present Value (PV) discounts a future sum."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** FV = PV * (1 + r)^n"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_time_value-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Depreciation**\n\nStraight Line Method (SLM) charges constant depreciation annually. Written Down Value (WDV) applies a fixed rate to beginning book value."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** SLM = (Cost - Scrap) / Life"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_time_value-quiz"
+      ]
+    },
+    {
+      "id": "les_ieifs_gdp",
+      "moduleId": "m_ieifs_b",
+      "title": {
+        "en": "GDP Concepts & National Income"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_gdp-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**GDP Concepts & National Income**\n\nEconomy"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_gdp-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Gross Domestic Product (GDP)**\n\nThe total market value of all finished goods and services produced within a country's borders in a specific time period."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** GDP = C + I + G + (X - M)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_gdp-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Real vs Nominal GDP**\n\nNominal GDP is evaluated at current market prices. Real GDP is adjusted for inflation by using a base year's prices."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Real GDP = Nominal GDP / GDP Deflator"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_gdp-quiz"
+      ]
+    },
+    {
+      "id": "les_ieifs_regulators",
+      "moduleId": "m_ieifs_c",
+      "title": {
+        "en": "Financial Market Regulators"
+      },
+      "estMinutes": 4,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_regulators-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Financial Market Regulators**\n\nRegulation"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_regulators-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Regulatory Domains**\n\nIndia's financial system is supervised by distinct statutory bodies: RBI (banking, currency, debt markets), SEBI (securities/capital markets), IRDAI (insurance), and PFRDA (pensions)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** RBI, SEBI, IRDAI, PFRDA"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_regulators-quiz"
+      ]
+    },
+    {
+      "id": "les_ppb_psl",
+      "moduleId": "m_ppb_b",
+      "title": {
+        "en": "Priority Sector Lending (PSL)"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_psl-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Priority Sector Lending (PSL)**\n\nRegulations"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_psl-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Priority Sector Targets**\n\nDomestic commercial banks are mandated to direct 40% of Adjusted Net Bank Credit (ANBC) — or the credit-equivalent of off-balance-sheet exposure, whichever is higher — to priority sectors."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** PSL Target: 40% of ANBC"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_psl-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Eligible Priority Sectors**\n\n- **Agriculture** — Farm credit, agri-infrastructure and ancillary activities · sub-target 18% of ANBC\n- **MSME** — Micro, small and medium enterprises\n- **Others** — Education, Housing, Social Infrastructure, Renewable Energy, and credit to weaker sections"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_psl-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Sub-targets**\n\nWithin the 40% umbrella the RBI sets sub-targets: 18% of ANBC for Agriculture (with a carve-out for small & marginal farmers) and 7.5% for Micro Enterprises. Weaker sections carry a 12% sub-target."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Agri 18% · Micro Enterprises 7.5% · Weaker Sections 12%"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_psl-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Shortfall & RIDF**\n\nBanks that fall short of PSL targets must contribute the shortfall to the Rural Infrastructure Development Fund (RIDF) maintained with NABARD, or other funds specified by the RBI. PSL targets can also be met by buying Priority Sector Lending Certificates (PSLCs)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Shortfall -> RIDF (NABARD) · trade via PSLCs"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_psl-quiz",
+        "les_ppb_psl-quiz2"
+      ]
+    },
+    {
+      "id": "les_ppb_payment_systems",
+      "moduleId": "m_ppb_c",
+      "title": {
+        "en": "Digital Payment Systems"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_payment_systems-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Digital Payment Systems**\n\nTechnology"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_payment_systems-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**NEFT vs RTGS**\n\nNEFT settles in half-hourly batches and has no minimum or maximum amount. RTGS processes transactions in real time, order-by-order, and is meant for high-value payments. Both are operated by the RBI and run 24x7x365."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** RTGS Minimum: ₹2 Lakh · NEFT: no limit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_payment_systems-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Four rails you must know**\n\n- **RTGS** — Real-time, gross (one-by-one), high value · min ₹2 lakh · RBI-operated\n- **NEFT** — Deferred net settlement in half-hourly batches · any amount · RBI-operated\n- **IMPS** — Instant 24x7 mobile/inter-bank transfer · operated by NPCI · per-txn limit ₹5 lakh\n- **UPI** — Instant mobile payments via Virtual Payment Address · operated by NPCI · typical limit ₹1 lakh (higher for some categories)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_payment_systems-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Who operates what**\n\nThe RBI directly operates RTGS and NEFT. The National Payments Corporation of India (NPCI) — an umbrella organisation — operates IMPS, UPI, RuPay, AePS, NACH and the Cheque Truncation System (CTS)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** RBI: RTGS, NEFT · NPCI: IMPS, UPI, RuPay, CTS"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_payment_systems-quiz",
+        "les_ppb_payment_systems-quiz2"
+      ]
+    },
+    {
+      "id": "les_afm_capital_budgeting",
+      "moduleId": "m_afm_c",
+      "title": {
+        "en": "Capital Budgeting (NPV & IRR)"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_capital_budgeting-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Capital Budgeting (NPV & IRR)**\n\nFinance"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_capital_budgeting-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Net Present Value (NPV)**\n\nThe difference between the present value of cash inflows and the present value of cash outflows over a period of time. A project with positive NPV is accepted."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Accept project if NPV > 0"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_capital_budgeting-quiz"
+      ]
+    },
+    {
+      "id": "les_afm_accounting_cycle",
+      "moduleId": "m_afm_b",
+      "title": {
+        "en": "The Accounting Equation"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_accounting_cycle-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**The Accounting Equation**\n\nAccounting"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_accounting_cycle-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Balance Sheet Identity**\n\nThe fundamental accounting equation states that a firm's total assets must equal the sum of its liabilities and owner's equity."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Assets = Liabilities + Equity"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_accounting_cycle-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_recovery",
+      "moduleId": "m_rbwm_b",
+      "title": {
+        "en": "Debt Recovery Channels"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_recovery-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Debt Recovery Channels**\n\nRecovery"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_recovery-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**SARFAESI & Lok Adalats**\n\nSARFAESI Act allows secured creditors to recover dues without court intervention. Lok Adalats resolve small disputes through compromise settlements."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Lok Adalat Limit: Up to ₹20 Lakh"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_recovery-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_marketing",
+      "moduleId": "m_rbwm_c",
+      "title": {
+        "en": "Marketing Mix in Banking"
+      },
+      "estMinutes": 4,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_marketing-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Marketing Mix in Banking**\n\nMarketing"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_marketing-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**The 7 Ps**\n\nService marketing expands the 4 Ps (Product, Price, Place, Promotion) to include: People (staff), Process (delivery systems), and Physical Evidence (ambience, digital portals)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** 7 Ps of Service Marketing"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_marketing-quiz"
+      ]
+    },
+    {
+      "id": "les_ppb_banker_rights",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Banker's Special Rights"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_banker_rights-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Banker's Special Rights**\n\nOperations"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_rights-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Lien & Set-off**\n\nBanker's Lien is an implied pledge giving the bank the right to retain securities/goods for a general balance of account. Right of Set-off enables the bank to combine two or more accounts of the same customer (held in the same capacity) to settle a debt."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Lien: Right to retain | Set-off: Right to combine accounts"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_rights-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Right of Appropriation (Clayton's Rule)**\n\nWhen a customer owes several debts and pays in money, the customer may appropriate it to a specific debt. If they don't, the banker may appropriate. For a running account, Clayton's Rule applies: the first item on the debit side is discharged by the first item on the credit side ('first in, first out')."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Clayton's Rule: first credit clears the first debit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_rights-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Garnishee Order**\n\nA Garnishee Order is issued by a court attaching a customer's balance to satisfy a creditor. It comes in two stages: Order Nisi (freezes the account) and Order Absolute (directs the bank to pay). It does not attach amounts not yet due or accounts held in a different capacity."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Order Nisi (freeze) -> Order Absolute (pay)"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_banker_rights-quiz",
+        "les_ppb_banker_rights-quiz2"
+      ]
+    },
+    {
+      "id": "les_ppb_collaterals",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Collateral Charges: Pledge vs Mortgage"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_collaterals-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Collateral Charges: Pledge vs Mortgage**\n\nCredit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_collaterals-c1",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Four ways to charge a security**\n\n- **Pledge** — Movable goods; possession with the bank (e.g. gold loan). Governed by the Indian Contract Act.\n- **Hypothecation** — Movable assets; possession stays with the borrower (e.g. vehicle/stock loan).\n- **Mortgage** — Immovable property (land, buildings). Governed by the Transfer of Property Act.\n- **Assignment** — Transfer of an actionable claim such as a life-insurance policy or book debts."
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_collaterals-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Types of Mortgage**\n\nCommon forms include the Simple Mortgage, the Equitable Mortgage (created by deposit of title deeds — quick and popular for housing loans), the Registered/English Mortgage, and the Usufructuary Mortgage. The Equitable Mortgage needs no registration in notified towns, making it cost-effective."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Equitable Mortgage = deposit of title deeds (no registration)"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_collaterals-quiz",
+        "les_ppb_collaterals-quiz2"
+      ]
+    },
+    {
+      "id": "les_ieifs_money_market",
+      "moduleId": "m_ieifs_c",
+      "title": {
+        "en": "Money Market Instruments"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_money_market-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Money Market Instruments**\n\nFinancial Markets"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_money_market-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Call Money & Commercial Paper**\n\n- **Call Money**: Inter-bank borrowing/lending for 1 day.\n- **Notice Money**: Borrowing/lending for 2 to 14 days.\n- **Commercial Paper (CP)**: Unsecured promissory note issued by corporates. Min value: ₹5 Lakh.\n- **Treasury Bills (T-Bills)**: Short-term debt issued by RBI on behalf of Government (91, 182, 364 days)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Call: 1 day | Notice: 2-14 days | CP Min: ₹5 Lakh"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_money_market-quiz"
+      ]
+    },
+    {
+      "id": "les_afm_ratio_analysis",
+      "moduleId": "m_afm_b",
+      "title": {
+        "en": "Financial Ratio Analysis"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_ratio_analysis-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Financial Ratio Analysis**\n\nNumerical"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_ratio_analysis-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Liquidity Ratios**\n\nCurrent Ratio evaluates the firm's capacity to pay off short-term debt.\nQuick Ratio (Acid Test) excludes inventory from current assets to test immediate liquidity."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Current Ratio = Current Assets / Current Liabilities"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_ratio_analysis-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Quick Ratio Formula**\n\nQuick Assets are Current Assets excluding Inventory and Prepaid Expenses."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Quick Ratio = (Current Assets - Inventory) / Current Liabilities"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_ratio_analysis-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_npa",
+      "moduleId": "m_rbwm_b",
+      "title": {
+        "en": "NPA Asset Classification"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_npa-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**NPA Asset Classification**\n\nRecovery"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_npa-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Asset Categories**\n\nAn account becomes a Non-Performing Asset (NPA) if interest/installment remains overdue for more than 90 days. NPAs are classified as:\n- **Substandard**: NPA for ≤ 12 months.\n- **Doubtful**: NPA for > 12 months.\n- **Loss Assets**: Identified as uncollectible by the bank or auditor."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** NPA trigger: > 90 days overdue"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_npa-quiz"
+      ]
+    },
+    {
+      "id": "les_ppb_banker_customer",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Banker-Customer Relationship"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_banker_customer-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Banker-Customer Relationship**\n\nOperations"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_customer-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**The Core Relationship**\n\nWhen a customer deposits money, the bank becomes the debtor and the customer the creditor — the bank owns the money and owes a debt. For a loan, the roles reverse. The relationship is established once an account is opened and accepted."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Deposit: Bank = Debtor · Loan: Bank = Creditor"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_customer-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Relationships by service**\n\n- **Debtor / Creditor** — Ordinary deposits and loans\n- **Bailor / Bailee** — Safe custody of articles and lockers\n- **Principal / Agent** — Collecting cheques, paying bills on standing instruction\n- **Trustee / Beneficiary** — Funds held for a specific named purpose"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_banker_customer-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Banker's Obligations**\n\nThe banker owes a duty to honour cheques when funds are available, to maintain secrecy of the customer's account (except under RBI/legal/public-duty exceptions), and to give reasonable notice before closing an account."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Duty: honour cheques · maintain secrecy · give notice"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_banker_customer-quiz",
+        "les_ppb_banker_customer-quiz2"
+      ]
+    },
+    {
+      "id": "les_ppb_customer_accounts",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Types of Customers & Accounts"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_customer_accounts-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Types of Customers & Accounts**\n\nOperations"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_customer_accounts-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Special Customers**\n\nCertain customers need special handling: a Minor (under 18) can open an account but the bank generally avoids overdrafts; a partnership account is opened in the firm's name; a company account needs the Board resolution and Memorandum/Articles of Association."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Minor: no overdraft · Company: Board resolution required"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_customer_accounts-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Joint account operation**\n\n- **Either or Survivor** — Either holder operates; on death of one, the survivor continues\n- **Former or Survivor** — Only the first holder operates while alive\n- **Jointly** — All holders must sign for every transaction"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_customer_accounts-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Nomination & Deceased Accounts**\n\nA depositor may nominate one person to receive the balance on death. The nominee is a trustee for the legal heirs, not the owner. For 'Either or Survivor' accounts the balance passes to the survivor; nomination simplifies settlement and avoids succession-certificate delays."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Nominee = trustee for legal heirs, not the owner"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_customer_accounts-quiz",
+        "les_ppb_customer_accounts-quiz2"
+      ]
+    },
+    {
+      "id": "les_ppb_negotiable_instruments",
+      "moduleId": "m_ppb_a",
+      "title": {
+        "en": "Negotiable Instruments"
+      },
+      "estMinutes": 7,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_negotiable_instruments-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Negotiable Instruments**\n\nCompliance"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_negotiable_instruments-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What is a Negotiable Instrument?**\n\nGoverned by the Negotiable Instruments Act, 1881, a negotiable instrument is a document guaranteeing payment of a specific amount, transferable by delivery or endorsement. The three statutory types are the Promissory Note, the Bill of Exchange, and the Cheque."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** NI Act, 1881 · Promissory Note, Bill of Exchange, Cheque"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_negotiable_instruments-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**The three instruments**\n\n- **Promissory Note** — An unconditional promise by the maker to pay the payee (2 parties)\n- **Bill of Exchange** — An unconditional order by the drawer to the drawee to pay the payee (3 parties)\n- **Cheque** — A bill of exchange drawn on a specified bank, payable on demand"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_negotiable_instruments-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Crossing of Cheques**\n\nA General Crossing (two parallel lines) means the cheque must be paid into a bank account, not over the counter. A Special Crossing names a specific bank. 'Account Payee' crossing restricts collection to the named payee's account, adding safety."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Crossing -> pay into account only (not cash)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_negotiable_instruments-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Endorsement**\n\nEndorsement is signing on the back to transfer the instrument. A Blank endorsement (signature only) makes it payable to bearer; a Full/Special endorsement names the next holder; a Restrictive endorsement ('Pay X only') stops further negotiation."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Blank = to bearer · Full = names holder · Restrictive = stops negotiation"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_negotiable_instruments-quiz",
+        "les_ppb_negotiable_instruments-quiz2"
+      ]
+    },
+    {
+      "id": "les_ppb_ethics",
+      "moduleId": "m_ppb_d",
+      "title": {
+        "en": "Ethics in Banking"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ppb_ethics-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Ethics in Banking**\n\nEthics"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_ethics-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Why Ethics Matter in Banking**\n\nBanking runs on trust and handles other people's money, so ethical conduct — integrity, confidentiality, fairness and transparency — is fundamental. Ethics goes beyond legal compliance: an action can be legal yet unethical (e.g. mis-selling a product a customer doesn't need)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Ethics > mere legal compliance"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_ethics-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Core values**\n\n- **Integrity** — Honesty and consistency between word and action\n- **Confidentiality** — Protecting customer information\n- **Fairness** — Treating customers and colleagues without bias\n- **Accountability** — Owning decisions and their consequences"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ppb_ethics-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Conflicts & Whistleblowing**\n\nA conflict of interest arises when personal gain could influence professional duty (e.g. favouring a related party for a loan). Banks maintain whistle-blower mechanisms and codes of conduct so staff can report unethical practices without retaliation."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Disclose conflicts · use whistle-blower channels"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ppb_ethics-quiz"
       ]
     }
   ],
   "questions": [
     {
-      "id": "cs_crr_q1",
+      "id": "les_ppb_crr-quiz",
       "version": 1,
       "topicTags": [
-        "crr"
-      ],
-      "difficulty": 2,
-      "gradingMode": "auto_numeric",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
-      "explanation": {
-        "en": "The CRR requirement is 4.5% of ₹100 crore, which equals ₹4.5 crore."
-      },
-      "stimulusId": "cs_crr_caselet",
-      "authoring": {
-        "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
-      },
-      "payload": {
-        "type": "passage_ref",
-        "innerType": "numeric",
-        "inner": {
-          "type": "numeric",
-          "stem": {
-            "en": "Based on the caselet, how much must the bank keep with the RBI as CRR (in ₹ crore)?"
-          },
-          "answer": {
-            "value": 4.5,
-            "unit": "₹ cr"
-          },
-          "tolerance": {
-            "kind": "absolute",
-            "amount": 0.01
-          }
-        }
-      }
-    },
-    {
-      "id": "cs_crr_q2",
-      "version": 1,
-      "topicTags": [
-        "slr"
-      ],
-      "difficulty": 2,
-      "gradingMode": "auto_numeric",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
-      "explanation": {
-        "en": "The SLR requirement is 18% of ₹100 crore, which equals ₹18 crore."
-      },
-      "stimulusId": "cs_crr_caselet",
-      "authoring": {
-        "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
-      },
-      "payload": {
-        "type": "passage_ref",
-        "innerType": "numeric",
-        "inner": {
-          "type": "numeric",
-          "stem": {
-            "en": "Based on the caselet, how much must the bank hold as SLR liquid assets (in ₹ crore)?"
-          },
-          "answer": {
-            "value": 18.0,
-            "unit": "₹ cr"
-          },
-          "tolerance": {
-            "kind": "absolute",
-            "amount": 0.01
-          }
-        }
-      }
-    },
-    {
-      "id": "q_aml_stages",
-      "version": 1,
-      "topicTags": [
-        "aml"
+        "crr",
+        "PPB"
       ],
       "difficulty": 2,
       "gradingMode": "auto_exact",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
-      "explanation": {
-        "en": "Money laundering begins with Placement (entering the system), followed by Layering (hiding trace), and ends with Integration (incorporating into the economy)."
-      },
-      "authoring": {
-        "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
-      },
-      "payload": {
-        "type": "mcq_single",
-        "stem": {
-          "en": "What are the three stages of money laundering in correct chronological order?"
-        },
-        "options": [
-          {
-            "id": "a",
-            "content": {
-              "en": "Placement, Layering, Integration"
-            }
-          },
-          {
-            "id": "b",
-            "content": {
-              "en": "Layering, Placement, Integration"
-            }
-          },
-          {
-            "id": "c",
-            "content": {
-              "en": "Placement, Integration, Layering"
-            }
-          },
-          {
-            "id": "d",
-            "content": {
-              "en": "Integration, Layering, Placement"
-            }
-          }
-        ],
-        "correctOptionId": "a"
-      }
-    },
-    {
-      "id": "q_crr_holder",
-      "version": 1,
-      "topicTags": [
-        "crr"
-      ],
-      "difficulty": 1,
-      "gradingMode": "auto_exact",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
       "explanation": {
         "en": "Under the RBI Act, 1934, banks are required to maintain a cash balance equivalent to the CRR percentage directly with the RBI."
       },
       "authoring": {
         "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
       },
       "payload": {
         "type": "mcq_single",
@@ -416,22 +1871,76 @@
       }
     },
     {
-      "id": "q_kyc_ovd",
+      "id": "les_ppb_crr-quiz2",
       "version": 1,
       "topicTags": [
-        "kyc"
+        "crr",
+        "PPB"
       ],
-      "difficulty": 1,
+      "difficulty": 2,
       "gradingMode": "auto_exact",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SLR is maintained by the bank itself in cash, gold, or RBI-approved securities (mainly government securities). CRR balances cannot double-count toward SLR."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of these assets can a bank use to meet its SLR requirement?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Balances kept with the RBI as CRR"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Approved government securities and gold held by the bank"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Loans advanced to corporate borrowers"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Shares of listed private companies"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_kyc_aml-quiz",
+      "version": 1,
+      "topicTags": [
+        "kyc",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
       "explanation": {
         "en": "OVDs are government-issued identity documents. A club membership card is a private document and does not qualify as an OVD."
       },
       "authoring": {
         "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
       },
       "payload": {
         "type": "mcq_single",
@@ -468,70 +1977,2815 @@
       }
     },
     {
-      "id": "q_slr_assets",
+      "id": "les_ppb_kyc_aml-quiz2",
       "version": 1,
       "topicTags": [
-        "slr"
+        "kyc",
+        "PPB"
       ],
       "difficulty": 2,
       "gradingMode": "auto_exact",
-      "defaultMarks": 1.0,
-      "defaultNegativeMarks": 0.0,
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
       "explanation": {
-        "en": "Under Section 24 of the Banking Regulation Act, 1949, SLR can be held in gold, cash, or unencumbered approved securities (e.g. government bonds)."
+        "en": "Under the PMLA rules, banks report all cash transactions of more than ₹10 lakh (or equivalent in foreign currency) in a month via the CTR."
       },
       "authoring": {
         "status": "published",
-        "authorId": "sme_author_1",
-        "reviewerId": "sme_reviewer_2"
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
       },
       "payload": {
         "type": "mcq_single",
         "stem": {
-          "en": "Which of the following assets can count towards a bank's SLR requirement?"
+          "en": "A Cash Transaction Report (CTR) must be filed with FIU-IND for cash transactions exceeding what threshold in a month?"
         },
         "options": [
           {
             "id": "a",
             "content": {
-              "en": "Unencumbered government approved securities"
+              "en": "₹50,000"
             }
           },
           {
             "id": "b",
             "content": {
-              "en": "Personal loans extended to retail borrowers"
+              "en": "₹1 lakh"
             }
           },
           {
             "id": "c",
             "content": {
-              "en": "Real estate investments owned by the bank"
+              "en": "₹10 lakh"
             }
           },
           {
             "id": "d",
             "content": {
-              "en": "Fixed deposits placed with foreign banks"
+              "en": "₹50 lakh"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_ieifs_monetary_policy-quiz",
+      "version": 1,
+      "topicTags": [
+        "monetary_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Repo rate is the rate at which the RBI lends money to commercial banks. Raising it increases the cost of funds for banks, which they pass on to consumers by raising interest rates."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When the Reserve Bank of India (RBI) raises the Repo Rate, what is the expected impact on the banking system?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Lending to commercial banks becomes cheaper"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Lending rates for retail consumers decrease"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Cost of borrowing for commercial banks increases, leading to higher consumer lending rates"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Money supply in the economy increases rapidly"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_rbwm_products-quiz",
+      "version": 1,
+      "topicTags": [
+        "banking_products",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Asset products are products where the bank lends money to customer borrowers, generating interest income."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following is classified as a retail bank asset product?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Savings Bank Account"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Fixed Deposit Scheme"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Home Loan Account"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Current Account"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_afm_time_value-quiz",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Using PV formula: PV = FV / (1 + r)^n. PV = 121 / (1 + 0.10)^2 = 121 / 1.21 = ₹100."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Calculate the Present Value of ₹121 received 2 years from now, discounted at an annual interest rate of 10% (in ₹)."
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹90"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹100"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹110"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹120"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_gdp-quiz",
+      "version": 1,
+      "topicTags": [
+        "gdp",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Real GDP = Nominal GDP / GDP Deflator (expressed as decimal) = 120 / 1.20 = ₹100 Crore."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a country's Nominal GDP is ₹120 Crore and the GDP Deflator is 120 (or 1.20), what is its Real GDP?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹100 Crore"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹110 Crore"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹120 Crore"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹144 Crore"
             }
           }
         ],
         "correctOptionId": "a"
       }
+    },
+    {
+      "id": "les_ieifs_regulators-quiz",
+      "version": 1,
+      "topicTags": [
+        "financial_regulators",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SEBI regulates the securities markets, including asset management companies and mutual funds in India."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which regulator supervises and regulates the functioning of Mutual Funds in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Reserve Bank of India (RBI)"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Securities and Exchange Board of India (SEBI)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Insurance Regulatory and Development Authority (IRDAI)"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Pension Fund Regulatory and Development Authority (PFRDA)"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_psl-quiz",
+      "version": 1,
+      "topicTags": [
+        "priority_sector_lending",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Domestic Scheduled Commercial Banks and Foreign Banks with 20 or more branches must allocate 40% of ANBC or Credit Equivalent Amount of Off-Balance Sheet Exposure, whichever is higher, to priority sectors."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the overall Priority Sector Lending (PSL) target for domestic scheduled commercial banks in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "32% of ANBC"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "40% of ANBC"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "18% of ANBC"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "7.5% of ANBC"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_psl-quiz2",
+      "version": 1,
+      "topicTags": [
+        "priority_sector_lending",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Within the 40% PSL target, a sub-target of 18% of ANBC is prescribed for Agriculture, including a dedicated allocation for small and marginal farmers."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the sub-target prescribed for lending to the Agriculture sector?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "10% of ANBC"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "18% of ANBC"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "7.5% of ANBC"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "40% of ANBC"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_payment_systems-quiz",
+      "version": 1,
+      "topicTags": [
+        "payment_systems",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "RTGS is meant for high-value settlement. The minimum amount for transferring funds via RTGS is ₹2 Lakh, with no maximum ceiling."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the minimum transaction limit for retail fund transfers via Real Time Gross Settlement (RTGS)?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "No minimum limit"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹50,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹1 Lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹2 Lakh"
+            }
+          }
+        ],
+        "correctOptionId": "d"
+      }
+    },
+    {
+      "id": "les_ppb_payment_systems-quiz2",
+      "version": 1,
+      "topicTags": [
+        "payment_systems",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "UPI, IMPS, RuPay and the Cheque Truncation System are operated by NPCI, while the RBI itself operates RTGS and NEFT."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which organisation operates the Unified Payments Interface (UPI) and IMPS?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Reserve Bank of India"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "National Payments Corporation of India (NPCI)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "SEBI"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Indian Banks' Association"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_capital_budgeting-quiz",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NPV = Present Value of Inflows - Initial Outflow = 1,200 - 1,000 = ₹200."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a project has an initial outflow of ₹1,000 and the present value of its future cash inflows is ₹1,200, what is its NPV?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "-₹200"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹200"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹1,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹1,200"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_accounting_cycle-quiz",
+      "version": 1,
+      "topicTags": [
+        "balance_sheet",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Equity = Assets - Liabilities = 50,000 - 20,000 = ₹30,000."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a business has Assets of ₹50,000 and Liabilities of ₹20,000, what is its Owner's Equity?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹20,000"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹30,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹50,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹70,000"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_recovery-quiz",
+      "version": 1,
+      "topicTags": [
+        "credit_scoring",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Banks refer cases with outstanding balances up to ₹20 Lakh to Lok Adalats for recovery through compromise settlement."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the maximum monetary limit for cases referred to Lok Adalats for debt recovery settlement?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹5 Lakh"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹10 Lakh"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹20 Lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "No limit"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_rbwm_marketing-quiz",
+      "version": 1,
+      "topicTags": [
+        "marketing",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Physical Evidence is the environment in which the service is delivered and where the firm and customer interact, such as branch ambience or app interfaces."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following represents 'Physical Evidence' in the retail banking marketing mix?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Interest rates on loans"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Friendly bank tellers"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "A clean, modern bank branch lobby or intuitive mobile app"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Direct mail advertisements"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_ppb_banker_rights-quiz",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_rights",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The Right of Set-off is the statutory right of a banker to combine two accounts of the same debtor/creditor capacity to adjust a debt."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Under what legal concept can a bank combine a customer's credit balance in one account with a debit balance in another to recover overdue debt?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Right of Appropriation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Right of Lien"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Right of Set-off"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Right of Pledge"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_ppb_banker_rights-quiz2",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_rights",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "A Garnishee Order is issued in two parts — Order Nisi freezes the balance, and Order Absolute directs the bank to pay the attached amount to the court/creditor."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The first stage of a Garnishee Order, which freezes the customer's account, is known as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Order Absolute"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Order Nisi"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Order of Attachment"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Order of Lien"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_collaterals-quiz",
+      "version": 1,
+      "topicTags": [
+        "collateral_types",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "A pledge involves bailment (transfer of possession) of movable goods to the creditor bank as security for a loan."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When a bank extends a loan against gold ornaments and takes physical custody of the gold, what type of charge is created?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Hypothecation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Mortgage"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Pledge"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Lien"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_ppb_collaterals-quiz2",
+      "version": 1,
+      "topicTags": [
+        "collateral_types",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An Equitable Mortgage (mortgage by deposit of title deeds) is created when the borrower hands over title documents as security; it requires no registration in notified towns and is widely used for housing loans."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A mortgage created by depositing the title deeds of an immovable property with the lender is called a:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Simple Mortgage"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Equitable Mortgage"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "English Mortgage"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Usufructuary Mortgage"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_money_market-quiz",
+      "version": 1,
+      "topicTags": [
+        "money_market",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Funds borrowed or lent in the inter-bank market for one day are termed Call Money. If for 2 to 14 days, it is called Notice Money."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the term used for inter-bank fund borrowing/lending for a period of exactly one day?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Notice Money"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Term Money"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Call Money"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Commercial Paper"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_afm_ratio_analysis-quiz",
+      "version": 1,
+      "topicTags": [
+        "ratio_analysis",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Current Ratio = Current Assets / Current Liabilities = 1,00,000 / 50,000 = 2.0:1."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Calculate the Current Ratio of a firm with Current Assets of ₹1,00,000, Current Liabilities of ₹50,000, and Inventory of ₹20,000."
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "1.6:1"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "2.0:1"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "2.5:1"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "3.0:1"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_npa-quiz",
+      "version": 1,
+      "topicTags": [
+        "npa_classification",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An asset is classified as substandard if it remains an NPA for up to 12 months, after which it transitions to the doubtful category."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "After what period of remaining in the Non-Performing Asset (NPA) category is an asset classified as a 'Doubtful Asset'?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "6 months"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "12 months"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "18 months"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "24 months"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_banker_customer-quiz",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_relationship",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "On a deposit the bank owns the money and is liable to repay it, making the bank the debtor and the depositing customer the creditor."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "In an ordinary savings deposit, what is the legal relationship between the bank and the customer?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Bailor and Bailee"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Bank is debtor, customer is creditor"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Trustee and Beneficiary"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Principal and Agent"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_banker_customer-quiz2",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_relationship",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Safe custody is a bailment — the customer (bailor) hands goods to the bank (bailee), which must take reasonable care and return them."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When a customer keeps valuables in a bank's safe custody, the relationship is that of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Debtor and Creditor"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Bailor and Bailee"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Mortgagor and Mortgagee"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Lessor and Lessee"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_customer_accounts-quiz",
+      "version": 1,
+      "topicTags": [
+        "types_of_accounts",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Under 'Either or Survivor', either holder can independently operate the account, and on the death of one the survivor can continue to operate it."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "In an 'Either or Survivor' joint account, who can operate the account during the lifetime of both holders?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Only the first-named holder"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Either of the two holders"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Both holders jointly only"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Only with bank manager approval"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_customer_accounts-quiz2",
+      "version": 1,
+      "topicTags": [
+        "types_of_accounts",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "A nominee merely receives the funds on the depositor's death and holds them as a trustee on behalf of the legal heirs; ownership is decided by succession law."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the legal status of a nominee in a deposit account?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "The absolute owner of the funds"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "A trustee for the legal heirs"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "A guarantor for the deposit"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "An authorised signatory only"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_negotiable_instruments-quiz",
+      "version": 1,
+      "topicTags": [
+        "negotiable_instruments",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Section 6 of the NI Act defines a cheque as a bill of exchange drawn on a specified banker and payable on demand."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A cheque is best described as which type of negotiable instrument?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "A promissory note payable on demand"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "A bill of exchange drawn on a specified banker and payable on demand"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "An unconditional promise by the maker"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "A government security"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_negotiable_instruments-quiz2",
+      "version": 1,
+      "topicTags": [
+        "negotiable_instruments",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An 'Account Payee' crossing directs the collecting banker to credit the proceeds only to the account of the named payee, reducing the risk of fraud."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What does an 'Account Payee' crossing on a cheque ensure?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "The cheque can be encashed over the counter"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Proceeds are credited only to the named payee's account"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "The cheque becomes payable to bearer"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "The cheque is valid for 6 months"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ppb_ethics-quiz",
+      "version": 1,
+      "topicTags": [
+        "ethics",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Recommending an unsuitable product for personal/institutional gain is mis-selling — it may not always be illegal, but it breaches the ethical duties of fairness and acting in the customer's interest."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Selling a customer an investment product that earns the banker a high commission but does not suit the customer's needs is an example of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Legal and ethical banking"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Mis-selling — a breach of ethics"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Priority sector lending"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "A permitted conflict of interest"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_repo",
+      "version": 1,
+      "topicTags": [
+        "monetary_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Repo rate is the rate at which the RBI lends money to commercial banks. Raising it increases the cost of funds for banks, which they pass on to consumers by raising interest rates, thus tightening liquidity and helping curb inflation."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When the Reserve Bank of India (RBI) raises the Repo Rate, what is the expected impact on the banking system?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Lending to commercial banks becomes cheaper"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Lending rates for retail consumers decrease"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Cost of borrowing for commercial banks increases, leading to higher consumer lending rates"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Money supply in the economy increases rapidly"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ieifs_inflation",
+      "version": 1,
+      "topicTags": [
+        "inflation",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The RBI adopted Consumer Price Index (CPI) Combined as the key metric for inflation targeting to reflect real cost of living fluctuations experienced by household retail consumers."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which index is primarily used by the RBI as the nominal anchor for measuring retail inflation under the inflation targeting framework?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Wholesale Price Index (WPI)"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Consumer Price Index (CPI) Combined"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "GDP Deflator"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Index of Industrial Production (IIP)"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_products",
+      "version": 1,
+      "topicTags": [
+        "banking_products",
+        "RBWM"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Asset products are products where the bank lends money to customer borrowers, generating interest income. Savings, Fixed, and Current accounts represent liabilities since the bank holds these deposits for customers."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following is classified as a retail bank asset product?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Savings Bank Account"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Fixed Deposit Scheme"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Home Loan Account"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Current Account"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_rbwm_score",
+      "version": 1,
+      "topicTags": [
+        "credit_scoring",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "CIBIL scores range from 300 to 900. Higher numbers represent lower default risk, facilitating quick retail loan approvals."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the standard numeric range for a CIBIL credit score utilized in retail credit evaluation in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "100 to 1000"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "300 to 900"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "0 to 100"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "500 to 1500"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_pv",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Using PV formula: PV = FV / (1 + r)^n. PV = 121 / (1 + 0.10)^2 = 121 / 1.21 = ₹100."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Calculate the Present Value of ₹121 received 2 years from now, discounted at an annual interest rate of 10% (in ₹)."
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹90"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹100"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹110"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹120"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_depr",
+      "version": 1,
+      "topicTags": [
+        "depreciation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SLM Depreciation = (Cost - Scrap Value) / Useful Life = (10,000 - 1,000) / 5 = ₹1,800 per annum."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "An asset cost ₹10,000 with a scrap value of ₹1,000 and a useful life of 5 years. Under the Straight Line Method (SLM), what is the annual depreciation charge (in ₹)?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹1,500"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹1,800"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹2,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹2,200"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_gdp",
+      "version": 1,
+      "topicTags": [
+        "gdp",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Real GDP = Nominal GDP / GDP Deflator (expressed as decimal) = 120 / 1.20 = ₹100 Crore."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a country's Nominal GDP is ₹120 Crore and the GDP Deflator is 120 (or 1.20), what is its Real GDP?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹100 Crore"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹110 Crore"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹120 Crore"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹144 Crore"
+            }
+          }
+        ],
+        "correctOptionId": "a"
+      }
+    },
+    {
+      "id": "q_ieifs_regulators",
+      "version": 1,
+      "topicTags": [
+        "financial_regulators",
+        "IEIFS"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SEBI regulates the securities markets, including asset management companies and mutual funds in India."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which regulator supervises and regulates the functioning of Mutual Funds in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Reserve Bank of India (RBI)"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Securities and Exchange Board of India (SEBI)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Insurance Regulatory and Development Authority (IRDAI)"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Pension Fund Regulatory and Development Authority (PFRDA)"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_psl",
+      "version": 1,
+      "topicTags": [
+        "crr",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Domestic Scheduled Commercial Banks and Foreign Banks with 20 or more branches must allocate 40% of ANBC or Credit Equivalent Amount of Off-Balance Sheet Exposure, whichever is higher, to priority sectors."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the overall Priority Sector Lending (PSL) target for domestic scheduled commercial banks in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "32% of ANBC"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "40% of ANBC"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "18% of ANBC"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "7.5% of ANBC"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_payment_systems",
+      "version": 1,
+      "topicTags": [
+        "core_banking",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "RTGS is meant for high-value settlement. The minimum amount for transferring funds via RTGS is ₹2 Lakh, with no maximum ceiling."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the minimum transaction limit for retail fund transfers via Real Time Gross Settlement (RTGS)?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "No minimum limit"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹50,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹1 Lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹2 Lakh"
+            }
+          }
+        ],
+        "correctOptionId": "d"
+      }
+    },
+    {
+      "id": "q_afm_capital_budgeting",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NPV = Present Value of Inflows - Initial Outflow = 1,200 - 1,000 = ₹200."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a project has an initial outflow of ₹1,000 and the present value of its future cash inflows is ₹1,200, what is its NPV?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "-₹200"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹200"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹1,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹1,200"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_accounting_cycle",
+      "version": 1,
+      "topicTags": [
+        "balance_sheet",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Equity = Assets - Liabilities = 50,000 - 20,000 = ₹30,000."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a business has Assets of ₹50,000 and Liabilities of ₹20,000, what is its Owner's Equity?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹20,000"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹30,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹50,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹70,000"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_recovery",
+      "version": 1,
+      "topicTags": [
+        "credit_scoring",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Banks refer cases with outstanding balances up to ₹20 Lakh to Lok Adalats for recovery through compromise settlement."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the maximum monetary limit for cases referred to Lok Adalats for debt recovery settlement?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹5 Lakh"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹10 Lakh"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹20 Lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "No limit"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_rbwm_marketing",
+      "version": 1,
+      "topicTags": [
+        "marketing",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Physical Evidence is the environment in which the service is delivered and where the firm and customer interact, such as branch ambience or app interfaces."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following represents 'Physical Evidence' in the retail banking marketing mix?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Interest rates on loans"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Friendly bank tellers"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "A clean, modern bank branch lobby or intuitive mobile app"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Direct mail advertisements"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ppb_banker_rights",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_rights",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The Right of Set-off is the statutory right of a banker to combine two accounts of the same debtor/creditor capacity to adjust a debt."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Under what legal concept can a bank combine a customer's credit balance in one account with a debit balance in another to recover overdue debt?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Right of Appropriation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Right of Lien"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Right of Set-off"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Right of Pledge"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ppb_collaterals",
+      "version": 1,
+      "topicTags": [
+        "collateral_types",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "A pledge involves bailment (transfer of possession) of movable goods to the creditor bank as security for a loan."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When a bank extends a loan against gold ornaments and takes physical custody of the gold, what type of charge is created?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Hypothecation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Mortgage"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Pledge"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Lien"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ieifs_money_market",
+      "version": 1,
+      "topicTags": [
+        "money_market",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Funds borrowed or lent in the inter-bank market for one day are termed Call Money. If for 2 to 14 days, it is called Notice Money."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "What is the term used for inter-bank fund borrowing/lending for a period of exactly one day?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Notice Money"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Term Money"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Call Money"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Commercial Paper"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_afm_ratio_analysis",
+      "version": 1,
+      "topicTags": [
+        "ratio_analysis",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Current Ratio = Current Assets / Current Liabilities = 1,00,000 / 50,000 = 2.0:1."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Calculate the Current Ratio of a firm with Current Assets of ₹1,00,000, Current Liabilities of ₹50,000, and Inventory of ₹20,000."
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "1.6:1"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "2.0:1"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "2.5:1"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "3.0:1"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_npa",
+      "version": 1,
+      "topicTags": [
+        "npa_classification",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An asset is classified as substandard if it remains an NPA for up to 12 months, after which it transitions to the doubtful category."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "After what period of remaining in the Non-Performing Asset (NPA) category is an asset classified as a 'Doubtful Asset'?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "6 months"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "12 months"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "18 months"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "24 months"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_ni_parties",
+      "version": 1,
+      "topicTags": [
+        "negotiable_instruments",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "A bill of exchange is an order to pay involving three parties: the drawer (who makes the order), the drawee (who is ordered to pay), and the payee (who receives payment)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A bill of exchange involves how many parties in its basic form?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Two — maker and payee"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Three — drawer, drawee and payee"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Four — drawer, drawee, payee and endorser"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "One — the bearer"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_crossing",
+      "version": 1,
+      "topicTags": [
+        "negotiable_instruments",
+        "PPB"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Two parallel transverse lines (with or without the words '& Co.') form a general crossing, meaning the cheque must be paid through a bank account and not across the counter."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Two transverse parallel lines on the face of a cheque, without any words, constitute a:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Special crossing"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "General crossing"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Account payee crossing"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Not-negotiable crossing"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_imps_operator",
+      "version": 1,
+      "topicTags": [
+        "payment_systems",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NEFT and RTGS are operated directly by the RBI. IMPS, UPI and RuPay are operated by the National Payments Corporation of India (NPCI)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "NEFT and RTGS are operated by which entity?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "NPCI"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "The Reserve Bank of India"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Indian Banks' Association"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "SEBI"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_joint_account",
+      "version": 1,
+      "topicTags": [
+        "types_of_accounts",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Under 'Former or Survivor', only the first-named (former) holder can operate the account during the lifetime of both; the survivor gets rights only after the former's death."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "In a 'Former or Survivor' joint account, who may operate the account while both holders are alive?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Either holder"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Only the first (former) holder"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Both holders jointly"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Only the second holder"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_relationship_locker",
+      "version": 1,
+      "topicTags": [
+        "banker_customer_relationship",
+        "PPB"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Hiring a safe-deposit locker creates a lessor (bank) and lessee (customer) relationship — the bank rents out space rather than taking custody of the contents."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "When a customer hires a safe-deposit locker, the bank-customer relationship is best described as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Debtor and creditor"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Lessor and lessee"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Trustee and beneficiary"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Principal and agent"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ppb_ethics_missell",
+      "version": 1,
+      "topicTags": [
+        "ethics",
+        "PPB"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Mis-selling is recommending a product that does not meet the customer's needs, usually driven by incentives — an ethical breach of the duty to act in the customer's interest."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Recommending an unsuitable high-commission product to a customer primarily for the banker's gain is known as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Cross-selling"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Mis-selling"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Up-selling"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Priority lending"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
     }
   ],
   "assets": [],
-  "stimuli": [
-    {
-      "id": "cs_crr_caselet",
-      "kind": "caselet",
-      "content": {
-        "en": "A commercial bank has Net Demand and Time Liabilities (NDTL) of ₹100 crore. The current Cash Reserve Ratio (CRR) is 4.5% and the Statutory Liquidity Ratio (SLR) is 18%."
-      },
-      "childQuestionIds": [
-        "cs_crr_q1",
-        "cs_crr_q2"
-      ]
-    }
-  ]
+  "stimuli": []
 }
