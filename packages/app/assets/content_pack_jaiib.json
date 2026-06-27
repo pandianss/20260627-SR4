@@ -218,7 +218,9 @@
       "topicTags": [
         "retail_banking_intro"
       ],
-      "lessonIds": []
+      "lessonIds": [
+        "les_rbwm_intro"
+      ]
     },
     {
       "id": "m_rbwm_b",
@@ -228,11 +230,13 @@
       },
       "topicTags": [
         "credit_scoring",
-        "npa_classification"
+        "npa_classification",
+        "retail_loan_products"
       ],
       "lessonIds": [
         "les_rbwm_recovery",
-        "les_rbwm_npa"
+        "les_rbwm_npa",
+        "les_rbwm_home_loan"
       ]
     },
     {
@@ -255,9 +259,13 @@
         "en": "Module D: Wealth Management"
       },
       "topicTags": [
-        "wealth_management"
+        "wealth_management",
+        "mutual_funds"
       ],
-      "lessonIds": []
+      "lessonIds": [
+        "les_rbwm_wealth",
+        "les_rbwm_mutual_funds"
+      ]
     },
     {
       "id": "m_afm_a",
@@ -668,20 +676,34 @@
             {
               "kind": "text",
               "md": {
-                "en": "**Credit Score (CIBIL)**\n\nA 3-digit numeric summary of a consumer's credit history, ranging from 300 to 900."
+                "en": "**Credit Score (CIBIL)**\n\nA 3-digit numeric summary of a consumer's credit history, ranging from 300 to 900. A score of 750+ is generally considered good and improves loan approval odds and pricing. India has four RBI-licensed credit bureaus: CIBIL, Equifax, Experian and CRIF High Mark."
               }
             },
             {
               "kind": "text",
               "md": {
-                "en": "**Key:** Score range: 300 to 900"
+                "en": "**Key:** Score range 300-900 · 750+ is good"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_products-c3",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Common retail products**\n\n- **Liability** — Savings, Current, Fixed and Recurring Deposits\n- **Asset (secured)** — Home loan, auto loan, loan against property/securities\n- **Asset (unsecured)** — Personal loan, credit card, education loan"
               }
             }
           ]
         }
       ],
       "probeQuestionIds": [
-        "les_rbwm_products-quiz"
+        "les_rbwm_products-quiz",
+        "les_rbwm_products-quiz2"
       ]
     },
     {
@@ -1225,20 +1247,34 @@
             {
               "kind": "text",
               "md": {
-                "en": "**SARFAESI & Lok Adalats**\n\nSARFAESI Act allows secured creditors to recover dues without court intervention. Lok Adalats resolve small disputes through compromise settlements."
+                "en": "**SARFAESI & Lok Adalats**\n\nThe SARFAESI Act, 2002 allows secured creditors to enforce security and recover dues without court intervention, but only for secured loans where the outstanding is above ₹1 lakh and the account is an NPA. Lok Adalats resolve smaller disputes through compromise settlements."
               }
             },
             {
               "kind": "text",
               "md": {
-                "en": "**Key:** Lok Adalat Limit: Up to ₹20 Lakh"
+                "en": "**Key:** SARFAESI: secured NPAs > ₹1 lakh, no court needed"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_recovery-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Recovery channels**\n\n- **SARFAESI** — Seize/sell secured assets without court (secured NPAs)\n- **DRT** — Debt Recovery Tribunal for bank dues of ₹20 lakh and above\n- **Lok Adalat** — Compromise settlement for cases up to ₹20 lakh\n- **IBC** — Insolvency & Bankruptcy Code for corporate insolvency resolution"
               }
             }
           ]
         }
       ],
       "probeQuestionIds": [
-        "les_rbwm_recovery-quiz"
+        "les_rbwm_recovery-quiz",
+        "les_rbwm_recovery-quiz2"
       ]
     },
     {
@@ -1281,10 +1317,49 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_rbwm_marketing-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Service Characteristics**\n\nBanking services are distinct from goods on four counts: Intangibility (can't be touched), Inseparability (produced and consumed together), Perishability (can't be stored), and Variability/Heterogeneity (quality varies by who delivers it)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Intangible · Inseparable · Perishable · Variable"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_marketing-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Cross-selling vs Up-selling**\n\nCross-selling offers a different, complementary product to an existing customer (e.g. insurance to a deposit holder). Up-selling persuades a customer to upgrade to a higher-value version of the same product. Both raise revenue per customer but must respect suitability."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Cross-sell = different product · Up-sell = higher version"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_rbwm_marketing-quiz"
+        "les_rbwm_marketing-quiz",
+        "les_rbwm_marketing-quiz2"
       ]
     },
     {
@@ -1622,10 +1697,49 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_rbwm_npa-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**SMA Early-Warning Categories**\n\nBefore becoming an NPA, an account is flagged as a Special Mention Account (SMA): SMA-0 (overdue 1-30 days), SMA-1 (31-60 days), and SMA-2 (61-90 days). These early-warning buckets help banks act before the 90-day NPA threshold."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** SMA-0: 1-30d · SMA-1: 31-60d · SMA-2: 61-90d"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_npa-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Provisioning**\n\nBanks must set aside provisions against NPAs from profits: roughly 15% for secured sub-standard assets, rising for doubtful assets by age, and 100% for loss assets. Provisioning protects the bank's balance sheet against expected loss."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Provisioning rises with the age/severity of the NPA"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_rbwm_npa-quiz"
+        "les_rbwm_npa-quiz",
+        "les_rbwm_npa-quiz2"
       ]
     },
     {
@@ -2335,6 +2449,319 @@
       "probeQuestionIds": [
         "les_ieifs_nbfc-quiz"
       ]
+    },
+    {
+      "id": "les_rbwm_intro",
+      "moduleId": "m_rbwm_a",
+      "title": {
+        "en": "Introduction to Retail Banking"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_intro-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Introduction to Retail Banking**\n\nRetail"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_intro-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What is Retail Banking?**\n\nRetail banking provides banking services to individual consumers rather than companies — deposits, loans, cards, and wealth products delivered in high volume but at low individual value. It is characterised by a large, diversified customer base and standardised products."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Retail = mass-market, individual customers, low ticket size"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_intro-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Why banks love retail**\n\n- **Diversified risk** — Many small loans spread default risk vs a few large corporate loans\n- **Stable deposits** — Retail CASA deposits are sticky and low-cost\n- **Cross-sell** — A broad base to sell cards, insurance and investments"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_intro-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Delivery Channels**\n\nRetail banking is delivered through branches, ATMs, internet and mobile banking, business correspondents (BCs), and points of sale. The shift to digital channels has sharply lowered the cost per transaction."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Branch · ATM · Net/Mobile · BC · POS"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_intro-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_home_loan",
+      "moduleId": "m_rbwm_b",
+      "title": {
+        "en": "Home Loans: LTV & EMI"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_home_loan-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Home Loans: LTV & EMI**\n\nCredit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_home_loan-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Loan-to-Value (LTV)**\n\nLTV is the ratio of the loan amount to the property value; the rest is the borrower's margin/down-payment. The RBI caps LTV by loan size — up to 90% for home loans up to ₹30 lakh, 80% for ₹30-75 lakh, and 75% above ₹75 lakh."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** LTV cap: 90% (≤₹30L) · 80% (₹30-75L) · 75% (>₹75L)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_home_loan-c2",
+          "kind": "example",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Computing the down-payment**\n\nA borrower buys a flat valued at ₹40 lakh. The bank's maximum LTV for this slab is 80%.\n\n- Maximum loan = 80% of ₹40 lakh = ₹32 lakh\n- Borrower's margin (down-payment) = ₹40 lakh - ₹32 lakh = ₹8 lakh\n\nThe bank can fund up to ₹32 lakh; the borrower must arrange ₹8 lakh as margin."
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_home_loan-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**EMI Basics**\n\nAn Equated Monthly Instalment (EMI) repays principal plus interest in equal monthly amounts. Early EMIs are interest-heavy and later ones principal-heavy. A longer tenure lowers the EMI but raises total interest paid."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Longer tenure -> lower EMI but more total interest"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_home_loan-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_wealth",
+      "moduleId": "m_rbwm_d",
+      "title": {
+        "en": "Wealth Management Basics"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_wealth-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Wealth Management Basics**\n\nWealth"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_wealth-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What Wealth Management Does**\n\nWealth management is an advisory service that helps clients grow and protect wealth through financial planning, investment advice, tax planning, retirement and estate planning — matched to the client's goals and risk profile."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Advice across investing, tax, retirement & estate"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_wealth-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Asset allocation & risk**\n\n- **Risk profile** — Conservative, moderate or aggressive — drives the asset mix\n- **Diversification** — Spreading across asset classes to reduce risk\n- **Rebalancing** — Periodically restoring the target asset allocation"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_wealth-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Risk vs Return**\n\nHigher expected returns come with higher risk. Equity offers higher long-term returns with more volatility; debt is steadier with lower returns. A suitable portfolio balances the two according to the client's goals and time horizon."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Higher return -> higher risk; match to horizon"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_wealth-quiz"
+      ]
+    },
+    {
+      "id": "les_rbwm_mutual_funds",
+      "moduleId": "m_rbwm_d",
+      "title": {
+        "en": "Mutual Funds & SIPs"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_rbwm_mutual_funds-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Mutual Funds & SIPs**\n\nWealth"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_mutual_funds-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What is a Mutual Fund?**\n\nA mutual fund pools money from many investors and invests it in a diversified portfolio managed by a professional fund manager, regulated by SEBI. Investors hold units; gains/losses are shared in proportion to holdings."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Pooled, professionally managed, SEBI-regulated"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_mutual_funds-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**By asset class**\n\n- **Equity funds** — Invest mainly in shares — higher risk and return\n- **Debt funds** — Invest in bonds/money-market — lower risk\n- **Hybrid funds** — Mix of equity and debt"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_rbwm_mutual_funds-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**NAV & SIP**\n\nNet Asset Value (NAV) is the per-unit market value of the fund, computed daily. A Systematic Investment Plan (SIP) invests a fixed amount at regular intervals, giving rupee-cost averaging and the benefit of compounding over time."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** NAV = per-unit value | SIP = invest fixed sum regularly"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_rbwm_mutual_funds-quiz",
+        "les_rbwm_mutual_funds-quiz2"
+      ]
     }
   ],
   "questions": [
@@ -2707,6 +3134,59 @@
           }
         ],
         "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_rbwm_products-quiz2",
+      "version": 1,
+      "topicTags": [
+        "banking_products",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The CIBIL score ranges from 300 to 900; a higher score indicates stronger creditworthiness, with 750 and above generally treated as good."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A CIBIL credit score can range between which values?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "0 to 100"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "300 to 900"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "1 to 1000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "500 to 850"
+            }
+          }
+        ],
+        "correctOptionId": "b"
       }
     },
     {
@@ -3346,6 +3826,59 @@
       }
     },
     {
+      "id": "les_rbwm_recovery-quiz2",
+      "version": 1,
+      "topicTags": [
+        "credit_scoring",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "DRTs, set up under the RDDBFI Act, adjudicate bank and financial-institution recovery cases where the amount of debt due is ₹20 lakh or more."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Recovery of bank dues through a Debt Recovery Tribunal (DRT) is available for amounts of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹1 lakh and above"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹10 lakh and above"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹20 lakh and above"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Any amount"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
       "id": "les_rbwm_marketing-quiz",
       "version": 1,
       "topicTags": [
@@ -3396,6 +3929,59 @@
           }
         ],
         "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_rbwm_marketing-quiz2",
+      "version": 1,
+      "topicTags": [
+        "marketing",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Selling a different but complementary product (insurance) to an existing customer (home-loan borrower) is cross-selling."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Offering a home-loan customer a linked home-insurance policy is an example of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Up-selling"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Cross-selling"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Down-selling"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "De-marketing"
+            }
+          }
+        ],
+        "correctOptionId": "b"
       }
     },
     {
@@ -3820,6 +4406,59 @@
           }
         ],
         "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_npa-quiz2",
+      "version": 1,
+      "topicTags": [
+        "npa_classification",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SMA-2 covers overdues of 61-90 days. Beyond 90 days the account is classified as an NPA (initially substandard)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "An account where principal/interest is overdue between 61 and 90 days is flagged as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "SMA-0"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "SMA-1"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "SMA-2"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Substandard NPA"
+            }
+          }
+        ],
+        "correctOptionId": "c"
       }
     },
     {
@@ -4611,6 +5250,271 @@
             "id": "d",
             "content": {
               "en": "Lend for vehicle purchase"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_intro-quiz",
+      "version": 1,
+      "topicTags": [
+        "retail_banking_intro",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Retail banking serves a large number of individual customers with standardised, relatively low-value products — the opposite of high-value wholesale/corporate banking."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following best characterises retail banking?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "A few high-value corporate loans"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "High-volume, low-value services to individual customers"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Only government securities trading"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Wholesale inter-bank lending"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_home_loan-quiz",
+      "version": 1,
+      "topicTags": [
+        "retail_loan_products",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "LTV = Loan / Property Value = 50 / 60 = 83.3%."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "For a home loan of ₹50 lakh against a property valued at ₹60 lakh, what is the Loan-to-Value (LTV) ratio?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "60%"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "70%"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "83.3%"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "120%"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_rbwm_wealth-quiz",
+      "version": 1,
+      "topicTags": [
+        "wealth_management",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Diversification reduces unsystematic risk by ensuring poor performance in one asset is offset by others, a core principle of wealth management."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Spreading investments across different asset classes to reduce overall risk is called:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Leverage"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Diversification"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Speculation"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Arbitrage"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_mutual_funds-quiz",
+      "version": 1,
+      "topicTags": [
+        "mutual_funds",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NAV (Net Asset Value) is the fund's total net assets divided by the number of outstanding units, and it is the price at which units are bought or sold."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The per-unit market value of a mutual fund, calculated daily, is known as the:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Expense Ratio"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Net Asset Value (NAV)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Coupon Rate"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Face Value"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_rbwm_mutual_funds-quiz2",
+      "version": 1,
+      "topicTags": [
+        "mutual_funds",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "By investing a fixed amount regularly, a SIP buys more units when prices are low and fewer when high (rupee-cost averaging) and instils investing discipline; it does not guarantee returns."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A Systematic Investment Plan (SIP) primarily helps an investor by providing:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Guaranteed returns"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Rupee-cost averaging and disciplined investing"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Exemption from all taxes"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Insurance cover"
             }
           }
         ],
@@ -6254,6 +7158,271 @@
             "id": "d",
             "content": {
               "en": "Offer fixed-term financing"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_ltv",
+      "version": 1,
+      "topicTags": [
+        "retail_loan_products",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "LTV = Loan / Property Value = 24 / 30 = 80%."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "For a home loan of ₹24 lakh on a property worth ₹30 lakh, what is the Loan-to-Value (LTV) ratio?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "70%"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "80%"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "90%"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "125%"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_sma2",
+      "version": 1,
+      "topicTags": [
+        "npa_classification",
+        "RBWM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SMA-2 covers overdues of 61-90 days; beyond 90 days the account becomes an NPA."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "An account with principal or interest overdue for 61 to 90 days is classified as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "SMA-0"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "SMA-1"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "SMA-2"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Doubtful Asset"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_rbwm_nav",
+      "version": 1,
+      "topicTags": [
+        "mutual_funds",
+        "RBWM"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The NAV is the per-unit value of the fund's net assets, calculated daily, and is the basis for purchase and redemption."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The price at which units of a mutual fund scheme are bought or redeemed is its:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Face value"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Net Asset Value (NAV)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Coupon rate"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Book value"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_diversification",
+      "version": 1,
+      "topicTags": [
+        "wealth_management",
+        "RBWM"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Diversification spreads investments across asset classes so weak performance in one is offset by others, lowering overall portfolio risk."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Holding a mix of equity, debt and gold to reduce portfolio risk is an application of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Leverage"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Diversification"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Hedging via derivatives"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Speculation"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_rbwm_crosssell",
+      "version": 1,
+      "topicTags": [
+        "marketing",
+        "RBWM"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Cross-selling offers a different, complementary product (credit card) to an existing customer (savings-account holder)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Offering a credit card to an existing savings-account holder is an example of:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Up-selling"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Cross-selling"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "De-marketing"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Re-marketing"
             }
           }
         ],

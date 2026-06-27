@@ -403,6 +403,56 @@ export const QUESTION_BANK = [
     opts: ["Grant loans", "Accept demand deposits and issue cheques", "Invest in shares", "Offer fixed-term financing"],
     correct: 1,
     why: "NBFCs cannot accept demand deposits or issue cheques and are not part of the payment and settlement system — these are exclusive to banks."
+  },
+  {
+    id: "q_rbwm_ltv",
+    subjectId: "RBWM",
+    topicId: "retail_loan_products",
+    difficulty: "Medium",
+    q: "For a home loan of ₹24 lakh on a property worth ₹30 lakh, what is the Loan-to-Value (LTV) ratio?",
+    opts: ["70%", "80%", "90%", "125%"],
+    correct: 1,
+    why: "LTV = Loan / Property Value = 24 / 30 = 80%."
+  },
+  {
+    id: "q_rbwm_sma2",
+    subjectId: "RBWM",
+    topicId: "npa_classification",
+    difficulty: "Medium",
+    q: "An account with principal or interest overdue for 61 to 90 days is classified as:",
+    opts: ["SMA-0", "SMA-1", "SMA-2", "Doubtful Asset"],
+    correct: 2,
+    why: "SMA-2 covers overdues of 61-90 days; beyond 90 days the account becomes an NPA."
+  },
+  {
+    id: "q_rbwm_nav",
+    subjectId: "RBWM",
+    topicId: "mutual_funds",
+    difficulty: "Easy",
+    q: "The price at which units of a mutual fund scheme are bought or redeemed is its:",
+    opts: ["Face value", "Net Asset Value (NAV)", "Coupon rate", "Book value"],
+    correct: 1,
+    why: "The NAV is the per-unit value of the fund's net assets, calculated daily, and is the basis for purchase and redemption."
+  },
+  {
+    id: "q_rbwm_diversification",
+    subjectId: "RBWM",
+    topicId: "wealth_management",
+    difficulty: "Easy",
+    q: "Holding a mix of equity, debt and gold to reduce portfolio risk is an application of:",
+    opts: ["Leverage", "Diversification", "Hedging via derivatives", "Speculation"],
+    correct: 1,
+    why: "Diversification spreads investments across asset classes so weak performance in one is offset by others, lowering overall portfolio risk."
+  },
+  {
+    id: "q_rbwm_crosssell",
+    subjectId: "RBWM",
+    topicId: "marketing",
+    difficulty: "Easy",
+    q: "Offering a credit card to an existing savings-account holder is an example of:",
+    opts: ["Up-selling", "Cross-selling", "De-marketing", "Re-marketing"],
+    correct: 1,
+    why: "Cross-selling offers a different, complementary product (credit card) to an existing customer (savings-account holder)."
   }
 ];
 export const QUESTION_BANK_SUPPLEMENT = [];

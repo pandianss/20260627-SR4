@@ -189,8 +189,17 @@ export const MICRO_LESSONS = [
       {
         kind: "concept",
         title: "Credit Score (CIBIL)",
-        body: "A 3-digit numeric summary of a consumer's credit history, ranging from 300 to 900.",
-        highlight: "Score range: 300 to 900"
+        body: "A 3-digit numeric summary of a consumer's credit history, ranging from 300 to 900. A score of 750+ is generally considered good and improves loan approval odds and pricing. India has four RBI-licensed credit bureaus: CIBIL, Equifax, Experian and CRIF High Mark.",
+        highlight: "Score range 300-900 · 750+ is good"
+      },
+      {
+        kind: "pillars",
+        title: "Common retail products",
+        pillars: [
+          { n: "Liability", d: "Savings, Current, Fixed and Recurring Deposits" },
+          { n: "Asset (secured)", d: "Home loan, auto loan, loan against property/securities" },
+          { n: "Asset (unsecured)", d: "Personal loan, credit card, education loan" }
+        ]
       },
       {
         kind: "quiz",
@@ -198,6 +207,13 @@ export const MICRO_LESSONS = [
         opts: ["Savings Bank Account", "Fixed Deposit Scheme", "Home Loan Account", "Current Account"],
         correct: 2,
         why: "Asset products are products where the bank lends money to customer borrowers, generating interest income."
+      },
+      {
+        kind: "quiz",
+        question: "A CIBIL credit score can range between which values?",
+        opts: ["0 to 100", "300 to 900", "1 to 1000", "500 to 850"],
+        correct: 1,
+        why: "The CIBIL score ranges from 300 to 900; a higher score indicates stronger creditworthiness, with 750 and above generally treated as good."
       }
     ]
   },
@@ -489,8 +505,18 @@ export const MICRO_LESSONS = [
       {
         kind: "concept",
         title: "SARFAESI & Lok Adalats",
-        body: "SARFAESI Act allows secured creditors to recover dues without court intervention. Lok Adalats resolve small disputes through compromise settlements.",
-        highlight: "Lok Adalat Limit: Up to ₹20 Lakh"
+        body: "The SARFAESI Act, 2002 allows secured creditors to enforce security and recover dues without court intervention, but only for secured loans where the outstanding is above ₹1 lakh and the account is an NPA. Lok Adalats resolve smaller disputes through compromise settlements.",
+        highlight: "SARFAESI: secured NPAs > ₹1 lakh, no court needed"
+      },
+      {
+        kind: "pillars",
+        title: "Recovery channels",
+        pillars: [
+          { n: "SARFAESI", d: "Seize/sell secured assets without court (secured NPAs)" },
+          { n: "DRT", d: "Debt Recovery Tribunal for bank dues of ₹20 lakh and above" },
+          { n: "Lok Adalat", d: "Compromise settlement for cases up to ₹20 lakh" },
+          { n: "IBC", d: "Insolvency & Bankruptcy Code for corporate insolvency resolution" }
+        ]
       },
       {
         kind: "quiz",
@@ -498,6 +524,13 @@ export const MICRO_LESSONS = [
         opts: ["₹5 Lakh", "₹10 Lakh", "₹20 Lakh", "No limit"],
         correct: 2,
         why: "Banks refer cases with outstanding balances up to ₹20 Lakh to Lok Adalats for recovery through compromise settlement."
+      },
+      {
+        kind: "quiz",
+        question: "Recovery of bank dues through a Debt Recovery Tribunal (DRT) is available for amounts of:",
+        opts: ["₹1 lakh and above", "₹10 lakh and above", "₹20 lakh and above", "Any amount"],
+        correct: 2,
+        why: "DRTs, set up under the RDDBFI Act, adjudicate bank and financial-institution recovery cases where the amount of debt due is ₹20 lakh or more."
       }
     ]
   },
@@ -517,11 +550,30 @@ export const MICRO_LESSONS = [
         highlight: "7 Ps of Service Marketing"
       },
       {
+        kind: "concept",
+        title: "Service Characteristics",
+        body: "Banking services are distinct from goods on four counts: Intangibility (can't be touched), Inseparability (produced and consumed together), Perishability (can't be stored), and Variability/Heterogeneity (quality varies by who delivers it).",
+        highlight: "Intangible · Inseparable · Perishable · Variable"
+      },
+      {
+        kind: "concept",
+        title: "Cross-selling vs Up-selling",
+        body: "Cross-selling offers a different, complementary product to an existing customer (e.g. insurance to a deposit holder). Up-selling persuades a customer to upgrade to a higher-value version of the same product. Both raise revenue per customer but must respect suitability.",
+        highlight: "Cross-sell = different product · Up-sell = higher version"
+      },
+      {
         kind: "quiz",
         question: "Which of the following represents 'Physical Evidence' in the retail banking marketing mix?",
         opts: ["Interest rates on loans", "Friendly bank tellers", "A clean, modern bank branch lobby or intuitive mobile app", "Direct mail advertisements"],
         correct: 2,
         why: "Physical Evidence is the environment in which the service is delivered and where the firm and customer interact, such as branch ambience or app interfaces."
+      },
+      {
+        kind: "quiz",
+        question: "Offering a home-loan customer a linked home-insurance policy is an example of:",
+        opts: ["Up-selling", "Cross-selling", "Down-selling", "De-marketing"],
+        correct: 1,
+        why: "Selling a different but complementary product (insurance) to an existing customer (home-loan borrower) is cross-selling."
       }
     ]
   },
@@ -698,11 +750,30 @@ export const MICRO_LESSONS = [
         highlight: "NPA trigger: > 90 days overdue"
       },
       {
+        kind: "concept",
+        title: "SMA Early-Warning Categories",
+        body: "Before becoming an NPA, an account is flagged as a Special Mention Account (SMA): SMA-0 (overdue 1-30 days), SMA-1 (31-60 days), and SMA-2 (61-90 days). These early-warning buckets help banks act before the 90-day NPA threshold.",
+        highlight: "SMA-0: 1-30d · SMA-1: 31-60d · SMA-2: 61-90d"
+      },
+      {
+        kind: "concept",
+        title: "Provisioning",
+        body: "Banks must set aside provisions against NPAs from profits: roughly 15% for secured sub-standard assets, rising for doubtful assets by age, and 100% for loss assets. Provisioning protects the bank's balance sheet against expected loss.",
+        highlight: "Provisioning rises with the age/severity of the NPA"
+      },
+      {
         kind: "quiz",
         question: "After what period of remaining in the Non-Performing Asset (NPA) category is an asset classified as a 'Doubtful Asset'?",
         opts: ["6 months", "12 months", "18 months", "24 months"],
         correct: 1,
         why: "An asset is classified as substandard if it remains an NPA for up to 12 months, after which it transitions to the doubtful category."
+      },
+      {
+        kind: "quiz",
+        question: "An account where principal/interest is overdue between 61 and 90 days is flagged as:",
+        opts: ["SMA-0", "SMA-1", "SMA-2", "Substandard NPA"],
+        correct: 2,
+        why: "SMA-2 covers overdues of 61-90 days. Beyond 90 days the account is classified as an NPA (initially substandard)."
       }
     ]
   },
@@ -1100,6 +1171,170 @@ export const MICRO_LESSONS = [
         opts: ["Provide loans", "Accept demand deposits and issue cheques", "Invest in securities", "Lend for vehicle purchase"],
         correct: 1,
         why: "NBFCs can lend and invest but cannot accept demand deposits or issue cheques, and are not part of the payment and settlement system — features unique to banks."
+      }
+    ]
+  },
+  {
+    id: "les_rbwm_intro",
+    topicId: "retail_banking_intro",
+    subjectId: "RBWM",
+    title: "Introduction to Retail Banking",
+    badge: "Retail",
+    time: "5 min",
+    emoji: "🏪",
+    steps: [
+      {
+        kind: "concept",
+        title: "What is Retail Banking?",
+        body: "Retail banking provides banking services to individual consumers rather than companies — deposits, loans, cards, and wealth products delivered in high volume but at low individual value. It is characterised by a large, diversified customer base and standardised products.",
+        highlight: "Retail = mass-market, individual customers, low ticket size"
+      },
+      {
+        kind: "pillars",
+        title: "Why banks love retail",
+        pillars: [
+          { n: "Diversified risk", d: "Many small loans spread default risk vs a few large corporate loans" },
+          { n: "Stable deposits", d: "Retail CASA deposits are sticky and low-cost" },
+          { n: "Cross-sell", d: "A broad base to sell cards, insurance and investments" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Delivery Channels",
+        body: "Retail banking is delivered through branches, ATMs, internet and mobile banking, business correspondents (BCs), and points of sale. The shift to digital channels has sharply lowered the cost per transaction.",
+        highlight: "Branch · ATM · Net/Mobile · BC · POS"
+      },
+      {
+        kind: "quiz",
+        question: "Which of the following best characterises retail banking?",
+        opts: ["A few high-value corporate loans", "High-volume, low-value services to individual customers", "Only government securities trading", "Wholesale inter-bank lending"],
+        correct: 1,
+        why: "Retail banking serves a large number of individual customers with standardised, relatively low-value products — the opposite of high-value wholesale/corporate banking."
+      }
+    ]
+  },
+  {
+    id: "les_rbwm_home_loan",
+    topicId: "retail_loan_products",
+    subjectId: "RBWM",
+    title: "Home Loans: LTV & EMI",
+    badge: "Credit",
+    time: "6 min",
+    emoji: "🏠",
+    steps: [
+      {
+        kind: "concept",
+        title: "Loan-to-Value (LTV)",
+        body: "LTV is the ratio of the loan amount to the property value; the rest is the borrower's margin/down-payment. The RBI caps LTV by loan size — up to 90% for home loans up to ₹30 lakh, 80% for ₹30-75 lakh, and 75% above ₹75 lakh.",
+        highlight: "LTV cap: 90% (≤₹30L) · 80% (₹30-75L) · 75% (>₹75L)"
+      },
+      {
+        kind: "scenario",
+        title: "Computing the down-payment",
+        problem: "A borrower buys a flat valued at ₹40 lakh. The bank's maximum LTV for this slab is 80%.",
+        steps: [
+          "Maximum loan = 80% of ₹40 lakh = ₹32 lakh",
+          "Borrower's margin (down-payment) = ₹40 lakh - ₹32 lakh = ₹8 lakh"
+        ],
+        verdict: "The bank can fund up to ₹32 lakh; the borrower must arrange ₹8 lakh as margin."
+      },
+      {
+        kind: "concept",
+        title: "EMI Basics",
+        body: "An Equated Monthly Instalment (EMI) repays principal plus interest in equal monthly amounts. Early EMIs are interest-heavy and later ones principal-heavy. A longer tenure lowers the EMI but raises total interest paid.",
+        highlight: "Longer tenure -> lower EMI but more total interest"
+      },
+      {
+        kind: "quiz",
+        question: "For a home loan of ₹50 lakh against a property valued at ₹60 lakh, what is the Loan-to-Value (LTV) ratio?",
+        opts: ["60%", "70%", "83.3%", "120%"],
+        correct: 2,
+        why: "LTV = Loan / Property Value = 50 / 60 = 83.3%."
+      }
+    ]
+  },
+  {
+    id: "les_rbwm_wealth",
+    topicId: "wealth_management",
+    subjectId: "RBWM",
+    title: "Wealth Management Basics",
+    badge: "Wealth",
+    time: "5 min",
+    emoji: "💎",
+    steps: [
+      {
+        kind: "concept",
+        title: "What Wealth Management Does",
+        body: "Wealth management is an advisory service that helps clients grow and protect wealth through financial planning, investment advice, tax planning, retirement and estate planning — matched to the client's goals and risk profile.",
+        highlight: "Advice across investing, tax, retirement & estate"
+      },
+      {
+        kind: "pillars",
+        title: "Asset allocation & risk",
+        pillars: [
+          { n: "Risk profile", d: "Conservative, moderate or aggressive — drives the asset mix" },
+          { n: "Diversification", d: "Spreading across asset classes to reduce risk" },
+          { n: "Rebalancing", d: "Periodically restoring the target asset allocation" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Risk vs Return",
+        body: "Higher expected returns come with higher risk. Equity offers higher long-term returns with more volatility; debt is steadier with lower returns. A suitable portfolio balances the two according to the client's goals and time horizon.",
+        highlight: "Higher return -> higher risk; match to horizon"
+      },
+      {
+        kind: "quiz",
+        question: "Spreading investments across different asset classes to reduce overall risk is called:",
+        opts: ["Leverage", "Diversification", "Speculation", "Arbitrage"],
+        correct: 1,
+        why: "Diversification reduces unsystematic risk by ensuring poor performance in one asset is offset by others, a core principle of wealth management."
+      }
+    ]
+  },
+  {
+    id: "les_rbwm_mutual_funds",
+    topicId: "mutual_funds",
+    subjectId: "RBWM",
+    title: "Mutual Funds & SIPs",
+    badge: "Wealth",
+    time: "6 min",
+    emoji: "📈",
+    steps: [
+      {
+        kind: "concept",
+        title: "What is a Mutual Fund?",
+        body: "A mutual fund pools money from many investors and invests it in a diversified portfolio managed by a professional fund manager, regulated by SEBI. Investors hold units; gains/losses are shared in proportion to holdings.",
+        highlight: "Pooled, professionally managed, SEBI-regulated"
+      },
+      {
+        kind: "pillars",
+        title: "By asset class",
+        pillars: [
+          { n: "Equity funds", d: "Invest mainly in shares — higher risk and return" },
+          { n: "Debt funds", d: "Invest in bonds/money-market — lower risk" },
+          { n: "Hybrid funds", d: "Mix of equity and debt" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "NAV & SIP",
+        body: "Net Asset Value (NAV) is the per-unit market value of the fund, computed daily. A Systematic Investment Plan (SIP) invests a fixed amount at regular intervals, giving rupee-cost averaging and the benefit of compounding over time.",
+        highlight: "NAV = per-unit value | SIP = invest fixed sum regularly"
+      },
+      {
+        kind: "quiz",
+        question: "The per-unit market value of a mutual fund, calculated daily, is known as the:",
+        opts: ["Expense Ratio", "Net Asset Value (NAV)", "Coupon Rate", "Face Value"],
+        correct: 1,
+        why: "NAV (Net Asset Value) is the fund's total net assets divided by the number of outstanding units, and it is the price at which units are bought or sold."
+      },
+      {
+        kind: "quiz",
+        question: "A Systematic Investment Plan (SIP) primarily helps an investor by providing:",
+        opts: ["Guaranteed returns", "Rupee-cost averaging and disciplined investing", "Exemption from all taxes", "Insurance cover"],
+        correct: 1,
+        why: "By investing a fixed amount regularly, a SIP buys more units when prices are low and fewer when high (rupee-cost averaging) and instils investing discipline; it does not guarantee returns."
       }
     ]
   }

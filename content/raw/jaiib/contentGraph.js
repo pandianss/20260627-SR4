@@ -90,12 +90,14 @@ export const TOPICS = {
   ],
   m_rbwm_b: [
     { id: "credit_scoring", name: "Credit Scoring CIBIL" },
-    { id: "npa_classification", name: "NPA Asset Classification" }
+    { id: "npa_classification", name: "NPA Asset Classification" },
+    { id: "retail_loan_products", name: "Retail Loan Products" }
   ],
   m_rbwm_c: [
     { id: "marketing", name: "Marketing of Banking Services" }
   ],
   m_rbwm_d: [
-    { id: "wealth_management", name: "Wealth Management Services" }
+    { id: "wealth_management", name: "Wealth Management Services" },
+    { id: "mutual_funds", name: "Mutual Funds & Investments" }
   ]
 };
