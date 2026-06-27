@@ -56,17 +56,21 @@ export const TOPICS = {
   ],
   m_ieifs_a: [
     { id: "monetary_policy", name: "Monetary Policy" },
-    { id: "inflation", name: "Inflation" }
+    { id: "inflation", name: "Inflation" },
+    { id: "financial_system", name: "Indian Financial System" }
   ],
   m_ieifs_b: [
-    { id: "gdp", name: "GDP Concepts" }
+    { id: "gdp", name: "GDP Concepts" },
+    { id: "fiscal_policy", name: "Fiscal Policy & Budget" }
   ],
   m_ieifs_c: [
     { id: "financial_regulators", name: "Financial Regulators" },
-    { id: "money_market", name: "Money Market Instruments" }
+    { id: "money_market", name: "Money Market Instruments" },
+    { id: "capital_market", name: "Capital Market" }
   ],
   m_ieifs_d: [
-    { id: "banking_products", name: "Banking Products" }
+    { id: "banking_products", name: "Banking Products" },
+    { id: "nbfc", name: "NBFCs & Financial Services" }
   ],
   m_afm_a: [
     { id: "depreciation", name: "Depreciation SLM & WDV" }

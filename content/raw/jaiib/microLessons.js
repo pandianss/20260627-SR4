@@ -135,6 +135,22 @@ export const MICRO_LESSONS = [
         highlight: "CPI Combined: Retail Inflation Anchor"
       },
       {
+        kind: "pillars",
+        title: "The RBI's quantitative tools",
+        pillars: [
+          { n: "Repo Rate", d: "Rate at which the RBI lends to banks against securities (short term)" },
+          { n: "Reverse Repo", d: "Rate at which the RBI absorbs liquidity by borrowing from banks" },
+          { n: "MSF", d: "Marginal Standing Facility — emergency overnight borrowing, above the repo rate" },
+          { n: "CRR / SLR", d: "Reserve ratios that directly tighten or loosen lendable funds" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Flexible Inflation Targeting",
+        body: "Since 2016 the RBI follows a flexible inflation-targeting framework. The Government, in consultation with the RBI, sets a CPI target of 4% with a tolerance band of +/- 2% (i.e. 2%-6%). The six-member Monetary Policy Committee (MPC) decides the policy rate.",
+        highlight: "CPI target: 4% (+/- 2%) · set by the MPC"
+      },
+      {
         kind: "quiz",
         question: "When the Reserve Bank of India (RBI) raises the Repo Rate, what is the expected impact on the banking system?",
         opts: [
@@ -145,6 +161,13 @@ export const MICRO_LESSONS = [
         ],
         correct: 2,
         why: "Repo rate is the rate at which the RBI lends money to commercial banks. Raising it increases the cost of funds for banks, which they pass on to consumers by raising interest rates."
+      },
+      {
+        kind: "quiz",
+        question: "How many members does the Monetary Policy Committee (MPC) of the RBI have?",
+        opts: ["Three", "Four", "Six", "Twelve"],
+        correct: 2,
+        why: "The MPC has six members — three from the RBI (including the Governor, who has a casting vote) and three appointed by the Government — and it sets the policy repo rate to meet the inflation target."
       }
     ]
   },
@@ -230,11 +253,33 @@ export const MICRO_LESSONS = [
         highlight: "Real GDP = Nominal GDP / GDP Deflator"
       },
       {
+        kind: "pillars",
+        title: "Related aggregates",
+        pillars: [
+          { n: "GDP vs GNP", d: "GNP = GDP + net factor income from abroad" },
+          { n: "GVA", d: "Gross Value Added = GDP - (taxes - subsidies) on products; India's preferred supply-side measure" },
+          { n: "NDP / NNP", d: "Subtract depreciation from GDP / GNP to get the 'net' figures" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Who measures it",
+        body: "In India, GDP estimates are compiled by the National Statistical Office (NSO) under the Ministry of Statistics and Programme Implementation (MoSPI). The current base year for the national accounts series is 2011-12.",
+        highlight: "GDP compiled by NSO/MoSPI · base year 2011-12"
+      },
+      {
         kind: "quiz",
         question: "If a country's Nominal GDP is ₹120 Crore and the GDP Deflator is 120 (or 1.20), what is its Real GDP?",
         opts: ["₹100 Crore", "₹110 Crore", "₹120 Crore", "₹144 Crore"],
         correct: 0,
         why: "Real GDP = Nominal GDP / GDP Deflator (expressed as decimal) = 120 / 1.20 = ₹100 Crore."
+      },
+      {
+        kind: "quiz",
+        question: "Gross National Product (GNP) differs from Gross Domestic Product (GDP) by which factor?",
+        opts: ["Depreciation", "Net factor income from abroad", "Indirect taxes", "Subsidies"],
+        correct: 1,
+        why: "GNP = GDP + Net Factor Income from Abroad (income earned by residents abroad minus income earned by foreigners domestically)."
       }
     ]
   },
@@ -254,11 +299,34 @@ export const MICRO_LESSONS = [
         highlight: "RBI, SEBI, IRDAI, PFRDA"
       },
       {
+        kind: "pillars",
+        title: "Who regulates what",
+        pillars: [
+          { n: "RBI", d: "Banks, NBFCs, currency, monetary policy, payment systems, government debt" },
+          { n: "SEBI", d: "Stock exchanges, mutual funds, brokers, listed companies" },
+          { n: "IRDAI", d: "Life and general insurance companies and intermediaries" },
+          { n: "PFRDA", d: "National Pension System and pension funds" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Coordination & Deposit Insurance",
+        body: "The Financial Stability and Development Council (FSDC), chaired by the Finance Minister, coordinates across regulators. Bank deposits are insured by the DICGC (a RBI subsidiary) up to ₹5 lakh per depositor per bank.",
+        highlight: "FSDC coordinates · DICGC insures deposits up to ₹5 lakh"
+      },
+      {
         kind: "quiz",
         question: "Which regulator supervises and regulates the functioning of Mutual Funds in India?",
         opts: ["Reserve Bank of India (RBI)", "Securities and Exchange Board of India (SEBI)", "Insurance Regulatory and Development Authority (IRDAI)", "Pension Fund Regulatory and Development Authority (PFRDA)"],
         correct: 1,
         why: "SEBI regulates the securities markets, including asset management companies and mutual funds in India."
+      },
+      {
+        kind: "quiz",
+        question: "Up to what amount per depositor per bank are bank deposits insured by the DICGC?",
+        opts: ["₹1 lakh", "₹2 lakh", "₹5 lakh", "₹10 lakh"],
+        correct: 2,
+        why: "The Deposit Insurance and Credit Guarantee Corporation (DICGC), a subsidiary of the RBI, insures deposits up to ₹5 lakh per depositor per bank, covering principal and interest."
       }
     ]
   },
@@ -557,11 +625,30 @@ export const MICRO_LESSONS = [
         highlight: "Call: 1 day | Notice: 2-14 days | CP Min: ₹5 Lakh"
       },
       {
+        kind: "concept",
+        title: "Money Market vs Capital Market",
+        body: "The money market deals in short-term funds (up to 1 year) — high liquidity, low risk. The capital market deals in long-term funds (over 1 year) through equity and debt instruments. T-Bills carry no coupon; they are issued at a discount and redeemed at face value.",
+        highlight: "Money market: < 1 year | Capital market: > 1 year"
+      },
+      {
+        kind: "concept",
+        title: "Certificate of Deposit (CD)",
+        body: "A CD is a negotiable money-market instrument issued by banks against funds deposited for a fixed period. Unlike a fixed deposit, a CD is transferable. Minimum issue size is ₹5 lakh.",
+        highlight: "CD: bank-issued, negotiable · min ₹5 lakh"
+      },
+      {
         kind: "quiz",
         question: "What is the term used for inter-bank fund borrowing/lending for a period of exactly one day?",
         opts: ["Notice Money", "Term Money", "Call Money", "Commercial Paper"],
         correct: 2,
         why: "Funds borrowed or lent in the inter-bank market for one day are termed Call Money. If for 2 to 14 days, it is called Notice Money."
+      },
+      {
+        kind: "quiz",
+        question: "Treasury Bills (T-Bills) issued by the RBI are available in which maturities?",
+        opts: ["91, 182 and 364 days", "1, 5 and 10 years", "30 and 60 days", "1 and 2 years"],
+        correct: 0,
+        why: "T-Bills are short-term government securities issued in three tenors — 91-day, 182-day and 364-day — at a discount to face value, with no separate interest coupon."
       }
     ]
   },
@@ -801,6 +888,218 @@ export const MICRO_LESSONS = [
         opts: ["Legal and ethical banking", "Mis-selling — a breach of ethics", "Priority sector lending", "A permitted conflict of interest"],
         correct: 1,
         why: "Recommending an unsuitable product for personal/institutional gain is mis-selling — it may not always be illegal, but it breaches the ethical duties of fairness and acting in the customer's interest."
+      }
+    ]
+  },
+  {
+    id: "les_ieifs_inflation",
+    topicId: "inflation",
+    subjectId: "IEIFS",
+    title: "Inflation: Types & Measures",
+    badge: "Economy",
+    time: "6 min",
+    emoji: "🔥",
+    steps: [
+      {
+        kind: "concept",
+        title: "What is Inflation?",
+        body: "Inflation is a sustained rise in the general price level, which erodes the purchasing power of money. Moderate inflation is normal; very high inflation (and its opposite, deflation) both harm the economy.",
+        highlight: "Inflation = falling purchasing power of money"
+      },
+      {
+        kind: "pillars",
+        title: "Causes",
+        pillars: [
+          { n: "Demand-pull", d: "Too much money chasing too few goods (excess demand)" },
+          { n: "Cost-push", d: "Rising input costs — wages, fuel, raw materials — push prices up" },
+          { n: "Built-in", d: "Wage-price spiral as expectations of future inflation feed current prices" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "WPI vs CPI",
+        body: "The Wholesale Price Index (WPI) measures price changes at the wholesale/producer level and excludes services. The Consumer Price Index (CPI) measures retail prices including services and is the RBI's policy anchor. WPI is compiled by the Office of the Economic Adviser; CPI by the NSO.",
+        highlight: "WPI: wholesale, no services | CPI: retail, RBI anchor"
+      },
+      {
+        kind: "quiz",
+        question: "Which index does the RBI use as its primary anchor for monetary policy?",
+        opts: ["Wholesale Price Index (WPI)", "Consumer Price Index (CPI)", "Producer Price Index (PPI)", "GDP Deflator"],
+        correct: 1,
+        why: "Since adopting flexible inflation targeting, the RBI uses CPI (Combined) inflation as its primary anchor, with a target of 4% +/- 2%."
+      },
+      {
+        kind: "quiz",
+        question: "Inflation caused by a rise in the cost of raw materials, fuel and wages is called:",
+        opts: ["Demand-pull inflation", "Cost-push inflation", "Deflation", "Disinflation"],
+        correct: 1,
+        why: "When higher input costs push up the price of finished goods, the resulting inflation is termed cost-push inflation."
+      }
+    ]
+  },
+  {
+    id: "les_ieifs_fiscal_policy",
+    topicId: "fiscal_policy",
+    subjectId: "IEIFS",
+    title: "Fiscal Policy & the Budget",
+    badge: "Economy",
+    time: "6 min",
+    emoji: "🏦",
+    steps: [
+      {
+        kind: "concept",
+        title: "Fiscal vs Monetary Policy",
+        body: "Fiscal policy is the Government's use of taxation and public spending to influence the economy. Monetary policy is the RBI's management of money supply and interest rates. The Union Budget is the main instrument of fiscal policy.",
+        highlight: "Fiscal = Govt spending & taxes | Monetary = RBI rates"
+      },
+      {
+        kind: "pillars",
+        title: "Key deficit measures",
+        pillars: [
+          { n: "Fiscal Deficit", d: "Total expenditure minus total receipts (excluding borrowings) — the Govt's borrowing need" },
+          { n: "Revenue Deficit", d: "Revenue expenditure minus revenue receipts" },
+          { n: "Primary Deficit", d: "Fiscal deficit minus interest payments" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "FRBM Act",
+        body: "The Fiscal Responsibility and Budget Management (FRBM) Act, 2003 commits the Government to fiscal discipline, targeting a lower fiscal deficit as a percentage of GDP and limiting public debt over time.",
+        highlight: "FRBM Act, 2003 = fiscal discipline targets"
+      },
+      {
+        kind: "quiz",
+        question: "The fiscal deficit of a government essentially indicates:",
+        opts: ["Its total interest payments", "Its total borrowing requirement for the year", "Its revenue from taxes", "Its trade balance"],
+        correct: 1,
+        why: "Fiscal deficit = total expenditure - total receipts (excluding borrowings). It represents how much the government must borrow to meet its expenditure."
+      },
+      {
+        kind: "quiz",
+        question: "Primary deficit is calculated as:",
+        opts: ["Fiscal deficit + interest payments", "Fiscal deficit - interest payments", "Revenue deficit + capital expenditure", "Total receipts - total expenditure"],
+        correct: 1,
+        why: "Primary deficit = Fiscal deficit - Interest payments. It shows the borrowing requirement excluding the burden of past debt servicing."
+      }
+    ]
+  },
+  {
+    id: "les_ieifs_financial_system",
+    topicId: "financial_system",
+    subjectId: "IEIFS",
+    title: "Structure of the Financial System",
+    badge: "Financial Markets",
+    time: "5 min",
+    emoji: "🏗️",
+    steps: [
+      {
+        kind: "concept",
+        title: "Four Components",
+        body: "A financial system channels savings to investment through four interlinked components: financial institutions, financial markets, financial instruments, and financial services.",
+        highlight: "Institutions · Markets · Instruments · Services"
+      },
+      {
+        kind: "pillars",
+        title: "Institutions & markets",
+        pillars: [
+          { n: "Institutions", d: "Banks, NBFCs, insurance companies, mutual funds, pension funds" },
+          { n: "Money Market", d: "Short-term funds (< 1 year): call money, T-bills, CP, CD" },
+          { n: "Capital Market", d: "Long-term funds (> 1 year): equity and debt securities" },
+          { n: "Forex Market", d: "Trading of foreign currencies" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Organised vs Unorganised",
+        body: "The organised sector (RBI-regulated banks, NBFCs, exchanges) operates under formal regulation. The unorganised sector (moneylenders, indigenous bankers, chit funds) is largely outside the regulatory net. Financial inclusion aims to bring more people into the organised system.",
+        highlight: "Organised (regulated) vs Unorganised (informal)"
+      },
+      {
+        kind: "quiz",
+        question: "Which of the following is NOT one of the four components of a financial system?",
+        opts: ["Financial institutions", "Financial markets", "Financial instruments", "Fiscal deficit"],
+        correct: 3,
+        why: "The four components are institutions, markets, instruments and services. Fiscal deficit is a government finance concept, not a component of the financial system."
+      }
+    ]
+  },
+  {
+    id: "les_ieifs_capital_market",
+    topicId: "capital_market",
+    subjectId: "IEIFS",
+    title: "Capital Market Basics",
+    badge: "Financial Markets",
+    time: "6 min",
+    emoji: "📑",
+    steps: [
+      {
+        kind: "concept",
+        title: "Primary vs Secondary Market",
+        body: "The primary market is where securities are issued for the first time (e.g. an IPO), raising fresh capital for the issuer. The secondary market (stock exchanges like NSE/BSE) is where existing securities are traded among investors, providing liquidity.",
+        highlight: "Primary = new issue (IPO) | Secondary = trading"
+      },
+      {
+        kind: "pillars",
+        title: "Instruments",
+        pillars: [
+          { n: "Equity Shares", d: "Ownership stake; dividends and voting rights" },
+          { n: "Preference Shares", d: "Fixed dividend, priority over equity in repayment" },
+          { n: "Debentures / Bonds", d: "Debt instruments paying fixed interest" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Market Infrastructure",
+        body: "SEBI regulates the capital market. Securities are held in electronic (demat) form with depositories — NSDL and CDSL. Trades settle on a T+1 rolling basis in India.",
+        highlight: "Regulator: SEBI · Depositories: NSDL, CDSL · Settlement: T+1"
+      },
+      {
+        kind: "quiz",
+        question: "An Initial Public Offering (IPO) is a transaction in the:",
+        opts: ["Secondary market", "Primary market", "Money market", "Forex market"],
+        correct: 1,
+        why: "An IPO is the first sale of shares to the public, raising fresh capital — it takes place in the primary market. Subsequent trading happens in the secondary market."
+      },
+      {
+        kind: "quiz",
+        question: "Which entities act as depositories for holding securities in dematerialised form in India?",
+        opts: ["NSE and BSE", "NSDL and CDSL", "RBI and SEBI", "NABARD and SIDBI"],
+        correct: 1,
+        why: "NSDL and CDSL are the two depositories that hold securities in electronic (demat) form; NSE and BSE are stock exchanges where trading happens."
+      }
+    ]
+  },
+  {
+    id: "les_ieifs_nbfc",
+    topicId: "nbfc",
+    subjectId: "IEIFS",
+    title: "NBFCs vs Banks",
+    badge: "Institutions",
+    time: "5 min",
+    emoji: "🏢",
+    steps: [
+      {
+        kind: "concept",
+        title: "What is an NBFC?",
+        body: "A Non-Banking Financial Company is registered under the Companies Act and lends or invests, but unlike a bank it cannot accept demand deposits, is not part of the payment & settlement system, and depositors are not covered by DICGC deposit insurance.",
+        highlight: "NBFC: no demand deposits, no cheques, no DICGC cover"
+      },
+      {
+        kind: "pillars",
+        title: "Bank vs NBFC",
+        pillars: [
+          { n: "Demand deposits", d: "Banks can accept; NBFCs cannot" },
+          { n: "Payment system", d: "Banks issue cheques/are in the clearing system; NBFCs are not" },
+          { n: "Reserve ratios", d: "CRR/SLR apply to banks, not to NBFCs" },
+          { n: "Deposit insurance", d: "DICGC covers bank deposits, not NBFC deposits" }
+        ]
+      },
+      {
+        kind: "quiz",
+        question: "Which of the following can a bank do that an NBFC generally cannot?",
+        opts: ["Provide loans", "Accept demand deposits and issue cheques", "Invest in securities", "Lend for vehicle purchase"],
+        correct: 1,
+        why: "NBFCs can lend and invest but cannot accept demand deposits or issue cheques, and are not part of the payment and settlement system — features unique to banks."
       }
     ]
   }

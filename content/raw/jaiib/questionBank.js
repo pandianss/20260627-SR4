@@ -343,6 +343,66 @@ export const QUESTION_BANK = [
     opts: ["Cross-selling", "Mis-selling", "Up-selling", "Priority lending"],
     correct: 1,
     why: "Mis-selling is recommending a product that does not meet the customer's needs, usually driven by incentives — an ethical breach of the duty to act in the customer's interest."
+  },
+  {
+    id: "q_ieifs_mpc",
+    subjectId: "IEIFS",
+    topicId: "monetary_policy",
+    difficulty: "Medium",
+    q: "The Monetary Policy Committee (MPC), which sets the policy repo rate, comprises how many members?",
+    opts: ["Three", "Five", "Six", "Nine"],
+    correct: 2,
+    why: "The MPC has six members — three from the RBI including the Governor (who has a casting vote) and three nominated by the Central Government."
+  },
+  {
+    id: "q_ieifs_cpi_target",
+    subjectId: "IEIFS",
+    topicId: "inflation",
+    difficulty: "Medium",
+    q: "Under flexible inflation targeting, what is the CPI inflation target (with tolerance band) for the RBI?",
+    opts: ["2% +/- 2%", "4% +/- 2%", "5% +/- 1%", "6% +/- 2%"],
+    correct: 1,
+    why: "The Government, in consultation with the RBI, has set the CPI inflation target at 4% with a tolerance band of +/- 2% (i.e. between 2% and 6%)."
+  },
+  {
+    id: "q_ieifs_fiscal_deficit",
+    subjectId: "IEIFS",
+    topicId: "fiscal_policy",
+    difficulty: "Medium",
+    q: "Fiscal deficit is defined as:",
+    opts: ["Revenue expenditure minus revenue receipts", "Total expenditure minus total receipts excluding borrowings", "Total receipts minus interest payments", "Capital expenditure minus capital receipts"],
+    correct: 1,
+    why: "Fiscal deficit = total expenditure - total receipts (excluding borrowings); it equals the government's net borrowing requirement for the year."
+  },
+  {
+    id: "q_ieifs_dicgc",
+    subjectId: "IEIFS",
+    topicId: "financial_regulators",
+    difficulty: "Easy",
+    q: "Bank deposit insurance provided by the DICGC covers each depositor up to:",
+    opts: ["₹1 lakh", "₹2 lakh", "₹5 lakh", "₹10 lakh"],
+    correct: 2,
+    why: "The DICGC, a subsidiary of the RBI, insures bank deposits up to ₹5 lakh per depositor per bank (principal plus interest)."
+  },
+  {
+    id: "q_ieifs_ipo_market",
+    subjectId: "IEIFS",
+    topicId: "capital_market",
+    difficulty: "Easy",
+    q: "Shares offered to the public for the first time through an IPO are issued in the:",
+    opts: ["Secondary market", "Primary market", "Money market", "Commodity market"],
+    correct: 1,
+    why: "An IPO raises fresh capital by issuing securities for the first time, which happens in the primary market; later trading of those shares occurs in the secondary market."
+  },
+  {
+    id: "q_ieifs_nbfc_deposit",
+    subjectId: "IEIFS",
+    topicId: "nbfc",
+    difficulty: "Medium",
+    q: "Which activity is a bank permitted to do but an NBFC is generally NOT?",
+    opts: ["Grant loans", "Accept demand deposits and issue cheques", "Invest in shares", "Offer fixed-term financing"],
+    correct: 1,
+    why: "NBFCs cannot accept demand deposits or issue cheques and are not part of the payment and settlement system — these are exclusive to banks."
   }
 ];
 export const QUESTION_BANK_SUPPLEMENT = [];

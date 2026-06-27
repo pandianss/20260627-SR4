@@ -153,10 +153,13 @@
       },
       "topicTags": [
         "monetary_policy",
-        "inflation"
+        "inflation",
+        "financial_system"
       ],
       "lessonIds": [
-        "les_ieifs_monetary_policy"
+        "les_ieifs_monetary_policy",
+        "les_ieifs_inflation",
+        "les_ieifs_financial_system"
       ]
     },
     {
@@ -166,10 +169,12 @@
         "en": "Module B: Economic Concepts Related to Banking"
       },
       "topicTags": [
-        "gdp"
+        "gdp",
+        "fiscal_policy"
       ],
       "lessonIds": [
-        "les_ieifs_gdp"
+        "les_ieifs_gdp",
+        "les_ieifs_fiscal_policy"
       ]
     },
     {
@@ -180,11 +185,13 @@
       },
       "topicTags": [
         "financial_regulators",
-        "money_market"
+        "money_market",
+        "capital_market"
       ],
       "lessonIds": [
         "les_ieifs_regulators",
-        "les_ieifs_money_market"
+        "les_ieifs_money_market",
+        "les_ieifs_capital_market"
       ]
     },
     {
@@ -194,10 +201,12 @@
         "en": "Module D: Financial Products and Services"
       },
       "topicTags": [
-        "banking_products"
+        "banking_products",
+        "nbfc"
       ],
       "lessonIds": [
-        "les_rbwm_products"
+        "les_rbwm_products",
+        "les_ieifs_nbfc"
       ]
     },
     {
@@ -571,10 +580,43 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_ieifs_monetary_policy-c3",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**The RBI's quantitative tools**\n\n- **Repo Rate** — Rate at which the RBI lends to banks against securities (short term)\n- **Reverse Repo** — Rate at which the RBI absorbs liquidity by borrowing from banks\n- **MSF** — Marginal Standing Facility — emergency overnight borrowing, above the repo rate\n- **CRR / SLR** — Reserve ratios that directly tighten or loosen lendable funds"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_monetary_policy-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Flexible Inflation Targeting**\n\nSince 2016 the RBI follows a flexible inflation-targeting framework. The Government, in consultation with the RBI, sets a CPI target of 4% with a tolerance band of +/- 2% (i.e. 2%-6%). The six-member Monetary Policy Committee (MPC) decides the policy rate."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** CPI target: 4% (+/- 2%) · set by the MPC"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_ieifs_monetary_policy-quiz"
+        "les_ieifs_monetary_policy-quiz",
+        "les_ieifs_monetary_policy-quiz2"
       ]
     },
     {
@@ -766,10 +808,43 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_ieifs_gdp-c3",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Related aggregates**\n\n- **GDP vs GNP** — GNP = GDP + net factor income from abroad\n- **GVA** — Gross Value Added = GDP - (taxes - subsidies) on products; India's preferred supply-side measure\n- **NDP / NNP** — Subtract depreciation from GDP / GNP to get the 'net' figures"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_gdp-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Who measures it**\n\nIn India, GDP estimates are compiled by the National Statistical Office (NSO) under the Ministry of Statistics and Programme Implementation (MoSPI). The current base year for the national accounts series is 2011-12."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** GDP compiled by NSO/MoSPI · base year 2011-12"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_ieifs_gdp-quiz"
+        "les_ieifs_gdp-quiz",
+        "les_ieifs_gdp-quiz2"
       ]
     },
     {
@@ -812,10 +887,43 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_ieifs_regulators-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Who regulates what**\n\n- **RBI** — Banks, NBFCs, currency, monetary policy, payment systems, government debt\n- **SEBI** — Stock exchanges, mutual funds, brokers, listed companies\n- **IRDAI** — Life and general insurance companies and intermediaries\n- **PFRDA** — National Pension System and pension funds"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_regulators-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Coordination & Deposit Insurance**\n\nThe Financial Stability and Development Council (FSDC), chaired by the Finance Minister, coordinates across regulators. Bank deposits are insured by the DICGC (a RBI subsidiary) up to ₹5 lakh per depositor per bank."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** FSDC coordinates · DICGC insures deposits up to ₹5 lakh"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_ieifs_regulators-quiz"
+        "les_ieifs_regulators-quiz",
+        "les_ieifs_regulators-quiz2"
       ]
     },
     {
@@ -1364,10 +1472,49 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_ieifs_money_market-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Money Market vs Capital Market**\n\nThe money market deals in short-term funds (up to 1 year) — high liquidity, low risk. The capital market deals in long-term funds (over 1 year) through equity and debt instruments. T-Bills carry no coupon; they are issued at a discount and redeemed at face value."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Money market: < 1 year | Capital market: > 1 year"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_money_market-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Certificate of Deposit (CD)**\n\nA CD is a negotiable money-market instrument issued by banks against funds deposited for a fixed period. Unlike a fixed deposit, a CD is transferable. Minimum issue size is ₹5 lakh."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** CD: bank-issued, negotiable · min ₹5 lakh"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_ieifs_money_market-quiz"
+        "les_ieifs_money_market-quiz",
+        "les_ieifs_money_market-quiz2"
       ]
     },
     {
@@ -1814,6 +1961,380 @@
       "probeQuestionIds": [
         "les_ppb_ethics-quiz"
       ]
+    },
+    {
+      "id": "les_ieifs_inflation",
+      "moduleId": "m_ieifs_a",
+      "title": {
+        "en": "Inflation: Types & Measures"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_inflation-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Inflation: Types & Measures**\n\nEconomy"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_inflation-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What is Inflation?**\n\nInflation is a sustained rise in the general price level, which erodes the purchasing power of money. Moderate inflation is normal; very high inflation (and its opposite, deflation) both harm the economy."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Inflation = falling purchasing power of money"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_inflation-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Causes**\n\n- **Demand-pull** — Too much money chasing too few goods (excess demand)\n- **Cost-push** — Rising input costs — wages, fuel, raw materials — push prices up\n- **Built-in** — Wage-price spiral as expectations of future inflation feed current prices"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_inflation-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**WPI vs CPI**\n\nThe Wholesale Price Index (WPI) measures price changes at the wholesale/producer level and excludes services. The Consumer Price Index (CPI) measures retail prices including services and is the RBI's policy anchor. WPI is compiled by the Office of the Economic Adviser; CPI by the NSO."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** WPI: wholesale, no services | CPI: retail, RBI anchor"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_inflation-quiz",
+        "les_ieifs_inflation-quiz2"
+      ]
+    },
+    {
+      "id": "les_ieifs_fiscal_policy",
+      "moduleId": "m_ieifs_b",
+      "title": {
+        "en": "Fiscal Policy & the Budget"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_fiscal_policy-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Fiscal Policy & the Budget**\n\nEconomy"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_fiscal_policy-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Fiscal vs Monetary Policy**\n\nFiscal policy is the Government's use of taxation and public spending to influence the economy. Monetary policy is the RBI's management of money supply and interest rates. The Union Budget is the main instrument of fiscal policy."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Fiscal = Govt spending & taxes | Monetary = RBI rates"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_fiscal_policy-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key deficit measures**\n\n- **Fiscal Deficit** — Total expenditure minus total receipts (excluding borrowings) — the Govt's borrowing need\n- **Revenue Deficit** — Revenue expenditure minus revenue receipts\n- **Primary Deficit** — Fiscal deficit minus interest payments"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_fiscal_policy-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**FRBM Act**\n\nThe Fiscal Responsibility and Budget Management (FRBM) Act, 2003 commits the Government to fiscal discipline, targeting a lower fiscal deficit as a percentage of GDP and limiting public debt over time."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** FRBM Act, 2003 = fiscal discipline targets"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_fiscal_policy-quiz",
+        "les_ieifs_fiscal_policy-quiz2"
+      ]
+    },
+    {
+      "id": "les_ieifs_financial_system",
+      "moduleId": "m_ieifs_a",
+      "title": {
+        "en": "Structure of the Financial System"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_financial_system-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Structure of the Financial System**\n\nFinancial Markets"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_financial_system-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Four Components**\n\nA financial system channels savings to investment through four interlinked components: financial institutions, financial markets, financial instruments, and financial services."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Institutions · Markets · Instruments · Services"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_financial_system-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Institutions & markets**\n\n- **Institutions** — Banks, NBFCs, insurance companies, mutual funds, pension funds\n- **Money Market** — Short-term funds (< 1 year): call money, T-bills, CP, CD\n- **Capital Market** — Long-term funds (> 1 year): equity and debt securities\n- **Forex Market** — Trading of foreign currencies"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_financial_system-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Organised vs Unorganised**\n\nThe organised sector (RBI-regulated banks, NBFCs, exchanges) operates under formal regulation. The unorganised sector (moneylenders, indigenous bankers, chit funds) is largely outside the regulatory net. Financial inclusion aims to bring more people into the organised system."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Organised (regulated) vs Unorganised (informal)"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_financial_system-quiz"
+      ]
+    },
+    {
+      "id": "les_ieifs_capital_market",
+      "moduleId": "m_ieifs_c",
+      "title": {
+        "en": "Capital Market Basics"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_capital_market-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Capital Market Basics**\n\nFinancial Markets"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_capital_market-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Primary vs Secondary Market**\n\nThe primary market is where securities are issued for the first time (e.g. an IPO), raising fresh capital for the issuer. The secondary market (stock exchanges like NSE/BSE) is where existing securities are traded among investors, providing liquidity."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Primary = new issue (IPO) | Secondary = trading"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_capital_market-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Instruments**\n\n- **Equity Shares** — Ownership stake; dividends and voting rights\n- **Preference Shares** — Fixed dividend, priority over equity in repayment\n- **Debentures / Bonds** — Debt instruments paying fixed interest"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_capital_market-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Market Infrastructure**\n\nSEBI regulates the capital market. Securities are held in electronic (demat) form with depositories — NSDL and CDSL. Trades settle on a T+1 rolling basis in India."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Regulator: SEBI · Depositories: NSDL, CDSL · Settlement: T+1"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_capital_market-quiz",
+        "les_ieifs_capital_market-quiz2"
+      ]
+    },
+    {
+      "id": "les_ieifs_nbfc",
+      "moduleId": "m_ieifs_d",
+      "title": {
+        "en": "NBFCs vs Banks"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_ieifs_nbfc-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**NBFCs vs Banks**\n\nInstitutions"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_nbfc-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**What is an NBFC?**\n\nA Non-Banking Financial Company is registered under the Companies Act and lends or invests, but unlike a bank it cannot accept demand deposits, is not part of the payment & settlement system, and depositors are not covered by DICGC deposit insurance."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** NBFC: no demand deposits, no cheques, no DICGC cover"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_ieifs_nbfc-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Bank vs NBFC**\n\n- **Demand deposits** — Banks can accept; NBFCs cannot\n- **Payment system** — Banks issue cheques/are in the clearing system; NBFCs are not\n- **Reserve ratios** — CRR/SLR apply to banks, not to NBFCs\n- **Deposit insurance** — DICGC covers bank deposits, not NBFC deposits"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_ieifs_nbfc-quiz"
+      ]
     }
   ],
   "questions": [
@@ -2083,6 +2604,59 @@
       }
     },
     {
+      "id": "les_ieifs_monetary_policy-quiz2",
+      "version": 1,
+      "topicTags": [
+        "monetary_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The MPC has six members — three from the RBI (including the Governor, who has a casting vote) and three appointed by the Government — and it sets the policy repo rate to meet the inflation target."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "How many members does the Monetary Policy Committee (MPC) of the RBI have?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Three"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Four"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Six"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Twelve"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
       "id": "les_rbwm_products-quiz",
       "version": 1,
       "topicTags": [
@@ -2242,6 +2816,59 @@
       }
     },
     {
+      "id": "les_ieifs_gdp-quiz2",
+      "version": 1,
+      "topicTags": [
+        "gdp",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "GNP = GDP + Net Factor Income from Abroad (income earned by residents abroad minus income earned by foreigners domestically)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Gross National Product (GNP) differs from Gross Domestic Product (GDP) by which factor?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Depreciation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Net factor income from abroad"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Indirect taxes"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Subsidies"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
       "id": "les_ieifs_regulators-quiz",
       "version": 1,
       "topicTags": [
@@ -2292,6 +2919,59 @@
           }
         ],
         "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_regulators-quiz2",
+      "version": 1,
+      "topicTags": [
+        "financial_regulators",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The Deposit Insurance and Credit Guarantee Corporation (DICGC), a subsidiary of the RBI, insures deposits up to ₹5 lakh per depositor per bank, covering principal and interest."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Up to what amount per depositor per bank are bank deposits insured by the DICGC?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹1 lakh"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹2 lakh"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹5 lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹10 lakh"
+            }
+          }
+        ],
+        "correctOptionId": "c"
       }
     },
     {
@@ -2984,6 +3664,59 @@
       }
     },
     {
+      "id": "les_ieifs_money_market-quiz2",
+      "version": 1,
+      "topicTags": [
+        "money_market",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "T-Bills are short-term government securities issued in three tenors — 91-day, 182-day and 364-day — at a discount to face value, with no separate interest coupon."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Treasury Bills (T-Bills) issued by the RBI are available in which maturities?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "91, 182 and 364 days"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "1, 5 and 10 years"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "30 and 60 days"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "1 and 2 years"
+            }
+          }
+        ],
+        "correctOptionId": "a"
+      }
+    },
+    {
       "id": "les_afm_ratio_analysis-quiz",
       "version": 1,
       "topicTags": [
@@ -3454,6 +4187,430 @@
             "id": "d",
             "content": {
               "en": "A permitted conflict of interest"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_inflation-quiz",
+      "version": 1,
+      "topicTags": [
+        "inflation",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Since adopting flexible inflation targeting, the RBI uses CPI (Combined) inflation as its primary anchor, with a target of 4% +/- 2%."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which index does the RBI use as its primary anchor for monetary policy?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Wholesale Price Index (WPI)"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Consumer Price Index (CPI)"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Producer Price Index (PPI)"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "GDP Deflator"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_inflation-quiz2",
+      "version": 1,
+      "topicTags": [
+        "inflation",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "When higher input costs push up the price of finished goods, the resulting inflation is termed cost-push inflation."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Inflation caused by a rise in the cost of raw materials, fuel and wages is called:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Demand-pull inflation"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Cost-push inflation"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Deflation"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Disinflation"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_fiscal_policy-quiz",
+      "version": 1,
+      "topicTags": [
+        "fiscal_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Fiscal deficit = total expenditure - total receipts (excluding borrowings). It represents how much the government must borrow to meet its expenditure."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The fiscal deficit of a government essentially indicates:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Its total interest payments"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Its total borrowing requirement for the year"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Its revenue from taxes"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Its trade balance"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_fiscal_policy-quiz2",
+      "version": 1,
+      "topicTags": [
+        "fiscal_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Primary deficit = Fiscal deficit - Interest payments. It shows the borrowing requirement excluding the burden of past debt servicing."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Primary deficit is calculated as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Fiscal deficit + interest payments"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Fiscal deficit - interest payments"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Revenue deficit + capital expenditure"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Total receipts - total expenditure"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_financial_system-quiz",
+      "version": 1,
+      "topicTags": [
+        "financial_system",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The four components are institutions, markets, instruments and services. Fiscal deficit is a government finance concept, not a component of the financial system."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following is NOT one of the four components of a financial system?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Financial institutions"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Financial markets"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Financial instruments"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Fiscal deficit"
+            }
+          }
+        ],
+        "correctOptionId": "d"
+      }
+    },
+    {
+      "id": "les_ieifs_capital_market-quiz",
+      "version": 1,
+      "topicTags": [
+        "capital_market",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An IPO is the first sale of shares to the public, raising fresh capital — it takes place in the primary market. Subsequent trading happens in the secondary market."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "An Initial Public Offering (IPO) is a transaction in the:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Secondary market"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Primary market"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Money market"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Forex market"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_capital_market-quiz2",
+      "version": 1,
+      "topicTags": [
+        "capital_market",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NSDL and CDSL are the two depositories that hold securities in electronic (demat) form; NSE and BSE are stock exchanges where trading happens."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which entities act as depositories for holding securities in dematerialised form in India?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "NSE and BSE"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "NSDL and CDSL"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "RBI and SEBI"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "NABARD and SIDBI"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_ieifs_nbfc-quiz",
+      "version": 1,
+      "topicTags": [
+        "nbfc",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NBFCs can lend and invest but cannot accept demand deposits or issue cheques, and are not part of the payment and settlement system — features unique to banks."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which of the following can a bank do that an NBFC generally cannot?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Provide loans"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Accept demand deposits and issue cheques"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Invest in securities"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Lend for vehicle purchase"
             }
           }
         ],
@@ -4779,6 +5936,324 @@
             "id": "d",
             "content": {
               "en": "Priority lending"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_mpc",
+      "version": 1,
+      "topicTags": [
+        "monetary_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The MPC has six members — three from the RBI including the Governor (who has a casting vote) and three nominated by the Central Government."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The Monetary Policy Committee (MPC), which sets the policy repo rate, comprises how many members?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Three"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Five"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Six"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Nine"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ieifs_cpi_target",
+      "version": 1,
+      "topicTags": [
+        "inflation",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The Government, in consultation with the RBI, has set the CPI inflation target at 4% with a tolerance band of +/- 2% (i.e. between 2% and 6%)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Under flexible inflation targeting, what is the CPI inflation target (with tolerance band) for the RBI?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "2% +/- 2%"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "4% +/- 2%"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "5% +/- 1%"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "6% +/- 2%"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_fiscal_deficit",
+      "version": 1,
+      "topicTags": [
+        "fiscal_policy",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Fiscal deficit = total expenditure - total receipts (excluding borrowings); it equals the government's net borrowing requirement for the year."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Fiscal deficit is defined as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Revenue expenditure minus revenue receipts"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Total expenditure minus total receipts excluding borrowings"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Total receipts minus interest payments"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Capital expenditure minus capital receipts"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_dicgc",
+      "version": 1,
+      "topicTags": [
+        "financial_regulators",
+        "IEIFS"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The DICGC, a subsidiary of the RBI, insures bank deposits up to ₹5 lakh per depositor per bank (principal plus interest)."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Bank deposit insurance provided by the DICGC covers each depositor up to:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹1 lakh"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹2 lakh"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹5 lakh"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹10 lakh"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_ieifs_ipo_market",
+      "version": 1,
+      "topicTags": [
+        "capital_market",
+        "IEIFS"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "An IPO raises fresh capital by issuing securities for the first time, which happens in the primary market; later trading of those shares occurs in the secondary market."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Shares offered to the public for the first time through an IPO are issued in the:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Secondary market"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Primary market"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Money market"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Commodity market"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_ieifs_nbfc_deposit",
+      "version": 1,
+      "topicTags": [
+        "nbfc",
+        "IEIFS"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "NBFCs cannot accept demand deposits or issue cheques and are not part of the payment and settlement system — these are exclusive to banks."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which activity is a bank permitted to do but an NBFC is generally NOT?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Grant loans"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Accept demand deposits and issue cheques"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Invest in shares"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Offer fixed-term financing"
             }
           }
         ],
