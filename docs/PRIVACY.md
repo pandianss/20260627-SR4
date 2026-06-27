@@ -2,8 +2,8 @@
 
 _Last updated: 27 June 2026. The published version is served via GitHub Pages
 from the `gh-pages` branch (`index.html`) at
-https://pandianss.github.io/20260627-SR4/ — keep the two in sync. Remaining
-placeholder: [YOUR NAME] (data controller)._
+https://pandianss.github.io/20260627-SR4/ — keep the two in sync. The data
+controller is Satish Pandian S._
 
 SuperRecall Banker ("the app", "we", "us") is a study app for candidates
 preparing for Indian Institute of Banking & Finance (IIBF) certifications. This
@@ -61,4 +61,4 @@ We may update this policy; material changes will be reflected here with a new
 
 ## Contact
 
-[YOUR NAME] — sspandian.here@gmail.com
+Satish Pandian S — sspandian.here@gmail.com
