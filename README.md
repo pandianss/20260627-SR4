@@ -1,4 +1,4 @@
-# IIBF micro-learning platform
+# IIBF Professional Certifications micro-learning platform
 
 A calm, minimal micro-learning app for working bankers preparing for **IIBF
 professional certifications** — JAIIB, CAIIB, and the specialised certificates
