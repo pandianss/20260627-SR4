@@ -19,6 +19,13 @@ class AppScope extends InheritedWidget {
   final AuthService? authService;
   final VoidCallback? onLogout;
   final Future<void> Function()? onDeleteAccount;
+
+  /// Bumps when remote (multi-device) changes have merged into local data, so
+  /// screens can reload. Null when live sync isn't active.
+  final Listenable? syncRevision;
+
+  /// Ask the app to push local changes to the cloud soon (debounced).
+  final VoidCallback? requestSync;
   final bool isPremium;
   final VoidCallback? onBuyPremium;
 
@@ -34,6 +41,8 @@ class AppScope extends InheritedWidget {
     this.authService,
     this.onLogout,
     this.onDeleteAccount,
+    this.syncRevision,
+    this.requestSync,
     required this.isPremium,
     this.onBuyPremium,
     required super.child,

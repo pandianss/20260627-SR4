@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
+  Listenable? _revision;
 
   @override
   void initState() {
@@ -31,6 +32,28 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _load();
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Refresh progress live when another device's activity merges in.
+    final rev = AppScope.of(context).syncRevision;
+    if (!identical(rev, _revision)) {
+      _revision?.removeListener(_onRemoteSync);
+      _revision = rev;
+      _revision?.addListener(_onRemoteSync);
+    }
+  }
+
+  void _onRemoteSync() {
+    if (mounted) _load();
+  }
+
+  @override
+  void dispose() {
+    _revision?.removeListener(_onRemoteSync);
+    super.dispose();
   }
 
   Future<void> _load() async {
@@ -71,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _handleLessonComplete(List<SrsEvent> events) async {
     await _repo.applyLessonCompletion(_scope.userId, _scope.examName, events);
+    _scope.requestSync?.call();
     await _load();
   }
 

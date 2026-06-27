@@ -62,4 +62,30 @@ void main() {
 
     expect(await eventsB.getAllEvents('u1'), hasLength(1));
   });
+
+  test('pull with a scheduler re-projects SRS state on a second device',
+      () async {
+    final db = FakeFirebaseFirestore();
+
+    // Device A logs a card review and syncs up.
+    final eventsA = MemoryEventLogStore();
+    await eventsA.appendEvent(_review('e1'));
+    await FirestoreSyncService(firestore: db)
+        .sync('u1', eventsA, MemorySrsStateStore());
+
+    // Device B pulls WITH a scheduler → rebuilds the SRS state from the event.
+    final eventsB = MemoryEventLogStore();
+    final statesB = MemorySrsStateStore();
+    await FirestoreSyncService(firestore: db).pull(
+      'u1',
+      eventsB,
+      statesB,
+      scheduler: const Fsrs(),
+      examContext: 'CAIIB',
+    );
+
+    final state = await statesB.getState('u1', 'card_1');
+    expect(state, isNotNull);
+    expect(state!.reps, greaterThan(0));
+  });
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/material.dart' hide Card;
@@ -70,7 +71,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   DateTime? _examDate;
   String _examName = 'CAIIB';
   late String _userId;
@@ -84,6 +85,9 @@ class _MyAppState extends State<MyApp> {
   final NotificationService _notificationService = NotificationService();
   final TelemetryService _telemetryService = TelemetryService();
   final UpdatesService _updatesService = UpdatesService();
+  final ValueNotifier<int> _syncRevision = ValueNotifier<int>(0);
+  StreamSubscription? _remoteSub;
+  Timer? _syncDebounce;
 
   bool _isPremium = false;
   bool _loadingSession = true;
@@ -91,9 +95,29 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _userId = widget.userId;
     _checkPersistedSession();
     _notificationService.init();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _remoteSub?.cancel();
+    _syncDebounce?.cancel();
+    _syncRevision.dispose();
+    super.dispose();
+  }
+
+  /// Continuous sync: push local changes up whenever the app is backgrounded
+  /// or closed, so progress isn't stranded until the next launch.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached) {
+      _pushCloud();
+    }
   }
 
   /// Back up local progress and restore any cloud data for this uid.
@@ -102,10 +126,53 @@ class _MyAppState extends State<MyApp> {
     final sync = widget.firestoreSync;
     if (sync == null) return;
     try {
-      await sync.sync(_userId, _eventStore, _stateStore);
+      await sync.sync(_userId, _eventStore, _stateStore,
+          scheduler: _buildScheduler(), examContext: _examName);
     } catch (e) {
       debugPrint('Cloud sync failed: $e');
     }
+  }
+
+  /// Push-only sync for the app-background trigger.
+  Future<void> _pushCloud() async {
+    final sync = widget.firestoreSync;
+    if (sync == null) return;
+    try {
+      await sync.push(_userId, _eventStore, _stateStore);
+    } catch (e) {
+      debugPrint('Cloud push failed: $e');
+    }
+  }
+
+  Scheduler? _buildScheduler() {
+    final date = _examDate;
+    if (date == null) return null;
+    return DeadlineAwareScheduler(delegate: const Fsrs(), examDate: date);
+  }
+
+  /// Start (or restart) the live multi-device listener for the current uid.
+  void _startRemoteListener() {
+    _remoteSub?.cancel();
+    final sync = widget.firestoreSync;
+    final scheduler = _buildScheduler();
+    if (sync == null || scheduler == null) return;
+    _remoteSub = sync.listenForRemoteChanges(
+      _userId,
+      _eventStore,
+      _stateStore,
+      scheduler: scheduler,
+      examContext: _examName,
+      onChanged: () {
+        if (mounted) _syncRevision.value++;
+      },
+    );
+  }
+
+  /// Debounced push so a local change reaches the cloud (and the other device)
+  /// within a couple of seconds.
+  void _requestSync() {
+    _syncDebounce?.cancel();
+    _syncDebounce = Timer(const Duration(seconds: 2), _pushCloud);
   }
 
   Future<void> _checkPersistedSession() async {
@@ -132,6 +199,7 @@ class _MyAppState extends State<MyApp> {
             _contentLoaded = true;
             _loadingSession = false;
           });
+          _startRemoteListener();
         }
       } else {
         if (mounted) {
@@ -321,6 +389,7 @@ class _MyAppState extends State<MyApp> {
           if (!mounted) return;
           setState(() => _contentLoaded = true);
           _syncCloud();
+          _startRemoteListener();
         },
         authService: widget.authService,
       );
@@ -351,6 +420,8 @@ class _MyAppState extends State<MyApp> {
         authService: widget.authService,
         onLogout: _logout,
         onDeleteAccount: _deleteAccount,
+        syncRevision: _syncRevision,
+        requestSync: _requestSync,
         isPremium: _isPremium,
         onBuyPremium: _purchasePremium,
         child: const MainLayout(),

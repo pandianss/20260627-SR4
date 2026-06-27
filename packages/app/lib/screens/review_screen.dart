@@ -25,6 +25,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   int _currentIndex = 0;
   bool _isFlipped = false;
   int _reviewsCompletedThisSession = 0;
+  Listenable? _revision;
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
@@ -35,6 +36,28 @@ class _ReviewScreenState extends State<ReviewScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _loadDueQueue();
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload the due deck live when another device's progress merges in.
+    final rev = AppScope.of(context).syncRevision;
+    if (!identical(rev, _revision)) {
+      _revision?.removeListener(_onRemoteSync);
+      _revision = rev;
+      _revision?.addListener(_onRemoteSync);
+    }
+  }
+
+  void _onRemoteSync() {
+    if (mounted) _loadDueQueue();
+  }
+
+  @override
+  void dispose() {
+    _revision?.removeListener(_onRemoteSync);
+    super.dispose();
   }
 
   Future<void> _loadDueQueue() async {
@@ -57,6 +80,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final currentState = _dueStates[_currentIndex];
     await _repo.applyReview(
         _scope.userId, _scope.examName, currentState, rating);
+    _scope.requestSync?.call(); // push this review to the cloud promptly
 
     setState(() {
       _reviewsCompletedThisSession += 1;
