@@ -453,6 +453,66 @@ export const QUESTION_BANK = [
     opts: ["Up-selling", "Cross-selling", "De-marketing", "Re-marketing"],
     correct: 1,
     why: "Cross-selling offers a different, complementary product (credit card) to an existing customer (savings-account holder)."
+  },
+  {
+    id: "q_afm_slm",
+    subjectId: "AFM",
+    topicId: "depreciation",
+    difficulty: "Medium",
+    q: "A machine costs ₹55,000, has a scrap value of ₹5,000 and a life of 5 years. Annual SLM depreciation is:",
+    opts: ["₹10,000", "₹11,000", "₹9,000", "₹12,000"],
+    correct: 0,
+    why: "SLM depreciation = (Cost - Scrap) / Life = (55,000 - 5,000) / 5 = ₹10,000 per year."
+  },
+  {
+    id: "q_afm_irr",
+    subjectId: "AFM",
+    topicId: "time_value_of_money",
+    difficulty: "Medium",
+    q: "The Internal Rate of Return (IRR) is the discount rate at which a project's:",
+    opts: ["NPV is maximum", "NPV equals zero", "Payback is shortest", "Profit is highest"],
+    correct: 1,
+    why: "IRR is the discount rate that makes the project's NPV zero; a project is accepted when its IRR exceeds the cost of capital."
+  },
+  {
+    id: "q_afm_breakeven",
+    subjectId: "AFM",
+    topicId: "costing_basics",
+    difficulty: "Medium",
+    q: "Fixed costs are ₹60,000, selling price ₹50 and variable cost ₹30 per unit. The break-even quantity is:",
+    opts: ["1,200 units", "2,000 units", "3,000 units", "6,000 units"],
+    correct: 2,
+    why: "Contribution = 50 - 30 = ₹20. BEP = Fixed Cost / Contribution = 60,000 / 20 = 3,000 units."
+  },
+  {
+    id: "q_afm_accrual",
+    subjectId: "AFM",
+    topicId: "accounting_concepts",
+    difficulty: "Easy",
+    q: "Recording an expense when it is incurred rather than when it is paid reflects which concept?",
+    opts: ["Going concern", "Accrual concept", "Conservatism", "Materiality"],
+    correct: 1,
+    why: "The accrual concept recognises income and expenses in the period to which they relate, regardless of when cash is exchanged."
+  },
+  {
+    id: "q_afm_bank_deposit",
+    subjectId: "AFM",
+    topicId: "balance_sheet",
+    difficulty: "Medium",
+    q: "On a bank's own balance sheet, customer fixed deposits appear as:",
+    opts: ["Assets", "Liabilities", "Contingent assets", "Equity"],
+    correct: 1,
+    why: "Deposits are amounts the bank owes its customers, so they are liabilities; advances and investments are the bank's assets."
+  },
+  {
+    id: "q_afm_tds_pan",
+    subjectId: "AFM",
+    topicId: "taxation",
+    difficulty: "Medium",
+    q: "If a depositor fails to provide a PAN, TDS on interest income is deducted at:",
+    opts: ["10%", "15%", "20%", "30%"],
+    correct: 2,
+    why: "Without a valid PAN, banks deduct TDS at the higher rate of 20% rather than the usual 10%."
   }
 ];
 export const QUESTION_BANK_SUPPLEMENT = [];

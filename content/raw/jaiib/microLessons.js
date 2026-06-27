@@ -234,9 +234,25 @@ export const MICRO_LESSONS = [
       },
       {
         kind: "concept",
-        title: "Depreciation",
-        body: "Straight Line Method (SLM) charges constant depreciation annually. Written Down Value (WDV) applies a fixed rate to beginning book value.",
-        highlight: "SLM = (Cost - Scrap) / Life"
+        title: "Simple vs Compound Interest",
+        body: "Simple interest is charged only on the original principal (SI = P x r x t). Compound interest is charged on principal plus accumulated interest, so it grows faster. The more frequent the compounding, the higher the effective return.",
+        highlight: "SI = P·r·t | CI grows on principal + interest"
+      },
+      {
+        kind: "scenario",
+        title: "Future Value worked example",
+        problem: "₹10,000 is invested for 2 years at 10% per annum compounded annually.",
+        steps: [
+          "FV = PV x (1 + r)^n = 10,000 x (1.10)^2",
+          "= 10,000 x 1.21 = ₹12,100"
+        ],
+        verdict: "The investment grows to ₹12,100, of which ₹2,100 is compound interest."
+      },
+      {
+        kind: "concept",
+        title: "Annuities",
+        body: "An annuity is a series of equal cash flows at regular intervals. The Present Value of an annuity discounts each instalment; this is the basis of EMI and loan-amortisation calculations.",
+        highlight: "Annuity = equal periodic cash flows (basis of EMIs)"
       },
       {
         kind: "quiz",
@@ -244,6 +260,13 @@ export const MICRO_LESSONS = [
         opts: ["₹90", "₹100", "₹110", "₹120"],
         correct: 1,
         why: "Using PV formula: PV = FV / (1 + r)^n. PV = 121 / (1 + 0.10)^2 = 121 / 1.21 = ₹100."
+      },
+      {
+        kind: "quiz",
+        question: "₹1,000 invested at 10% per annum compounded annually grows to what amount after 2 years?",
+        opts: ["₹1,100", "₹1,200", "₹1,210", "₹1,221"],
+        correct: 2,
+        why: "FV = 1,000 x (1.10)^2 = 1,000 x 1.21 = ₹1,210."
       }
     ]
   },
@@ -461,11 +484,33 @@ export const MICRO_LESSONS = [
         highlight: "Accept project if NPV > 0"
       },
       {
+        kind: "pillars",
+        title: "Appraisal techniques",
+        pillars: [
+          { n: "NPV", d: "PV of inflows - PV of outflows; accept if > 0 (discounted)" },
+          { n: "IRR", d: "The discount rate at which NPV = 0; accept if IRR > cost of capital (discounted)" },
+          { n: "Payback Period", d: "Time to recover the initial outlay (non-discounted, ignores time value)" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "IRR & the Hurdle Rate",
+        body: "The Internal Rate of Return (IRR) is the rate that makes a project's NPV zero. A project is accepted if its IRR exceeds the firm's required return (cost of capital / hurdle rate). NPV and IRR usually agree, but NPV is preferred when they conflict.",
+        highlight: "Accept if IRR > cost of capital"
+      },
+      {
         kind: "quiz",
         question: "If a project has an initial outflow of ₹1,000 and the present value of its future cash inflows is ₹1,200, what is its NPV?",
         opts: ["-₹200", "₹200", "₹1,000", "₹1,200"],
         correct: 1,
         why: "NPV = Present Value of Inflows - Initial Outflow = 1,200 - 1,000 = ₹200."
+      },
+      {
+        kind: "quiz",
+        question: "The Internal Rate of Return (IRR) of a project is the discount rate at which:",
+        opts: ["NPV is maximum", "NPV equals zero", "Payback period is shortest", "Profit is highest"],
+        correct: 1,
+        why: "IRR is defined as the discount rate at which the project's Net Present Value becomes zero; a project is viable if its IRR exceeds the cost of capital."
       }
     ]
   },
@@ -485,11 +530,30 @@ export const MICRO_LESSONS = [
         highlight: "Assets = Liabilities + Equity"
       },
       {
+        kind: "concept",
+        title: "Double-Entry & Golden Rules",
+        body: "Every transaction has two equal and opposite effects (debit and credit). The traditional golden rules: Personal a/c — debit the receiver, credit the giver; Real a/c — debit what comes in, credit what goes out; Nominal a/c — debit expenses/losses, credit incomes/gains.",
+        highlight: "Every debit has an equal and opposite credit"
+      },
+      {
+        kind: "concept",
+        title: "A Bank's Balance Sheet",
+        body: "For a bank, deposits are liabilities (money it owes customers) and loans/advances are assets (money owed to it). This is the reverse of how a customer views the same accounts — a key exam trap.",
+        highlight: "Bank: deposits = liability · loans = asset"
+      },
+      {
         kind: "quiz",
         question: "If a business has Assets of ₹50,000 and Liabilities of ₹20,000, what is its Owner's Equity?",
         opts: ["₹20,000", "₹30,000", "₹50,000", "₹70,000"],
         correct: 1,
         why: "Equity = Assets - Liabilities = 50,000 - 20,000 = ₹30,000."
+      },
+      {
+        kind: "quiz",
+        question: "On a bank's own balance sheet, customer deposits are classified as:",
+        opts: ["Assets", "Liabilities", "Equity", "Contingent liabilities"],
+        correct: 1,
+        why: "Deposits are money the bank owes its customers, so they are liabilities on the bank's balance sheet; loans and advances are its assets."
       }
     ]
   },
@@ -726,11 +790,34 @@ export const MICRO_LESSONS = [
         highlight: "Quick Ratio = (Current Assets - Inventory) / Current Liabilities"
       },
       {
+        kind: "pillars",
+        title: "Four families of ratios",
+        pillars: [
+          { n: "Liquidity", d: "Current Ratio, Quick Ratio — short-term solvency" },
+          { n: "Leverage", d: "Debt-Equity, Interest Coverage — long-term gearing" },
+          { n: "Profitability", d: "Net Profit margin, Return on Equity" },
+          { n: "Turnover", d: "Stock turnover, Debtors turnover — efficiency" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Debt-Equity & Ideal Norms",
+        body: "Debt-Equity Ratio = Total Debt / Net Worth, measuring how leveraged a firm is. A common benchmark for the Current Ratio is 2:1 and for the Quick Ratio 1:1, though ideal levels vary by industry.",
+        highlight: "Ideal: Current 2:1 · Quick 1:1 · D/E lower is safer"
+      },
+      {
         kind: "quiz",
         question: "Calculate the Current Ratio of a firm with Current Assets of ₹1,00,000, Current Liabilities of ₹50,000, and Inventory of ₹20,000.",
         opts: ["1.6:1", "2.0:1", "2.5:1", "3.0:1"],
         correct: 1,
         why: "Current Ratio = Current Assets / Current Liabilities = 1,00,000 / 50,000 = 2.0:1."
+      },
+      {
+        kind: "quiz",
+        question: "Using the same figures, what is the Quick (Acid-Test) Ratio?",
+        opts: ["1.0:1", "1.6:1", "2.0:1", "2.5:1"],
+        correct: 1,
+        why: "Quick Ratio = (Current Assets - Inventory) / Current Liabilities = (1,00,000 - 20,000) / 50,000 = 80,000 / 50,000 = 1.6:1."
       }
     ]
   },
@@ -1335,6 +1422,176 @@ export const MICRO_LESSONS = [
         opts: ["Guaranteed returns", "Rupee-cost averaging and disciplined investing", "Exemption from all taxes", "Insurance cover"],
         correct: 1,
         why: "By investing a fixed amount regularly, a SIP buys more units when prices are low and fewer when high (rupee-cost averaging) and instils investing discipline; it does not guarantee returns."
+      }
+    ]
+  },
+  {
+    id: "les_afm_depreciation",
+    topicId: "depreciation",
+    subjectId: "AFM",
+    title: "Depreciation: SLM vs WDV",
+    badge: "Accounting",
+    time: "6 min",
+    emoji: "📉",
+    steps: [
+      {
+        kind: "concept",
+        title: "Why Depreciate?",
+        body: "Depreciation spreads the cost of a fixed asset over its useful life, matching the expense to the periods that benefit from the asset. It is a non-cash expense that reduces book value and taxable profit.",
+        highlight: "Depreciation = systematic write-off of asset cost"
+      },
+      {
+        kind: "concept",
+        title: "SLM vs WDV",
+        body: "Straight Line Method (SLM) charges a constant amount each year: (Cost - Scrap) / Life. Written Down Value (WDV) applies a fixed percentage to the reducing book value, so the charge is higher early and lower later.",
+        highlight: "SLM = constant | WDV = reducing balance"
+      },
+      {
+        kind: "scenario",
+        title: "SLM worked example",
+        problem: "A machine costs ₹1,00,000, has a scrap value of ₹10,000 and a useful life of 9 years. Compute annual SLM depreciation.",
+        steps: [
+          "Depreciable amount = Cost - Scrap = 1,00,000 - 10,000 = ₹90,000",
+          "Annual depreciation = 90,000 / 9 = ₹10,000 per year"
+        ],
+        verdict: "Under SLM, ₹10,000 is charged to the P&L each year for 9 years."
+      },
+      {
+        kind: "quiz",
+        question: "An asset costing ₹1,00,000 with a scrap value of ₹10,000 and a life of 9 years has what annual SLM depreciation?",
+        opts: ["₹9,000", "₹10,000", "₹11,111", "₹12,000"],
+        correct: 1,
+        why: "SLM depreciation = (Cost - Scrap) / Life = (1,00,000 - 10,000) / 9 = ₹10,000 per year."
+      },
+      {
+        kind: "quiz",
+        question: "Which depreciation method charges a higher amount in the early years of an asset's life?",
+        opts: ["Straight Line Method", "Written Down Value method", "Both charge equally", "Neither charges depreciation early"],
+        correct: 1,
+        why: "The Written Down Value (reducing balance) method applies a fixed rate to a shrinking book value, so the rupee charge is highest in early years and declines over time."
+      }
+    ]
+  },
+  {
+    id: "les_afm_accounting_concepts",
+    topicId: "accounting_concepts",
+    subjectId: "AFM",
+    title: "Accounting Concepts & Conventions",
+    badge: "Accounting",
+    time: "5 min",
+    emoji: "📒",
+    steps: [
+      {
+        kind: "concept",
+        title: "Why Concepts Matter",
+        body: "Accounting concepts are the basic assumptions on which financial statements are built, ensuring they are consistent and comparable across firms and years.",
+        highlight: "Concepts = the ground rules of accounting"
+      },
+      {
+        kind: "pillars",
+        title: "Key concepts",
+        pillars: [
+          { n: "Going Concern", d: "The business will continue operating in the foreseeable future" },
+          { n: "Accrual", d: "Record income/expense when earned/incurred, not when cash moves" },
+          { n: "Matching", d: "Match expenses to the revenues they help generate" },
+          { n: "Consistency", d: "Use the same methods period to period for comparability" }
+        ]
+      },
+      {
+        kind: "concept",
+        title: "Conventions",
+        body: "Conventions guide practical reporting: Conservatism (anticipate losses, not gains), Materiality (report what could influence decisions), and Full Disclosure (reveal all relevant information).",
+        highlight: "Conservatism · Materiality · Full Disclosure"
+      },
+      {
+        kind: "quiz",
+        question: "Recording revenue when it is earned rather than when cash is received reflects which concept?",
+        opts: ["Going Concern", "Accrual concept", "Conservatism", "Materiality"],
+        correct: 1,
+        why: "The accrual concept records income and expenses in the period they are earned or incurred, independent of the actual cash flow."
+      }
+    ]
+  },
+  {
+    id: "les_afm_costing",
+    topicId: "costing_basics",
+    subjectId: "AFM",
+    title: "Costing & Break-even",
+    badge: "Finance",
+    time: "6 min",
+    emoji: "⚖️",
+    steps: [
+      {
+        kind: "concept",
+        title: "Fixed vs Variable Cost",
+        body: "Fixed costs stay constant regardless of output (rent, salaries). Variable costs change with output (raw materials). Total cost = Fixed + Variable. Per-unit fixed cost falls as output rises.",
+        highlight: "Total Cost = Fixed Cost + Variable Cost"
+      },
+      {
+        kind: "concept",
+        title: "Contribution & Break-even",
+        body: "Contribution = Selling Price - Variable Cost per unit. The Break-Even Point (in units) = Fixed Costs / Contribution per unit — the output at which total revenue exactly covers total cost (no profit, no loss).",
+        highlight: "BEP (units) = Fixed Cost / Contribution per unit"
+      },
+      {
+        kind: "scenario",
+        title: "Break-even worked example",
+        problem: "Fixed costs are ₹1,00,000. A unit sells for ₹50 and its variable cost is ₹30.",
+        steps: [
+          "Contribution per unit = 50 - 30 = ₹20",
+          "BEP = Fixed Cost / Contribution = 1,00,000 / 20 = 5,000 units"
+        ],
+        verdict: "The firm must sell 5,000 units to break even; every unit beyond that earns ₹20 profit."
+      },
+      {
+        kind: "quiz",
+        question: "Fixed costs are ₹2,00,000, selling price is ₹100 and variable cost is ₹60 per unit. What is the break-even quantity?",
+        opts: ["2,000 units", "3,333 units", "5,000 units", "10,000 units"],
+        correct: 2,
+        why: "Contribution = 100 - 60 = ₹40. BEP = Fixed Cost / Contribution = 2,00,000 / 40 = 5,000 units."
+      }
+    ]
+  },
+  {
+    id: "les_afm_taxation",
+    topicId: "taxation",
+    subjectId: "AFM",
+    title: "Taxation Basics for Bankers",
+    badge: "Taxation",
+    time: "5 min",
+    emoji: "🧾",
+    steps: [
+      {
+        kind: "concept",
+        title: "Direct vs Indirect Tax",
+        body: "Direct taxes (Income Tax) are levied on income and borne by the same person. Indirect taxes (GST) are levied on goods/services and the burden is passed to the final consumer.",
+        highlight: "Direct = on income | Indirect (GST) = on consumption"
+      },
+      {
+        kind: "concept",
+        title: "TDS on Interest",
+        body: "Banks must deduct Tax Deducted at Source (TDS) on interest paid on deposits once it crosses the annual threshold (₹40,000 for most individuals, ₹50,000 for senior citizens). Customers can submit Form 15G/15H to avoid TDS if their income is below the taxable limit.",
+        highlight: "TDS on FD interest above ₹40,000 (₹50,000 for seniors)"
+      },
+      {
+        kind: "concept",
+        title: "PAN & Form 15G/15H",
+        body: "If a customer does not provide a PAN, TDS is deducted at the higher rate of 20% instead of 10%. Form 15G (non-seniors) and Form 15H (seniors) are self-declarations that no tax is payable, so the bank should not deduct TDS.",
+        highlight: "No PAN -> 20% TDS · 15G/15H -> no TDS"
+      },
+      {
+        kind: "quiz",
+        question: "If a depositor does not furnish a PAN, at what rate is TDS on interest generally deducted?",
+        opts: ["5%", "10%", "20%", "30%"],
+        correct: 2,
+        why: "In the absence of a valid PAN, banks deduct TDS at the higher rate of 20% instead of the standard 10%."
+      },
+      {
+        kind: "quiz",
+        question: "Which form does a senior citizen submit to a bank to avoid TDS on interest when their income is below the taxable limit?",
+        opts: ["Form 15G", "Form 15H", "Form 16", "Form 26AS"],
+        correct: 1,
+        why: "Form 15H is the self-declaration for senior citizens; Form 15G is for other individuals. Both certify that the person's income is below the taxable limit so no TDS should be deducted."
       }
     ]
   }

@@ -73,7 +73,8 @@ export const TOPICS = {
     { id: "nbfc", name: "NBFCs & Financial Services" }
   ],
   m_afm_a: [
-    { id: "depreciation", name: "Depreciation SLM & WDV" }
+    { id: "depreciation", name: "Depreciation SLM & WDV" },
+    { id: "accounting_concepts", name: "Accounting Concepts & Conventions" }
   ],
   m_afm_b: [
     { id: "balance_sheet", name: "Balance Sheet Equation" },
@@ -83,7 +84,8 @@ export const TOPICS = {
     { id: "time_value_of_money", name: "Time Value of Money" }
   ],
   m_afm_d: [
-    { id: "costing_basics", name: "Fundamentals of Costing" }
+    { id: "costing_basics", name: "Fundamentals of Costing" },
+    { id: "taxation", name: "Taxation Basics for Bankers" }
   ],
   m_rbwm_a: [
     { id: "retail_banking_intro", name: "Introduction to Retail Banking" }

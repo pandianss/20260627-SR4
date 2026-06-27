@@ -274,9 +274,13 @@
         "en": "Module A: Accounting Principles and Processes"
       },
       "topicTags": [
-        "depreciation"
+        "depreciation",
+        "accounting_concepts"
       ],
-      "lessonIds": []
+      "lessonIds": [
+        "les_afm_depreciation",
+        "les_afm_accounting_concepts"
+      ]
     },
     {
       "id": "m_afm_b",
@@ -314,9 +318,13 @@
         "en": "Module D: Taxation and Fundamentals of Costing"
       },
       "topicTags": [
-        "costing_basics"
+        "costing_basics",
+        "taxation"
       ],
-      "lessonIds": []
+      "lessonIds": [
+        "les_afm_costing",
+        "les_afm_taxation"
+      ]
     }
   ],
   "lessons": [
@@ -755,20 +763,53 @@
             {
               "kind": "text",
               "md": {
-                "en": "**Depreciation**\n\nStraight Line Method (SLM) charges constant depreciation annually. Written Down Value (WDV) applies a fixed rate to beginning book value."
+                "en": "**Simple vs Compound Interest**\n\nSimple interest is charged only on the original principal (SI = P x r x t). Compound interest is charged on principal plus accumulated interest, so it grows faster. The more frequent the compounding, the higher the effective return."
               }
             },
             {
               "kind": "text",
               "md": {
-                "en": "**Key:** SLM = (Cost - Scrap) / Life"
+                "en": "**Key:** SI = P·r·t | CI grows on principal + interest"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_time_value-c3",
+          "kind": "example",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Future Value worked example**\n\n₹10,000 is invested for 2 years at 10% per annum compounded annually.\n\n- FV = PV x (1 + r)^n = 10,000 x (1.10)^2\n- = 10,000 x 1.21 = ₹12,100\n\nThe investment grows to ₹12,100, of which ₹2,100 is compound interest."
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_time_value-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Annuities**\n\nAn annuity is a series of equal cash flows at regular intervals. The Present Value of an annuity discounts each instalment; this is the basis of EMI and loan-amortisation calculations."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Annuity = equal periodic cash flows (basis of EMIs)"
               }
             }
           ]
         }
       ],
       "probeQuestionIds": [
-        "les_afm_time_value-quiz"
+        "les_afm_time_value-quiz",
+        "les_afm_time_value-quiz2"
       ]
     },
     {
@@ -1165,10 +1206,43 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_afm_capital_budgeting-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Appraisal techniques**\n\n- **NPV** — PV of inflows - PV of outflows; accept if > 0 (discounted)\n- **IRR** — The discount rate at which NPV = 0; accept if IRR > cost of capital (discounted)\n- **Payback Period** — Time to recover the initial outlay (non-discounted, ignores time value)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_capital_budgeting-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**IRR & the Hurdle Rate**\n\nThe Internal Rate of Return (IRR) is the rate that makes a project's NPV zero. A project is accepted if its IRR exceeds the firm's required return (cost of capital / hurdle rate). NPV and IRR usually agree, but NPV is preferred when they conflict."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Accept if IRR > cost of capital"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_afm_capital_budgeting-quiz"
+        "les_afm_capital_budgeting-quiz",
+        "les_afm_capital_budgeting-quiz2"
       ]
     },
     {
@@ -1211,10 +1285,49 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_afm_accounting_cycle-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Double-Entry & Golden Rules**\n\nEvery transaction has two equal and opposite effects (debit and credit). The traditional golden rules: Personal a/c — debit the receiver, credit the giver; Real a/c — debit what comes in, credit what goes out; Nominal a/c — debit expenses/losses, credit incomes/gains."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Every debit has an equal and opposite credit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_accounting_cycle-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**A Bank's Balance Sheet**\n\nFor a bank, deposits are liabilities (money it owes customers) and loans/advances are assets (money owed to it). This is the reverse of how a customer views the same accounts — a key exam trap."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Bank: deposits = liability · loans = asset"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_afm_accounting_cycle-quiz"
+        "les_afm_accounting_cycle-quiz",
+        "les_afm_accounting_cycle-quiz2"
       ]
     },
     {
@@ -1651,10 +1764,43 @@
               }
             }
           ]
+        },
+        {
+          "id": "les_afm_ratio_analysis-c3",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Four families of ratios**\n\n- **Liquidity** — Current Ratio, Quick Ratio — short-term solvency\n- **Leverage** — Debt-Equity, Interest Coverage — long-term gearing\n- **Profitability** — Net Profit margin, Return on Equity\n- **Turnover** — Stock turnover, Debtors turnover — efficiency"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_ratio_analysis-c4",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Debt-Equity & Ideal Norms**\n\nDebt-Equity Ratio = Total Debt / Net Worth, measuring how leveraged a firm is. A common benchmark for the Current Ratio is 2:1 and for the Quick Ratio 1:1, though ideal levels vary by industry."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Ideal: Current 2:1 · Quick 1:1 · D/E lower is safer"
+              }
+            }
+          ]
         }
       ],
       "probeQuestionIds": [
-        "les_afm_ratio_analysis-quiz"
+        "les_afm_ratio_analysis-quiz",
+        "les_afm_ratio_analysis-quiz2"
       ]
     },
     {
@@ -2762,6 +2908,326 @@
         "les_rbwm_mutual_funds-quiz",
         "les_rbwm_mutual_funds-quiz2"
       ]
+    },
+    {
+      "id": "les_afm_depreciation",
+      "moduleId": "m_afm_a",
+      "title": {
+        "en": "Depreciation: SLM vs WDV"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_depreciation-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Depreciation: SLM vs WDV**\n\nAccounting"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_depreciation-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Why Depreciate?**\n\nDepreciation spreads the cost of a fixed asset over its useful life, matching the expense to the periods that benefit from the asset. It is a non-cash expense that reduces book value and taxable profit."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Depreciation = systematic write-off of asset cost"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_depreciation-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**SLM vs WDV**\n\nStraight Line Method (SLM) charges a constant amount each year: (Cost - Scrap) / Life. Written Down Value (WDV) applies a fixed percentage to the reducing book value, so the charge is higher early and lower later."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** SLM = constant | WDV = reducing balance"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_depreciation-c3",
+          "kind": "example",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**SLM worked example**\n\nA machine costs ₹1,00,000, has a scrap value of ₹10,000 and a useful life of 9 years. Compute annual SLM depreciation.\n\n- Depreciable amount = Cost - Scrap = 1,00,000 - 10,000 = ₹90,000\n- Annual depreciation = 90,000 / 9 = ₹10,000 per year\n\nUnder SLM, ₹10,000 is charged to the P&L each year for 9 years."
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_depreciation-quiz",
+        "les_afm_depreciation-quiz2"
+      ]
+    },
+    {
+      "id": "les_afm_accounting_concepts",
+      "moduleId": "m_afm_a",
+      "title": {
+        "en": "Accounting Concepts & Conventions"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_accounting_concepts-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Accounting Concepts & Conventions**\n\nAccounting"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_accounting_concepts-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Why Concepts Matter**\n\nAccounting concepts are the basic assumptions on which financial statements are built, ensuring they are consistent and comparable across firms and years."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Concepts = the ground rules of accounting"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_accounting_concepts-c2",
+          "kind": "concept",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key concepts**\n\n- **Going Concern** — The business will continue operating in the foreseeable future\n- **Accrual** — Record income/expense when earned/incurred, not when cash moves\n- **Matching** — Match expenses to the revenues they help generate\n- **Consistency** — Use the same methods period to period for comparability"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_accounting_concepts-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Conventions**\n\nConventions guide practical reporting: Conservatism (anticipate losses, not gains), Materiality (report what could influence decisions), and Full Disclosure (reveal all relevant information)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Conservatism · Materiality · Full Disclosure"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_accounting_concepts-quiz"
+      ]
+    },
+    {
+      "id": "les_afm_costing",
+      "moduleId": "m_afm_d",
+      "title": {
+        "en": "Costing & Break-even"
+      },
+      "estMinutes": 6,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_costing-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Costing & Break-even**\n\nFinance"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_costing-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Fixed vs Variable Cost**\n\nFixed costs stay constant regardless of output (rent, salaries). Variable costs change with output (raw materials). Total cost = Fixed + Variable. Per-unit fixed cost falls as output rises."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Total Cost = Fixed Cost + Variable Cost"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_costing-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Contribution & Break-even**\n\nContribution = Selling Price - Variable Cost per unit. The Break-Even Point (in units) = Fixed Costs / Contribution per unit — the output at which total revenue exactly covers total cost (no profit, no loss)."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** BEP (units) = Fixed Cost / Contribution per unit"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_costing-c3",
+          "kind": "example",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Break-even worked example**\n\nFixed costs are ₹1,00,000. A unit sells for ₹50 and its variable cost is ₹30.\n\n- Contribution per unit = 50 - 30 = ₹20\n- BEP = Fixed Cost / Contribution = 1,00,000 / 20 = 5,000 units\n\nThe firm must sell 5,000 units to break even; every unit beyond that earns ₹20 profit."
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_costing-quiz"
+      ]
+    },
+    {
+      "id": "les_afm_taxation",
+      "moduleId": "m_afm_d",
+      "title": {
+        "en": "Taxation Basics for Bankers"
+      },
+      "estMinutes": 5,
+      "version": 1,
+      "cards": [
+        {
+          "id": "les_afm_taxation-c0",
+          "kind": "intro",
+          "srsEligible": false,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Taxation Basics for Bankers**\n\nTaxation"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_taxation-c1",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Direct vs Indirect Tax**\n\nDirect taxes (Income Tax) are levied on income and borne by the same person. Indirect taxes (GST) are levied on goods/services and the burden is passed to the final consumer."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** Direct = on income | Indirect (GST) = on consumption"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_taxation-c2",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**TDS on Interest**\n\nBanks must deduct Tax Deducted at Source (TDS) on interest paid on deposits once it crosses the annual threshold (₹40,000 for most individuals, ₹50,000 for senior citizens). Customers can submit Form 15G/15H to avoid TDS if their income is below the taxable limit."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** TDS on FD interest above ₹40,000 (₹50,000 for seniors)"
+              }
+            }
+          ]
+        },
+        {
+          "id": "les_afm_taxation-c3",
+          "kind": "concept",
+          "srsEligible": true,
+          "blocks": [
+            {
+              "kind": "text",
+              "md": {
+                "en": "**PAN & Form 15G/15H**\n\nIf a customer does not provide a PAN, TDS is deducted at the higher rate of 20% instead of 10%. Form 15G (non-seniors) and Form 15H (seniors) are self-declarations that no tax is payable, so the bank should not deduct TDS."
+              }
+            },
+            {
+              "kind": "text",
+              "md": {
+                "en": "**Key:** No PAN -> 20% TDS · 15G/15H -> no TDS"
+              }
+            }
+          ]
+        }
+      ],
+      "probeQuestionIds": [
+        "les_afm_taxation-quiz",
+        "les_afm_taxation-quiz2"
+      ]
     }
   ],
   "questions": [
@@ -3243,6 +3709,59 @@
       }
     },
     {
+      "id": "les_afm_time_value-quiz2",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "FV = 1,000 x (1.10)^2 = 1,000 x 1.21 = ₹1,210."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "₹1,000 invested at 10% per annum compounded annually grows to what amount after 2 years?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹1,100"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹1,200"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹1,210"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹1,221"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
       "id": "les_ieifs_gdp-quiz",
       "version": 1,
       "topicTags": [
@@ -3720,6 +4239,59 @@
       }
     },
     {
+      "id": "les_afm_capital_budgeting-quiz2",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "IRR is defined as the discount rate at which the project's Net Present Value becomes zero; a project is viable if its IRR exceeds the cost of capital."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The Internal Rate of Return (IRR) of a project is the discount rate at which:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "NPV is maximum"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "NPV equals zero"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Payback period is shortest"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Profit is highest"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
       "id": "les_afm_accounting_cycle-quiz",
       "version": 1,
       "topicTags": [
@@ -3766,6 +4338,59 @@
             "id": "d",
             "content": {
               "en": "₹70,000"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_accounting_cycle-quiz2",
+      "version": 1,
+      "topicTags": [
+        "balance_sheet",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Deposits are money the bank owes its customers, so they are liabilities on the bank's balance sheet; loans and advances are its assets."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "On a bank's own balance sheet, customer deposits are classified as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Assets"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Liabilities"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Equity"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Contingent liabilities"
             }
           }
         ],
@@ -4349,6 +4974,59 @@
             "id": "d",
             "content": {
               "en": "3.0:1"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_ratio_analysis-quiz2",
+      "version": 1,
+      "topicTags": [
+        "ratio_analysis",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Quick Ratio = (Current Assets - Inventory) / Current Liabilities = (1,00,000 - 20,000) / 50,000 = 80,000 / 50,000 = 1.6:1."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Using the same figures, what is the Quick (Acid-Test) Ratio?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "1.0:1"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "1.6:1"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "2.0:1"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "2.5:1"
             }
           }
         ],
@@ -5515,6 +6193,324 @@
             "id": "d",
             "content": {
               "en": "Insurance cover"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_depreciation-quiz",
+      "version": 1,
+      "topicTags": [
+        "depreciation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SLM depreciation = (Cost - Scrap) / Life = (1,00,000 - 10,000) / 9 = ₹10,000 per year."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "An asset costing ₹1,00,000 with a scrap value of ₹10,000 and a life of 9 years has what annual SLM depreciation?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹9,000"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹10,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹11,111"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹12,000"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_depreciation-quiz2",
+      "version": 1,
+      "topicTags": [
+        "depreciation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The Written Down Value (reducing balance) method applies a fixed rate to a shrinking book value, so the rupee charge is highest in early years and declines over time."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which depreciation method charges a higher amount in the early years of an asset's life?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Straight Line Method"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Written Down Value method"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Both charge equally"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Neither charges depreciation early"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_accounting_concepts-quiz",
+      "version": 1,
+      "topicTags": [
+        "accounting_concepts",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The accrual concept records income and expenses in the period they are earned or incurred, independent of the actual cash flow."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Recording revenue when it is earned rather than when cash is received reflects which concept?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Going Concern"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Accrual concept"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Conservatism"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Materiality"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "les_afm_costing-quiz",
+      "version": 1,
+      "topicTags": [
+        "costing_basics",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Contribution = 100 - 60 = ₹40. BEP = Fixed Cost / Contribution = 2,00,000 / 40 = 5,000 units."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Fixed costs are ₹2,00,000, selling price is ₹100 and variable cost is ₹60 per unit. What is the break-even quantity?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "2,000 units"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "3,333 units"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "5,000 units"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "10,000 units"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_afm_taxation-quiz",
+      "version": 1,
+      "topicTags": [
+        "taxation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "In the absence of a valid PAN, banks deduct TDS at the higher rate of 20% instead of the standard 10%."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a depositor does not furnish a PAN, at what rate is TDS on interest generally deducted?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "5%"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "10%"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "20%"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "30%"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "les_afm_taxation-quiz2",
+      "version": 1,
+      "topicTags": [
+        "taxation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Form 15H is the self-declaration for senior citizens; Form 15G is for other individuals. Both certify that the person's income is below the taxable limit so no TDS should be deducted."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Which form does a senior citizen submit to a bank to avoid TDS on interest when their income is below the taxable limit?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Form 15G"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Form 15H"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Form 16"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Form 26AS"
             }
           }
         ],
@@ -7427,6 +8423,324 @@
           }
         ],
         "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_slm",
+      "version": 1,
+      "topicTags": [
+        "depreciation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "SLM depreciation = (Cost - Scrap) / Life = (55,000 - 5,000) / 5 = ₹10,000 per year."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "A machine costs ₹55,000, has a scrap value of ₹5,000 and a life of 5 years. Annual SLM depreciation is:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "₹10,000"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "₹11,000"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "₹9,000"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "₹12,000"
+            }
+          }
+        ],
+        "correctOptionId": "a"
+      }
+    },
+    {
+      "id": "q_afm_irr",
+      "version": 1,
+      "topicTags": [
+        "time_value_of_money",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "IRR is the discount rate that makes the project's NPV zero; a project is accepted when its IRR exceeds the cost of capital."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "The Internal Rate of Return (IRR) is the discount rate at which a project's:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "NPV is maximum"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "NPV equals zero"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Payback is shortest"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Profit is highest"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_breakeven",
+      "version": 1,
+      "topicTags": [
+        "costing_basics",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Contribution = 50 - 30 = ₹20. BEP = Fixed Cost / Contribution = 60,000 / 20 = 3,000 units."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Fixed costs are ₹60,000, selling price ₹50 and variable cost ₹30 per unit. The break-even quantity is:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "1,200 units"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "2,000 units"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "3,000 units"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "6,000 units"
+            }
+          }
+        ],
+        "correctOptionId": "c"
+      }
+    },
+    {
+      "id": "q_afm_accrual",
+      "version": 1,
+      "topicTags": [
+        "accounting_concepts",
+        "AFM"
+      ],
+      "difficulty": 1,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "The accrual concept recognises income and expenses in the period to which they relate, regardless of when cash is exchanged."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "Recording an expense when it is incurred rather than when it is paid reflects which concept?"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Going concern"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Accrual concept"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Conservatism"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Materiality"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_bank_deposit",
+      "version": 1,
+      "topicTags": [
+        "balance_sheet",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Deposits are amounts the bank owes its customers, so they are liabilities; advances and investments are the bank's assets."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "On a bank's own balance sheet, customer fixed deposits appear as:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "Assets"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "Liabilities"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "Contingent assets"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "Equity"
+            }
+          }
+        ],
+        "correctOptionId": "b"
+      }
+    },
+    {
+      "id": "q_afm_tds_pan",
+      "version": 1,
+      "topicTags": [
+        "taxation",
+        "AFM"
+      ],
+      "difficulty": 2,
+      "gradingMode": "auto_exact",
+      "defaultMarks": 1,
+      "defaultNegativeMarks": 0,
+      "explanation": {
+        "en": "Without a valid PAN, banks deduct TDS at the higher rate of 20% rather than the usual 10%."
+      },
+      "authoring": {
+        "status": "published",
+        "authorId": "jaiib_ingest",
+        "reviewerId": "jaiib_review"
+      },
+      "payload": {
+        "type": "mcq_single",
+        "stem": {
+          "en": "If a depositor fails to provide a PAN, TDS on interest income is deducted at:"
+        },
+        "options": [
+          {
+            "id": "a",
+            "content": {
+              "en": "10%"
+            }
+          },
+          {
+            "id": "b",
+            "content": {
+              "en": "15%"
+            }
+          },
+          {
+            "id": "c",
+            "content": {
+              "en": "20%"
+            }
+          },
+          {
+            "id": "d",
+            "content": {
+              "en": "30%"
+            }
+          }
+        ],
+        "correctOptionId": "c"
       }
     }
   ],
