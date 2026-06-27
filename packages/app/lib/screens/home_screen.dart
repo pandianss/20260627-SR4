@@ -186,6 +186,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   const Divider(),
                   const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.brightness_6_outlined,
+                          color: t.textSecondary, size: 20),
+                      const SizedBox(width: 12),
+                      Text('Appearance', style: AppTypography.body(t)),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  SegmentedButton<ThemeMode>(
+                    showSelectedIcon: false,
+                    segments: const [
+                      ButtonSegment(
+                          value: ThemeMode.system, label: Text('System')),
+                      ButtonSegment(
+                          value: ThemeMode.light, label: Text('Light')),
+                      ButtonSegment(
+                          value: ThemeMode.dark, label: Text('Dark')),
+                    ],
+                    selected: {_scope.themeMode},
+                    onSelectionChanged: (sel) {
+                      _scope.onSetThemeMode?.call(sel.first);
+                      setSheetState(() {});
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  const Divider(),
+                  const SizedBox(height: 8),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: Icon(

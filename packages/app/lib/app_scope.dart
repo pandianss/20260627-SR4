@@ -28,6 +28,8 @@ class AppScope extends InheritedWidget {
   final VoidCallback? requestSync;
   final bool isPremium;
   final VoidCallback? onBuyPremium;
+  final ThemeMode themeMode;
+  final void Function(ThemeMode mode)? onSetThemeMode;
 
   const AppScope({
     super.key,
@@ -45,6 +47,8 @@ class AppScope extends InheritedWidget {
     this.requestSync,
     required this.isPremium,
     this.onBuyPremium,
+    this.themeMode = ThemeMode.system,
+    this.onSetThemeMode,
     required super.child,
   });
 
@@ -58,5 +62,6 @@ class AppScope extends InheritedWidget {
   bool updateShouldNotify(AppScope oldWidget) =>
       oldWidget.isPremium != isPremium ||
       oldWidget.userId != userId ||
-      oldWidget.examName != examName;
+      oldWidget.examName != examName ||
+      oldWidget.themeMode != themeMode;
 }

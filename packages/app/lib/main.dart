@@ -91,6 +91,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   bool _isPremium = false;
   bool _loadingSession = true;
+  ThemeMode _themeMode = ThemeMode.system;
 
   @override
   void initState() {
@@ -175,10 +176,25 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     _syncDebounce = Timer(const Duration(seconds: 2), _pushCloud);
   }
 
+  Future<void> _setThemeMode(ThemeMode mode) async {
+    setState(() => _themeMode = mode);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('themeMode', mode.name);
+    } catch (_) {}
+  }
+
   Future<void> _checkPersistedSession() async {
     final prefs = await SharedPreferences.getInstance();
     _eventStore = await PrefsEventLogStore.create(prefs);
     _stateStore = await PrefsSrsStateStore.create(prefs);
+    final themeStr = prefs.getString('themeMode');
+    if (themeStr != null) {
+      _themeMode = ThemeMode.values.firstWhere(
+        (m) => m.name == themeStr,
+        orElse: () => ThemeMode.system,
+      );
+    }
     _syncCloud(); // fire-and-forget cloud backup + restore for this uid
     try {
       final examName = prefs.getString('examName');
@@ -364,7 +380,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     final Widget home;
     if (_loadingSession) {
       home = Scaffold(
-        backgroundColor: themeTokens.bgBase,
         body: Center(child: CircularProgressIndicator(color: themeTokens.accent)),
       );
     } else if (_examDate == null) {
@@ -395,7 +410,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       );
     } else if (!_contentLoaded) {
       home = Scaffold(
-        backgroundColor: themeTokens.bgBase,
         body: Center(child: CircularProgressIndicator(color: themeTokens.accent)),
       );
     } else {
@@ -424,6 +438,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         requestSync: _requestSync,
         isPremium: _isPremium,
         onBuyPremium: _purchasePremium,
+        themeMode: _themeMode,
+        onSetThemeMode: _setThemeMode,
         child: const MainLayout(),
       );
     }
@@ -432,6 +448,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       title: 'SuperRecall Banker',
       debugShowCheckedModeBanner: false,
       theme: theme,
+      darkTheme: buildTheme(AppTokens.dark),
+      themeMode: _themeMode,
       home: home,
     );
   }
