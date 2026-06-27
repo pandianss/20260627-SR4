@@ -259,6 +259,26 @@ class LearningRepository {
     if (next != null) await states.saveState(next);
     return next ?? state;
   }
+
+  /// Flag content as incorrect, typos, etc., and append to the event log.
+  Future<void> flagContent({
+    required String userId,
+    required String examContext,
+    required String contentId,
+    required String contentType,
+    required String reason,
+  }) async {
+    final now = DateTime.now();
+    await events.appendEvent(ContentFlaggedEvent(
+      clientUlid: 'ulid_flag_${contentId}_${now.millisecondsSinceEpoch}',
+      userId: userId,
+      timestamp: now,
+      examContext: examContext,
+      contentId: contentId,
+      contentType: contentType,
+      reason: reason,
+    ));
+  }
 }
 
 class HomeData {

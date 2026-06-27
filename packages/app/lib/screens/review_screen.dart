@@ -9,6 +9,7 @@ import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
 import '../app_scope.dart';
 import 'paywall_screen.dart';
+import '../components/flag_content_dialog.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
@@ -204,6 +205,35 @@ class _ReviewScreenState extends State<ReviewScreen> {
           style: AppTypography.heading(t).copyWith(fontWeight: FontWeight.w500),
         ),
         actions: [
+          IconButton(
+            icon: Icon(Icons.flag_outlined, color: t.textSecondary),
+            tooltip: 'Report an issue with this card',
+            onPressed: () {
+              if (card == null) return;
+              showFlagContentDialog(
+                context: context,
+                contentId: card.id,
+                contentType: 'card',
+                userId: _scope.userId,
+                examContext: _scope.examName,
+                onFlagSubmitted: ({
+                  required userId,
+                  required examContext,
+                  required contentId,
+                  required contentType,
+                  required reason,
+                }) async {
+                  await _repo.flagContent(
+                    userId: userId,
+                    examContext: examContext,
+                    contentId: contentId,
+                    contentType: contentType,
+                    reason: reason,
+                  );
+                },
+              );
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Center(
