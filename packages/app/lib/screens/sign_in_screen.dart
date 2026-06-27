@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../components/button.dart';
 import '../services/auth_service.dart';
@@ -51,10 +53,19 @@ class _SignInScreenState extends State<SignInScreen> {
       await action();
     } on FirebaseAuthException catch (e) {
       _snack(_friendly(e));
+    } on GoogleSignInException catch (e) {
+      // User backing out is not an error worth surfacing.
+      if (e.code == GoogleSignInExceptionCode.canceled) return;
+      final desc = e.description == null ? '' : ' — ${e.description}';
+      _snack('Google sign-in failed (${e.code.name})$desc');
+    } on PlatformException catch (e) {
+      // e.g. code "10" = DEVELOPER_ERROR (the signing SHA-1 isn't registered
+      // in Firebase for this build), "12500" = misconfiguration.
+      _snack('Sign-in error ${e.code}: ${e.message ?? ''}');
     } on UnsupportedError catch (e) {
       _snack(e.message ?? 'Not supported on this device.');
     } catch (e) {
-      _snack('Something went wrong. Please try again.');
+      _snack('Something went wrong: $e');
     } finally {
       if (mounted) setState(() => _busy = false);
     }
