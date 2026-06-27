@@ -163,7 +163,9 @@ void main() {
     });
 
     test('Records lesson views, calculates DAU/MAU and lesson completion rates', () async {
-      final now = DateTime.now();
+      // Fixed mid-day, mid-month reference so "+5 min" can't cross midnight and
+      // "-1 day" can't cross a month boundary (which made this test date-flaky).
+      final now = DateTime(2026, 6, 15, 10, 0);
       // Add a lesson viewed event today
       await eventStore.appendEvent(LessonViewedEvent(
         clientUlid: 'ulid_1',
@@ -173,7 +175,7 @@ void main() {
         lessonId: 'lesson1',
       ));
 
-      var stats = await analyticsService.calculateAnalytics(userId);
+      var stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 1);
       expect(stats.mau, 1);
       expect(stats.completedLessonsCount, 1);
@@ -189,7 +191,7 @@ void main() {
         lessonId: 'lesson1',
       ));
 
-      stats = await analyticsService.calculateAnalytics(userId);
+      stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 1);
       expect(stats.completedLessonsCount, 1);
 
@@ -202,7 +204,7 @@ void main() {
         lessonId: 'lesson2',
       ));
 
-      stats = await analyticsService.calculateAnalytics(userId);
+      stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 2);
       expect(stats.completedLessonsCount, 2);
       expect(stats.completionRate, 1.0);

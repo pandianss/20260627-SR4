@@ -1,5 +1,4 @@
 import 'package:store/store.dart';
-import 'package:domain/domain.dart';
 
 class UserAnalytics {
   final int dau;
@@ -38,7 +37,9 @@ class AnalyticsService {
     required this.contentStore,
   });
 
-  Future<UserAnalytics> calculateAnalytics(String userId) async {
+  /// [now] overrides the reference "today" used for the streak calculation
+  /// (defaults to the wall clock) — pass it for deterministic tests.
+  Future<UserAnalytics> calculateAnalytics(String userId, {DateTime? now}) async {
     final events = await eventStore.getAllEvents(userId);
     if (events.isEmpty) {
       return const UserAnalytics(
@@ -79,7 +80,7 @@ class AnalyticsService {
     int longestStreak = 0;
     
     if (uniqueDates.isNotEmpty) {
-      final today = DateTime.now();
+      final today = now ?? DateTime.now();
       final todayDate = DateTime(today.year, today.month, today.day);
       final yesterdayDate = todayDate.subtract(const Duration(days: 1));
 
