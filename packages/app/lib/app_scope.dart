@@ -4,6 +4,7 @@ import 'data/learning_repository.dart';
 import 'services/notification_service.dart';
 import 'services/updates_service.dart';
 import 'services/auth_service.dart';
+import 'services/billing_service.dart';
 
 /// App-wide dependencies made available to the screen tree, so screens read
 /// what they need from context instead of receiving a long list of constructor
@@ -28,6 +29,9 @@ class AppScope extends InheritedWidget {
   final VoidCallback? requestSync;
   final bool isPremium;
   final VoidCallback? onBuyPremium;
+
+  /// Play Billing / StoreKit access for the paywall. Null when unavailable.
+  final BillingService? billingService;
   final ThemeMode themeMode;
   final void Function(ThemeMode mode)? onSetThemeMode;
 
@@ -47,6 +51,7 @@ class AppScope extends InheritedWidget {
     this.requestSync,
     required this.isPremium,
     this.onBuyPremium,
+    this.billingService,
     this.themeMode = ThemeMode.system,
     this.onSetThemeMode,
     required super.child,

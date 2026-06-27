@@ -15,6 +15,7 @@ import 'screens/main_layout.dart';
 import 'theme/tokens.dart';
 import 'services/notification_service.dart';
 import 'services/push_service.dart';
+import 'services/billing_service.dart';
 import 'services/telemetry_service.dart';
 import 'services/updates_service.dart';
 import 'services/auth_service.dart';
@@ -88,6 +89,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   late final EventLogStore _eventStore;
   late final SrsStateStore _stateStore;
   final NotificationService _notificationService = NotificationService();
+  final BillingService _billing = BillingService();
   final TelemetryService _telemetryService = TelemetryService();
   final UpdatesService _updatesService = UpdatesService();
   final ValueNotifier<int> _syncRevision = ValueNotifier<int>(0);
@@ -106,6 +108,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     _userId = widget.userId;
     _checkPersistedSession();
     _notificationService.init();
+    _billing.onPremiumUnlocked = _grantPremium;
+    _billing.init();
 
     _authSub = widget.authService?.authStateChanges.listen((user) {
       if (user != null && user.uid != _userId) {
@@ -125,6 +129,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     _authSub?.cancel();
     _syncDebounce?.cancel();
     _syncRevision.dispose();
+    _billing.dispose();
     super.dispose();
   }
 
@@ -325,16 +330,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     });
   }
 
-  Future<void> _purchasePremium() async {
+  /// Mark premium active (called by BillingService when a purchase is confirmed
+  /// or restored). Persists locally and reflects in the UI.
+  Future<void> _grantPremium() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isPremium', true);
     } catch (e) {
       debugPrint('Error saving premium state: $e');
     }
-    setState(() {
-      _isPremium = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isPremium = true;
+      });
+    }
   }
 
   /// Load the content pack for the chosen exam into the stores.
@@ -474,7 +483,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         syncRevision: _syncRevision,
         requestSync: _requestSync,
         isPremium: _isPremium,
-        onBuyPremium: _purchasePremium,
+        billingService: _billing,
         themeMode: _themeMode,
         onSetThemeMode: _setThemeMode,
         child: const MainLayout(),
