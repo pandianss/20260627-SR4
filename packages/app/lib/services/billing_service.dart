@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -86,10 +87,15 @@ class BillingService {
         case PurchaseStatus.purchased:
         case PurchaseStatus.restored:
           if (_ids.contains(p.productID)) {
-            onPremiumUnlocked?.call();
-            _events.add(p.status == PurchaseStatus.restored
-                ? BillingEvent.restored
-                : BillingEvent.purchased);
+            final ok = await _verify(p);
+            if (ok) {
+              onPremiumUnlocked?.call();
+              _events.add(p.status == PurchaseStatus.restored
+                  ? BillingEvent.restored
+                  : BillingEvent.purchased);
+            } else {
+              _events.add(BillingEvent.error);
+            }
           }
           break;
         case PurchaseStatus.error:
@@ -103,6 +109,32 @@ class BillingService {
       if (p.pendingCompletePurchase) {
         await _iap.completePurchase(p);
       }
+    }
+  }
+
+  /// Until the Play service account is linked in Play Console, server
+  /// verification will fail; trust the client so internal testing isn't blocked.
+  /// Flip to `false` once `verifyPlayPurchase` is configured and tested.
+  static const bool _allowUnverifiedFallback = true;
+
+  /// Server-side receipt verification via the `verifyPlayPurchase` Cloud
+  /// Function (validates against the Play Developer API + records entitlement
+  /// in Firestore). Falls back to client-trust while not yet configured.
+  Future<bool> _verify(PurchaseDetails p) async {
+    try {
+      final res = await FirebaseFunctions.instance
+          .httpsCallable('verifyPlayPurchase')
+          .call(<String, dynamic>{
+        'productId': p.productID,
+        'purchaseToken': p.verificationData.serverVerificationData,
+        'isSubscription': p.productID == monthlyId,
+      });
+      final data = res.data;
+      return data is Map && data['valid'] == true;
+    } catch (e) {
+      debugPrint('verifyPlayPurchase unavailable ($e) — '
+          'granting unverified=$_allowUnverifiedFallback');
+      return _allowUnverifiedFallback;
     }
   }
 

@@ -1,5 +1,6 @@
-const { onRequest } = require("firebase-functions/v2/https");
+const { onRequest, onCall, HttpsError } = require("firebase-functions/v2/https");
 const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { google } = require("googleapis");
 const { defineSecret } = require("firebase-functions/params");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
@@ -404,3 +405,73 @@ exports.refreshUpdatesNow = onRequest(
     }
   }
 );
+
+// ── Play Billing receipt verification ───────────────────────────────────────
+
+const PACKAGE_NAME = "com.superrecall.banker";
+
+// Verify a Play purchase server-side against the Google Play Developer API and,
+// if valid, record the entitlement on the user's Firestore doc (the
+// tamper-proof source of truth).
+//
+// Setup required (see docs/BILLING.md): grant this project's runtime service
+// account access to the app in Play Console (Users & permissions → invite the
+// `…@…gserviceaccount.com` account with "View financial data" / order access),
+// and link the project under Play Console → Setup → API access.
+exports.verifyPlayPurchase = onCall(async (req) => {
+  const uid = req.auth?.uid;
+  if (!uid) {
+    throw new HttpsError("unauthenticated", "Sign in required.");
+  }
+  const { productId, purchaseToken, isSubscription } = req.data || {};
+  if (!productId || !purchaseToken) {
+    throw new HttpsError("invalid-argument", "productId and purchaseToken required.");
+  }
+
+  const auth = new google.auth.GoogleAuth({
+    scopes: ["https://www.googleapis.com/auth/androidpublisher"],
+  });
+  const androidpublisher = google.androidpublisher({ version: "v3", auth });
+
+  try {
+    let valid = false;
+    let expiryMs = null;
+
+    if (isSubscription) {
+      const res = await androidpublisher.purchases.subscriptionsv2.get({
+        packageName: PACKAGE_NAME,
+        token: purchaseToken,
+      });
+      const state = res.data.subscriptionState;
+      valid =
+        state === "SUBSCRIPTION_STATE_ACTIVE" ||
+        state === "SUBSCRIPTION_STATE_IN_GRACE_PERIOD";
+      const expiry = res.data.lineItems?.[0]?.expiryTime;
+      if (expiry) expiryMs = new Date(expiry).getTime();
+    } else {
+      const res = await androidpublisher.purchases.products.get({
+        packageName: PACKAGE_NAME,
+        productId,
+        token: purchaseToken,
+      });
+      valid = res.data.purchaseState === 0; // 0 = Purchased
+    }
+
+    if (valid) {
+      await db.collection("users").doc(uid).set(
+        {
+          premium: true,
+          premiumProductId: productId,
+          premiumExpiry: expiryMs,
+          premiumUpdatedAt: Date.now(),
+        },
+        { merge: true }
+      );
+    }
+    logger.info("verifyPlayPurchase", { uid, productId, isSubscription, valid });
+    return { valid, expiryMs };
+  } catch (error) {
+    logger.error("verifyPlayPurchase failed", { productId, error: error.message });
+    throw new HttpsError("internal", "Verification failed.");
+  }
+});

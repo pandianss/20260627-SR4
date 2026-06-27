@@ -34,8 +34,28 @@ Steps:
 - JAIIB and other exams are planned to be sold separately later — add new
   product IDs + an entitlement model when that lands.
 
-## Hardening TODO (before scaling)
-Entitlement is currently trusted client-side (persisted to SharedPreferences).
-Add **server-side receipt verification**: a Cloud Function that validates the
-purchase token against the Google Play Developer API and writes the entitlement
-to Firestore, so it can't be spoofed and syncs across devices.
+## Server-side verification (`verifyPlayPurchase`)
+A callable Cloud Function (`functions/index.js` → `verifyPlayPurchase`) validates
+the purchase token against the **Google Play Developer API** and records the
+entitlement on `users/{uid}` in Firestore. `BillingService._verify` calls it
+after every purchase/restore and only grants premium when it returns
+`{valid:true}`.
+
+**Required setup (do this once the app exists in Play Console):**
+1. **Play Console → Setup → API access** → link this GCP project
+   (`superrecall-3afe5`).
+2. Grant the **functions runtime service account**
+   (`524369176132-compute@developer.gserviceaccount.com`) access to the app:
+   Play Console → Users & permissions → Invite that service-account email →
+   grant "View financial data, orders, and cancellation survey responses"
+   (and app access). It can take a few hours to propagate.
+3. Deploy: `firebase deploy --only functions:verifyPlayPurchase`.
+
+**Transitional flag:** until the above is configured, the server call fails and
+`BillingService._allowUnverifiedFallback` (currently `true`) trusts the client so
+internal testing isn't blocked. **Flip it to `false`** once verification works.
+
+**Final hardening (optional):** make the app *read* `users/{uid}.premium` as the
+authoritative entitlement (instead of the local pref) so it can't be spoofed and
+syncs across devices. Today the function writes that doc but the app still keys
+premium off the local grant.
