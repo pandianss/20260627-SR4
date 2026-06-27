@@ -14,6 +14,7 @@ import 'screens/onboarding_screen.dart';
 import 'screens/main_layout.dart';
 import 'theme/tokens.dart';
 import 'services/notification_service.dart';
+import 'services/push_service.dart';
 import 'services/telemetry_service.dart';
 import 'services/updates_service.dart';
 import 'services/auth_service.dart';
@@ -36,6 +37,9 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  // Subscribe to regulatory-update pushes (best-effort, non-blocking).
+  unawaited(PushService().init());
 
   // Anonymous-first auth: every user gets a stable uid immediately. Falls back
   // to a local id only if the very first launch is offline.
