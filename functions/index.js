@@ -201,45 +201,81 @@ const UPDATE_SCHEMA = {
   required: ["updates"],
 };
 
-const CURATION_PROMPT = `You curate regulatory updates for an Indian banking
-certification study app (IIBF JAIIB/CAIIB candidates). Using web search, find
-the most relevant official announcements from the last 30 days from the RBI,
-SEBI, IRDAI, and IIBF that matter to the JAIIB/CAIIB syllabus — monetary policy,
-KYC/AML, digital lending, priority-sector lending, risk/capital norms, mutual
-funds/investor protection, insurance regulation, and IIBF exam notices.
+// Phase 1 — web research (free-form; lets the model search and take notes).
+const RESEARCH_PROMPT = `You research regulatory updates for an Indian banking
+certification study app (IIBF JAIIB/CAIIB candidates). Use web search to find
+the most relevant official announcements from roughly the last 30 days from the
+RBI, SEBI, IRDAI, and IIBF that matter to the JAIIB/CAIIB syllabus — monetary
+policy, KYC/AML, digital lending, priority-sector lending, risk/capital norms,
+mutual funds/investor protection, insurance regulation, and IIBF exam notices.
 
-For each update: write a neutral 1-2 sentence plain-language summary, classify
-priority (critical = exam notices/deadlines or major rule changes candidates
-must know; important = notable rule updates; normal = background), pick a short
-category label, set publishedAt to the official publication date (YYYY-MM-DD),
-link sourceUrl to the official page (rbi.org.in, sebi.gov.in, irdai.gov.in, or
-iibf.org.in only), and list affected syllabus topic slugs in affectsTopics.
+Search several times across the four regulators. Then write research notes
+listing each real item you found, with: regulator, exact title, official source
+URL (must be on rbi.org.in, sebi.gov.in, irdai.gov.in, or iibf.org.in),
+publication date, and a one-line description. Only list items you actually found
+via search with an attributable official URL — do not invent anything. If a
+regulator yielded nothing, say so.`;
 
-Return up to 15 items, newest first. Only include items you can attribute to an
-official source URL. Respond with the structured JSON object only.`;
+// Phase 2 — structure the notes into the strict schema (no tools, so structured
+// outputs is honoured).
+const STRUCTURE_PROMPT = `Convert the research notes below into the required JSON.
+Include only items that have an official source URL on rbi.org.in, sebi.gov.in,
+irdai.gov.in, or iibf.org.in. For each: a neutral 1-2 sentence summary; priority
+(critical = exam notices/deadlines or major rule changes; important = notable
+rule updates; normal = background); a short category label; publishedAt as
+YYYY-MM-DD; and affectsTopics syllabus slugs. Newest first, up to 15 items. If
+the notes contain no attributable items, return {"updates":[]}.
 
-// Run the curation model (handles the server-side web-search loop) and return
-// the parsed update objects.
-async function curateUpdates() {
-  const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
-  const messages = [{ role: "user", content: CURATION_PROMPT }];
+RESEARCH NOTES:
+`;
+
+// Drive the server-side web-search loop and return the model's research text.
+async function researchUpdates(client) {
+  const messages = [{ role: "user", content: RESEARCH_PROMPT }];
   let response;
   for (let i = 0; i < 6; i++) {
     response = await client.messages.create({
       model: MODEL,
       max_tokens: 16000,
-      tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 8 }],
-      output_config: { format: { type: "json_schema", schema: UPDATE_SCHEMA } },
+      // Basic variant: no under-the-hood code execution / dynamic filtering.
+      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 12 }],
       messages,
     });
     if (response.stop_reason !== "pause_turn") break;
-    // Server tool loop hit its iteration cap — resume.
     messages.push({ role: "assistant", content: response.content });
   }
+  const blocks = response.content || [];
+  const searchHits = blocks
+    .filter((b) => b.type === "web_search_tool_result")
+    .reduce((n, b) => n + (Array.isArray(b.content) ? b.content.length : 0), 0);
+  const notes = blocks
+    .filter((b) => b.type === "text")
+    .map((b) => b.text)
+    .join("\n");
+  logger.info("researchUpdates", {
+    stopReason: response.stop_reason,
+    searchHits,
+    notesPreview: notes.slice(0, 400),
+  });
+  return notes;
+}
 
-  const textBlock = (response.content || []).find((b) => b.type === "text");
+// Two-phase curation: research with web search, then structure into the schema.
+async function curateUpdates() {
+  const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
+
+  const notes = await researchUpdates(client);
+  if (!notes.trim()) return [];
+
+  const structured = await client.messages.create({
+    model: MODEL,
+    max_tokens: 8000,
+    output_config: { format: { type: "json_schema", schema: UPDATE_SCHEMA } },
+    messages: [{ role: "user", content: STRUCTURE_PROMPT + notes }],
+  });
+  const textBlock = (structured.content || []).find((b) => b.type === "text");
   if (!textBlock) {
-    throw new Error(`No text output (stop_reason=${response.stop_reason})`);
+    throw new Error(`No structured output (stop_reason=${structured.stop_reason})`);
   }
   const parsed = JSON.parse(textBlock.text);
   return Array.isArray(parsed.updates) ? parsed.updates : [];
