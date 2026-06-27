@@ -1,8 +1,9 @@
 # Privacy Policy — SuperRecall Banker
 
-_Last updated: [DATE]. This is a draft — replace the bracketed placeholders
-([COMPANY], [CONTACT EMAIL], jurisdiction) and have it reviewed before
-publishing, then host it at a public URL and add that URL in the Play Console._
+_Last updated: 27 June 2026. The published version is served via GitHub Pages
+from the `gh-pages` branch (`index.html`) at
+https://pandianss.github.io/20260627-SR4/ — keep the two in sync. Remaining
+placeholder: [YOUR NAME] (data controller)._
 
 SuperRecall Banker ("the app", "we", "us") is a study app for candidates
 preparing for Indian Institute of Banking & Finance (IIBF) certifications. This
@@ -41,7 +42,7 @@ account can read or write it.
 - **You can delete your account at any time** from within the app
   (Account → Delete account). This permanently removes your account and all
   associated data (learning progress and identifiers) from our systems.
-- To request deletion without the app, contact us at **[CONTACT EMAIL]**.
+- To request deletion without the app, contact us at **sspandian.here@gmail.com**.
 
 ## Children
 
@@ -60,4 +61,4 @@ We may update this policy; material changes will be reflected here with a new
 
 ## Contact
 
-[COMPANY] — [CONTACT EMAIL]
+[YOUR NAME] — sspandian.here@gmail.com
