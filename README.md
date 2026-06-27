@@ -28,16 +28,18 @@ packages/grading/     Deterministic grading & scoring engine (epic E2)
     scoring.dart         Pass-rule evaluation (e.g. JAIIB two-path)
 content/exams/        Exam-config documents (e.g. jaiib.config.json — E2.4)
 schemas/              Language-neutral JSON Schema contracts (for the backend)
-docs (root *.md):
+docs/:
   banking-microlearning-study.md   Sourced strategy study
   technical-spec.md                Engine spec (questions, SRS, sync, decisions)
   design-system.md                 Calm design tokens (Flutter-ready)
   jaiib-content-pack-example.md     Worked JAIIB lesson + authoring checklist
   caiib-content-pack-example.md     Harder CAIIB lesson (formulas, multi-step)
   p0-build-backlog.md              Engineering epics & tickets
+  deep-research-report.md          Background research
+  PRIVACY.md                       Privacy policy draft
 ```
 
-## Tech decisions (see `technical-spec.md` §15)
+## Tech decisions (see `docs/technical-spec.md` §15)
 
 - **Flutter** mobile (offline-first; drift/sqflite; Riverpod or Bloc).
 - **FSRS** spaced-repetition scheduler (default weights at launch, swappable).
@@ -60,6 +62,6 @@ dart test          # 16 tests, all green
 | **E2** | Grading & scoring engine (graders, marking, pass rule) | ✅ implemented + tested |
 | E3 | FSRS spaced-repetition engine | next |
 | E4 | Offline store & sync | planned |
-| E5–E10 | App shell, renderers, mocks, content, release | planned (see `p0-build-backlog.md`) |
+| E5–E10 | App shell, renderers, mocks, content, release | planned (see `docs/p0-build-backlog.md`) |
 
 33 tests passing (`dart test` in `packages/domain` and `packages/grading`).
