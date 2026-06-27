@@ -18,6 +18,7 @@ class AppScope extends InheritedWidget {
   final UpdatesService updatesService;
   final AuthService? authService;
   final VoidCallback? onLogout;
+  final Future<void> Function()? onDeleteAccount;
   final bool isPremium;
   final VoidCallback? onBuyPremium;
 
@@ -32,6 +33,7 @@ class AppScope extends InheritedWidget {
     required this.updatesService,
     this.authService,
     this.onLogout,
+    this.onDeleteAccount,
     required this.isPremium,
     this.onBuyPremium,
     required super.child,

@@ -228,6 +228,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
+                  if (_scope.onDeleteAccount != null)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(Icons.delete_forever_outlined,
+                          color: t.textTertiary),
+                      title: Text('Delete account',
+                          style: AppTypography.body(t)
+                              .copyWith(color: t.textSecondary)),
+                      subtitle: Text(
+                          'Permanently remove your account and all progress',
+                          style: AppTypography.caption(t)),
+                      onTap: () async {
+                        final messenger = ScaffoldMessenger.of(context);
+                        final confirmed = await showDialog<bool>(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: const Text('Delete account?'),
+                            content: const Text(
+                                'This permanently deletes your account and all your progress. This cannot be undone.'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.pop(ctx, false),
+                                  child: const Text('Cancel')),
+                              TextButton(
+                                  onPressed: () => Navigator.pop(ctx, true),
+                                  child: const Text('Delete',
+                                      style:
+                                          TextStyle(color: Colors.redAccent))),
+                            ],
+                          ),
+                        );
+                        if (confirmed != true) return;
+                        if (context.mounted) Navigator.pop(context);
+                        try {
+                          await _scope.onDeleteAccount!.call();
+                        } catch (_) {
+                          messenger.showSnackBar(const SnackBar(
+                              content: Text(
+                                  'Couldn\'t delete the account. Please sign in again and retry.')));
+                        }
+                      },
+                    ),
                 ],
               ),
             );

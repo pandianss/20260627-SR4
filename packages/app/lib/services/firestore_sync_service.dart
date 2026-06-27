@@ -52,6 +52,22 @@ class FirestoreSyncService {
     }
   }
 
+  /// Permanently delete all of a user's cloud data: every events/srsStates doc
+  /// and the parent users/{uid} document. (Batches are capped at 500 ops, which
+  /// comfortably covers a single learner's footprint.)
+  Future<void> deleteUserData(String uid) async {
+    for (final col in [_eventsCol(uid), _statesCol(uid)]) {
+      final snap = await col.get();
+      if (snap.docs.isEmpty) continue;
+      final batch = _db.batch();
+      for (final doc in snap.docs) {
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
+    }
+    await _db.collection('users').doc(uid).delete();
+  }
+
   /// Pull remote events (append + mark synced so they aren't echoed back) and
   /// remote states (only to fill local gaps).
   Future<void> pull(

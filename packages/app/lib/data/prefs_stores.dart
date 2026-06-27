@@ -101,6 +101,14 @@ class PrefsEventLogStore implements EventLogStore {
     list.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     return list;
   }
+
+  /// Wipe the entire local event log (used on account deletion).
+  Future<void> clear() async {
+    _events.clear();
+    _synced.clear();
+    await _prefs.remove(_eventsKey);
+    await _prefs.remove(_syncedKey);
+  }
 }
 
 class PrefsSrsStateStore implements SrsStateStore {
@@ -152,6 +160,12 @@ class PrefsSrsStateStore implements SrsStateStore {
       _states.values
           .where((s) => s.userId == userId && s.examContext == examContext)
           .toList();
+
+  /// Wipe all local SRS states (used on account deletion).
+  Future<void> clear() async {
+    _states.clear();
+    await _prefs.remove(_statesKey);
+  }
 }
 
 class PrefsSyncCursorStore implements SyncCursorStore {

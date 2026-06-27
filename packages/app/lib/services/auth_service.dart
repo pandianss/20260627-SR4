@@ -53,6 +53,14 @@ class AuthService {
     return ensureSignedIn();
   }
 
+  /// Permanently delete the current Firebase Auth user. Caller is responsible
+  /// for deleting the user's stored data first. May throw a
+  /// `requires-recent-login` [FirebaseAuthException] for accounts that signed in
+  /// a while ago — the UI should prompt a re-sign-in and retry.
+  Future<void> deleteAccount() async {
+    await _auth.currentUser?.delete();
+  }
+
   // ── Google ─────────────────────────────────────────────────────────────────
 
   bool _googleReady = false;

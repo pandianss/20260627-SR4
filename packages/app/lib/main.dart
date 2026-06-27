@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'firebase_options.dart';
 import 'package:store/store.dart';
 import 'package:srs/srs.dart';
@@ -25,6 +27,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Route Flutter framework + async errors to Crashlytics.
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   // Anonymous-first auth: every user gets a stable uid immediately. Falls back
   // to a local id only if the very first launch is offline.
@@ -84,6 +93,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _userId = widget.userId;
     _checkPersistedSession();
+    _notificationService.init();
   }
 
   /// Back up local progress and restore any cloud data for this uid.
@@ -153,6 +163,42 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _examDate = null;
       _userId = widget.userId;
+      _isPremium = false;
+      _contentLoaded = false;
+    });
+  }
+
+  /// Permanently delete the account: cloud data, the auth user, and all local
+  /// data, then re-establish a fresh anonymous session and return to onboarding.
+  Future<void> _deleteAccount() async {
+    final uid = _userId;
+    try {
+      await widget.firestoreSync?.deleteUserData(uid);
+    } catch (e) {
+      debugPrint('Failed to delete cloud data: $e');
+    }
+    // Throws (e.g. requires-recent-login) propagate to the UI to handle.
+    await widget.authService?.deleteAccount();
+
+    final eventStore = _eventStore;
+    if (eventStore is PrefsEventLogStore) await eventStore.clear();
+    final stateStore = _stateStore;
+    if (stateStore is PrefsSrsStateStore) await stateStore.clear();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      for (final k in ['email', 'examName', 'examDate', 'isPremium', 'userId']) {
+        await prefs.remove(k);
+      }
+    } catch (_) {}
+
+    String newUid = 'local';
+    try {
+      newUid = await widget.authService?.ensureSignedIn() ?? 'local';
+    } catch (_) {}
+    if (!mounted) return;
+    setState(() {
+      _userId = newUid;
+      _examDate = null;
       _isPremium = false;
       _contentLoaded = false;
     });
@@ -304,6 +350,7 @@ class _MyAppState extends State<MyApp> {
         updatesService: _updatesService,
         authService: widget.authService,
         onLogout: _logout,
+        onDeleteAccount: _deleteAccount,
         isPremium: _isPremium,
         onBuyPremium: _purchasePremium,
         child: const MainLayout(),
