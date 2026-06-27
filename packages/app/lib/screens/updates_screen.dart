@@ -38,6 +38,8 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
   late Future<UpdatesResult> _future;
   DateTime? _seenBefore;
   bool _started = false;
+  String? _regulator; // issuing body filter; null = all
+  String? _month; // "yyyy-MM" filter; null = all
 
   UpdatesService get _service => AppScope.of(context).updatesService;
 
@@ -120,8 +122,37 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         children: [child],
       );
 
+  static String _monthKey(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}';
+
   Widget _list(AppTokens t, UpdatesResult r) {
-    final updates = r.feed.updates;
+    final all = r.feed.updates;
+
+    // Issuing bodies present, in a sensible order.
+    const order = ['RBI', 'SEBI', 'IRDAI', 'IIBF'];
+    final regulators = all.map((u) => u.regulator).toSet().toList()
+      ..sort((a, b) {
+        final ia = order.indexOf(a), ib = order.indexOf(b);
+        if (ia == -1 && ib == -1) return a.compareTo(b);
+        if (ia == -1) return 1;
+        if (ib == -1) return -1;
+        return ia.compareTo(ib);
+      });
+
+    // Months present, newest first.
+    final months = all.map((u) => _monthKey(u.publishedAt)).toSet().toList()
+      ..sort((a, b) => b.compareTo(a));
+    String monthLabel(String key) {
+      final p = key.split('-');
+      return '${_months[int.parse(p[1]) - 1]} ${p[0]}';
+    }
+
+    final filtered = all.where((u) {
+      if (_regulator != null && u.regulator != _regulator) return false;
+      if (_month != null && _monthKey(u.publishedAt) != _month) return false;
+      return true;
+    }).toList();
+
     return ListView(
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
@@ -135,20 +166,99 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         ),
         const SizedBox(height: 16),
         _disclaimer(t),
-        const SizedBox(height: 10),
-        _sourceLine(t, r),
-        const SizedBox(height: 16),
-        if (updates.isEmpty)
-          Text(
-            'No updates yet. Pull to refresh.',
-            style: AppTypography.body(t).copyWith(color: t.textSecondary),
+        const SizedBox(height: 12),
+        _filterRow(
+          t,
+          icon: Icons.account_balance_outlined,
+          options: [for (final reg in regulators) (reg, reg)],
+          selected: _regulator,
+          onSelected: (v) => setState(() => _regulator = v),
+        ),
+        const SizedBox(height: 8),
+        _filterRow(
+          t,
+          icon: Icons.calendar_today_outlined,
+          options: [for (final m in months) (m, monthLabel(m))],
+          selected: _month,
+          onSelected: (v) => setState(() => _month = v),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Text(
+              '${filtered.length} update${filtered.length == 1 ? '' : 's'}'
+              '${(_regulator != null || _month != null) ? ' · filtered' : ''}',
+              style: AppTypography.micro(t).copyWith(color: t.textTertiary),
+            ),
+            const Spacer(),
+            _sourceLine(t, r),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (filtered.isEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 24),
+            child: Text(
+              all.isEmpty
+                  ? 'No updates yet. Pull to refresh.'
+                  : 'No updates match these filters.',
+              style: AppTypography.body(t).copyWith(color: t.textSecondary),
+              textAlign: TextAlign.center,
+            ),
           )
         else
-          for (final u in updates) ...[
-            _UpdateCard(update: u, isNew: _isNew(u), onOpen: () => _open(u.sourceUrl)),
+          for (final u in filtered) ...[
+            _UpdateCard(
+                update: u, isNew: _isNew(u), onOpen: () => _open(u.sourceUrl)),
             const SizedBox(height: 12),
           ],
       ],
+    );
+  }
+
+  /// A horizontally-scrolling row of filter chips with a leading icon and an
+  /// "All" reset chip.
+  Widget _filterRow(
+    AppTokens t, {
+    required IconData icon,
+    required List<(String, String)> options,
+    required String? selected,
+    required void Function(String?) onSelected,
+  }) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: t.textTertiary),
+          const SizedBox(width: 8),
+          _chip(t, 'All', selected == null, () => onSelected(null)),
+          for (final (value, label) in options) ...[
+            const SizedBox(width: 6),
+            _chip(t, label, selected == value, () => onSelected(value)),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _chip(AppTokens t, String label, bool active, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+        decoration: BoxDecoration(
+          color: active ? t.accent : t.bgSurface,
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(color: active ? t.accent : t.border),
+        ),
+        child: Text(
+          label,
+          style: AppTypography.caption(t).copyWith(
+            color: active ? t.onAccent : t.textSecondary,
+            fontWeight: active ? FontWeight.w600 : FontWeight.w400,
+          ),
+        ),
+      ),
     );
   }
 

@@ -47,29 +47,30 @@ class UpdatesService {
   /// Resolve the feed. Tries the network first (when a URL is configured),
   /// falling back to the last cached copy and finally the bundled seed.
   Future<UpdatesResult> load({bool forceRefresh = false}) async {
-    if (feedUrl.isNotEmpty) {
+    final targetUrl = _getEffectiveFeedUrl();
+    if (targetUrl.isNotEmpty) {
       try {
         final resp = await _client
-            .get(Uri.parse(feedUrl))
+            .get(Uri.parse(targetUrl))
             .timeout(const Duration(seconds: 8));
         if (resp.statusCode == 200) {
           await _writeCache(resp.body);
           return UpdatesResult(
-            feed: _parse(resp.body),
+            feed: _filterToThreeMonths(_parse(resp.body)),
             source: UpdatesSource.network,
             fetchedAt: DateTime.now(),
           );
         }
         debugPrint('UpdatesService: feed returned ${resp.statusCode}');
       } catch (e) {
-        debugPrint('UpdatesService: network fetch failed ($e)');
+        debugPrint('UpdatesService: network fetch failed ($e) at $targetUrl');
       }
     }
 
     final cached = await _readCache();
     if (cached != null) {
       return UpdatesResult(
-        feed: _parse(cached.body),
+        feed: _filterToThreeMonths(_parse(cached.body)),
         source: UpdatesSource.cache,
         fetchedAt: cached.at,
       );
@@ -77,10 +78,23 @@ class UpdatesService {
 
     final seed = await rootBundle.loadString(_bundledAsset);
     return UpdatesResult(
-      feed: _parse(seed),
+      feed: _filterToThreeMonths(_parse(seed)),
       source: UpdatesSource.bundled,
       fetchedAt: null,
     );
+  }
+
+  String _getEffectiveFeedUrl() {
+    if (feedUrl.isNotEmpty) return feedUrl;
+    if (kReleaseMode) {
+      return 'https://us-central1-superrecall-3afe5.cloudfunctions.net/updatesFeed';
+    } else {
+      // Emulator fallback: 10.0.2.2 for Android emulator, localhost for others
+      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
+        return 'http://10.0.2.2:5001/superrecall-3afe5/us-central1/updatesFeed';
+      }
+      return 'http://localhost:5001/superrecall-3afe5/us-central1/updatesFeed';
+    }
   }
 
   UpdatesFeed _parse(String body) {
@@ -90,6 +104,21 @@ class UpdatesService {
       debugPrint('UpdatesService: failed to parse feed ($e)');
       return UpdatesFeed.empty;
     }
+  }
+
+  UpdatesFeed _filterToThreeMonths(UpdatesFeed feed) {
+    final ninetyDaysAgo = DateTime.now().subtract(const Duration(days: 90));
+    var filtered = feed.updates.where((u) => u.publishedAt.isAfter(ninetyDaysAgo)).toList();
+    if (filtered.isEmpty && feed.updates.isNotEmpty) {
+      final sorted = List<RegulatoryUpdate>.from(feed.updates)
+        ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+      filtered = sorted.take(5).toList();
+    }
+    return UpdatesFeed(
+      version: feed.version,
+      generatedAt: feed.generatedAt,
+      updates: filtered,
+    );
   }
 
   Future<void> _writeCache(String body) async {
