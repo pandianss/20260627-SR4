@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../components/button.dart';
 import '../components/card.dart';
+import '../components/shimmer_logo.dart';
 import '../services/auth_service.dart';
 import '../theme/tokens.dart';
 
@@ -105,11 +106,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         return Column(
           key: const ValueKey(0),
           children: [
-            SvgPicture.asset(
-              'assets/logo.svg',
-              width: 80,
-              height: 80,
-              colorFilter: ColorFilter.mode(t.accent, BlendMode.srcIn),
+            const ShimmerLogo(
+              size: 80,
             ),
             const SizedBox(height: 24),
             Text(
@@ -130,12 +128,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           key: const ValueKey(1),
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: SvgPicture.asset(
-                'assets/logo.svg',
-                width: 48,
-                height: 48,
-                colorFilter: ColorFilter.mode(t.accent, BlendMode.srcIn),
+            const Center(
+              child: ShimmerLogo(
+                size: 48,
               ),
             ),
             const SizedBox(height: 16),

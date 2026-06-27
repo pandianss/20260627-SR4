@@ -92,8 +92,10 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> _google() => _run(() async {
-        await _auth.signInWithGoogle();
-        _done();
+        final cred = await _auth.signInWithGoogle();
+        if (cred != null) {
+          _done();
+        }
       });
 
   Future<void> _submitEmail() => _run(() async {
