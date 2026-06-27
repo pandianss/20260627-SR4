@@ -1,5 +1,6 @@
 import 'package:flutter/semantics.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:domain/domain.dart';
 import 'package:store/store.dart';
 import 'package:grading/grading.dart';
@@ -10,6 +11,8 @@ import '../components/question_renderer.dart';
 import '../components/caselet_renderer.dart';
 import '../theme/tokens.dart';
 import '../services/audio_narration_service.dart';
+import '../components/flag_content_dialog.dart';
+import '../app_scope.dart';
 
 class LessonPlayerScreen extends StatefulWidget {
   final Lesson lesson;
@@ -48,6 +51,36 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen> {
     _cardPageController = PageController();
     _narrationService = AudioNarrationService();
     _narrationService.addListener(_onNarrationUpdate);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkFlagHighlight());
+  }
+
+  Future<void> _checkFlagHighlight() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final hasSeen = prefs.getBool('has_seen_flag_tip') ?? false;
+      if (!hasSeen) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                Icon(Icons.outlined_flag, color: context.tokens.onInk, size: 20),
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Text(
+                    'Content error? Tap the flag icon in the top right to report it.',
+                    style: TextStyle(fontFamily: 'Inter'),
+                  ),
+                ),
+              ],
+            ),
+            duration: const Duration(seconds: 4),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+        await prefs.setBool('has_seen_flag_tip', true);
+      }
+    } catch (_) {}
   }
 
   @override
@@ -195,6 +228,43 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen> {
                 },
               ),
             ),
+          Semantics(
+            label: 'Report Issue',
+            button: true,
+            container: true,
+            child: IconButton(
+              icon: Icon(Icons.flag_outlined, color: t.textSecondary),
+              tooltip: 'Report an issue with this content',
+              onPressed: () {
+                final activeId = _isPlayingQuestions
+                    ? widget.questions[_currentQuestionIndex].id
+                    : widget.lesson.cards[_currentCardIndex].id;
+                final activeType = _isPlayingQuestions ? 'question' : 'card';
+                showFlagContentDialog(
+                  context: context,
+                  contentId: activeId,
+                  contentType: activeType,
+                  userId: widget.userId,
+                  examContext: widget.lesson.moduleId,
+                  onFlagSubmitted: ({
+                    required userId,
+                    required examContext,
+                    required contentId,
+                    required contentType,
+                    required reason,
+                  }) async {
+                    await AppScope.of(context).repository.flagContent(
+                          userId: userId,
+                          examContext: examContext,
+                          contentId: contentId,
+                          contentType: contentType,
+                          reason: reason,
+                        );
+                  },
+                );
+              },
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Center(
@@ -282,26 +352,37 @@ class _LessonPlayerScreenState extends State<LessonPlayerScreen> {
       onPageChanged: (idx) {
         setState(() => _currentCardIndex = idx);
         if (_narrationService.isPlaying && _narrationService.currentIndex != idx) {
-          // If user swipes manually, sync narration target
           _narrationService.stop();
         }
       },
       itemCount: widget.lesson.cards.length,
       itemBuilder: (context, index) {
         final card = widget.lesson.cards[index];
-        return SingleChildScrollView(
-          child: Semantics(
-            container: true,
-            label: 'Concept card ${index + 1} of ${widget.lesson.cards.length}',
-            child: CalmCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: card.blocks
-                    .map((b) => ContentBlockRenderer(block: b))
-                    .toList(),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Semantics(
+                      container: true,
+                      label: 'Concept card ${index + 1} of ${widget.lesson.cards.length}',
+                      child: LessonCardLayout(
+                        card: card,
+                        cardIndex: index,
+                        totalCards: widget.lesson.cards.length,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

@@ -100,6 +100,40 @@ void main() {
       expect(parsed.rating, equals(5));
       expect(parsed.comments, equals('Excellent bite-sized learning app.'));
     });
+
+    test('ContentFlaggedEvent serialization and deserialization', () async {
+      final eventStore = MemoryEventLogStore();
+      final flagEvent = ContentFlaggedEvent(
+        clientUlid: 'ulid_flag_test',
+        userId: 'user_flag_test',
+        timestamp: DateTime.parse('2026-06-27T08:32:00.000Z'),
+        examContext: 'CAIIB',
+        contentId: 'card-123',
+        contentType: 'card',
+        reason: 'Incorrect information: formula value is wrong',
+      );
+
+      await eventStore.appendEvent(flagEvent);
+      final logged = await eventStore.getAllEvents('user_flag_test');
+      expect(logged.length, equals(1));
+      expect(logged.first, isA<ContentFlaggedEvent>());
+
+      final parsedEvent = logged.first as ContentFlaggedEvent;
+      expect(parsedEvent.contentId, equals('card-123'));
+      expect(parsedEvent.contentType, equals('card'));
+      expect(parsedEvent.reason, equals('Incorrect information: formula value is wrong'));
+
+      final json = parsedEvent.toJson();
+      expect(json['type'], equals('content_flagged'));
+      expect(json['contentId'], equals('card-123'));
+      expect(json['contentType'], equals('card'));
+      expect(json['reason'], equals('Incorrect information: formula value is wrong'));
+
+      final fromJsonEvent = SrsEvent.fromJson(json) as ContentFlaggedEvent;
+      expect(fromJsonEvent.contentId, equals('card-123'));
+      expect(fromJsonEvent.contentType, equals('card'));
+      expect(fromJsonEvent.reason, equals('Incorrect information: formula value is wrong'));
+    });
   });
 
   group('Telemetry & Diagnostics (E10.3) Tests', () {

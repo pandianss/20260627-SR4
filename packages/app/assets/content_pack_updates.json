@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-26T18:30:00Z",
+  "note": "Sample seed data for development only. In production this file is replaced by the curated feed published by the ingestion pipeline. Items below are illustrative, not authoritative.",
+  "updates": [
+    {
+      "id": "rbi-2026-06-25-digital-lending",
+      "regulator": "RBI",
+      "title": "Revised Digital Lending Guidelines issued",
+      "summary": "Updated rules on default loss guarantee (DLG) caps and disclosures for Lending Service Providers. Relevant to digital-lending and fintech topics.",
+      "category": "Digital Lending",
+      "priority": "important",
+      "publishedAt": "2026-06-25",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["digital-lending", "fintech"]
+    },
+    {
+      "id": "iibf-2026-06-22-caiib-window",
+      "regulator": "IIBF",
+      "title": "CAIIB November 2026 registration window opens",
+      "summary": "Online registration for the CAIIB November 2026 attempt is now open. Check eligibility and exam-centre options before the last date.",
+      "category": "Exam notice",
+      "priority": "critical",
+      "publishedAt": "2026-06-22",
+      "sourceUrl": "https://www.iibf.org.in/",
+      "affectsTopics": ["exam-schedule"]
+    },
+    {
+      "id": "rbi-2026-06-20-mpc-repo",
+      "regulator": "RBI",
+      "title": "MPC keeps the policy repo rate unchanged at 6.50%",
+      "summary": "The Monetary Policy Committee retained the repo rate at 6.50% and continued its stance on withdrawal of accommodation. Relevant to monetary-policy and interest-rate questions.",
+      "category": "Monetary Policy",
+      "priority": "important",
+      "publishedAt": "2026-06-20",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx",
+      "affectsTopics": ["monetary-policy", "interest-rates"]
+    },
+    {
+      "id": "sebi-2026-06-18-mf-disclosure",
+      "regulator": "SEBI",
+      "title": "Tighter disclosure norms for mutual fund expense ratios",
+      "summary": "Revised disclosure expectations on total expense ratio (TER) and commissions. Useful background for retail investment-product topics.",
+      "category": "Mutual Funds",
+      "priority": "normal",
+      "publishedAt": "2026-06-18",
+      "sourceUrl": "https://www.sebi.gov.in/",
+      "affectsTopics": ["mutual-funds", "investor-protection"]
+    },
+    {
+      "id": "rbi-2026-06-12-kyc-md",
+      "regulator": "RBI",
+      "title": "Amendment to the Master Direction on KYC",
+      "summary": "Updated periodic-KYC and customer due-diligence timelines. Affects KYC/AML topics in JAIIB Principles & Practices of Banking.",
+      "category": "KYC / AML",
+      "priority": "important",
+      "publishedAt": "2026-06-12",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx",
+      "affectsTopics": ["kyc", "aml"]
+    },
+    {
+      "id": "iibf-2026-06-05-climate-elective",
+      "regulator": "IIBF",
+      "title": "New CAIIB elective on Climate Risk & Sustainable Finance",
+      "summary": "IIBF added an elective covering climate-risk management and green finance. Relevant for candidates choosing CAIIB electives.",
+      "category": "Certification",
+      "priority": "normal",
+      "publishedAt": "2026-06-05",
+      "sourceUrl": "https://www.iibf.org.in/",
+      "affectsTopics": ["esg", "exam-schedule"]
+    },
+    {
+      "id": "rbi-2026-06-03-upi-limits",
+      "regulator": "RBI",
+      "title": "Revised transaction limits for certain UPI payments",
+      "summary": "Higher per-transaction limits announced for specified UPI use-cases. Relevant to payment-systems and digital-banking topics.",
+      "category": "Payment Systems",
+      "priority": "normal",
+      "publishedAt": "2026-06-03",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["payment-systems", "digital-banking"]
+    },
+    {
+      "id": "rbi-2026-05-30-ecl-framework",
+      "regulator": "RBI",
+      "title": "Final guidelines on the Expected Credit Loss (ECL) framework",
+      "summary": "Forward-looking, expected-loss-based provisioning for banks with a phased transition. Core to credit-risk and provisioning topics in CAIIB.",
+      "category": "Provisioning",
+      "priority": "important",
+      "publishedAt": "2026-05-30",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["credit-risk", "provisioning"]
+    },
+    {
+      "id": "irdai-2026-05-28-bancassurance",
+      "regulator": "IRDAI",
+      "title": "Guidance on bancassurance distribution practices",
+      "summary": "Guidance on conduct and disclosures for banks distributing insurance. Relevant to the bancassurance section in CAIIB electives.",
+      "category": "Insurance",
+      "priority": "normal",
+      "publishedAt": "2026-05-28",
+      "sourceUrl": "https://irdai.gov.in/",
+      "affectsTopics": ["bancassurance", "insurance"]
+    },
+    {
+      "id": "sebi-2026-05-22-t0-settlement",
+      "regulator": "SEBI",
+      "title": "T+0 settlement extended to the top 500 stocks",
+      "summary": "Same-day settlement widened from the pilot set to the top 500 stocks. Relevant to capital-markets and settlement-cycle topics.",
+      "category": "Markets",
+      "priority": "important",
+      "publishedAt": "2026-05-22",
+      "sourceUrl": "https://www.sebi.gov.in/",
+      "affectsTopics": ["capital-markets", "settlement"]
+    },
+    {
+      "id": "rbi-2026-05-15-psl-renewable",
+      "regulator": "RBI",
+      "title": "Revised Priority Sector Lending classification for renewables",
+      "summary": "Expanded PSL eligibility for renewable-energy and storage projects. Relevant to NABARD/PSL topics in the Rural elective.",
+      "category": "Priority Sector",
+      "priority": "normal",
+      "publishedAt": "2026-05-15",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["priority-sector", "rural"]
+    },
+    {
+      "id": "irdai-2026-05-10-bima-sugam",
+      "regulator": "IRDAI",
+      "title": "Bima Sugam insurance marketplace — go-live update",
+      "summary": "Phased rollout of the unified insurance marketplace for buying and servicing policies. Background for insurance-distribution topics.",
+      "category": "Insurance",
+      "priority": "normal",
+      "publishedAt": "2026-05-10",
+      "sourceUrl": "https://irdai.gov.in/",
+      "affectsTopics": ["insurance"]
+    },
+    {
+      "id": "iibf-2026-05-02-jaiib-results",
+      "regulator": "IIBF",
+      "title": "JAIIB May 2026 results declared",
+      "summary": "Results for the JAIIB May 2026 attempt are out on the IIBF portal. Check the score card and re-attempt windows if needed.",
+      "category": "Exam notice",
+      "priority": "normal",
+      "publishedAt": "2026-05-02",
+      "sourceUrl": "https://www.iibf.org.in/",
+      "affectsTopics": ["exam-schedule"]
+    },
+    {
+      "id": "rbi-2026-04-28-fraud-md",
+      "regulator": "RBI",
+      "title": "Master Directions on Fraud Risk Management revised",
+      "summary": "Updated framework for early detection, reporting and governance of frauds, including timelines and board oversight. Core to risk-and-compliance topics.",
+      "category": "Fraud / Risk",
+      "priority": "critical",
+      "publishedAt": "2026-04-28",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx",
+      "affectsTopics": ["fraud", "risk-management"]
+    },
+    {
+      "id": "sebi-2026-04-18-demat-nomination",
+      "regulator": "SEBI",
+      "title": "New nomination rules for demat and MF accounts",
+      "summary": "Revised nomination and joint-holding norms, including opt-out declarations. Useful for investor-services topics.",
+      "category": "Investor Protection",
+      "priority": "normal",
+      "publishedAt": "2026-04-18",
+      "sourceUrl": "https://www.sebi.gov.in/",
+      "affectsTopics": ["investor-protection"]
+    },
+    {
+      "id": "rbi-2026-04-10-lrs-reporting",
+      "regulator": "RBI",
+      "title": "Liberalised Remittance Scheme — reporting changes",
+      "summary": "Revised reporting and authorised-dealer obligations under the LRS. Relevant to forex and external-sector topics.",
+      "category": "Forex",
+      "priority": "normal",
+      "publishedAt": "2026-04-10",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["forex", "external-sector"]
+    },
+    {
+      "id": "irdai-2026-04-05-surrender-value",
+      "regulator": "IRDAI",
+      "title": "Revised surrender-value norms for life policies",
+      "summary": "Higher special surrender values for early exits from life-insurance policies. Relevant to insurance-product topics.",
+      "category": "Insurance",
+      "priority": "important",
+      "publishedAt": "2026-04-05",
+      "sourceUrl": "https://irdai.gov.in/",
+      "affectsTopics": ["insurance"]
+    },
+    {
+      "id": "rbi-2026-03-26-mpc-stance",
+      "regulator": "RBI",
+      "title": "FY27 monetary policy stance turns neutral",
+      "summary": "The MPC shifted its stance to 'neutral', signalling data-dependent rate decisions ahead. Relevant to monetary-policy framework topics.",
+      "category": "Monetary Policy",
+      "priority": "important",
+      "publishedAt": "2026-03-26",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["monetary-policy"]
+    },
+    {
+      "id": "sebi-2026-03-20-secondary-asba",
+      "regulator": "SEBI",
+      "title": "ASBA-like blocked-amount facility for secondary trading",
+      "summary": "Optional facility to keep funds blocked in the bank account (UPI mandate) while trading in the secondary market. Relevant to markets-infrastructure topics.",
+      "category": "Markets",
+      "priority": "normal",
+      "publishedAt": "2026-03-20",
+      "sourceUrl": "https://www.sebi.gov.in/",
+      "affectsTopics": ["capital-markets"]
+    },
+    {
+      "id": "rbi-2026-03-12-basel-timeline",
+      "regulator": "RBI",
+      "title": "Basel III endgame — implementation timeline",
+      "summary": "Indicative timelines for revised capital and output-floor norms. Core to capital-adequacy topics in CAIIB Bank Financial Management.",
+      "category": "Capital",
+      "priority": "normal",
+      "publishedAt": "2026-03-12",
+      "sourceUrl": "https://www.rbi.org.in/",
+      "affectsTopics": ["capital-adequacy", "basel"]
+    },
+    {
+      "id": "iibf-2026-03-08-ccp-syllabus",
+      "regulator": "IIBF",
+      "title": "Revised syllabus for the Certified Credit Professional course",
+      "summary": "Updated syllabus and reading material for the CCP certification. Relevant for candidates planning specialised certifications.",
+      "category": "Certification",
+      "priority": "normal",
+      "publishedAt": "2026-03-08",
+      "sourceUrl": "https://www.iibf.org.in/",
+      "affectsTopics": ["exam-schedule"]
+    }
+  ]
+}

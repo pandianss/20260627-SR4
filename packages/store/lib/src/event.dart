@@ -26,6 +26,7 @@ sealed class SrsEvent {
       'question_answered' => QuestionAnsweredEvent.fromJson(j),
       'mock_submitted' => MockSubmittedEvent.fromJson(j),
       'feedback_submitted' => FeedbackSubmittedEvent.fromJson(j),
+      'content_flagged' => ContentFlaggedEvent.fromJson(j),
       _ => throw FormatException('Unknown event type: $t'),
     };
   }
@@ -265,5 +266,47 @@ class FeedbackSubmittedEvent extends SrsEvent {
         'examContext': examContext,
         'rating': rating,
         'comments': comments,
+      };
+}
+
+class ContentFlaggedEvent extends SrsEvent {
+  final String contentId;
+  final String contentType;
+  final String reason;
+
+  const ContentFlaggedEvent({
+    required super.clientUlid,
+    required super.userId,
+    required super.timestamp,
+    required super.examContext,
+    required this.contentId,
+    required this.contentType,
+    required this.reason,
+  });
+
+  @override
+  String get type => 'content_flagged';
+
+  factory ContentFlaggedEvent.fromJson(Map<String, dynamic> j) =>
+      ContentFlaggedEvent(
+        clientUlid: j['clientUlid'] as String,
+        userId: j['userId'] as String,
+        timestamp: DateTime.parse(j['timestamp'] as String),
+        examContext: j['examContext'] as String,
+        contentId: j['contentId'] as String,
+        contentType: j['contentType'] as String,
+        reason: j['reason'] as String? ?? '',
+      );
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'clientUlid': clientUlid,
+        'userId': userId,
+        'timestamp': timestamp.toUtc().toIso8601String(),
+        'examContext': examContext,
+        'contentId': contentId,
+        'contentType': contentType,
+        'reason': reason,
       };
 }

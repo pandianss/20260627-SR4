@@ -9,14 +9,12 @@ import 'package:domain/domain.dart';
 class DevSeed {
   DevSeed._();
 
-  static const lessonId = 'les_ppb_crr';
-  static const crrCard = 'card_crr_concept';
-  static const slrCard = 'card_slr_concept';
+  static const lessonId = 'L-BFM-B1';
+  static const crrCard = 'L-BFM-B1-c1';
+  static const slrCard = 'L-BFM-D1-c1';
 
   /// Seed a couple of due reviews for [userId] so the Review tab isn't empty on
-  /// first launch. Called after onboarding, when the real user id is known
-  /// (the previous seed keyed reviews to a placeholder id that never matched
-  /// the onboarded user).
+  /// first launch. Called after onboarding, when the real user id is known.
   static Future<void> seedDueReviews(
       SrsStateStore stateStore, String userId) async {
     final now = DateTime.now();
@@ -30,28 +28,28 @@ class DevSeed {
   /// Internally consistent and id-aligned with the canonical pack.
   static Future<void> seedFallbackContent(ContentStore contentStore) async {
     await contentStore.saveExam(const Exam(
-      id: 'ex_ppb',
-      code: 'JAIIB',
-      name: 'JAIIB',
+      id: 'ex_caiib',
+      code: 'CAIIB',
+      name: 'CAIIB',
       body: 'Indian Institute of Banking and Finance',
-      paperIds: ['p_ppb'],
+      paperIds: ['p_caiib'],
     ));
     await contentStore.savePaper(const Paper(
-      id: 'p_ppb',
-      examCode: 'JAIIB',
-      name: LocalizedString({'en': 'Principles & Practices of Banking'}),
-      moduleIds: ['m_ppb_a'],
+      id: 'p_caiib',
+      examCode: 'CAIIB',
+      name: LocalizedString({'en': 'CAIIB'}),
+      moduleIds: ['m_caiib_a'],
     ));
     await contentStore.saveModule(const Module(
-      id: 'm_ppb_a',
-      paperId: 'p_ppb',
-      name: LocalizedString({'en': 'Module A: Indian financial system'}),
+      id: 'm_caiib_a',
+      paperId: 'p_caiib',
+      name: LocalizedString({'en': 'Module A'}),
       topicTags: ['crr', 'slr'],
       lessonIds: [lessonId],
     ));
     await contentStore.saveLesson(const Lesson(
       id: lessonId,
-      moduleId: 'm_ppb_a',
+      moduleId: 'm_caiib_a',
       title: LocalizedString({'en': 'Cash reserve ratio & SLR'}),
       cards: [
         Card(
@@ -124,7 +122,7 @@ class DevSeed {
       phase: SrsPhase.review,
       userId: userId,
       itemId: itemId,
-      examContext: 'JAIIB',
+      examContext: 'CAIIB',
     );
   }
 }

@@ -243,8 +243,8 @@ class _MockResultScreenState extends State<MockResultScreen> {
                     softColor = t.danger.withOpacity(0.12);
                     label = 'Critical Weakness';
                   } else if (accuracy < 0.7) {
-                    barColor = const Color(0xFFF57C00); // Amber
-                    softColor = const Color(0xFFFFF3E0);
+                    barColor = t.warning;
+                    softColor = t.warning.withOpacity(0.12);
                     label = 'Warning';
                   }
 
@@ -293,7 +293,8 @@ class _MockResultScreenState extends State<MockResultScreen> {
                   );
                 }).toList(),
               const SizedBox(height: 32),
-
+              _buildAnswerReview(t),
+              const SizedBox(height: 32),
               CalmButton.primary(
                 text: 'Go to Home',
                 onPressed: () {
@@ -304,6 +305,141 @@ class _MockResultScreenState extends State<MockResultScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  /// Per-question answer key: the correct option, the learner's choice, and the
+  /// explanation for every question in the mock.
+  Widget _buildAnswerReview(AppTokens t) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Answer Review',
+          style: AppTypography.heading(t).copyWith(fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 12),
+        ...widget.questions.asMap().entries.map((entry) {
+          final idx = entry.key;
+          final q = entry.value;
+          final payload = q.payload;
+          if (payload is! McqSingle) return const SizedBox.shrink();
+
+          final grade = _questionGrades[q.id];
+          final isCorrect = grade?.correctness == Correctness.correct;
+          final response = widget.responses[q.id];
+          final userOptionId = response is McqResponse ? response.optionId : null;
+
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: CalmCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        userOptionId == null
+                            ? Icons.remove_circle_outline
+                            : (isCorrect ? Icons.check_circle : Icons.cancel),
+                        size: 18,
+                        color: userOptionId == null
+                            ? t.textTertiary
+                            : (isCorrect ? t.accent : t.danger),
+                      ),
+                      const SizedBox(width: 6),
+                      Text('Q${idx + 1}',
+                          style: AppTypography.caption(t)
+                              .copyWith(fontWeight: FontWeight.w600)),
+                      const SizedBox(width: 8),
+                      Text(
+                        userOptionId == null
+                            ? 'Not answered'
+                            : (isCorrect ? 'Correct' : 'Incorrect'),
+                        style: AppTypography.caption(t).copyWith(
+                          color: userOptionId == null
+                              ? t.textTertiary
+                              : (isCorrect ? t.accentText : t.danger),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(payload.stem.resolve('en'),
+                      style: AppTypography.body(t)
+                          .copyWith(fontWeight: FontWeight.w500)),
+                  const SizedBox(height: 10),
+                  ...payload.options.map((o) {
+                    final isAnswer = o.id == payload.correctOptionId;
+                    final isUserPick = o.id == userOptionId;
+                    Color bg = Colors.transparent;
+                    Color fg = t.textSecondary;
+                    IconData? icon;
+                    if (isAnswer) {
+                      bg = t.accentSoft;
+                      fg = t.accentText;
+                      icon = Icons.check;
+                    } else if (isUserPick) {
+                      bg = t.danger.withOpacity(0.10);
+                      fg = t.danger;
+                      icon = Icons.close;
+                    }
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 6),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: bg,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          if (icon != null) ...[
+                            Icon(icon, size: 14, color: fg),
+                            const SizedBox(width: 6),
+                          ],
+                          Expanded(
+                            child: Text(
+                              o.content.resolve('en'),
+                              style: AppTypography.bodySm(t).copyWith(
+                                color: (isAnswer || isUserPick)
+                                    ? fg
+                                    : t.textSecondary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: t.bgBase,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.lightbulb_outline, size: 16, color: t.accent),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            q.explanation.resolve('en'),
+                            style: AppTypography.caption(t)
+                                .copyWith(color: t.textSecondary, height: 1.5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
+      ],
     );
   }
 }

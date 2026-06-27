@@ -249,7 +249,7 @@ export const MICRO_LESSONS = [
       {
         kind: "concept",
         title: "Leading, Lagging & Coincident Indicators",
-        body: "Economic indicators help bankers forecast cycle turning points. Leading indicators (stock markets, PMI, building permits, repo rate changes) predict future activity. Coincident indicators (industrial production, retail sales, employment levels) reflect current state. Lagging indicators (NPA ratios, loan delinquency rates, CPI) confirm trends after they occur. RBI uses a composite leading index to inform monetary policy timing. A PMI reading above 50 signals expansion; below 50 signals contraction.",
+        body: "Economic indicators help bankers forecast cycle turning points. Leading indicators — stock markets, the Purchasing Managers' Index (PMI), building permits, repo rate changes — predict future activity. The PMI is a monthly, survey-based gauge of business activity, so a reading above 50 signals expansion and below 50 signals contraction. Coincident indicators (industrial production, retail sales, employment levels) reflect the current state. Lagging indicators (NPA ratios, loan delinquency rates, CPI) confirm trends after they occur. RBI uses a composite leading index to inform monetary policy timing.",
         highlight: "PMI > 50: Expansion | PMI < 50: Contraction | Key RBI data: IIP, CPI, WPI, Bank Credit Growth"
       },
       {

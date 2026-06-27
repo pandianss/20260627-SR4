@@ -76,6 +76,38 @@ class LearningRepository {
   Future<List<QuestionBase>> getLessonQuestions(String lessonId) =>
       content.getQuestionsByLesson(lessonId);
 
+  /// Full catalog tree for the content browser: papers → modules → lessons,
+  /// plus the set of completed lesson IDs for the given user.
+  Future<CatalogData> browseCatalog(String examCode, String userId) async {
+    final all = await events.getAllEvents(userId);
+    final completed =
+        all.whereType<LessonViewedEvent>().map((e) => e.lessonId).toSet();
+
+    final exam = await content.getExamByCode(examCode);
+    final papers = <Paper>[];
+    final modulesByPaper = <String, List<Module>>{};
+    final lessonsByModule = <String, List<Lesson>>{};
+
+    if (exam != null) {
+      final ps = await content.getPapersByExam(exam.code);
+      for (final paper in ps) {
+        papers.add(paper);
+        final mods = await content.getModulesByPaper(paper.id);
+        modulesByPaper[paper.id] = mods;
+        for (final mod in mods) {
+          lessonsByModule[mod.id] = await content.getLessonsByModule(mod.id);
+        }
+      }
+    }
+
+    return CatalogData(
+      papers: papers,
+      modulesByPaper: modulesByPaper,
+      lessonsByModule: lessonsByModule,
+      completed: completed,
+    );
+  }
+
   /// Persist a completed lesson's events, then re-project the SRS state of each
   /// touched item from its full event history.
   Future<void> applyLessonCompletion(
@@ -128,14 +160,29 @@ class LearningRepository {
   // --- Reviews ---
 
   /// Load the due spaced-repetition queue plus the cards needed to render it.
+  ///
+  /// A card enters review once its lesson has been studied (a [LessonViewedEvent]
+  /// exists): cards already in the SRS contribute their scheduled state, and
+  /// studied-but-not-yet-reviewed cards are enrolled as new items due now — so
+  /// finishing a lesson populates the review deck. Probe-question states are
+  /// intentionally excluded (they aren't card-flip reviewable).
   Future<DueReviews> loadDueReviews(
     String userId,
     String examContext, {
     int budget = 15,
   }) async {
     final allStates = await states.getStatesForExam(userId, examContext);
+    final stateByItem = {for (final s in allStates) s.itemId: s};
+    final allEvents = await events.getAllEvents(userId);
+    final studiedLessons = allEvents
+        .whereType<LessonViewedEvent>()
+        .map((e) => e.lessonId)
+        .toSet();
+    final now = DateTime.now();
+
     final items = <String, LearnableItem>{};
     final cards = <String, Card>{};
+    final reviewStates = <SrsState>[];
 
     final exam = await content.getExamByCode(examContext) ??
         await content.getExam('ex_ppb');
@@ -147,15 +194,31 @@ class LearningRepository {
           final lessons = await content.getLessonsByModule(mod.id);
           for (final lesson in lessons) {
             for (final card in lesson.cards) {
-              if (card.srsEligible) {
-                cards[card.id] = card;
-                items[card.id] = LearnableItem(
-                  id: card.id,
-                  kind: LearnableItemKind.card,
-                  refId: card.id,
-                  topicTags: mod.topicTags,
-                  examContexts: [exam.code],
-                );
+              if (!card.srsEligible) continue;
+              cards[card.id] = card;
+              items[card.id] = LearnableItem(
+                id: card.id,
+                kind: LearnableItemKind.card,
+                refId: card.id,
+                topicTags: mod.topicTags,
+                examContexts: [exam.code],
+              );
+              final existing = stateByItem[card.id];
+              if (existing != null) {
+                reviewStates.add(existing);
+              } else if (studiedLessons.contains(lesson.id)) {
+                // Studied but never reviewed → enroll as a new item, due now.
+                reviewStates.add(SrsState(
+                  stability: 0,
+                  difficulty: 5,
+                  due: now,
+                  lastReview: now,
+                  reps: 0,
+                  phase: SrsPhase.newItem,
+                  userId: userId,
+                  itemId: card.id,
+                  examContext: examContext,
+                ));
               }
             }
           }
@@ -164,20 +227,19 @@ class LearningRepository {
     }
 
     final due = buildDueQueue(
-      states: allStates,
+      states: reviewStates,
       items: items,
-      now: DateTime.now(),
+      now: now,
       budget: budget,
     );
     return DueReviews(states: due, cards: cards);
   }
 
-  /// Apply a recall rating: advance the scheduler, persist state, log the event.
+  /// Apply a recall rating: log the event and re-project the item's SRS state
+  /// from its full history (so a card's first review is initialised correctly).
   Future<SrsState> applyReview(
       String userId, String examContext, SrsState state, Rating rating) async {
     final now = DateTime.now();
-    final next = scheduler.review(state, rating, now);
-    await states.saveState(next);
     await events.appendEvent(CardReviewedEvent(
       clientUlid: 'ulid_rev_${state.itemId}_${now.millisecondsSinceEpoch}',
       userId: userId,
@@ -186,7 +248,36 @@ class LearningRepository {
       itemId: state.itemId,
       rating: rating,
     ));
-    return next;
+    final itemEvents = await events.getEventsForItem(userId, state.itemId);
+    final next = projectSrsState(
+      userId: userId,
+      itemId: state.itemId,
+      events: itemEvents,
+      scheduler: scheduler,
+      examContext: examContext,
+    );
+    if (next != null) await states.saveState(next);
+    return next ?? state;
+  }
+
+  /// Flag content as incorrect, typos, etc., and append to the event log.
+  Future<void> flagContent({
+    required String userId,
+    required String examContext,
+    required String contentId,
+    required String contentType,
+    required String reason,
+  }) async {
+    final now = DateTime.now();
+    await events.appendEvent(ContentFlaggedEvent(
+      clientUlid: 'ulid_flag_${contentId}_${now.millisecondsSinceEpoch}',
+      userId: userId,
+      timestamp: now,
+      examContext: examContext,
+      contentId: contentId,
+      contentType: contentType,
+      reason: reason,
+    ));
   }
 }
 
@@ -218,4 +309,17 @@ class DueReviews {
   final List<SrsState> states;
   final Map<String, Card> cards;
   const DueReviews({required this.states, required this.cards});
+}
+
+class CatalogData {
+  final List<Paper> papers;
+  final Map<String, List<Module>> modulesByPaper;
+  final Map<String, List<Lesson>> lessonsByModule;
+  final Set<String> completed;
+  const CatalogData({
+    required this.papers,
+    required this.modulesByPaper,
+    required this.lessonsByModule,
+    required this.completed,
+  });
 }

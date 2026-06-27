@@ -8,6 +8,8 @@ import '../components/block_renderer.dart';
 import '../theme/tokens.dart';
 import '../data/learning_repository.dart';
 import '../app_scope.dart';
+import 'paywall_screen.dart';
+import '../components/flag_content_dialog.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
@@ -23,6 +25,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   int _currentIndex = 0;
   bool _isFlipped = false;
+  int _reviewsCompletedThisSession = 0;
+  Listenable? _revision;
 
   AppScope get _scope => AppScope.of(context);
   LearningRepository get _repo => _scope.repository;
@@ -33,6 +37,28 @@ class _ReviewScreenState extends State<ReviewScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _loadDueQueue();
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload the due deck live when another device's progress merges in.
+    final rev = AppScope.of(context).syncRevision;
+    if (!identical(rev, _revision)) {
+      _revision?.removeListener(_onRemoteSync);
+      _revision = rev;
+      _revision?.addListener(_onRemoteSync);
+    }
+  }
+
+  void _onRemoteSync() {
+    if (mounted) _loadDueQueue();
+  }
+
+  @override
+  void dispose() {
+    _revision?.removeListener(_onRemoteSync);
+    super.dispose();
   }
 
   Future<void> _loadDueQueue() async {
@@ -55,6 +81,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final currentState = _dueStates[_currentIndex];
     await _repo.applyReview(
         _scope.userId, _scope.examName, currentState, rating);
+    _scope.requestSync?.call(); // push this review to the cloud promptly
+
+    setState(() {
+      _reviewsCompletedThisSession += 1;
+    });
 
     // Advance to next card
     if (_currentIndex + 1 < _dueStates.length) {
@@ -71,6 +102,46 @@ class _ReviewScreenState extends State<ReviewScreen> {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+
+    if (!_scope.isPremium && _reviewsCompletedThisSession >= 10) {
+      return Scaffold(
+        backgroundColor: t.bgBase,
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.stars,
+                    color: Colors.amber,
+                    size: 72,
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Daily Review Limit Reached',
+                    style: AppTypography.heading(t).copyWith(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Free tier is limited to 10 card reviews per day. Upgrade to Premium to study all remaining due cards.',
+                    style: AppTypography.body(t).copyWith(color: t.textSecondary),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
+                  CalmButton.primary(
+                    text: 'Unlock Premium',
+                    onPressed: () => PaywallScreen.show(context),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     if (_isLoading) {
       return Scaffold(
@@ -103,7 +174,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'No spaced reviews are due today. Come back tomorrow!',
+                    'No cards are due right now. Finish a lesson to add new cards — they return here for spaced recall as they fall due.',
                     style: AppTypography.bodySm(t),
                     textAlign: TextAlign.center,
                   ),
@@ -134,6 +205,35 @@ class _ReviewScreenState extends State<ReviewScreen> {
           style: AppTypography.heading(t).copyWith(fontWeight: FontWeight.w500),
         ),
         actions: [
+          IconButton(
+            icon: Icon(Icons.flag_outlined, color: t.textSecondary),
+            tooltip: 'Report an issue with this card',
+            onPressed: () {
+              if (card == null) return;
+              showFlagContentDialog(
+                context: context,
+                contentId: card.id,
+                contentType: 'card',
+                userId: _scope.userId,
+                examContext: _scope.examName,
+                onFlagSubmitted: ({
+                  required userId,
+                  required examContext,
+                  required contentId,
+                  required contentType,
+                  required reason,
+                }) async {
+                  await _repo.flagContent(
+                    userId: userId,
+                    examContext: examContext,
+                    contentId: contentId,
+                    contentType: contentType,
+                    reason: reason,
+                  );
+                },
+              );
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: Center(
@@ -156,7 +256,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 child: SingleChildScrollView(
                   child: CalmCard(
                     child: AnimatedCrossFade(
-                      firstChild: _buildFrontCard(t, cardId),
+                      firstChild: _buildFrontCard(t, card),
                       secondChild: _buildBackCard(t, card),
                       crossFadeState: _isFlipped
                           ? CrossFadeState.showSecond
@@ -189,7 +289,25 @@ class _ReviewScreenState extends State<ReviewScreen> {
     );
   }
 
-  Widget _buildFrontCard(AppTokens t, String cardId) {
+  /// A short recall cue — the concept card's bold title (or its first line).
+  String _cardCue(Card? card) {
+    if (card == null) return '';
+    for (final b in card.blocks) {
+      if (b is TextBlock) {
+        final md = b.md.resolve('en').trim();
+        final bold = RegExp(r'^\s*\*\*(.+?)\*\*').firstMatch(md);
+        if (bold != null) return bold.group(1)!.trim();
+        final firstLine = md.split('\n').first.trim();
+        return firstLine.length > 70
+            ? '${firstLine.substring(0, 70)}…'
+            : firstLine;
+      }
+    }
+    return '';
+  }
+
+  Widget _buildFrontCard(AppTokens t, Card? card) {
+    final cue = _cardCue(card);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -208,14 +326,14 @@ class _ReviewScreenState extends State<ReviewScreen> {
         ),
         const SizedBox(height: 32),
         Text(
-          'Can you recall the key details regarding this concept?',
-          style: AppTypography.body(t).copyWith(height: 1.6),
+          'Recall everything you can about:',
+          style: AppTypography.body(t).copyWith(height: 1.6, color: t.textSecondary),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
         Text(
-          'Item ID: $cardId',
-          style: AppTypography.caption(t),
+          cue.isEmpty ? 'this concept' : cue,
+          style: AppTypography.title(t).copyWith(color: t.textPrimary),
           textAlign: TextAlign.center,
         ),
       ],

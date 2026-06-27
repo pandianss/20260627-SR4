@@ -61,7 +61,7 @@ void main() {
       expect(onCompleteCalled, isFalse);
     });
 
-    testWidgets('Successful onboarding emits correct user data and mock token', (tester) async {
+    testWidgets('Successful onboarding emits the entered email on completion', (tester) async {
       DateTime? completedDate;
       String? completedEmail;
       String? completedToken;
@@ -100,7 +100,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(completedEmail, equals('developer@sbi.co.in'));
-      expect(completedToken, startsWith('JWT_dummy_token_'));
+      // Auth is now handled by AuthService (no mock token); the token arg is unused.
+      expect(completedToken, isEmpty);
       expect(completedDate, isNotNull);
     });
   });
@@ -162,7 +163,9 @@ void main() {
     });
 
     test('Records lesson views, calculates DAU/MAU and lesson completion rates', () async {
-      final now = DateTime.now();
+      // Fixed mid-day, mid-month reference so "+5 min" can't cross midnight and
+      // "-1 day" can't cross a month boundary (which made this test date-flaky).
+      final now = DateTime(2026, 6, 15, 10, 0);
       // Add a lesson viewed event today
       await eventStore.appendEvent(LessonViewedEvent(
         clientUlid: 'ulid_1',
@@ -172,7 +175,7 @@ void main() {
         lessonId: 'lesson1',
       ));
 
-      var stats = await analyticsService.calculateAnalytics(userId);
+      var stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 1);
       expect(stats.mau, 1);
       expect(stats.completedLessonsCount, 1);
@@ -188,7 +191,7 @@ void main() {
         lessonId: 'lesson1',
       ));
 
-      stats = await analyticsService.calculateAnalytics(userId);
+      stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 1);
       expect(stats.completedLessonsCount, 1);
 
@@ -201,7 +204,7 @@ void main() {
         lessonId: 'lesson2',
       ));
 
-      stats = await analyticsService.calculateAnalytics(userId);
+      stats = await analyticsService.calculateAnalytics(userId, now: now);
       expect(stats.dau, 2);
       expect(stats.completedLessonsCount, 2);
       expect(stats.completionRate, 1.0);
@@ -300,11 +303,13 @@ void main() {
       expect(settings.hour, 19);
       expect(settings.minute, 45);
     });
-
     test('Simulate notification triggers appropriately', () {
       // Enabled, reviews due > 0 -> should trigger
       final msg = notificationService.simulateNotificationTrigger(5);
       expect(msg, equals('5 reviews due — 3 min'));
+
+      final singularMsg = notificationService.simulateNotificationTrigger(1);
+      expect(singularMsg, equals('1 review due — 3 min'));
 
       // Enabled, reviews due <= 0 -> should not trigger
       final noReviewsMsg = notificationService.simulateNotificationTrigger(0);
