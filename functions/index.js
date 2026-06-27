@@ -255,9 +255,30 @@ function updateId(u) {
   return `${u.regulator.toLowerCase()}-${u.publishedAt}-${hash}`;
 }
 
+// Skip curation if the feed was refreshed within this window, to avoid
+// unnecessary (metered) web searches.
+const FRESHNESS_WINDOW_MS = 6 * 60 * 60 * 1000;
+const META_REF = () => db.collection("regulatory_updates_meta").doc("state");
+
 // Curate, write to Firestore (merge by id), and FCM-notify on new high-priority
-// items. Returns a small summary object.
-async function curateAndStore() {
+// items. Skips the web-search call when the feed is still fresh (< 6h old)
+// unless { force } is set. Returns a small summary object.
+async function curateAndStore({ force = false } = {}) {
+  if (!force) {
+    const meta = await META_REF().get();
+    const lastMs = meta.exists ? meta.get("lastRefreshedAt") : null;
+    if (typeof lastMs === "number") {
+      const ageMs = Date.now() - lastMs;
+      if (ageMs < FRESHNESS_WINDOW_MS) {
+        return {
+          skipped: true,
+          reason: "fresh",
+          ageMinutes: Math.round(ageMs / 60000),
+        };
+      }
+    }
+  }
+
   const updates = await curateUpdates();
   const collection = db.collection("regulatory_updates");
   const batch = db.batch();
@@ -273,6 +294,7 @@ async function curateAndStore() {
     batch.set(ref, { ...u, id }, { merge: true });
   }
   await batch.commit();
+  await META_REF().set({ lastRefreshedAt: Date.now() }, { merge: true });
 
   if (newHighPriority.length > 0) {
     const top = newHighPriority[0];
@@ -311,7 +333,9 @@ exports.refreshUpdatesNow = onRequest(
   { secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 300, memory: "512MiB" },
   async (req, res) => {
     try {
-      const result = await curateAndStore();
+      // Pass ?force=true to bypass the 6h freshness guard (backfill/testing).
+      const force = req.query.force === "true" || req.body?.force === true;
+      const result = await curateAndStore({ force });
       res.status(200).json({ success: true, ...result });
     } catch (error) {
       logger.error("refreshUpdatesNow failed", error);
