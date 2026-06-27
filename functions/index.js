@@ -1,8 +1,17 @@
 const { onRequest } = require("firebase-functions/v2/https");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { defineSecret } = require("firebase-functions/params");
+const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
+const crypto = require("crypto");
+const Anthropic = require("@anthropic-ai/sdk");
 
 admin.initializeApp();
 const db = admin.firestore();
+
+// Anthropic API key — set once with:
+//   firebase functions:secrets:set ANTHROPIC_API_KEY
+const ANTHROPIC_API_KEY = defineSecret("ANTHROPIC_API_KEY");
 
 // Predefined seed data from packages/app/assets/content_pack_updates.json
 const SEED_UPDATES = [
@@ -156,3 +165,157 @@ exports.updatesFeed = onRequest({ cors: true }, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// ── Live ingestion (Claude curation) ────────────────────────────────────────
+
+const MODEL = "claude-opus-4-8";
+
+// JSON-schema the curated output must conform to — mirrors RegulatoryUpdate in
+// packages/app/lib/models/regulatory_update.dart.
+const UPDATE_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    updates: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          regulator: { type: "string", enum: ["RBI", "SEBI", "IRDAI", "IIBF"] },
+          title: { type: "string" },
+          summary: { type: "string" },
+          category: { type: "string" },
+          priority: { type: "string", enum: ["critical", "important", "normal"] },
+          publishedAt: { type: "string", format: "date" },
+          sourceUrl: { type: "string", format: "uri" },
+          affectsTopics: { type: "array", items: { type: "string" } },
+        },
+        required: [
+          "regulator", "title", "summary", "category",
+          "priority", "publishedAt", "sourceUrl", "affectsTopics",
+        ],
+      },
+    },
+  },
+  required: ["updates"],
+};
+
+const CURATION_PROMPT = `You curate regulatory updates for an Indian banking
+certification study app (IIBF JAIIB/CAIIB candidates). Using web search, find
+the most relevant official announcements from the last 30 days from the RBI,
+SEBI, IRDAI, and IIBF that matter to the JAIIB/CAIIB syllabus — monetary policy,
+KYC/AML, digital lending, priority-sector lending, risk/capital norms, mutual
+funds/investor protection, insurance regulation, and IIBF exam notices.
+
+For each update: write a neutral 1-2 sentence plain-language summary, classify
+priority (critical = exam notices/deadlines or major rule changes candidates
+must know; important = notable rule updates; normal = background), pick a short
+category label, set publishedAt to the official publication date (YYYY-MM-DD),
+link sourceUrl to the official page (rbi.org.in, sebi.gov.in, irdai.gov.in, or
+iibf.org.in only), and list affected syllabus topic slugs in affectsTopics.
+
+Return up to 15 items, newest first. Only include items you can attribute to an
+official source URL. Respond with the structured JSON object only.`;
+
+// Run the curation model (handles the server-side web-search loop) and return
+// the parsed update objects.
+async function curateUpdates() {
+  const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
+  const messages = [{ role: "user", content: CURATION_PROMPT }];
+  let response;
+  for (let i = 0; i < 6; i++) {
+    response = await client.messages.create({
+      model: MODEL,
+      max_tokens: 16000,
+      tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 8 }],
+      output_config: { format: { type: "json_schema", schema: UPDATE_SCHEMA } },
+      messages,
+    });
+    if (response.stop_reason !== "pause_turn") break;
+    // Server tool loop hit its iteration cap — resume.
+    messages.push({ role: "assistant", content: response.content });
+  }
+
+  const textBlock = (response.content || []).find((b) => b.type === "text");
+  if (!textBlock) {
+    throw new Error(`No text output (stop_reason=${response.stop_reason})`);
+  }
+  const parsed = JSON.parse(textBlock.text);
+  return Array.isArray(parsed.updates) ? parsed.updates : [];
+}
+
+// Deterministic, stable id so re-curation merges rather than duplicates.
+function updateId(u) {
+  const hash = crypto
+    .createHash("sha1")
+    .update(u.sourceUrl || u.title)
+    .digest("hex")
+    .slice(0, 8);
+  return `${u.regulator.toLowerCase()}-${u.publishedAt}-${hash}`;
+}
+
+// Curate, write to Firestore (merge by id), and FCM-notify on new high-priority
+// items. Returns a small summary object.
+async function curateAndStore() {
+  const updates = await curateUpdates();
+  const collection = db.collection("regulatory_updates");
+  const batch = db.batch();
+  const newHighPriority = [];
+
+  for (const u of updates) {
+    const id = updateId(u);
+    const ref = collection.doc(id);
+    const existing = await ref.get();
+    if (!existing.exists && (u.priority === "critical" || u.priority === "important")) {
+      newHighPriority.push(u);
+    }
+    batch.set(ref, { ...u, id }, { merge: true });
+  }
+  await batch.commit();
+
+  if (newHighPriority.length > 0) {
+    const top = newHighPriority[0];
+    await admin.messaging().send({
+      topic: "regulatory-updates",
+      notification: {
+        title: `${top.regulator}: ${top.title}`,
+        body:
+          newHighPriority.length > 1
+            ? `${top.summary} (+${newHighPriority.length - 1} more)`
+            : top.summary,
+      },
+    });
+  }
+
+  return { curated: updates.length, notified: newHighPriority.length };
+}
+
+// Daily scheduled curation (08:30 IST).
+exports.refreshUpdates = onSchedule(
+  {
+    schedule: "30 8 * * *",
+    timeZone: "Asia/Kolkata",
+    secrets: [ANTHROPIC_API_KEY],
+    timeoutSeconds: 300,
+    memory: "512MiB",
+  },
+  async () => {
+    const result = await curateAndStore();
+    logger.info("refreshUpdates", result);
+  }
+);
+
+// Manual trigger for testing / backfill: GET/POST the function URL.
+exports.refreshUpdatesNow = onRequest(
+  { secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 300, memory: "512MiB" },
+  async (req, res) => {
+    try {
+      const result = await curateAndStore();
+      res.status(200).json({ success: true, ...result });
+    } catch (error) {
+      logger.error("refreshUpdatesNow failed", error);
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
