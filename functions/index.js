@@ -140,17 +140,9 @@ exports.updatesFeed = onRequest({ cors: true }, async (req, res) => {
       return dateB - dateA;
     });
 
-    // In case collection is empty, seed it automatically so it functions out of the box
-    if (updates.length === 0) {
-      const batch = db.batch();
-      const collectionRef = db.collection("regulatory_updates");
-      for (const update of SEED_UPDATES) {
-        batch.set(collectionRef.doc(update.id), update);
-      }
-      await batch.commit();
-      updates = [...SEED_UPDATES];
-      updates.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-    }
+    // Note: the collection is populated by the live curation job
+    // (refreshUpdates). If it's empty, the app falls back to its bundled seed,
+    // so we no longer auto-seed placeholder data here.
 
     const feed = {
       version: 1,
