@@ -60,8 +60,11 @@ dart test          # 16 tests, all green
 |------|-------|--------|
 | **E1** | Content schema + question-type system + validation | ✅ implemented + tested |
 | **E2** | Grading & scoring engine (graders, marking, pass rule) | ✅ implemented + tested |
-| E3 | FSRS spaced-repetition engine | next |
-| E4 | Offline store & sync | planned |
-| E5–E10 | App shell, renderers, mocks, content, release | planned (see `docs/p0-build-backlog.md`) |
+| **E3** | FSRS spaced-repetition engine (due queue, deadline-aware scheduler) | ✅ implemented + tested |
+| **E4** | Offline store & sync (event-sourced store, Firestore sync) | ✅ implemented + tested |
+| **E5–E10** | App shell, renderers, mocks, content, Firebase auth, release | ✅ implemented (CAIIB pack; JAIIB+ priced separately later) |
 
-33 tests passing (`dart test` in `packages/domain` and `packages/grading`).
+Tests green across packages (`dart test` in `domain`/`grading`/`srs`/`store`;
+`flutter test` in `packages/app`, 50 passing). Release pipeline (signing, R8,
+Crashlytics, dark mode, notifications, TTS) in place; remaining work is Play
+Console submission and live Updates ingestion — see `docs/p0-build-backlog.md`.
