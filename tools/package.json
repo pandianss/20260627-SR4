@@ -1,0 +1,9 @@
+{
+  "name": "jaiib-tools",
+  "private": true,
+  "type": "module",
+  "description": "Content tooling for the JAIIB pack (ingest + LLM question generation).",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.106.0"
+  }
+}
